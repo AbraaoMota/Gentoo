@@ -14,7 +14,12 @@ Conclusions:
 
 They analyse a redirection trail used in different websites, and the different vulnerabilities these might expose
 
-The trail is as strong as its weakest link
+The trail is as strong as its weakest link - a MiTM attacker can intercept data and attempt different attacks
+  - Intercept their private data directly
+  - Send the user through evil URLs for malvertising
+  - Redirect sweeps - make use of password manager autofill features to gather data on several redirected sites
+
+
 
 
 

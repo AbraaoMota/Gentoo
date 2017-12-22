@@ -1,0 +1,30 @@
+Security Implications of redirection trail problems
+
+SYNOPSIS:
+
+Not directly correlated to dissertation
+
+How safe is URL redirection really? A redirection trail may look safe to user but only needs to end in HTTPS, may be unsafe inbetween
+
+Conclusions:
+  - the majority (83.3% in the 1M dataset and 78.6% in the 10K dataset) of redirection trails among web- sites that support only HTTPS are vulnerable to attacks
+  - current incoherent practices (e.g., naked domains and www subdomains being redirected to different destinations with varying security levels) undermine the security guaran- tees provided by HTTPS and HSTS (HSTS is HTTP Strict Transport Security - prevents session degradation and cookie hijacking)
+
+---------------------------------------------------------------------------
+
+They analyse a redirection trail used in different websites, and the different vulnerabilities these might expose
+
+The trail is as strong as its weakest link
+
+
+
+
+
+
+
+
+
+
+
+
+

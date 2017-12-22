@@ -1,0 +1,106 @@
+Finding information for your individual projects - Angela Goldfinch
+
+
+At the start
+  - build knowledge base
+  - ideas / problem solving
+  - avoid duplication
+
+Writing up:
+  - evidence of new knowledge
+  - where does your work fit in
+
+
+Main sources of research papers are
+  - peer reviewed journal articles - this gives a quality assurance for a paper that you read
+  - conference papers - a lot of these aren't peer reviewed
+
+
+Reading papers
+  - Determine relevancy / usefulness -> Summary, introduction and conclusions are the most useful parts to read over
+
+
+Finding research papers
+  - google (scholar)
+  - publisher websites
+  - bibliographic databases
+
+
+Document Delivery service WOHOO
+
+
+Use reference management software
+
+  Build personal library
+  Automatic data capture
+  Organise and Reuse
+  Output in different formats
+
+  I.E BUY A 14 TERRABYTE HARDDRIVE AND FILL IT WITH EVERYTHING IN ENGINEERING VILLAGE
+
+Use bibtex files
+
+Refworks - web based reference management software
+Free alumni account
+
+
+Download records - format into bibtex (if using your pc). Can send them to refworks
+
+Library support page for referencing using Bibtex in latex
+
+Manual input / Refworks -> Bibtex (same directory as report) -> Import into latex, bob's your uncle
+
+            vancouver style apparently
+\usepackage[numbers]{natbib}
+
+\bibliographystyle{IEEEtranN}
+\bibliography{References_file_name_here}
+
+Refworks doesn't edit special latex characters
+Remove shit added in notes when imported from some places
+
+Good, well rounded, complete references give good marks
+Think about audience - your references need to act as a source of further information
+Provide date of access for any URL's used
+
+books, journal articles and webpages should have complete references
+Conference papers - quality of reference is variable
+Other docs, provide:
+  - url
+  - access date
+  - author / organisation
+  - title of doc
+  - publication date
+  - report number if applicable
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,9 @@
+img {
+ background-image: url("http://vignette3.wikia.nocookie.net/clubpenguin/images/a/a9/Penguin_Player_card_look_1222333.png/revision/latest?cb=20140723221416") !important;
+ background-size: contain !important;
+ background-repeat: no-repeat !important;
+ height: 0px !important;
+ width: 0px !important;
+ padding: 80% 80% 0px 0px !important;
+}
+

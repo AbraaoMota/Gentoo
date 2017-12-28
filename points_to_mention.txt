@@ -1,0 +1,23 @@
+
+Important points to mention:
+
+What colour box is my tool?
+  - "A state aware" paper has a list of references of tools that are white box, a lot of my papers are black box
+
+
+Why is it black box?
+
+Why user driven? Why is that a feature?
+ - Organic
+ - Focus on what matters
+
+
+
+
+
+
+
+
+
+
+

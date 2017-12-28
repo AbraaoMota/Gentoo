@@ -2,23 +2,20 @@ Look up the more latest reports on things that are reported
 
 Those papers aren't the latest state of the art
 
-What is more relevant nowadays - XSS might not be the main vector of attack
+  What is more relevant nowadays - XSS might not be the main vector of attack
+  Recent patterns of bugs that are interesting
+  and the more interesting tools
 
 What is the kind of attacker you can imagine can access different things
 
-Which part of the project to focus on:
+  Which part of the project to focus on:
 
-Defensive wants to protect against everythin
-  - HTTPS might be more interesting for this case
-
-
-Web attacker interested in what he can tamper with to create attacks
-  - HTTPS not the model of attack
+  Defensive wants to protect against everythin
+    - HTTPS might be more interesting for this case
 
 
-Recent patterns of bugs that are interesting
-and the more interesting tools
-
+  Web attacker interested in what he can tamper with to create attacks
+    - HTTPS not the model of attack
 
 
 Thoughts on chrome extension
@@ -28,26 +25,24 @@ Thoughts on chrome extension
   - the debugger needs to be kept open
 
 
-Mostly written in Javascript
+  Mostly written in Javascript
 
-Looking at web requests lets you look at the events, not all of these have all the info
-Might need to look at several events to gather the different parts of the request
+  Looking at web requests lets you look at the events, not all of these have all the info
+  Might need to look at several events to gather the different parts of the request
 
-Redirects might skip events etc
+  Redirects might skip events etc
 
-Always look at mozilla docs, try using chrome
-Debugger in chrome known to be able to get that stuff
+  Always look at mozilla docs, try using chrome
+  Debugger in chrome known to be able to get that stuff
 
-Web extensions should be portable between the two
+  Web extensions should be portable between the two
 
-Christmas stuff: write a small extension
+  Christmas stuff: write a small extension
 
-Alternative - extension and a proxy kept in sync
+  Alternative - extension and a proxy kept in sync
 
 
 Offensive stuff can be automatically extracted to the defense sides
-
-
 
 Another choice:
 
@@ -74,16 +69,6 @@ Databases:
 
 ACM digital library
 IEEE explorer
-
-
-
-
-
-
-
-
-
-
 
 
 

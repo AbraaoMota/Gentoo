@@ -4,12 +4,33 @@ Important points to mention:
 What colour box is my tool?
   - "A state aware" paper has a list of references of tools that are white box, a lot of my papers are black box
 
-
 Why is it black box?
 
 Why user driven? Why is that a feature?
- - Organic
- - Focus on what matters
+  - Organic
+  - Focus on what matters
+  - Using user driven applications means the user can make use of the ENTIRE webpage - we don't skip AJAX, JS, Flash or other plugins 'point and shoots'
+    don't use
+  - Crawling is a super critical part of these scanners, foregoing that skips a ton of trouble and gives a more in depth representation of the website
+  - Skips having to look at things such as WIVET - benchmark for how well scanner goes through JS, Flash and form submissions
+
+"Crawling is arguably the most important part of a web application vulnerability scanner; if the scanner’s attack engine is poor, it might miss a vulnerability, but if its crawling engine is poor and cannot reach the vulnerability, then it will surely miss the vulnerability." - Why johnny can't pentest
+
+
+Evaluation:
+  As mentioned in the "state aware paper", the most important metric is
+    - True vulnerabilities discovered
+  Other important metrics include:
+    - Number of False positives - a large number of these basically makes the application impossible to use and massively decreases trust in it
+      noone wants to use something that declares bugs where they aren't. Looking into these is also an expensive process.
+    - Application code coverage
+
+  How to test my own application:
+  - Have a test against WackoPicko - checkout the "Why johnny can't pentest" paper
+  - Also look at HacmeBank, WebGoat, SiteGenerator
+
+
+
 
 
 

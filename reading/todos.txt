@@ -4,5 +4,7 @@ Reading related todos:
 1) Finish reading any papers that haven't been filed in the read_with_notes folder
 2) Find further reading
   - Great source of further reading is the "State aware paper" - lots of tools referenced there
+  - "Why johnny can't pentest" good source for additional reading for evaluating scanners and creating vulnerable apps
+
 
 

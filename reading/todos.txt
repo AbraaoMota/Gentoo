@@ -4,7 +4,82 @@ Reading related todos:
 1) Finish reading any papers that haven't been filed in the read_with_notes folder
 2) Find further reading
   - Great source of further reading is the "State aware paper" - lots of tools referenced there
+
+  ACADEMIC PROTOTYPES
+
+    1) BALZAROTTI, D., COVA, M., FELMETSGER, V., JOVANOVIC, N., KIRDA, E., KRUEGEL, C., AND VIGNA, G. Saner: Com- posing Static and Dynamic Analysis to Validate Sanitization in Web Applications. In 2008 IEEE Symposium on Security and Privacy (2008), IEEE, pp. 387–401.
+    2) FELMETSGER, V., CAVEDON, L., KRUEGEL, C., AND VIGNA, G. Toward Automated Detection of Logic Vulnerabilities in Web Applications. In Proceedings of the USENIX Security Symposium (Washington, DC, August 2010).
+    3) HALFOND, W., CHOUDHARY, S., AND ORSO, A. Penetration testing with improved input vector identification. In Software Testing Verification and Validation, 2009. ICST’09. International Conference on (2009), IEEE, pp. 346–355.
+    4) HUANG, Y.-W., YU, F., HANG, C., TSAI, C.-H., LEE, D.- T., AND KUO, S.-Y. Securing web application code by static analysis and runtime protection. In WWW ’04: Proceedings of the 13th international conference on World Wide Web (New York, NY, USA, 2004), ACM, pp. 40–52.
+    5) JOVANOVIC, N., KRUEGEL, C., AND KIRDA, E. Static anal- ysis for detecting taint-style vulnerabilities in web applications. Journal of Computer Security 18, 5 (2010), 861–907.
+    6) KALS, S., KIRDA, E., KRUEGEL, C., AND JOVANOVIC, N. Secubat: a Web Vulnerability Scanner. In Proceedings of the 15th international conference on World Wide Web (2006), ACM, pp. 247–256.
+    7) LI, X., YAN, W., AND XUE, Y. SENTINEL: Securing Database from Logic Flaws in Web Applications. In CODASPY (2012), pp. 25–36.
+
+  OPEN SOURCE PROJECTS
+
+    1) BYRNE, D. Grendel-Scan. http://www.grendel-scan. com/.
+    2) CHINOTEC TECHNOLOGIES. parosproxy.org/.
+    3) RIANCHO, A. w3af – Web Application Attack and Audit Frame- work. http://w3af.sourceforge.net/.
+
+  COMMERCIAL PRODUCTS
+
+    1) ACUNETIX. Acunetix Web Vulnerbility Scanner. http://www. acunetix.com/.
+    2) HP . WebInspect. https://download.hpsmartupdate.com/ webinspect/.
+    3) IBM. AppScan. http://www-01.ibm.com/software/ awdtools/appscan/.
+    4) PORTSWIGGER. Burp Proxy. http://www.portswigger. net/burp/.
+
+
   - "Why johnny can't pentest" good source for additional reading for evaluating scanners and creating vulnerable apps
+  - State awareness paper also has useful material to look at for evaluating scanners
+
+
+  EVALUATING SCANNERS
+
+    1) BAU, J., BURSZTEIN, E., GUPTA, D., AND MITCHELL, J. State of the Art: Automated Black-Box Web Application Vulnerability Testing. In Security and Privacy (SP), 2010 IEEE Symposium on (2010), IEEE, pp. 332–345.
+    2) DOUPE ́, A., COVA, M., AND VIGNA, G. Why Johnny Can’t Pentest: An Analysis of Black-box Web Vulnerability Scanners. In Detection of Intrusions and Malware, and Vulnerability As- sessment (DIMVA 2010) (2010), Springer, pp. 111–131.
+    3) SUTO, L. Analyzing the Accuracy and Time Costs of Web Ap- plication Security Scanners, 2010.
+    4) VIEIRA, M., ANTUNES, N., AND MADEIRA, H. Using Web Security Scanners to Detect Vulnerabilities in Web Services. In Dependable Systems & Networks, 2009. DSN’09. IEEE/IFIP In- ternational Conference on (2009), IEEE, pp. 566–571.
+    5) 
+    6)
+    7)
+    8)
+    9)
+   10)
+   11)
+   12)
+   13)
+   14)
+
+
+  BENCHMARKING TOOLS
+
+    1) HacmeBank
+    2) WebGoat
+    3) SiteGenerator
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

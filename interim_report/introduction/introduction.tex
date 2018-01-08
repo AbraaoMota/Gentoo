@@ -1,8 +1,48 @@
 \chapter{Introduction}
 
- It’s a good idea to try to write the introduction to your final report early on in the project. However, you will find it hard, as you won’t yet have a complete story and you won’t know what your main contributions are going to be. However, the exercise is useful as it will tell you what you don’t yet know and thus what questions your project should aim to answer. For the interim report this section should be a short, succinct, summary of the project’s main objectives. Some of this material may be re-usable in your final report, but the chances are that your final introduction will be quite different.  You are therefore advised to keep this part of the interim report short, focusing on the following questions: What is the problem, why is it interesting and what’s your main idea for solving it?  (DON'T use those three questions as subheadings however!  The answers should emerge from what you write.)
+  You are therefore advised to keep this part of the interim report short, focusing on the following questions: What is the problem, why is it interesting and what’s your main idea for solving it?  (DON'T use those three questions as subheadings however!  The answers should emerge from what you write.)
 
-Hello \cite{greenwade93}
+Hello \cite{greenwade93} \\
+
+
+In recent years, use of internet applications has skyrocketed across the world. This is exarcebated by the ubiquity and sheer number of devices that are now connected to the internet. 
+These devices (and their users by extension) place a great deal of implicit trust in the applications and websites they use to power the activities they engage in. 
+This in turn means that the developers behind these web applications have a heavy responsibility on their shoulders - their products must uphold a high standard of security.  \\
+
+
+Sadly, due to the immaturity of the web development industry and how quickly technologies emerge in the field, web security is an often overlooked aspect of development. 
+The lack of security as a founding basis for development is also due to a gap in developer education, as well as a somewhat high entry barrier to understand and mitigate potential security vulnerabilities. It is not treated as an important focus for new web developers to understand as part of many online and university courses, so many will get by, even work in professional development roles without that knowledge. 
+Common vulnerability mitigation measures are also hidden in the inner workings of many frameworks developers use and become accustomed to. 
+It is very often the case that these will be used without knowledge of what they do and how they work. However, in the case that the developer changes to use another framework without \textit{secure by default} features, or decides to write an application from scratch, they will more often than not be left without a clue how to mitigate vulnerabilities, let alone know that these exist altogether. \\
+
+
+This effectively highlights the overarching problem this project aims to tackle - improving security for web applications. It tries to do so through a pragmatic approach; the final goal of this project is to construct a tool which can diagnose vulnerabilities on a target website and goes a step further and attempts to use these to explore potential exploits on the target application.  
+My initial proposal in solving this encompasses writing a browser extension to analyse the website the user is currently visiting, and applying a wide variety of scans and techniques to detect potential security pitfalls the website may have.
+A browser extension is an appropriate approach to this as it is a lightweight tool running with elevated privileges on the user's browser - this gives it the appropriate 'clearance' level to run a variety of scans on the user's behalf. \\
+
+
+A tool of this kind has 2 immediately clear use cases. 
+The first would be to give this tool to a website owner or developer and create it in such a way so that it gives clear and concise suggestions to quantifiably improve the security level of the target website - for example, if an SQL injection has been detected, show the user where on the website this vulnerability can be found, and make effective suggestions as to how to mitigate this (in an SQLi, it may be done by sanitizing user input). The tool could analyse a range of potential vulnerabilities and generate a quantifiable rating for the website in order to give feedback to the developer on where the website needs improving or immediate work.
+The slightly alternative use case of this tool provides a more in-depth scan per potential vulnerability, and would be better suited for use by a penetration tester, or an otherwise knowledgeable web security expert. In this use case, the tool would work in a similar fashion, albeit with a different final goal of going 'all the way' by helping the user to detect vulnerabilities and creating exploits using them on the target application. 
+In both potential use cases, the benefits of the tool are twofold - it can be used as an educational stepping stone for developers to further their understanding of security in web applications. It also provides a pragmatic way to improve website security through alternate routes - that of the direct owner improving their website by given suggestions, or the penetration tester showing developers the dangers of ignoring security for their website by exploiting open vulnerabilities. \\
+
+This project aims to explore the latter of the two approaches mentioned. This is the more encompassing of the two possible use cases, with more information produced than just recommendations on how to improve a website. It also provides appropriate scope to allow for an in-depth analysis per potential vulnerability. Given that, this project aims to explore vulnerabilities in as much depth as possible, with less focus on attempting to detect as many vulnerabilities as possible. This choice is made with the evaluation of the tool in mind - as will be discussed later on. False positives (declaring that a website has a vulnerability when in fact it doesn't) are a major evaluation metric for the project and minimising these through more accurate, in-depth scans will result in a quantifiably better, more usable tool. \\
+
+
+
+User driven approach
+
+
+
+This goal poses several challenges, the biggest of which are:
+
+1) Breadth of analysis
+2) Depth of analysis
+3) Accuracy of the scanner
+
+
+
+
 \section{Objectives}
 \section{Challenges}
 \section{Contributions}

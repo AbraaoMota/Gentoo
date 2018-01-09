@@ -14,6 +14,8 @@ Why user driven? Why is that a feature?
   - Crawling is a super critical part of these scanners, foregoing that skips a ton of trouble and gives a more in depth representation of the website
   - Skips having to look at things such as WIVET - benchmark for how well scanner goes through JS, Flash and form submissions
 
+QUOTES
+
 "Crawling is arguably the most important part of a web application vulnerability scanner; if the scanner’s attack engine is poor, it might miss a vulnerability, but if its crawling engine is poor and cannot reach the vulnerability, then it will surely miss the vulnerability." - Why johnny can't pentest (2010)
 
 

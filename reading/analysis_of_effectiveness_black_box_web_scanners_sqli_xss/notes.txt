@@ -1,0 +1,19 @@
+PAPER SYNOPSIS:
+
+THEY HAVE A LOOK AT WHETHER SCANNERS HAVE IMPROVED OVER TIME AT SQLi AND XSS DETECTION. THEIR STUDIES SHOW TOOLS HAVE IMPROVED, BUT STILL NEED FURTHER IMPROVEMENT BASED ON THEIR OWN TESTING TOOLS
+
+GOOD QUOTE FROM CONCLUSION
+
+"Our experimental findings confirmed that choosing the right attack vectors for the detection and exploitation of stored XSS and stored SQLI remains a big challenge for black box scanners."
+
+"Scanners need to be improved to use right attack vectors in the right situations"
+
+According to past relevant work, performance of scanners in detecting vulnerabilities has been concerningly low, and could do with improvement, especially for SQLi's and XSS since these are the top 2 security risks as presented by OWASP
+
+
+"C) Adding interactive multistep options to scan. Out of the three scanners, only one scanner had that feature. While the option to set login credentials helps to provide application’s login info for the scanning, it does not instruct the scanners how to visit the pages and where to put attack vectors to exploit and to detect the vulnerabilities."
+
+
+Second order (stored) vulnerabilities are extremely hard to test for and detect.
+
+

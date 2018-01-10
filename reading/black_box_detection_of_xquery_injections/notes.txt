@@ -5,3 +5,32 @@ SERVER SIDE VALIDATIONS ARE NOT YET MATURE ENOUGH TO KNOW TO HANDLE THESE AS WEL
 XQUERIES ARE QUERIES SUBMITTED TO AN XML DATABASE
 
 
+
+Injection attacks are still the most prevalent risk to applications today
+
+Parameter tampering attacks are also attempted, when there is client side validation which can be easily bypassed
+
+
+NXD (Native XML Database) are databases ran using the XML object model
+XML driven databases are more often used to store data that is very diverse in nature with a potentially ever changing schema
+
+This is a relatively very new concept (certainly in relation to RDB's), so there is very little literature and research done on XML injection
+
+Some attacks rely on disabling JavaScript input verification and validation on the client side to bypass having to give 'nice' input.
+Server side doesn't expect this to happen, and with lack of input validation there, vulnerabilities arise due to maliciously formed input.
+
+Interesting dynamic analysis done by antunes and vieira - look into that
+
+Many commercial tools are able to identify vulnerabilities that involve XML documents, but none of them can do so for the case where there is a NXD model being used
+
+The tool being developed in this case has to have a training phase - their fancy term for crawling the webpage and gathering data on it
+
+Essentially tries different fuzzed queries - for those that work, keep a list of these. Then try to mess around with them to generate illegitimate attempts at a query. Vulnerabilities are reported when there is a mismatch between the 2 given query models. If these are the same, compare the html output of these to test if there has been a significant change - potential parameter tampering. 
+
+
+
+
+
+
+
+

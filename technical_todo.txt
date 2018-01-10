@@ -1,0 +1,63 @@
+
+
+Development to have in order:
+
+  - Analyse output from HTML requests and gather if there is a significant change (change in state)
+
+  - Generate a way to replicate steps taken to get to current position
+
+
+
+Types of vulnerabilities to look at and consider
+
+  Cookies
+    - Same site cookie policy
+
+  Headers
+    - Anti XSS
+    - X-Options
+
+  Forms & CSRF
+
+  HTTPS / HSTS
+
+  JS instrumentation
+    - Is `eval` being called
+    - Try to deobfuscate code
+
+  Remote inclusions, dependencies and iFrames
+    - Dos
+    - Clickjacking
+
+  CSP and Sandboxing policies
+
+  SQL Injections
+    - Check for SQL syntax error response from server
+    - Timing (Blind)
+    - 2nd order (Stored)
+
+  XSS
+    - Self XSS
+    - URL bar
+    - Reflected
+    - 2nd order (Stored)
+
+  XQUERY
+    - XML injection
+    As recommended by OWASP:
+      – Tautology attack
+      – Meta Character injection attack
+      – Comment injection attack
+      – CDATA section injection attack
+      – Tag injection attack
+      – External entity injection attack
+      – Alternate encoding attack
+      – Injection via evaluation function
+
+
+
+
+
+
+
+

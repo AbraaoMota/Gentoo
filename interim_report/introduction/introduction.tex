@@ -1,32 +1,35 @@
-\chapter{Introduction}
-
-What is the problem, why is it interesting and what’s your main idea for solving it? 
-
-
+\chapter{Introduction} 
 
 \section{Motivation}
 
 In recent years, use of internet applications has skyrocketed across the world. This is exarcebated by the ubiquity and sheer number of devices that are now connected to the internet. 
 The users of these devices place a great deal of trust in the applications and websites they use to power the activities they engage in. 
-These play an ever increasingly influential role in people's lives - as an example, in a not so distant past, people would have to travel to a physical bank branch to deal with account matters or execute transactions. Though physical presence is sometimes required nowadays, a majority of the population will now take advantage of online banking in their day to day lives, often even from the comfort of the phone in their pocket. This has obvious time and efficiency advantages, and benefit many who use this today.
-This was not an overnight phenomenon however; online banking faced heavy customer reluctance due to lack of trust on an internet based interface. 
+These play an ever increasingly influential role in people's lives - as an example, in a not so distant past, people would have to travel to a physical bank branch to deal with account matters or execute transactions. Though physical presence can still be required nowadays, a majority of the population will now take advantage of online banking in their day to day lives, often even from the comfort of the phone in their pocket. This has obvious time and efficiency advantages, and benefit many who use this today.
+This was not an overnight phenomenon however; online banking initially faced heavy customer reluctance, enough to warrant studies on the cause of this \cite{KUISMA200775}. 
 This is understandable, given that everyone holds their financial situation as a very sensitive part of their lives.
-Banking is not a solitary example however; with the growingly pervasive use of the internet, its users have become less apprehensive about surrendering important details over a web connection, such as their phone numbers, addresses or medical history.  
-All of this builds up to a massive reponsibility placed on the shoulders of web application developers today; their products are expected to uphold a high standard of security, which oftentimes is hard to reach and maintain. \\
+Banking is not a solitary example however; with the pervasive use of the internet, its users have gradually become less apprehensive about surrendering important details over a web connection, such as their phone numbers, addresses or medical history.  
+All of this builds up to a massive responsibility placed on the shoulders of web application developers today; their products are expected to uphold a high standard of security, which oftentimes is hard to reach and maintain. \\
 
+Despite this, it is all too common to hear about web applications that suffer from severe cyber attacks. In some of the most debilitating hacks we have heard of in recent years, it is often the case that they were a result of simple vulnerability mitigation measures not being taken. A vulnerability in this context can be illustrated as an unlocked window into a house - it may not be immediately clear that the house owner has overlooked this security aspect, but if a burglar manages to work out that this is the case, they can maliciously \textit{exploit} this vulnerability in the house, and use that as an entry point to steal all the valuable contents within. Properly closing and locking all the windows in the house would be an obvious mitigation to this, but this is only one of the potential (ingenious) ways for a burglar to make his way into the house. The same principle can be applied to websites; it is important to cover as many bases as possible to prevent a potential information or content leak to malicious users. Some vulnerabilities may be harder to detect than others, and it is unlikely that \textit{all} the possible vulnerabilities will be covered, but any efforts towards  can only work in favour of the website developer.  \\
 
 Sadly, due to the immaturity of the web development industry and how quickly technologies emerge in the field, web security is an often overlooked aspect of development. 
-The lack of security as a fundamental tenet for development is also due to a gap in developer education, and a high entry barrier to understand and mitigate potential security vulnerabilities. Though this view is slowly changing, web security is not treated as an important focus for new web developers to understand as part of many online and university courses, so many will get by, even work in professional development roles without having ascertained basic security principles. 
+The lack of security as a fundamental tenet for development is also due to a gap in developer education, and a high entry barrier to understand and mitigate potential security vulnerabilities. 
+Though this view is slowly changing, web security is not treated as an important focus for new web developers to understand as part of many online and university courses, so many will get by, even work in professional development roles without having ascertained basic security principles. 
 Common vulnerability mitigation measures are also hidden in the inner workings of many frameworks developers use and become accustomed to. 
-For example, using \textit{Anti CSRF} (Cross Site Request Forgery) tokens in web forms to prevent action hijacking has become commonplace in web frameworks, and is often activated by default.
-It is very often the case that features like this will be used without knowledge of what they do and how they work (in my own experience, I had been venturing in web development for years before realising that feature existed). However, in the case that the developer changes to use another framework without \textit{secure by default} features, or decides to write an application from scratch, the burden of creating a secure application lies with them even further. These default features become like 'training wheels' for some uneducated developers and without them, these creators will be left without a clue as to how to mitigate vulnerabilities, let alone know that these exist altogether. \\
+For example, using \textit{Anti CSRF} (Cross Site Request Forgery) tokens in web forms to prevent action hijacking has become commonplace in web frameworks, and is a feature that is often activated by default \cite{djangoCSRF, rubyOnRailsCSRF, laravelCSRF}.
+It is very often the case that features like this will be used without knowledge of what they do and how they work (in my own experience, I had been venturing in web development for years before realising that feature existed). 
+However, in the case that the developer changes to use another framework without \textit{secure by default} features, or decides to write an application from scratch, the burden of creating a secure application lies with them even further. 
+These default features become like 'training wheels' for some uneducated developers and without them, these creators will be left without a clue as to how to mitigate vulnerabilities, let alone know that these exist altogether. 
+Experienced web developers are less likely to leave the 'windows' of their website unlocked, but it nevertheless makes sense to install security alarms to prevent both obvious and more subtle security risks.
+If these security systems can automatically work in the background it is ideal, but like a home security alarm, it is no good if no-one intervenes upon detection of a problem. 
+This begs the question; what is the feasibility of creating a tool that can work as an aide to a web developer in detecting and preventing vulnerabilities in a website? \\
+
+\section{Objectives}
+The question raised above effectively highlights the overarching problem this project aims to tackle - improving security for web applications. The goal is to do this through a pragmatic approach; the final objective of this project is to construct a tool which can diagnose vulnerabilities on a target website and goes a step further and attempts to use said vulnerabilities to explore potential exploits on the target. \\
 
 
-This effectively highlights the overarching problem this project aims to tackle - improving security for web applications. It tries to do so through a pragmatic approach; the final goal of this project is to construct a tool which can diagnose vulnerabilities on a target website and goes a step further and attempts to use these to explore potential exploits on the target application.   \\
-
-
-My initial proposal in solving this encompasses writing a browser extension to analyse the website the user is currently visiting, and applying a wide variety of scans and techniques to detect potential security pitfalls the website may have.
-A browser extension is an appropriate approach to this as it is a lightweight tool running with elevated privileges on the user's browser - this gives it the appropriate 'clearance' level to run a variety of scans on the user's behalf. \\
+My initial proposal in solving this encompasses writing a browser extension to analyse the target website, and applying a wide variety of scans and techniques to detect potential security pitfalls the website may have.
+A browser extension is an appropriate approach to this as it is a lightweight application running with elevated privileges on the user's browser, giving it the appropriate clearance level to run a variety of automated scans on the user's behalf.  \\
 
 
 A tool of this kind has 2 immediately clear use cases. 
@@ -48,10 +51,6 @@ This goal poses several challenges, the biggest of which are:
 2) Depth of analysis
 3) Accuracy of the scanner
 
-
-
-
-\section{Objectives}
 
 This project aims to explore the latter of the two approaches mentioned. This is the more encompassing of the two possible use cases, with more information produced than just recommendations on how to improve a website. It also provides appropriate scope to allow for an in-depth analysis per potential vulnerability. Given that, this project aims to explore vulnerabilities in as much depth as possible, with less focus on attempting to detect as many vulnerabilities as possible. This choice is made with the evaluation of the tool in mind - as will be discussed later on. False positives (declaring that a website has a vulnerability when in fact it doesn't) are a major evaluation metric for the project and minimising these through more accurate, in-depth scans will result in a quantifiably better, more usable tool. \\  
 

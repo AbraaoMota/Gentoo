@@ -8,7 +8,9 @@ These play an ever increasingly influential role in people's lives - as an examp
 This was not an overnight phenomenon however; online banking initially faced heavy customer reluctance, enough to warrant studies on the cause of this \cite{KUISMA200775}. 
 This is understandable, given that everyone holds their financial situation as a very sensitive part of their lives.
 Banking is not a solitary example however; with the pervasive use of the internet, its users have gradually become less apprehensive about surrendering important details over a web connection, such as their phone numbers, addresses or medical history.  
+This sensitive information is expected to be kept private when being given away to a web service - it is a conventional unspoken agreement between the user and the service provider that this is the case, although there are laws to enforce this as well.
 All of this builds up to a massive responsibility placed on the shoulders of web application developers today; their products are expected to uphold a high standard of security, which oftentimes is hard to reach and maintain. \\
+% cite some news articles here
 
 Despite this, it is all too common to hear about web applications that suffer from severe cyber attacks. In some of the most debilitating hacks we have heard of in recent years, it is often the case that they were a result of simple vulnerability mitigation measures not being taken. A vulnerability in this context can be illustrated as an unlocked window into a house - it may not be immediately clear that the house owner has overlooked this security aspect, but if a burglar manages to work out that this is the case, they can maliciously \textit{exploit} this vulnerability in the house, and use that as an entry point to steal all the valuable contents within. Properly closing and locking all the windows in the house would be an obvious mitigation to this, but this is only one of the potential (ingenious) ways for a burglar to make his way into the house. The same principle can be applied to websites; it is important to cover as many bases as possible to prevent a potential information or content leak to malicious users. Some vulnerabilities may be harder to detect than others, and it is unlikely that \textit{all} the possible vulnerabilities will be covered, but any efforts towards  can only work in favour of the website developer.  \\
 
@@ -20,13 +22,12 @@ For example, using \textit{Anti CSRF} (Cross Site Request Forgery) tokens in web
 It is very often the case that features like this will be used without knowledge of what they do and how they work (in my own experience, I had been venturing in web development for years before realising that feature existed). 
 However, in the case that the developer changes to use another framework without \textit{secure by default} features, or decides to write an application from scratch, the burden of creating a secure application lies with them even further. 
 These default features become like 'training wheels' for some uneducated developers and without them, these creators will be left without a clue as to how to mitigate vulnerabilities, let alone know that these exist altogether. 
-Experienced web developers are less likely to leave the 'windows' of their website unlocked, but it nevertheless makes sense to install security alarms to prevent both obvious and more subtle security risks.
+Experienced web developers are less likely to leave the "windows" of their website unlocked, but it nevertheless makes sense to install security alarms to prevent both obvious and more subtle security risks.
 If these security systems can automatically work in the background it is ideal, but like a home security alarm, it is no good if no-one intervenes upon detection of a problem. 
 This begs the question; what is the feasibility of creating a tool that can work as an aide to a web developer in detecting and preventing vulnerabilities in a website? \\
 
 \section{Objectives}
-The question raised above effectively highlights the overarching problem this project aims to tackle - improving security for web applications. The goal is to do this through a pragmatic approach; the final objective of this project is to construct a tool which can diagnose vulnerabilities on a target website and goes a step further and attempts to use said vulnerabilities to explore potential exploits on the target. \\
-
+The question raised above effectively highlights the overarching problem this project aims to tackle - improving security for web applications. The goal is to do this through a pragmatic approach; the final objective of this project is to construct a tool which can diagnose vulnerabilities on a target website as a user browses the service. The tool then uses the information gathered to suggest potential exploits that can arise from these vulnerabilities.  \\
 
 My initial proposal in solving this encompasses writing a browser extension to analyse the target website, and applying a wide variety of scans and techniques to detect potential security pitfalls the website may have.
 A browser extension is an appropriate approach to this as it is a lightweight application running with elevated privileges on the user's browser, giving it the appropriate clearance level to run a variety of automated scans on the user's behalf.  \\
@@ -34,27 +35,21 @@ A browser extension is an appropriate approach to this as it is a lightweight ap
 
 A tool of this kind has 2 immediately clear use cases. 
 The first would be to give this tool to a website owner or developer and create it in such a way so that it gives clear and concise suggestions to quantifiably improve the security level of the target website - for example, if an SQL injection has been detected, show the user where on the website this vulnerability can be found, and make effective suggestions as to how to mitigate this (in an SQLi, it may be done by sanitizing user input). The tool could analyse a range of potential vulnerabilities and generate a quantifiable rating for the website in order to give feedback to the developer on where the website needs improving or immediate work.
-The slightly alternative use case of this tool provides a more in-depth scan per potential vulnerability, and would be better suited for use by a penetration tester, or an otherwise knowledgeable web security expert. In this use case, the tool would work in a similar fashion, albeit with a different final goal of going 'all the way' by helping the user to detect vulnerabilities and creating exploits using them on the target application. 
-In both potential use cases, the benefits of the tool are twofold - it can be used as an educational stepping stone for developers to further their understanding of security in web applications. It also provides a pragmatic way to improve website security through alternate routes - that of the direct owner improving their website by given suggestions, or the penetration tester showing developers the dangers of ignoring security for their website by exploiting open vulnerabilities. \\
+The slightly alternative use case of this tool provides a more in-depth scan per potential vulnerability, and would be better suited for use by a penetration tester, or an otherwise knowledgeable web security expert. In this use case, the tool would work in a similar fashion, albeit with a different final goal of going 'all the way' by helping the user to detect vulnerabilities and creating exploits using them on the target application. \\ 
+ 
+In both potential use cases, the benefits of the tool are twofold - it can be used as an educational stepping stone for developers to further their understanding of security in web applications. It also provides a pragmatic way to improve website security through slightly different ways. In the first case, the developer applies the given suggestions to their website, making an immediate effect on its security. Alternatively, the penetration tester can  show developers the dangers of ignoring security for their website by exploiting open vulnerabilities, which gives further incentive to fix these as soon as possible. A penetration tester with the knowledge of exploiting vulnerabilities will most often also know how to mitigate vulnerabilities against their own attacks. \\
 
 
+This project aims to explore the latter of the two approaches mentioned. 
+This is the more encompassing of the two possible use cases, and produces richer information beyond safety improvement recommendations. 
+The extension will be designed to run in real time as the penetration tester navigates the website being targeted, analysing server responses from the website given to the tester based on different inputs. 
+It will also perform automated fuzzing of detected user input forms and other parameters in an attempt to detect vulnerabilities that can be triggered from tampering or manipulating these.
+It is not reasonable for the penetration tester to find a combination of inputs that will immediately result in the unveiling of a vulnerability; this is a slow manual process that requires careful crafting of inputs that adapt to received server output.
+It makes sense to take advantage of computing power in this case to expedite this process by attempting several combinations and permutations of inputs that are well known to be problematic to handle by insecure systems, showing the existence of vulnerabilities.
+The creation of the tool will have quality of vulnerability detection as a more important design principle over breadth of detection. This results in a more accurate tool that achieves better results, with fewer false-positives.
+
+%This choice is made with the evaluation of the tool in mind. False positives (declaring that a website has a vulnerability when in fact it doesn't) are a major evaluation metric for the project and minimising these through more accurate, in-depth scans will result in a quantifiably better, more usable tool. \\  
 
 
-
-User driven approach
-
-
-
-This goal poses several challenges, the biggest of which are:
-
-1) Breadth of analysis
-2) Depth of analysis
-3) Accuracy of the scanner
-
-
-This project aims to explore the latter of the two approaches mentioned. This is the more encompassing of the two possible use cases, with more information produced than just recommendations on how to improve a website. It also provides appropriate scope to allow for an in-depth analysis per potential vulnerability. Given that, this project aims to explore vulnerabilities in as much depth as possible, with less focus on attempting to detect as many vulnerabilities as possible. This choice is made with the evaluation of the tool in mind - as will be discussed later on. False positives (declaring that a website has a vulnerability when in fact it doesn't) are a major evaluation metric for the project and minimising these through more accurate, in-depth scans will result in a quantifiably better, more usable tool. \\  
-
-
-\section{Challenges}
 
 

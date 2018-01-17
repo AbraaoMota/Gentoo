@@ -1,0 +1,132 @@
+Use LaTeX!
+
+
+Get your story right
+
+Whats the problem? motivation
+What's the key idea (solution/approach)?
+What's the likely benefit / tradeoff?
+What did you build? Did it work?
+What did you conclude?
+Is what you've produced usable/useful
+
+can i do a dissertation on my life as a failed experiment
+
+final report structure
+  title
+  abstract
+  introduction
+  background
+  deets
+  eval/discussion
+  conclusions and further work
+  bibliography
+  appendices
+
+
+Write abstract at the end so you can summarise the project
+
+Intro:
+  Draw the reader in, start with big picture, focus in on the issues
+  Avoid philosophical rambling
+  Use examples to explain the problem and idea - if people can relate to the problem then they want to read it.
+  Summarise contributions
+  Provide pointers to later chapters
+
+this is the point where anandha says all of this information is based on my star pupil project last year
+
+Contributions - they drive the rest of the report - report substantiates what you've made
+
+Use forward references from the narrative in the introduction - speak about something and mention where there is more about it in the report later on
+Make contributions clear - use a bullet point list
+
+Background
+  Make it clear you're aware of important key work in the subject
+  Enough detail to make the report as self-contained as possible - BUT NO MORE
+  Don't cite sources that are irrelevant or that I haven't read
+
+
+Details (Chunky part)
+  - what i did
+  - how and why (method)
+  - justify decisions regarding design, tools, techniques etc <- Super important to justify
+  - Emphasise key challenges that I encountered
+
+  - For interim - outline planned work and what has been done so far, have a timeline to help plan the rest of the weeks ahead
+
+  When writing this, start non-detailed, and easy, use intuition
+  Once reader has intuition, they can then follow the details
+  Litter the report with examples and diagrams for people to understand
+
+  Graphs - make sure they're clear
+
+
+Evaluation
+  - must evaluate both successes and failures - bearing in mind what other people have already done / achieved
+  - Make sure each of claimed contributions is backed up by evidence
+
+  - quantitative eval - experiments and numbers
+  - qualitative - making judgements, more subjective
+
+  - Make sure i gather quantitative feedback from people i run experiments on
+
+me to 10 people
+Use it.
+tell me.
+gut.
+okay dom sooooo the evaluation is you just run it on every coreutil and all the open source program you can find
+and that's it
+- cristian, 2017
+
+
+Quantitative: Results should be replicable by someone repeating the experiment
+  Don't hide experiment parameters
+  Discuss the results and provide insight
+  Present graphs and tables
+  Give details on the outcomes, don't leave it to reader to figure that out
+
+
+Conclusion
+
+  Focus on insight
+  What has been learnt from the project
+  What are the key take-away messages
+  Try to add value to what has been said before
+
+Cite sources properly
+ - Date accessed
+
+
+Language and style
+
+  Visual structure to report
+
+
+  Friday 16th feb - review deadline
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

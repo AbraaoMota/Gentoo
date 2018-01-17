@@ -28,17 +28,48 @@ At the time of writing, this list contains the following risks, some of which ar
 	
 	\emph{Insufficient Logging and Monitoring} - An ideal web application keeps a track of all activities and accesses that occur. This helps provide accountability for actions. When this is not the case, it weakens the position of the website administrators to pinpoint attack culprits. This is very hard to detect from an outsider perspective, and \textit{insufficient} is an objective term; it wouldn't be fruitful to include this in an externally ran vulnerability scanner. \\
 
+	This is not an exhaustive list, but is useful to consider when attempting to address specific aspects for development in the tool. There are several other features or protocols that can be checked to better ascertain the security of a website, such as:
+\begin{multicols}{3}
+	\begin{itemize}
+	\item   Use of iFrames
+	\item 	Cookies
+	\item 	Appropriate headers
+	\item 	CSRF mitigations
+	\item 	Use of HTTPS
+	\item   HSTS
+	\item 	JS instrumentation
+	\item 	Remote inclusion and dependency analysis
+	\item 	DoS
+	\item 	Clickjacking
+	\item 	CSP and sandboxing policies
+	\end{itemize}
+\end{multicols}
+
+
 
 \section{Vulnerability Scanners}
 
-This project is not the first piece of work aimed at detecting website vulnerabilities. 
+This project is not the first piece of work aimed at detecting website vulnerabilities. There have been efforts in academia to address this issue \textbf{ADD REFERENCES HERE}. There are also other commercial and open source tools designed to solve this problem such as \textit{Acunetix} \textbf{REFERENCE}, IBM's \textit{AppScan} and \textit{w3af}. In order to appreciate the aspects in which this project aims to innovate in, it is fruitful to understand some aspects used to refer to these scanners.
 
 \subsection{Black Box}
+
+Much of the reading in this area makes reference to \textit{black box} scanners. This term is simply used for the tools that analyse a website without access to its source code. The opposite of this would be a \textit{white box} scanner - this sort of program works through static analysis on the raw code of the web application. A major differentiation between the two approaches is their use case; a white box scanner emulates the experience of a web developer who is looking to detect potentially exposed parts of his code, whereas a black box scanner portrays the more common setting for a malicious attacker, whereby they are only working with the exterior interface of the application to forge an intrusion. The black box approach is the one I will be using in the extension implementation as it aligns best with the project requisites.
 
 \subsection{Automated scanning}
  
  
  Human judgement is needed anyway - scanner won't know for sure. It's a human process to hack, and people will spend hours in crafting specialised attacks. 
+ 
+ "If you can’t crawl it you can’t scan it! " - Acunetix - Commercial tool - https://www.acunetix.com/vulnerability-scanner/javascript-html5-security/
+ 
+ 
+ "C) Adding interactive multistep options to scan. Out of the three scanners, only one scanner had that feature. While the option to set login credentials helps to provide application’s login info for the scanning, it does not instruct the scanners how to visit the pages and where to put attack vectors to exploit and to detect the vulnerabilities." - Analysis of effectivness of black box web app scanners 
+ 
+ 
+ "Our experimental findings confirmed that choosing the right attack vectors for the detection and exploitation of stored XSS and stored SQLI remains a big challenge for black box scanners." - Analysis of effectiveness of black box web application scanners in detection of stored sql injection and stored xss vulnerabilities (2015)
+ 
+ "Scanners need to be improved to use right attack vectors in the right situations" - Analysis of effectiveness of black box web application scanners in detection of stored sql injection and stored xss vulnerabilities (2015)
+ 
 \section{Browser extensions}
  
  

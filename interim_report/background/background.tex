@@ -1,6 +1,4 @@
 \chapter{Background}
-Types of scanning - network based vs host based scanning
-
 
 \section {Website Vulnerabilities}
 
@@ -67,22 +65,51 @@ Much of the reading in this area makes reference to \textit{black box} scanners.
 		\includegraphics[width=.8\linewidth]{images/white_box.png}
 		\label{fig:whiteBox}
 	\end{subfigure}
-	\caption{A black box scanner derives behaviour strictly from I/O, whilst a white box scanner has all the inner workings of a (web) application at its disposition for analysis}
+	\caption{A black box scanner derives behaviour strictly from I/O, whilst a white box scanner has all the inner workings of a (web) application at its disposal for analysis}
 	\label{fig:test}
 \end{figure}
 
 
  A major differentiation between the two approaches is their use case; a white box scanner emulates the experience of a web developer who is looking to detect potentially exposed parts of his code, whereas a black box scanner portrays the more common setting for a malicious attacker, whereby they are only working with the exterior interface of the application to forge an intrusion. The black box approach is the one I will be using in the extension implementation as it aligns best with the project requisites.
 
-\subsection{Crawling \& Automated scanning}
+\subsection{Mix of Crawling \& Automated scanning and Related work REWORK THIS}
  
 A large majority of web vulnerability scanners are designed to be ran passively. This means an auditor of the security of a web application would start the tool, and depending on the length and intensity of the scan, either grab a coffee while it executes or leave it running overnight. Either way, these are expected to produce reports on where a website is suffering from a vulnerability, which can then be interpreted to produce a fix. This automation is a great bonus because it makes life easier for the auditor, as they can get on with other tasks in the meantime; depending on the initial monetary and time investment needed to set up the scan, doing so automatically can be a cost-effective solution for many businesses. \\
 
-There have been studies dedicated to evaluating the effectiveness of these black box scanners. \\
+There have been studies committed to evaluate the effectiveness of these black box scanners. Doup\'e, Cova and Vigna did an extensive analysis of the tools available in 2010 \cite{whyJohnnyCantPentest}, including tools ranging from free to \$30,000+ worth. In the same year, Bau, Bursztein, Gupta and Mitchell published their own paper with a similar analysis \cite{stateOfArtAutomatedBlackBoxWebAppVulnTesting}. More recently, in 2015, Parvez, Zavarsky and Khoury released a study on the effectiveness of scanners in detecting a limited set of vulnerabilities \cite{analysisOfEffectivenessOfBlackBoxWebAppScannersStoredSQLStoredXSS}. \\
+
+Doup\'e et al. found that \textit{crawling} was one of the major limiting factors of web vulnerability scanners; according to them, {"...crawling is arguably the most important part of a web application vulnerability scanner; if the scanner’s attack engine is poor, it might miss a vulnerability, but if its crawling engine is poor and cannot reach the vulnerability, then it will surely miss the vulnerability"}. To better understand this, it is important to contextualise what \textit{crawling} is. \\
+
+A typical vulnerability scanner will loosely consist of 3 different modules:
+
+\begin{itemize}
+	
+	\item \textit{Crawling module} - This is the first part of the scanner that gets executed. A crawler will recursively follow every possible link in a webpage so that the tool can build up an internal representation / database of what the target website looks like. As mentioned above, this stage will make or break the scan - though it is unlikely that a crawler will be able to find 100\% of the available subpages on the target website, any missed links will result in the scanner not considering those pages, which in the worst case scenario can be the root of many vulnerabilities on the target site. Acunetix themselves, the providers of the commercial scanner, say "if you can't crawl it, you can't scan it!" \cite{acunetixQuoteCrawling}. 
+	
+	\item \textit{Attacker module} - At this stage, the scanner attempts to chip away at any potential cracks in the website. It goes through every stored entry in the previous phase and scans the content of the associated page. Depending on this content (e.g. a form or a URL parameter), the scanner issues web requests with specially crafted input designed to create \textit{interesting} responses from the web server.
+	
+	\item \textit{Analysis module} - This module reads the outputs from the attacker module, and scans for any significant or telling change from the server side based on the attacking input. If the web server generates a wildly different response to a normal input (e.g. it issues a page containing an SQL error message), then this is flagged up as a potential vulnerability. This module can have a feedback loop to the attacker module to refine attack methods. This can be done by creating mutations of the benign input provided until a more malicious input is generated that triggers a probable vulnerability. The scan completes after potential mutations and attack vectors have been exhausted, or a resource cap is met (time elapsed, bytes sent etc).
+\end{itemize}
+
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=\textwidth]{images/scanner_structure.png}
+	\caption{The typical structure of a vulnerability scanner. The crawling phase builds up a database of potential pages to attack. During attack, malicious inputs are fired towards pages to try and trigger undesired behaviour.}
+	\label{fig:test}
+\end{figure}
+
+
+
+ 
+whyJohnny found that a bunch of students with some knowledge had better results than scanners
+
+
+
+
  
  Human judgement is needed anyway - scanner won't know for sure. It's a human process to hack, and people will spend hours in crafting specialised attacks. 
  
- "If you can’t crawl it you can’t scan it! " - Acunetix - Commercial tool - https://www.acunetix.com/vulnerability-scanner/javascript-html5-security/
  
  
  "C) Adding interactive multistep options to scan. Out of the three scanners, only one scanner had that feature. While the option to set login credentials helps to provide application’s login info for the scanning, it does not instruct the scanners how to visit the pages and where to put attack vectors to exploit and to detect the vulnerabilities." - Analysis of effectivness of black box web app scanners 

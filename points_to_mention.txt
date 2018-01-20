@@ -28,6 +28,8 @@ QUOTES
 "If you can’t crawl it you can’t scan it! " - Acunetix - Commercial tool - https://www.acunetix.com/vulnerability-scanner/javascript-html5-security/
 
 
+"Note that the information about a web application’s “normal” behavior cannot be gathered using automatic-crawling tools, as these tools usually do not interact with an application following the workflow intended by the developer or using inputs that reflect normal operational patterns." -  FELMETSGER, V., CAVEDON, L., KRUEGEL, C., AND VIGNA, G. Toward Automated Detection of Logic Vulnerabilities in Web Applications. In Proceedings of the USENIX Security Symposium (Washington, DC, August 2010).
+
 
 
 Evaluation:

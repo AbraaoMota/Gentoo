@@ -1,15 +1,50 @@
-\begin{thebibliography}{1}
+\begin{thebibliography}{10}
+
+\bibitem{Saner}
+Cova M. Felmetsger V. Jovanovic N. Kirda E. Kruegel~C. Balzarotti, D. and
+  G.~Vigna.
+\newblock Saner: Composing static and dynamic analysis to validate sanitization
+  in web applications.
+\newblock {\em 2008 IEEE Symposium on Security and Privacy}, 2008.
+
+\bibitem{stateAwareBlackBoxWebVulnScanner}
+Adam Doup{\'e}, Ludovico Cavedon, Christopher Kruegel, and Giovanni Vigna.
+\newblock Enemy of the state: A state-aware black-box web vulnerability
+  scanner.
+\newblock In {\em Presented as part of the 21st {USENIX} Security Symposium
+  ({USENIX} Security 12)}, pages 523--538, Bellevue, WA, 2012. {USENIX}.
+
+\bibitem{Waler}
+Cavedon L. Kruegel~C. Felmetsger, V. and G.~Vigna.
+\newblock Toward automated detection of logic vulnerabilities in web
+  applications.
+\newblock {\em Proceedings of the USENIX Security Sym posium (Washington, DC,
+  August 2010)}, 2010.
 
 \bibitem{djangoCSRF}
 Django~Software Foundation.
 \newblock Django project documentation - cross site request forgery protection.
-\newblock \url{https://docs.djangoproject.com/en/2.0/ref/csrf/}, 2018.
+\newblock \url{https://docs.djangoproject.com/en/2.0/ref/csrf/}.
+\newblock Accessed: 10/01/2018.
 
 \bibitem{rubyOnRailsCSRF}
 Rails Guides.
 \newblock Rails guides - csrf countermeasures.
 \newblock
-  \url{http://guides.rubyonrails.org/security.html#csrf-countermeasures}, 2018.
+  \url{http://guides.rubyonrails.org/security.html#csrf-countermeasures}.
+\newblock Accessed: 10/01/2018.
+
+\bibitem{appscan}
+IBM.
+\newblock Ibm security appscan.
+\newblock \url{https://www.ibm.com/security/application-security/appscan}.
+\newblock Accessed 20/01/2018.
+
+\bibitem{Kals:2006:SWV:1135777.1135817}
+Stefan Kals, Engin Kirda, Christopher Kruegel, and Nenad Jovanovic.
+\newblock Secubat: A web vulnerability scanner.
+\newblock In {\em Proceedings of the 15th International Conference on World
+  Wide Web}, WWW '06, pages 247--256, New York, NY, USA, 2006. ACM.
 
 \bibitem{KUISMA200775}
 Tuire Kuisma, Tommi Laukkanen, and Mika Hiltunen.
@@ -18,9 +53,28 @@ Tuire Kuisma, Tommi Laukkanen, and Mika Hiltunen.
 \newblock {\em International Journal of Information Management}, 27(2):75 --
   85, 2007.
 
+\bibitem{acunetix}
+Acunetix Ltd.
+\newblock Acunetix web vulnerability scanner.
+\newblock \url{https://www.acunetix.com/}.
+\newblock Accessed 20/01/2018.
+
 \bibitem{laravelCSRF}
 Taylor Otwell.
 \newblock Laravel docs - csrf protection.
-\newblock \url{https://laravel.com/docs/5.5/csrf}, 2018.
+\newblock \url{https://laravel.com/docs/5.5/csrf}.
+\newblock Accessed: 10/01/2018.
+
+\bibitem{owaspPage}
+OWASP.
+\newblock Open web application security project.
+\newblock \url{https://www.owasp.org/index.php/Main_Page}.
+\newblock Accessed 20/01/2018.
+
+\bibitem{w3af}
+w3af Org.
+\newblock w3af - web application attack and audit framework.
+\newblock \url{http://w3af.org/}.
+\newblock Accessed 20/01/2018.
 
 \end{thebibliography}

@@ -3,44 +3,101 @@ Capacity: max_strings=100000, hash_size=100000, hash_prime=85009
 The top-level auxiliary file: main.aux
 The style file: plain.bst
 Database file #1: bibs/sample.bib
-You've used 4 entries,
+Name 1 in "Balzarotti, D., Cova, M., Felmetsger, V., Jovanovic, N., Kirda, E., Kruegel, C., and Vigna, G." has a comma at the end for entry Saner
+while executing---line 1049 of file plain.bst
+Too many commas in name 1 of "Balzarotti, D., Cova, M., Felmetsger, V., Jovanovic, N., Kirda, E., Kruegel, C., and Vigna, G." for entry Saner
+while executing---line 1049 of file plain.bst
+Too many commas in name 1 of "Balzarotti, D., Cova, M., Felmetsger, V., Jovanovic, N., Kirda, E., Kruegel, C., and Vigna, G." for entry Saner
+while executing---line 1049 of file plain.bst
+Too many commas in name 1 of "Balzarotti, D., Cova, M., Felmetsger, V., Jovanovic, N., Kirda, E., Kruegel, C., and Vigna, G." for entry Saner
+while executing---line 1049 of file plain.bst
+Too many commas in name 1 of "Balzarotti, D., Cova, M., Felmetsger, V., Jovanovic, N., Kirda, E., Kruegel, C., and Vigna, G." for entry Saner
+while executing---line 1049 of file plain.bst
+Too many commas in name 1 of "Balzarotti, D., Cova, M., Felmetsger, V., Jovanovic, N., Kirda, E., Kruegel, C., and Vigna, G." for entry Saner
+while executing---line 1049 of file plain.bst
+Too many commas in name 1 of "Balzarotti, D., Cova, M., Felmetsger, V., Jovanovic, N., Kirda, E., Kruegel, C., and Vigna, G." for entry Saner
+while executing---line 1049 of file plain.bst
+Too many commas in name 1 of "Balzarotti, D., Cova, M., Felmetsger, V., Jovanovic, N., Kirda, E., Kruegel, C., and Vigna, G." for entry Saner
+while executing---line 1049 of file plain.bst
+Too many commas in name 1 of "Balzarotti, D., Cova, M., Felmetsger, V., Jovanovic, N., Kirda, E., Kruegel, C., and Vigna, G." for entry Saner
+while executing---line 1049 of file plain.bst
+Too many commas in name 1 of "Balzarotti, D., Cova, M., Felmetsger, V., Jovanovic, N., Kirda, E., Kruegel, C., and Vigna, G." for entry Saner
+while executing---line 1049 of file plain.bst
+Name 1 in "Felmetsger, V., Cavedon, L., Kruegel, C., and Vigna, G." has a comma at the end for entry Waler
+while executing---line 1049 of file plain.bst
+Too many commas in name 1 of "Felmetsger, V., Cavedon, L., Kruegel, C., and Vigna, G." for entry Waler
+while executing---line 1049 of file plain.bst
+Too many commas in name 1 of "Felmetsger, V., Cavedon, L., Kruegel, C., and Vigna, G." for entry Waler
+while executing---line 1049 of file plain.bst
+Too many commas in name 1 of "Felmetsger, V., Cavedon, L., Kruegel, C., and Vigna, G." for entry Waler
+while executing---line 1049 of file plain.bst
+Name 1 in "Balzarotti, D., Cova, M., Felmetsger, V., Jovanovic, N., Kirda, E., Kruegel, C., and Vigna, G." has a comma at the end for entry Saner
+while executing---line 1090 of file plain.bst
+Too many commas in name 1 of "Balzarotti, D., Cova, M., Felmetsger, V., Jovanovic, N., Kirda, E., Kruegel, C., and Vigna, G." for entry Saner
+while executing---line 1090 of file plain.bst
+Too many commas in name 1 of "Balzarotti, D., Cova, M., Felmetsger, V., Jovanovic, N., Kirda, E., Kruegel, C., and Vigna, G." for entry Saner
+while executing---line 1090 of file plain.bst
+Too many commas in name 1 of "Balzarotti, D., Cova, M., Felmetsger, V., Jovanovic, N., Kirda, E., Kruegel, C., and Vigna, G." for entry Saner
+while executing---line 1090 of file plain.bst
+Too many commas in name 1 of "Balzarotti, D., Cova, M., Felmetsger, V., Jovanovic, N., Kirda, E., Kruegel, C., and Vigna, G." for entry Saner
+while executing---line 1090 of file plain.bst
+Too many commas in name 1 of "Balzarotti, D., Cova, M., Felmetsger, V., Jovanovic, N., Kirda, E., Kruegel, C., and Vigna, G." for entry Saner
+while executing---line 1090 of file plain.bst
+Too many commas in name 1 of "Balzarotti, D., Cova, M., Felmetsger, V., Jovanovic, N., Kirda, E., Kruegel, C., and Vigna, G." for entry Saner
+while executing---line 1090 of file plain.bst
+Too many commas in name 1 of "Balzarotti, D., Cova, M., Felmetsger, V., Jovanovic, N., Kirda, E., Kruegel, C., and Vigna, G." for entry Saner
+while executing---line 1090 of file plain.bst
+Too many commas in name 1 of "Balzarotti, D., Cova, M., Felmetsger, V., Jovanovic, N., Kirda, E., Kruegel, C., and Vigna, G." for entry Saner
+while executing---line 1090 of file plain.bst
+Too many commas in name 1 of "Balzarotti, D., Cova, M., Felmetsger, V., Jovanovic, N., Kirda, E., Kruegel, C., and Vigna, G." for entry Saner
+while executing---line 1090 of file plain.bst
+Name 1 in "Felmetsger, V., Cavedon, L., Kruegel, C., and Vigna, G." has a comma at the end for entry Waler
+while executing---line 1090 of file plain.bst
+Too many commas in name 1 of "Felmetsger, V., Cavedon, L., Kruegel, C., and Vigna, G." for entry Waler
+while executing---line 1090 of file plain.bst
+Too many commas in name 1 of "Felmetsger, V., Cavedon, L., Kruegel, C., and Vigna, G." for entry Waler
+while executing---line 1090 of file plain.bst
+Too many commas in name 1 of "Felmetsger, V., Cavedon, L., Kruegel, C., and Vigna, G." for entry Waler
+while executing---line 1090 of file plain.bst
+You've used 12 entries,
             2118 wiz_defined-function locations,
-            521 strings with 4624 characters,
-and the built_in function-call counts, 998 in all, are:
-= -- 94
-> -- 39
-< -- 0
-+ -- 16
-- -- 12
-* -- 50
-:= -- 174
-add.period$ -- 12
-call.type$ -- 4
-change.case$ -- 18
+            570 strings with 6079 characters,
+and the built_in function-call counts, 3403 in all, are:
+= -- 342
+> -- 139
+< -- 2
++ -- 56
+- -- 44
+* -- 162
+:= -- 568
+add.period$ -- 45
+call.type$ -- 12
+change.case$ -- 58
 chr.to.int$ -- 0
-cite$ -- 4
-duplicate$ -- 32
-empty$ -- 94
-format.name$ -- 12
-if$ -- 212
+cite$ -- 12
+duplicate$ -- 126
+empty$ -- 294
+format.name$ -- 44
+if$ -- 740
 int.to.chr$ -- 0
-int.to.str$ -- 4
-missing$ -- 1
-newline$ -- 23
-num.names$ -- 8
-pop$ -- 28
+int.to.str$ -- 12
+missing$ -- 5
+newline$ -- 70
+num.names$ -- 24
+pop$ -- 100
 preamble$ -- 1
-purify$ -- 14
+purify$ -- 46
 quote$ -- 0
-skip$ -- 28
+skip$ -- 94
 stack$ -- 0
-substring$ -- 41
-swap$ -- 4
-text.length$ -- 0
+substring$ -- 145
+swap$ -- 30
+text.length$ -- 2
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 16
+type$ -- 48
 warning$ -- 0
-while$ -- 9
-width$ -- 5
-write$ -- 43
+while$ -- 31
+width$ -- 14
+write$ -- 137
+(There were 28 error messages)

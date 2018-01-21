@@ -70,9 +70,9 @@ Much of the reading in this area makes reference to \textit{black box} scanners.
 \end{figure}
 
 
- A major differentiation between the two approaches is their use case; a white box scanner emulates the experience of a web developer who is looking to detect potentially exposed parts of his code, whereas a black box scanner portrays the more common setting for a malicious attacker, whereby they are only working with the exterior interface of the application to forge an intrusion. The black box approach is the one I will be using in the extension implementation as it aligns best with the project requisites.
+ A white box scanner takes into consideration the implementation of the service, so it may be designed with the specific framework or language used for the application in mind. Conversely, a black box implementation does not care about these details and looks only at outputs from the service. A major differentiation between the two approaches is their use case; a white box scanner emulates the experience of a web developer who is looking to detect potentially exposed parts of his code, whereas a black box scanner portrays the setting for a malicious attacker, where they are only working with the exterior interface of the application to forge an intrusion. The black box approach is the one I will be using in the extension implementation as it aligns best with the project requisites.
 
-\subsection{Mix of Crawling \& Automated scanning and Related work REWORK THIS}
+\subsection{Related work}
  
 A large majority of web vulnerability scanners are designed to be ran passively. This means an auditor of the security of a web application would start the tool, and depending on the length and intensity of the scan, either grab a coffee while it executes or leave it running overnight. Either way, these are expected to produce reports on where a website is suffering from a vulnerability, which can then be interpreted to produce a fix. This automation is a great bonus because it makes life easier for the auditor, as they can get on with other tasks in the meantime; depending on the initial monetary and time investment needed to set up the scan, doing so automatically can be a cost-effective solution for many businesses. \\
 
@@ -84,25 +84,35 @@ A typical vulnerability scanner will loosely consist of 3 different modules:
 
 \begin{itemize}
 	
-	\item \textit{Crawling module} - This is the first part of the scanner that gets executed. A crawler will recursively follow every possible link in a webpage so that the tool can build up an internal representation / database of what the target website looks like. As mentioned above, this stage will make or break the scan - though it is unlikely that a crawler will be able to find 100\% of the available subpages on the target website, any missed links will result in the scanner not considering those pages, which in the worst case scenario can be the root of many vulnerabilities on the target site. Acunetix themselves, the providers of the commercial scanner, say "if you can't crawl it, you can't scan it!" \cite{acunetixQuoteCrawling}. 
+	\item \textit{Crawling module} - This is the first part of the scanner that gets executed. A crawler will recursively follow every possible link in a webpage so that the tool can build up an internal representation / database of what the target website looks like. As mentioned above, this stage will make or break the scan - though it is unlikely that a crawler will be able to find 100\% of the available subpages on the target website, any missed links will result in the scanner not considering those pages, which in the worst case scenario may miss a page which is the root of many vulnerabilities on the target site. Acunetix themselves, the providers of the commercial vulnerability scanner, say "if you can't crawl it, you can't scan it!" \cite{acunetixQuoteCrawling}. 
 	
 	\item \textit{Attacker module} - At this stage, the scanner attempts to chip away at any potential cracks in the website. It goes through every stored entry in the previous phase and scans the content of the associated page. Depending on this content (e.g. a form or a URL parameter), the scanner issues web requests with specially crafted input designed to create \textit{interesting} responses from the web server.
 	
-	\item \textit{Analysis module} - This module reads the outputs from the attacker module, and scans for any significant or telling change from the server side based on the attacking input. If the web server generates a wildly different response to a normal input (e.g. it issues a page containing an SQL error message), then this is flagged up as a potential vulnerability. This module can have a feedback loop to the attacker module to refine attack methods. This can be done by creating mutations of the benign input provided until a more malicious input is generated that triggers a probable vulnerability. The scan completes after potential mutations and attack vectors have been exhausted, or a resource cap is met (time elapsed, bytes sent etc).
+	\item \textit{Analysis module} - This module reads the outputs from the target to the attacker module input, and scans for any significant or telling change from the server side response. If the web server generates a wildly different response to a normal input (e.g. it issues a page containing an SQL error message), then this is flagged up as a potential vulnerability. This module can have a feedback loop to the attacker module to refine attack methods. This is done through \textit{fuzzing} - creating mutations of the benign input and testing these on the application until a more malicious input is generated that triggers a vulnerability. The scan completes after all potential mutations and attack vectors have been exhausted, or a resource cap is met (time elapsed, bytes sent etc).
 \end{itemize}
 
 
 \begin{figure}[h]
 	\centering
 	\includegraphics[width=\textwidth]{images/scanner_structure.png}
-	\caption{The typical structure of a vulnerability scanner. The crawling phase builds up a database of potential pages to attack. During attack, malicious inputs are fired towards pages to try and trigger undesired behaviour.}
+	\caption{The typical structure of a vulnerability scanner. The crawling phase builds up a database of potential pages to attack. During attack, malicious inputs are fired towards pages to try and trigger undesired behaviour - the analyser reads response contents with some heuristics to determine what responses seem to indicate vulnerabilities.}
 	\label{fig:test}
 \end{figure}
 
+With this knowledge in mind, it is now easier to appreciate how important the crawling phase is, as it sets an upper bound to how far a scanner can go. Crawling in itself is however not a trivial task to implement. A naive approach to this would be to start at the target page given, scan for any \texttt{<a>} anchor links in this page and filter this list to only include links that belong to the target domain (e.g. if our target was \texttt{facebook.com}, we might be interested in \texttt{facebook.com/account}, but we would discard any links to \texttt{google.com}, as Google links belong to a different domain. As a general rule of thumb, the links we explore have the target link as a prefix to the URL). This method of crawling pages would quickly come up against issues though. A lot of the interesting state of a web application is often hidden behind a login form, so if a valid user account isn't created then a scanner will not be able to explore the full array of actions available. The method described above would not consider this, so would skip out on all the intriguing parts of a website that requires you to have an account. There are also other technologies used in the web that make this slightly harder, such as Flash objects that contain useful sublinks. These objects are not straightforward to analyse, and make automated crawling difficult. \\
 
+This combination of components quickly complicates things for creation of an effective crawler implementation. A competent crawler needs to go above and beyond being just a database of pages - it has to emulate human interactions with an application without any prior domain knowledge. To do so, it has to somehow derive an internal representation of what the website looks like, and refer to this state when crawling and in the analysis phase. Keeping state was an issue raised by Doup\'e et al. in \cite{whyJohnnyCantPentest}. As an example of its importance, if during the attacking phase the scanner is logged in, and an attack request causes the scanner to log out of the application, all the subsequent requests will execute in a different context where the scanner is logged out, invalidating their intended purpose. Doup\'e, Cavedon, Kruegel and Vigna later addressed this by creating a scanner that generated an internal state machine representation of a web application based on heuristically unique server responses \cite{stateAwareBlackBoxWebVulnScanner}. The techniques demonstrated in that paper were useful in creating a more effective crawler that remembered state so as to not waste computation efforts. The resulting scanner achieved higher code coverage rates for web applications analysed over other otherwise similar, open-source scanners. Higher code coverage rates mean that a scanner is exercising more of the application's source code, thus increasing likelihoods of finding a vulnerability. \\
 
+It is clear that an automated crawler based web vulnerability scanner is a difficult tool to create. The shotgun approach used by the crawler can also have negative consequences for the application as discussed in \ref{ethics}. Though state of the art crawlers can now handle the aforementioned hurdles and other intricacies of different web applications, the creation of an efficient, fully automated crawler could warrant a project of its own. \\
 
+These points lead us nicely onto the intended innovation behind the project idea - to create a semi-automated web application vulnerability scanner. The essential difference between this and the aforementioned black box scanners is that it intends to work as an aide alongside a pentester, not as a fully automated background process. 
 
+why should you use human input:
+organic, realistic experience
+make use of the entire webpage - no need to skip AJAX, JS, flash etc - although these might be out of scope of the project
+
+ using the website as intended allows us to keep a simpler representation of the website
+if the scanner works at the same level as the user then they 
  
 whyJohnny found that a bunch of students with some knowledge had better results than scanners
  
@@ -125,6 +135,7 @@ whyJohnny found that a bunch of students with some knowledge had better results 
  
 \section{Limitations}
 
+crawling does find more stuff to look through
 \subsection{Human review}
 
  \subsection{Breadth of  work}
@@ -134,6 +145,7 @@ whyJohnny found that a bunch of students with some knowledge had better results 
 http://slideplayer.com/slide/4352044/
 
 \subsection{Ethics \& Handling of Results}
-
+\label{ethics}
+ each potential vulnerability may have 100's of different known alternatives to fuzz through,
 scans might take the website down if intensive
  

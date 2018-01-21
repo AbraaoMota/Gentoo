@@ -3,6 +3,10 @@ Capacity: max_strings=100000, hash_size=100000, hash_prime=85009
 The top-level auxiliary file: main.aux
 The style file: plain.bst
 Database file #1: bibs/sample.bib
+Repeated entry---line 162 of file bibs/sample.bib
+ : @inproceedings {stateAwareBlackBoxWebVulnScanner
+ :                                                 ,
+I'm skipping whatever remains of this entry
 Name 1 in "Balzarotti, D., Cova, M., Felmetsger, V., Jovanovic, N., Kirda, E., Kruegel, C., and Vigna, G." has a comma at the end for entry Saner
 while executing---line 1049 of file plain.bst
 Too many commas in name 1 of "Balzarotti, D., Cova, M., Felmetsger, V., Jovanovic, N., Kirda, E., Kruegel, C., and Vigna, G." for entry Saner
@@ -100,4 +104,4 @@ warning$ -- 0
 while$ -- 47
 width$ -- 18
 write$ -- 183
-(There were 28 error messages)
+(There were 29 error messages)

@@ -1,0 +1,4 @@
+Paper Synopsis
+
+They test OWASP ZAP vs Skipfish on DVWA and WAVSEP
+ZAP seems to perform much better, but the paper doesn't look very well written

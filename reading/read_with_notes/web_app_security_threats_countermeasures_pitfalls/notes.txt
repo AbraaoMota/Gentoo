@@ -1,0 +1,14 @@
+PAPER SYNOPSIS:
+
+These guys describe how they built their own tool Vulnscan
+
+This is a good paper to demonstrate how intensive a scanner can be - loads of mutations per input. So much that they've got pruning techniques to make this more feasible
+
+Performed better than zap against WebGoat
+
+GOOD QUOTE
+"There's no silver bullet for web application security; threats will continue to grow and evolve"
+
+
+Ethics debate
+Sys admins for vulnerable sites fix things after being told - is that good enough?

@@ -45,7 +45,7 @@ At the time of writing, this list contains the following risks, some of which ar
 
 
 
-\section{Vulnerability Scanners}
+\section{Related Work}
 
 This project is not the first piece of work aimed at detecting website vulnerabilities. There have been efforts in academia to address this issue (\cite{Saner, Waler, Kals:2006:SWV:1135777.1135817, stateAwareBlackBoxWebVulnScanner}, to name a few), where tools are often built as part of the related paper to demonstrate the feasibility of the proposed techniques in detecting vulnerabilities. There are also other commercial and open source tools designed to solve this problem such as \textit{Acunetix} \cite{acunetix}, IBM's \textit{AppScan} \cite{appscan} and \textit{w3af} \cite{w3af}. In order to appreciate the aspects in which this project aims to innovate in, it is fruitful to understand some aspects used to refer to these scanners.
 
@@ -72,7 +72,7 @@ Much of the reading in this area makes reference to \textit{black box} scanners.
 
  A white box scanner takes into consideration the implementation of the service, so it may be designed with the specific framework or language used for the application in mind. Conversely, a black box implementation does not care about these details and looks only at outputs from the service. A major differentiation between the two approaches is their use case; a white box scanner emulates the experience of a web developer who is looking to detect potentially exposed parts of his code, whereas a black box scanner portrays the setting for a malicious attacker, where they are only working with the exterior interface of the application to forge an intrusion. The black box approach is the one I will be using in the extension implementation as it aligns best with the project requisites.
 
-\subsection{Related work}
+\subsection{Automated Vulnerability Scanners}
  
 A large majority of web vulnerability scanners are designed to be ran passively. This means an auditor of the security of a web application would start the tool, and depending on the length and intensity of the scan, either grab a coffee while it executes or leave it running overnight. Either way, these are expected to produce reports on where a website is suffering from a vulnerability, which can then be interpreted to produce a fix. This automation is a great bonus because it makes life easier for the auditor, as they can get on with other tasks in the meantime; depending on the initial monetary and time investment needed to set up the scan, doing so automatically can be a cost-effective solution for many businesses. \\
 
@@ -105,18 +105,24 @@ This combination of components quickly complicates things for creation of an eff
 
 It is clear that an automated crawler based web vulnerability scanner is a difficult tool to create. The shotgun approach used by the crawler can also have negative consequences for the application as discussed in \ref{ethics}. Though state of the art crawlers can now handle the aforementioned hurdles and other intricacies of different web applications, the creation of an efficient, fully automated crawler could warrant a project of its own. \\
 
+\section{Project Contribution}
+
 These points lead us nicely onto the intended innovation behind the project idea - to create a semi-automated web application vulnerability scanner. The essential difference between this and the aforementioned black box scanners is that it intends to work as an aide alongside a pentester, not as a fully automated background process. 
 
-why should you use human input:
-organic, realistic experience
-make use of the entire webpage - no need to skip AJAX, JS, flash etc - although these might be out of scope of the project
+The proposition of creating a tool that is driven by user input seems appealing for a number of reasons:
 
- using the website as intended allows us to keep a simpler representation of the website
-if the scanner works at the same level as the user then they 
+\begin{itemize}
+	\item \textbf{Full Experience} -  no need to skip AJAX, JS, flash etc
+	\item \textbf{Educational}
+	\item \textbf{Simpler inner representation \& Less crawling}
+	\item \textbf{Human judgement} - Increased likelihood of using the correct attack vector.	 Human judgement is needed anyway - scanner won't know for sure. It's a human process to hack, and people will spend hours in crafting specialised attacks. 
+\end{itemize}
+
+This however doesn't mean completely foregoing crawling - it means the project will only handle a smaller subset of possible pages to look at.
  
 whyJohnny found that a bunch of students with some knowledge had better results than scanners
  
- Human judgement is needed anyway - scanner won't know for sure. It's a human process to hack, and people will spend hours in crafting specialised attacks. 
+
  
  "C) Adding interactive multistep options to scan. Out of the three scanners, only one scanner had that feature. While the option to set login credentials helps to provide application’s login info for the scanning, it does not instruct the scanners how to visit the pages and where to put attack vectors to exploit and to detect the vulnerabilities." - Analysis of effectivness of black box web app scanners 
  

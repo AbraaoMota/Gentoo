@@ -107,33 +107,35 @@ It is clear that an automated crawler based web vulnerability scanner is a diffi
 
 \section{Project Contribution}
 
-These points lead us nicely onto the intended innovation behind the project idea - to create a semi-automated web application vulnerability scanner. The essential difference between this and the aforementioned black box scanners is that it intends to work as an aide alongside a pentester, not as a fully automated background process. 
+These points lead us nicely onto the intended innovation behind the project idea - to create a semi-automated web application vulnerability scanner. The essential difference between this and the aforementioned black box scanners is that it intends to work as an aide alongside a pentester, not as a fully automated background process. \\
 
 The proposition of creating a tool that is driven by user input seems appealing for a number of reasons:
 
 \begin{itemize}
-	\item \textbf{Full Experience} -  no need to skip AJAX, JS, flash etc
-	\item \textbf{Educational}
-	\item \textbf{Simpler inner representation \& Less crawling}
-	\item \textbf{Human judgement} - Increased likelihood of using the correct attack vector.	 Human judgement is needed anyway - scanner won't know for sure. It's a human process to hack, and people will spend hours in crafting specialised attacks. 
+	\item \textbf{Full Experience} - A scanner that analyses a web application for vulnerabilities as a user is using the application has fewer limitations as to what is within its scope. As pointed out by \cite{whyJohnnyCantPentest}, scanners struggle to scour through more complex constructs of the internet such as convoluted Javascript forms, AJAX requests and Flash objects. As a result, many scanners ignore these features altogether, dismissing potential vulnerabilities in the process. A user driven experience allows the user to interact as they would normally with these technologies, and can analyse inputs and outputs accordingly.
+	
+	\item \textbf{Educational} - As mentioned above, one of the issues that leads to the need of vulnerability scanners is the lack of security-aware developers. By developing a tool that works alongside developers, they can refine their skills in this area if they already know some security basics. There is also room for learning for website owners as penetration testers may demonstrate the severity of exploits caused by vulnerabilities using the tool, and mitigating these. 
+	
+	\item \textbf{Simpler crawling module} - Since the tool is not scouring the entire site at once but is rather following the more natural workflow of a human user, the equivalent crawling module will only need to keep a much smaller representation of the website as opposed to before. \textbf{CHECK THIS WITH TUTOR}. A proposed methodology to simplify this process given the project specification is to create a crawler based on recommendations and an 'action replay' mechanism. The recommendation algorithm is the humanising of a regular crawler - since the tool must be driven by user input, the crawler would analyse potential contents on a page (as it would do automatically), and suggest specific features to the user as a starting point for the scan. At this point, the 'action replay' algorithm begins - once a user has elected a potential target to test for a vulnerability, the tool begins to record user actions. Depending on the selected feature and what vulnerabilities may be discoverable, the tool can then suggest a stopping point of recording, or wait for the user to determine when their actions that detect a vulnerability are enough. The tool then takes these actions and analyses their outputs - it may be the case that a user has found a vulnerability on their first go. It could also be the case that this input didn't trigger a vulnerability, but is worth looking into further. At this point, the crawler will begin to fuzz different versions of input that may be more effective at showcasing vulnerabilities. In recent research by Parvez et al. into evaluating black box scanners \cite{analysisOfEffectivenessOfBlackBoxWebAppScannersStoredSQLStoredXSS}, one of the final recommendations for a better scanner was to add interactive multistep options to the scanner, which is a main focus of this method. To the best of my knowledge, this 'action replay' algorithm is a novel approach in this area.
+	
+		\begin{figure}[h]
+		\centering
+		\includegraphics[width=\textwidth]{images/action_replay.png}
+		\caption{A visualization of the proposed action replay algorithm. The tool records user input for a time period determined by the user. The tool then replicates actions using fuzzed inputs to try and uncover vulnerabilities if the first attempt was unsuccessful.}
+		\label{fig:test}
+	\end{figure}
+	
+	
+	\item \textbf{Human judgement} - The previously paper by Parvez et al. also mentions that choosing the right attack vectors to exploit vulnerabilities is still a big challenge for black box scanners \cite{analysisOfEffectivenessOfBlackBoxWebAppScannersStoredSQLStoredXSS}. Huang et al. recently built a scanner that performed well against open-source competition \cite{webAppSecThreatsCountermeasuresPitfalls}. However, even these authors more recently acknowledge that \emph{there is no silver bullet for web application security; threats will continue to grow and evolve}. Herein lies much of the motivation for making this project user-centric: vulnerability detection may be automated to a certain extent, but exploitation of security holes in a web application is a task that inherently requires human judgement. Hacking is a highly intellectual activity that is not necessarily automated, so in order to counter it, efforts against it must match up to its level of intellect. This is not admitting defeat in attempting to automate the process of countering malicious agents, but rather increasing the likelihood of doing a good job against them by covering our bases with higher quality base defences. In fact, even limited domain knowledge has shown to be useful; a group of students with 'average' security skills achieved a higher success rate on their own than some vulnerability scanners in analysing web applications \cite{whyJohnnyCantPentest}. It is hoped that with the correct suggestions provided by the tool, this project lowers the minimum requirements of a successful user to be 'below average' in their security domain knowledge.
+
 \end{itemize}
 
-This however doesn't mean completely foregoing crawling - it means the project will only handle a smaller subset of possible pages to look at.
- 
-whyJohnny found that a bunch of students with some knowledge had better results than scanners
- 
 
- 
- "C) Adding interactive multistep options to scan. Out of the three scanners, only one scanner had that feature. While the option to set login credentials helps to provide application’s login info for the scanning, it does not instruct the scanners how to visit the pages and where to put attack vectors to exploit and to detect the vulnerabilities." - Analysis of effectivness of black box web app scanners 
- 
- 
- "Our experimental findings confirmed that choosing the right attack vectors for the detection and exploitation of stored XSS and stored SQLI remains a big challenge for black box scanners." - Analysis of effectiveness of black box web application scanners in detection of stored sql injection and stored xss vulnerabilities (2015)
- 
- "Scanners need to be improved to use right attack vectors in the right situations" - Analysis of effectiveness of black box web application scanners in detection of stored sql injection and stored xss vulnerabilities (2015)
+
  
 \section{Browser extensions}
  
- 
+ I propose to create the tool described above as a browser extension in Google Chrome.
  
  
  
@@ -155,3 +157,4 @@ http://slideplayer.com/slide/4352044/
  each potential vulnerability may have 100's of different known alternatives to fuzz through,
 scans might take the website down if intensive
  
+Make sure im only testing on sites i own

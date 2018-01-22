@@ -8,22 +8,22 @@
 \contentsline {subsection}{\numberline {2.2.1}Black Box}{8}{subsection.2.2.1}
 \contentsline {subsection}{\numberline {2.2.2}Automated Vulnerability Scanners}{8}{subsection.2.2.2}
 \contentsline {section}{\numberline {2.3}Project Contribution}{10}{section.2.3}
-\contentsline {section}{\numberline {2.4}Browser extensions}{11}{section.2.4}
-\contentsline {section}{\numberline {2.5}Limitations}{11}{section.2.5}
-\contentsline {subsection}{\numberline {2.5.1}Human review}{11}{subsection.2.5.1}
-\contentsline {subsection}{\numberline {2.5.2}Breadth of work}{11}{subsection.2.5.2}
-\contentsline {subsection}{\numberline {2.5.3}Self security}{11}{subsection.2.5.3}
-\contentsline {subsection}{\numberline {2.5.4}Ethics \& Handling of Results}{11}{subsection.2.5.4}
-\contentsline {chapter}{\numberline {3}Evaluation}{12}{chapter.3}
-\contentsline {section}{\numberline {3.1}Intended functionality}{12}{section.3.1}
-\contentsline {section}{\numberline {3.2}Metrics of success}{12}{section.3.2}
-\contentsline {subsection}{\numberline {3.2.1}Correct reporting}{12}{subsection.3.2.1}
-\contentsline {subsection}{\numberline {3.2.2}False positives}{12}{subsection.3.2.2}
-\contentsline {subsection}{\numberline {3.2.3}Code coverage}{12}{subsection.3.2.3}
-\contentsline {subsection}{\numberline {3.2.4}Usability}{12}{subsection.3.2.4}
-\contentsline {section}{\numberline {3.3}Experiments}{12}{section.3.3}
-\contentsline {subsection}{\numberline {3.3.1}Benchmarks}{12}{subsection.3.3.1}
-\contentsline {subsection}{\numberline {3.3.2}Ease of use}{12}{subsection.3.3.2}
-\contentsline {subsection}{\numberline {3.3.3}Educational purpose}{12}{subsection.3.3.3}
-\contentsline {section}{\numberline {3.4}Intellectual contributions}{12}{section.3.4}
-\contentsline {chapter}{\numberline {4}Project Plan}{13}{chapter.4}
+\contentsline {section}{\numberline {2.4}Browser extensions}{12}{section.2.4}
+\contentsline {section}{\numberline {2.5}Limitations}{12}{section.2.5}
+\contentsline {subsection}{\numberline {2.5.1}Human review}{12}{subsection.2.5.1}
+\contentsline {subsection}{\numberline {2.5.2}Breadth of work}{12}{subsection.2.5.2}
+\contentsline {subsection}{\numberline {2.5.3}Self security}{12}{subsection.2.5.3}
+\contentsline {subsection}{\numberline {2.5.4}Ethics \& Handling of Results}{12}{subsection.2.5.4}
+\contentsline {chapter}{\numberline {3}Evaluation}{13}{chapter.3}
+\contentsline {section}{\numberline {3.1}Intended functionality}{13}{section.3.1}
+\contentsline {section}{\numberline {3.2}Metrics of success}{13}{section.3.2}
+\contentsline {subsection}{\numberline {3.2.1}Correct reporting}{13}{subsection.3.2.1}
+\contentsline {subsection}{\numberline {3.2.2}False positives}{13}{subsection.3.2.2}
+\contentsline {subsection}{\numberline {3.2.3}Code coverage}{13}{subsection.3.2.3}
+\contentsline {subsection}{\numberline {3.2.4}Usability}{13}{subsection.3.2.4}
+\contentsline {section}{\numberline {3.3}Experiments}{13}{section.3.3}
+\contentsline {subsection}{\numberline {3.3.1}Benchmarks}{13}{subsection.3.3.1}
+\contentsline {subsection}{\numberline {3.3.2}Ease of use}{13}{subsection.3.3.2}
+\contentsline {subsection}{\numberline {3.3.3}Educational purpose}{13}{subsection.3.3.3}
+\contentsline {section}{\numberline {3.4}Intellectual contributions}{13}{section.3.4}
+\contentsline {chapter}{\numberline {4}Project Plan}{14}{chapter.4}

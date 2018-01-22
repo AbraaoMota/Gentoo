@@ -49,6 +49,11 @@ Rails Guides.
   \url{http://guides.rubyonrails.org/security.html#csrf-countermeasures}.
 \newblock Accessed: 10/01/2018.
 
+\bibitem{webAppSecThreatsCountermeasuresPitfalls}
+H.~C. Huang, Z.~K. Zhang, H.~W. Cheng, and S.~W. Shieh.
+\newblock Web application security: Threats, countermeasures, and pitfalls.
+\newblock {\em Computer}, 50(6):81--85, 2017.
+
 \bibitem{appscan}
 IBM.
 \newblock Ibm security appscan.

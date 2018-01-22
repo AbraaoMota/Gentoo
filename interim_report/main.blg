@@ -63,45 +63,45 @@ Too many commas in name 1 of "Felmetsger, V., Cavedon, L., Kruegel, C., and Vign
 while executing---line 1090 of file plain.bst
 Too many commas in name 1 of "Felmetsger, V., Cavedon, L., Kruegel, C., and Vigna, G." for entry Waler
 while executing---line 1090 of file plain.bst
-You've used 16 entries,
+You've used 17 entries,
             2118 wiz_defined-function locations,
-            597 strings with 7238 characters,
-and the built_in function-call counts, 5132 in all, are:
-= -- 513
-> -- 213
+            606 strings with 7459 characters,
+and the built_in function-call counts, 5499 in all, are:
+= -- 547
+> -- 236
 < -- 5
-+ -- 84
-- -- 68
-* -- 267
-:= -- 823
-add.period$ -- 59
-call.type$ -- 16
-change.case$ -- 81
++ -- 93
+- -- 76
+* -- 299
+:= -- 887
+add.period$ -- 62
+call.type$ -- 17
+change.case$ -- 88
 chr.to.int$ -- 0
-cite$ -- 16
-duplicate$ -- 202
-empty$ -- 438
-format.name$ -- 68
-if$ -- 1136
+cite$ -- 17
+duplicate$ -- 213
+empty$ -- 463
+format.name$ -- 76
+if$ -- 1210
 int.to.chr$ -- 0
-int.to.str$ -- 16
-missing$ -- 8
-newline$ -- 91
-num.names$ -- 34
-pop$ -- 137
+int.to.str$ -- 17
+missing$ -- 9
+newline$ -- 96
+num.names$ -- 36
+pop$ -- 142
 preamble$ -- 1
-purify$ -- 65
+purify$ -- 71
 quote$ -- 0
-skip$ -- 158
+skip$ -- 165
 stack$ -- 0
-substring$ -- 253
-swap$ -- 63
+substring$ -- 273
+swap$ -- 64
 text.length$ -- 5
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 64
+type$ -- 68
 warning$ -- 0
-while$ -- 47
-width$ -- 18
-write$ -- 183
+while$ -- 50
+width$ -- 19
+write$ -- 194
 (There were 29 error messages)

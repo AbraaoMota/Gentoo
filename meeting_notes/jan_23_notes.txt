@@ -1,0 +1,17 @@
+
+Questions to ask:
+
+Second marker?
+
+Make a resumal of the background  and the action replay technique
+
+Extension didn't seem so hard to make, only annoying thing was some intricacies of the manifest file
+Mostly well documented
+
+
+
+
+Passive mode of the extension to throw at a real website .. more muzzled - passive analysis of the traffic to try and flag up things that are interesting and 'tamperable' 
+
+try to look for more recent papers - reports from hackerone, or other venues, googlezero 
+

@@ -1,5 +1,11 @@
 \begin{thebibliography}{10}
 
+\bibitem{darpaAIChallenge}
+Defense Advanced Research~Projects Agency.
+\newblock Darpa celebrates cyber grand challenge winners.
+\newblock \url{https://www.darpa.mil/news-events/2016-08-05a}.
+\newblock Accessed: 23/01/2018.
+
 \bibitem{Saner}
 Cova M. Felmetsger V. Jovanovic N. Kirda E. Kruegel~C. Balzarotti, D. and
   G.~Vigna.
@@ -13,6 +19,18 @@ J.~Bau, E.~Bursztein, D.~Gupta, and J.~Mitchell.
   testing.
 \newblock In {\em 2010 IEEE Symposium on Security and Privacy}, pages 332--345,
   May 2010.
+
+\bibitem{evalChromeExtensionSecurityArchitecture}
+Nicholas Carlini, Adrienne~Porter Felt, and David Wagner.
+\newblock An evaluation of the google chrome extension security architecture.
+\newblock In {\em Presented as part of the 21st {USENIX} Security Symposium
+  ({USENIX} Security 12)}, pages 97--111, Bellevue, WA, 2012. {USENIX}.
+
+\bibitem{defcon16Results}
+DEF CON.
+\newblock 2016 def con ctf final scores.
+\newblock \url{https://www.defcon.org/html/defcon-24/dc-24-ctf.html}.
+\newblock Accessed: 23/01/2018.
 
 \bibitem{stateAwareBlackBoxWebVulnScanner}
 Adam Doup{\'e}, Ludovico Cavedon, Christopher Kruegel, and Giovanni Vigna.
@@ -41,6 +59,12 @@ Django~Software Foundation.
 \newblock Django project documentation - cross site request forgery protection.
 \newblock \url{https://docs.djangoproject.com/en/2.0/ref/csrf/}.
 \newblock Accessed: 10/01/2018.
+
+\bibitem{chromeExtensionArchitecture}
+Google.
+\newblock Google developer - extensions - overview.
+\newblock \url{https://developer.chrome.com/extensions/overview}.
+\newblock Accessed: 23/01/2018.
 
 \bibitem{rubyOnRailsCSRF}
 Rails Guides.
@@ -104,6 +128,12 @@ M.~Parvez, P.~Zavarsky, and N.~Khoury.
   detection of stored sql injection and stored xss vulnerabilities.
 \newblock In {\em 2015 10th International Conference for Internet Technology
   and Secured Transactions (ICITST)}, pages 186--191, Dec 2015.
+
+\bibitem{dvwaSite}
+Dewhurst Security.
+\newblock Dvwa.
+\newblock \url{http://www.dvwa.co.uk/}.
+\newblock Accessed: 24/01/2018.
 
 \bibitem{w3af}
 w3af Org.

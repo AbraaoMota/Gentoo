@@ -73,6 +73,20 @@ Rails Guides.
   \url{http://guides.rubyonrails.org/security.html#csrf-countermeasures}.
 \newblock Accessed: 10/01/2018.
 
+\bibitem{hackerone2017}
+HackerOne.
+\newblock The hacker-powered security report 2017.
+\newblock
+  \url{https://www.hackerone.com/sites/default/files/2017-06/The%20Hacker-Powered%20Security%20Report.pdf}.
+\newblock Accessed: 25/01/2018.
+
+\bibitem{hackerone2018}
+HackerOne.
+\newblock The hacker-powered security report 2018.
+\newblock
+  \url{https://www.hackerone.com/sites/default/files/2018-01/2018_Hacker_Report.pdf}.
+\newblock Accessed: 25/01/2018.
+
 \bibitem{webAppSecThreatsCountermeasuresPitfalls}
 H.~C. Huang, Z.~K. Zhang, H.~W. Cheng, and S.~W. Shieh.
 \newblock Web application security: Threats, countermeasures, and pitfalls.

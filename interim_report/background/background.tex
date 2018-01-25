@@ -5,7 +5,7 @@
 
 This project is rooted in identifying and mitigating web application vulnerabilities. In order to do so, it is essential to understand what these are, their impact, and what steps are necessary to prevent them. Fortunately, there are great wealths of information available to learn more about vulnerabilities. A great starting point is \textit{OWASP}, the Open Web Application Security Project \cite{owaspPage}. This is a community driven effort into improving the safety of software across the world, and the organisation has taken extensive steps into creating useful guides for developers wishing to know more. A particularly convenient resource they provide is a consensus of the top 10 security risks that web applications face today. \\
 
-At the time of writing, this list contains the following risks, some of which are appropriate to pursue in this project: \\
+In their latest 2017 report, this list contains the following risks, some of which are appropriate to pursue in this project: \\
 
 	\emph{Injection} - This risk arises from any place on a website that accepts client controlled input. This may be through the more obvious - submission of web forms and search boxes, but also includes more subtle ways of the user providing input, such as URL or HTTP request parameters. Accepting this input per se is not a vulnerability, but the issue lies in blindly trusting this input to not be malicious. Whenever this input is used to query a database or perform server-side commands, if it has not been sanitized (cleaned to delete potentially dangerous input combinations), it has potential to leak or permanently corrupt information for the website owner. Due to its prevalence and modus operandi, this is an appropriate vulnerability to scan for and detect in this project. \\
 	
@@ -26,19 +26,19 @@ At the time of writing, this list contains the following risks, some of which ar
 	\emph{Using components with known vulnerabilities} - In application architectures that heavily rely on a variety of components or libraries from different sources, it can often be hard to ensure that these are all kept up to date. In instances where they are not, it becomes a simple task for a scanner to produce a map of outdated version numbers to possible exploits that have been discovered on the component since then. Once a CVE (Common vulnerabilities and Exposures - a unique identification method for security vulnerabilities found worldwide) is produced as a result from a scan, it is just a matter of reproducing exploit steps found online to endanger the application. \\ 
 	
 	\emph{Insufficient Logging and Monitoring} - An ideal web application keeps a track of all activities and accesses that occur. This helps provide accountability for actions. When this is not the case, it weakens the position of the website administrators to pinpoint attack culprits. This is very hard to detect from an outsider perspective, and \textit{insufficient} is an objective term; it wouldn't be fruitful to include this in an externally ran vulnerability scanner. \\
+	
+	In order to stay relevant, it is good not only to look at recent reports, such as the above from 2017, but also reports of different provenance. \emph{HackerOne} is a company that produces surveys harnessing the power of ethical hackers around the world to gather statistics on the current general state of web application security. In their 2017 report \cite{hackerone2017}, the survey gathers information on several vulnerability types from 2013 to 2017, and their prevalence across different industries. The most prevalent types of vulnerabilities included \textbf{Cross Site Scripting, improper authentication, Cross Site Request Forgery (CSRF), violation of secure design principles, information disclosure}  and \textbf{privilege escalation}. This should however be analysed with caution; HackerOne is a profitable company, surveying ethical hackers for hire, some of which, by self admittance, do so simply for profit or to make a living. This may therefore skew the results - it is fair to assume that some percentage of these hackers may aim for the highest ratio of bug bounty award to search / hacking efforts, so we may see more vulnerabilities discovered that are simply easier to uncover, though this may not reflect the true state of the industry. In their latest 2018 report \cite{hackerone2018}, it is clear that there are 'favourite' attack vectors by the surveyed attackers, namely, XSS and SQL injection. \\
 
-	This is not an exhaustive list, but is useful to consider when attempting to address specific aspects for development in the tool. There are several other features or protocols that can be checked to better ascertain the security of a website, such as:
+	The aforementioned lists are not exhaustive, but are useful to consider when attempting to classify and sort different types of vulnerabilities during the development phase of this project.  There are several other features or protocols that can be checked to better ascertain the security of a website, such as:
 \begin{multicols}{2}
 	\begin{itemize}
 	\item   Use of iFrames
 	\item 	Cookies
 	\item 	Appropriate headers
-	\item 	CSRF mitigations
 	\item 	Use of HTTPS
 	\item   HSTS
-	\item 	JS instrumentation
+	\item 	Javascript instrumentation
 	\item 	Remote inclusion and dependency analysis
-	\item 	DoS
 	\item 	Clickjacking
 	\item 	CSP and sandboxing policies
 	\end{itemize}
@@ -169,12 +169,15 @@ The proposition of creating a tool that is driven by user input seems appealing 
 
  
 \section{Limitations}
+\subsection{Time taken}
+Since the extension is user driven and not fully automatic, the suggested process will be inevitably slower than if it was otherwise automated - there will be waiting times as users will not instantly attempt to uncover recommended vulnerabilities. There may also be some intellectual effort involved in crafting initial input to try and do this, which adds to this. Both of these factors add to 2 different metrics: the total scan time and the time taken from recommendation to decision of whether a vulnerability is found or not. \\
 
-crawling doess find more stuff to look through
-\subsection{human reviewRecommendation qualit}
+Total scan time may be especially hard to measure, and can be seen as a disadvantage of this scan. It is not known whether a user will eventually go through every possible page that is relevant, so it becomes very difficult to claim an end to the scan. On the contrary, automated crawlers \emph{will eventually} come to an end their search, and thus put an upper bound on how many resources they can analyse. Human driven crawling may stop or resume at any given point. Not being able to best assess the total scan time is an acceptable tradeoff of this project as it will simply not be avoidable given human driven interaction is being explored. \\
+
+The time taken to ascertain whether a vulnerability exists or not from a recommendation can however be bounded. This period begins when a user decides to investigate a recommendation on their own or by suggestion of the tool, and finishes either when enough proof of a vulnerability has been observed, or when all possible fuzzing opportunities in exploiting it have been exhausted - the extension will have a list of possible fuzzing mutations per type of vulnerability, so this work is bounded by that list. Again, since this is not a fully automated tool, the extension is expected to take longer in this metric due to human interaction when comparing it to automated scanners, which is only natural. \\
 
  \subsection{Breadth of  work}
- Section \ref{vulnerabilities} describes many potential kinds of vulnerabilities that the project may choose to tackle. Some of these vulnerabilities may be harder to detect 
+ Section \ref{vulnerabilities} describes many potential kinds of vulnerabilities that the project may choose to tackle. Some of these are harder to detect than others, and thus require more development work. This large scope may make it tempting to try and undertake too many things at once. At the time of writing, it is also hard to assess just how difficult it may be to implement scanning for a specific type of vulnerability. The extension will be developed with aims of finding revelant vulnerabilities - sorted by both volume of occurrence and contemporary relevance as found on surveys. One of the most recurring vulnerabilities in both aspects is Cross Site Scripting, so developing the tool to be able to detect this class of weaknesses is a good starting point. Other features that may seem small (such as analysing cookies or the use of iFrames on a page), may also be beneficial to implement. As the project develops, it becomes harder to weigh the costs of effort to implement versus the success rate of focusing on a specific feature, so some further time should be allocated to allow for this meta research. \\ 
  
  \subsection{Self security}
  	The security of the extension being developed should not be taken for granted. As mentioned above, Google Chrome has several mechanisms in place to safeguard extensions from falling prey to malicious attackers. Namely, these are:
@@ -184,7 +187,7 @@ crawling doess find more stuff to look through
  		\item Predefined permissions
  		\item CSP (Content Security Policy)
  	\end{itemize} 
- 	Although these practices make it much easier for a developer to avoid serious mistakes, it is still possible to write vulnerable extensions. The \textit{threat model} in this case (the way we choose to archetype our potential enemy), is by means of a web attacker. This would be someone who sets up a 'honeypot' website, expecting the extension to scan it but in the process attempt to compromise the extension by different means. Due to the priveleges granted to an extension, this may result in the jeopardizing of sensitive user data, such as their passwords. A recent paper by Carlini, Felt and Wagner reinforces the notion that Chrome's existing techniques are effective in preventing extension compromise, but also list some developer practices that could result in vulnerabilities, such as the unrestricted use of the \texttt{eval} function by Javascript (which is known to be dangerous as it executes given strings as commands), and injecting website data into HTML \cite{evalChromeExtensionSecurityArchitecture}. Many of the notions mentioned in the paper are also cited in Google's own documentation on how to write Chrome extensions \cite{chromeExtensionArchitecture}. Following these best practices will decrease potential risks associated with this project.
+ 	Although these practices make it much easier for a developer to avoid serious mistakes, it is still possible to write vulnerable extensions. The \textit{threat model} in this case (the way we choose to archetype our potential enemy), is by means of a web attacker. This would be someone who sets up a 'honeypot' website, expecting the extension to scan it but in the process attempt to compromise the extension by different means. Due to the priveleges granted to an extension, this may result in the jeopardizing of sensitive user data, such as their passwords. A recent paper by Carlini, Felt and Wagner reinforces the notion that Chrome's existing techniques are effective in preventing extension compromise, but also list some developer practices that could result in vulnerabilities, such as the unrestricted use of the \texttt{eval} function by Javascript (which is known to be dangerous as it executes given strings as commands), and injecting website data into HTML \cite{evalChromeExtensionSecurityArchitecture}. Many of the notions mentioned in the paper are also cited in Google's own documentation on how to write Chrome extensions \cite{chromeExtensionArchitecture}. Following these best practices will decrease potential risks associated with this project. \\ 
 
 \subsection{Ethics \& Handling of Results}
 \label{ethics}

@@ -35,6 +35,8 @@
 \@writefile{lot}{\addvspace {10\p@ }}
 \@writefile{toc}{\contentsline {section}{\numberline {2.1}Website Vulnerabilities}{6}{section.2.1}}
 \newlabel{vulnerabilities}{{2.1}{6}{Website Vulnerabilities}{section.2.1}{}}
+\citation{hackerone2017}
+\citation{hackerone2018}
 \citation{Saner}
 \citation{Waler}
 \citation{Kals:2006:SWV:1135777.1135817}
@@ -42,10 +44,7 @@
 \citation{acunetix}
 \citation{appscan}
 \citation{w3af}
-\@writefile{toc}{\contentsline {section}{\numberline {2.2}Related Work}{7}{section.2.2}}
-\citation{whyJohnnyCantPentest}
-\citation{stateOfArtAutomatedBlackBoxWebAppVulnTesting}
-\citation{analysisOfEffectivenessOfBlackBoxWebAppScannersStoredSQLStoredXSS}
+\@writefile{toc}{\contentsline {section}{\numberline {2.2}Related Work}{8}{section.2.2}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {2.2.1}Black Box}{8}{subsection.2.2.1}}
 \providecommand*\caption@xref[2]{\@setref\relax\@undefined{#1}}
 \newlabel{fig:blackBox}{{\caption@xref {fig:blackBox}{ on input line 62}}{8}{Black Box}{figure.caption.2}{}}
@@ -55,20 +54,23 @@
 \@writefile{lof}{\contentsline {figure}{\numberline {2.1}{\ignorespaces A black box scanner derives behaviour strictly from I/O, whilst a white box scanner has all the inner workings of a (web) application at its disposal for analysis\relax }}{8}{figure.caption.2}}
 \newlabel{fig:test}{{2.1}{8}{A black box scanner derives behaviour strictly from I/O, whilst a white box scanner has all the inner workings of a (web) application at its disposal for analysis\relax }{figure.caption.2}{}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {2.2.2}Automated Vulnerability Scanners}{8}{subsection.2.2.2}}
+\citation{whyJohnnyCantPentest}
+\citation{stateOfArtAutomatedBlackBoxWebAppVulnTesting}
+\citation{analysisOfEffectivenessOfBlackBoxWebAppScannersStoredSQLStoredXSS}
 \citation{acunetixQuoteCrawling}
-\@writefile{lof}{\contentsline {figure}{\numberline {2.2}{\ignorespaces The typical structure of a vulnerability scanner. The crawling phase builds up a database of potential pages to attack. During attack, malicious inputs are fired towards pages to try and trigger undesired behaviour - the analyser reads response contents with some heuristics to determine what responses seem to indicate vulnerabilities.\relax }}{9}{figure.caption.3}}
-\newlabel{fig:test}{{2.2}{9}{The typical structure of a vulnerability scanner. The crawling phase builds up a database of potential pages to attack. During attack, malicious inputs are fired towards pages to try and trigger undesired behaviour - the analyser reads response contents with some heuristics to determine what responses seem to indicate vulnerabilities.\relax }{figure.caption.3}{}}
 \citation{whyJohnnyCantPentest}
 \citation{stateAwareBlackBoxWebVulnScanner}
+\@writefile{lof}{\contentsline {figure}{\numberline {2.2}{\ignorespaces The typical structure of a vulnerability scanner. The crawling phase builds up a database of potential pages to attack. During attack, malicious inputs are fired towards pages to try and trigger undesired behaviour - the analyser reads response contents with some heuristics to determine what responses seem to indicate vulnerabilities.\relax }}{10}{figure.caption.3}}
+\newlabel{fig:test}{{2.2}{10}{The typical structure of a vulnerability scanner. The crawling phase builds up a database of potential pages to attack. During attack, malicious inputs are fired towards pages to try and trigger undesired behaviour - the analyser reads response contents with some heuristics to determine what responses seem to indicate vulnerabilities.\relax }{figure.caption.3}{}}
 \@writefile{toc}{\contentsline {section}{\numberline {2.3}Browser extensions}{10}{section.2.3}}
 \citation{chromeExtensionArchitecture}
 \citation{chromeExtensionArchitecture}
 \@writefile{lof}{\contentsline {figure}{\numberline {2.3}{\ignorespaces An extension is split into 2 main areas. The \texttt  {background.html} page has access to all extension privileges and is where the business logic of the extension is stored. It cannot interact with user webpages. Content scripts can be injected to interact with the DOM of a page. The \texttt  {background.html} can contact the content script via a message passing API. Image courtesy of Google Developer documentation. \cite  {chromeExtensionArchitecture}\relax }}{11}{figure.caption.4}}
 \newlabel{fig:test}{{2.3}{11}{An extension is split into 2 main areas. The \texttt {background.html} page has access to all extension privileges and is where the business logic of the extension is stored. It cannot interact with user webpages. Content scripts can be injected to interact with the DOM of a page. The \texttt {background.html} can contact the content script via a message passing API. Image courtesy of Google Developer documentation. \cite {chromeExtensionArchitecture}\relax }{figure.caption.4}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {2.4}Project Contribution}{11}{section.2.4}}
-\newlabel{contribution}{{2.4}{11}{Project Contribution}{section.2.4}{}}
 \citation{whyJohnnyCantPentest}
 \citation{analysisOfEffectivenessOfBlackBoxWebAppScannersStoredSQLStoredXSS}
+\@writefile{toc}{\contentsline {section}{\numberline {2.4}Project Contribution}{12}{section.2.4}}
+\newlabel{contribution}{{2.4}{12}{Project Contribution}{section.2.4}{}}
 \citation{analysisOfEffectivenessOfBlackBoxWebAppScannersStoredSQLStoredXSS}
 \citation{webAppSecThreatsCountermeasuresPitfalls}
 \citation{darpaAIChallenge}
@@ -76,32 +78,32 @@
 \citation{whyJohnnyCantPentest}
 \@writefile{lof}{\contentsline {figure}{\numberline {2.4}{\ignorespaces A visualization of the proposed action replay algorithm. The tool records user input for a time period determined by the user. The tool then replicates actions using fuzzed inputs to try and uncover vulnerabilities if the first attempt was unsuccessful.\relax }}{13}{figure.caption.5}}
 \newlabel{fig:test}{{2.4}{13}{A visualization of the proposed action replay algorithm. The tool records user input for a time period determined by the user. The tool then replicates actions using fuzzed inputs to try and uncover vulnerabilities if the first attempt was unsuccessful.\relax }{figure.caption.5}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {2.5}Limitations}{13}{section.2.5}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {2.5.1}Recommendation qualit}{13}{subsection.2.5.1}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {2.5.2}Breadth of work}{13}{subsection.2.5.2}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {2.5.3}Self security}{13}{subsection.2.5.3}}
 \citation{evalChromeExtensionSecurityArchitecture}
 \citation{chromeExtensionArchitecture}
+\@writefile{toc}{\contentsline {section}{\numberline {2.5}Limitations}{14}{section.2.5}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.5.1}Time taken}{14}{subsection.2.5.1}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.5.2}Breadth of work}{14}{subsection.2.5.2}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.5.3}Self security}{14}{subsection.2.5.3}}
 \citation{dvwaSite}
-\@writefile{toc}{\contentsline {subsection}{\numberline {2.5.4}Ethics \& Handling of Results}{14}{subsection.2.5.4}}
-\newlabel{ethics}{{2.5.4}{14}{Ethics \& Handling of Results}{subsection.2.5.4}{}}
-\@writefile{toc}{\contentsline {chapter}{\numberline {3}Evaluation}{15}{chapter.3}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.5.4}Ethics \& Handling of Results}{15}{subsection.2.5.4}}
+\newlabel{ethics}{{2.5.4}{15}{Ethics \& Handling of Results}{subsection.2.5.4}{}}
+\@writefile{toc}{\contentsline {chapter}{\numberline {3}Evaluation}{16}{chapter.3}}
 \@writefile{lof}{\addvspace {10\p@ }}
 \@writefile{lot}{\addvspace {10\p@ }}
-\@writefile{toc}{\contentsline {section}{\numberline {3.1}Intended functionality}{15}{section.3.1}}
-\@writefile{toc}{\contentsline {section}{\numberline {3.2}Metrics of success}{15}{section.3.2}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.2.1}Correct reporting}{15}{subsection.3.2.1}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.2.2}False positives}{15}{subsection.3.2.2}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.2.3}Code coverage}{15}{subsection.3.2.3}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.2.4}Usability}{15}{subsection.3.2.4}}
-\@writefile{toc}{\contentsline {section}{\numberline {3.3}Experiments}{15}{section.3.3}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.3.1}Benchmarks}{15}{subsection.3.3.1}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.3.2}Ease of use}{15}{subsection.3.3.2}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.3.3}Educational purpose}{15}{subsection.3.3.3}}
-\@writefile{toc}{\contentsline {section}{\numberline {3.4}Intellectual contributions}{15}{section.3.4}}
+\@writefile{toc}{\contentsline {section}{\numberline {3.1}Intended functionality}{16}{section.3.1}}
+\@writefile{toc}{\contentsline {section}{\numberline {3.2}Metrics of success}{16}{section.3.2}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.2.1}Correct reporting}{16}{subsection.3.2.1}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.2.2}False positives}{16}{subsection.3.2.2}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.2.3}Code coverage}{16}{subsection.3.2.3}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.2.4}Usability}{16}{subsection.3.2.4}}
+\@writefile{toc}{\contentsline {section}{\numberline {3.3}Experiments}{16}{section.3.3}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.3.1}Benchmarks}{16}{subsection.3.3.1}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.3.2}Ease of use}{16}{subsection.3.3.2}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.3.3}Educational purpose}{16}{subsection.3.3.3}}
+\@writefile{toc}{\contentsline {section}{\numberline {3.4}Intellectual contributions}{16}{section.3.4}}
 \bibstyle{plain}
 \bibdata{bibs/sample}
-\@writefile{toc}{\contentsline {chapter}{\numberline {4}Project Plan}{16}{chapter.4}}
+\@writefile{toc}{\contentsline {chapter}{\numberline {4}Project Plan}{17}{chapter.4}}
 \@writefile{lof}{\addvspace {10\p@ }}
 \@writefile{lot}{\addvspace {10\p@ }}
 \bibcite{darpaAIChallenge}{1}
@@ -115,14 +117,16 @@
 \bibcite{djangoCSRF}{9}
 \bibcite{chromeExtensionArchitecture}{10}
 \bibcite{rubyOnRailsCSRF}{11}
-\bibcite{webAppSecThreatsCountermeasuresPitfalls}{12}
-\bibcite{appscan}{13}
-\bibcite{Kals:2006:SWV:1135777.1135817}{14}
-\bibcite{KUISMA200775}{15}
-\bibcite{acunetix}{16}
-\bibcite{acunetixQuoteCrawling}{17}
-\bibcite{laravelCSRF}{18}
-\bibcite{owaspPage}{19}
-\bibcite{analysisOfEffectivenessOfBlackBoxWebAppScannersStoredSQLStoredXSS}{20}
-\bibcite{dvwaSite}{21}
-\bibcite{w3af}{22}
+\bibcite{hackerone2017}{12}
+\bibcite{hackerone2018}{13}
+\bibcite{webAppSecThreatsCountermeasuresPitfalls}{14}
+\bibcite{appscan}{15}
+\bibcite{Kals:2006:SWV:1135777.1135817}{16}
+\bibcite{KUISMA200775}{17}
+\bibcite{acunetix}{18}
+\bibcite{acunetixQuoteCrawling}{19}
+\bibcite{laravelCSRF}{20}
+\bibcite{owaspPage}{21}
+\bibcite{analysisOfEffectivenessOfBlackBoxWebAppScannersStoredSQLStoredXSS}{22}
+\bibcite{dvwaSite}{23}
+\bibcite{w3af}{24}

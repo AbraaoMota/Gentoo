@@ -32,6 +32,12 @@ DEF CON.
 \newblock \url{https://www.defcon.org/html/defcon-24/dc-24-ctf.html}.
 \newblock Accessed: 23/01/2018.
 
+\bibitem{wackoPickoGithub}
+Adam Doup\'e.
+\newblock Github - wackopicko.
+\newblock \url{https://github.com/adamdoupe/WackoPicko}.
+\newblock Accessed: 25/01/2018.
+
 \bibitem{stateAwareBlackBoxWebVulnScanner}
 Adam Doup{\'e}, Ludovico Cavedon, Christopher Kruegel, and Giovanni Vigna.
 \newblock Enemy of the state: A state-aware black-box web vulnerability
@@ -124,11 +130,23 @@ Acunetix Ltd.
   \url{https://www.acunetix.com/vulnerability-scanner/javascript-html5-security/}.
 \newblock Accessed 20/01/2018.
 
+\bibitem{hacmeBankMcAfee}
+McAfee.
+\newblock Mcafee - hacmebank v2.0.
+\newblock \url{https://www.mcafee.com/us/downloads/free-tools/hacme-bank.aspx}.
+\newblock Accessed: 25/01/2018.
+
 \bibitem{laravelCSRF}
 Taylor Otwell.
 \newblock Laravel docs - csrf protection.
 \newblock \url{https://laravel.com/docs/5.5/csrf}.
 \newblock Accessed: 10/01/2018.
+
+\bibitem{webgoatGithub}
+OWASP.
+\newblock Github - webgoat.
+\newblock \url{https://github.com/WebGoat/WebGoat}.
+\newblock Accessed: 25/01/2018.
 
 \bibitem{owaspPage}
 OWASP.
@@ -136,12 +154,37 @@ OWASP.
 \newblock \url{https://www.owasp.org/index.php/Main_Page}.
 \newblock Accessed 20/01/2018.
 
+\bibitem{owaspVulnerableWebAppsList}
+OWASP.
+\newblock Owasp vulnerable web applications directory project/pages/offline.
+\newblock
+  \url{https://www.owasp.org/index.php/OWASP_Vulnerable_Web_Applications_Directory_Project/Pages/Offline}.
+\newblock Accessed: 25/01/2018.
+
+\bibitem{owaspZapPage}
+OWASP.
+\newblock Owasp zed attack proxy project.
+\newblock \url{https://www.owasp.org/index.php/OWASP_Zed_Attack_Proxy_Project}.
+\newblock Accessed: 25/01/2018.
+
+\bibitem{webgoatIntro}
+OWASP.
+\newblock Webgoat.
+\newblock \url{https://www.owasp.org/index.php/Category:OWASP_WebGoat_Project}.
+\newblock Accessed: 25/01/2018.
+
 \bibitem{analysisOfEffectivenessOfBlackBoxWebAppScannersStoredSQLStoredXSS}
 M.~Parvez, P.~Zavarsky, and N.~Khoury.
 \newblock Analysis of effectiveness of black-box web application scanners in
   detection of stored sql injection and stored xss vulnerabilities.
 \newblock In {\em 2015 10th International Conference for Internet Technology
   and Secured Transactions (ICITST)}, pages 186--191, Dec 2015.
+
+\bibitem{burpSuitePage}
+PortSwigger.
+\newblock Portswigger - burpsuite.
+\newblock \url{https://portswigger.net/burp}.
+\newblock Accessed: 25/01/2018.
 
 \bibitem{dvwaSite}
 Dewhurst Security.

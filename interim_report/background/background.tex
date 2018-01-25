@@ -131,7 +131,7 @@ I propose to create the tool described as a browser extension in Google Chrome. 
 	\item \emph{User operability} - Because of the features described above, the extension can be designed in such a way that allows it to sit between the user and the web application and seamlessly create the desired semi-automated experience. Wherever possible, depending on the type of vulnerability, it would be ideal to give the user interactive visual cues for when the scan has detected something that merits further research. If the vulnerability is attached to a specific form that takes user input for example, the extension should have the capabilities of identifying the DOM object for this, and add a small tooltip around the visual area of this object to initiate the deeper scan analysis. If the vulnerability is not necessarily caused by visible means, then the extension is also able to create other appropriate visual cues, such as a fixed position element. 
 	Being able to implement these characteristics should result in a more intuitive user experience. 
 	
-	This also means that the user will not be doing any heavy lifting - the extension will be passively searching for vulnerabilities as they use the website, but should also be able to be activated at user will. During the phase where the tool begins to replicate user actions to investigate a vulnerability (explained further in \ref{contribution}), if implemented appropriately, the extension will be able to repeat the human steps of submission and navigation at a much faster rate with several more inputs.
+	This also means that the user will not be doing any heavy lifting - the extension will be passively searching for vulnerabilities as they use the website, but should also be able to be activated at user will. During the phase where the tool begins to replicate user actions to investigate a vulnerability (explained further in \ref{contribution}), if implemented appropriately, the extension will be able to repeat the human steps of submission and navigation at a much faster rate than a human would do, with several more inputs.
 	
 \end{itemize} 
 
@@ -169,6 +169,10 @@ The proposition of creating a tool that is driven by user input seems appealing 
 
  
 \section{Limitations}
+\label{limitations}
+
+In order to be able to effectively evaluate this project at a later point, it is important to delineate realistic expectations in terms of what it can and cannot do. 
+
 \subsection{Time taken}
 Since the extension is user driven and not fully automatic, the suggested process will be inevitably slower than if it was otherwise automated - there will be waiting times as users will not instantly attempt to uncover recommended vulnerabilities. There may also be some intellectual effort involved in crafting initial input to try and do this, which adds to this. Both of these factors add to 2 different metrics: the total scan time and the time taken from recommendation to decision of whether a vulnerability is found or not. \\
 

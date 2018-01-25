@@ -17,13 +17,9 @@
 \contentsline {chapter}{\numberline {3}Evaluation}{16}{chapter.3}
 \contentsline {section}{\numberline {3.1}Intended functionality}{16}{section.3.1}
 \contentsline {section}{\numberline {3.2}Metrics of success}{16}{section.3.2}
-\contentsline {subsection}{\numberline {3.2.1}Correct reporting}{16}{subsection.3.2.1}
-\contentsline {subsection}{\numberline {3.2.2}False positives}{16}{subsection.3.2.2}
-\contentsline {subsection}{\numberline {3.2.3}Code coverage}{16}{subsection.3.2.3}
-\contentsline {subsection}{\numberline {3.2.4}Usability}{16}{subsection.3.2.4}
-\contentsline {section}{\numberline {3.3}Experiments}{16}{section.3.3}
-\contentsline {subsection}{\numberline {3.3.1}Benchmarks}{16}{subsection.3.3.1}
-\contentsline {subsection}{\numberline {3.3.2}Ease of use}{16}{subsection.3.3.2}
-\contentsline {subsection}{\numberline {3.3.3}Educational purpose}{16}{subsection.3.3.3}
-\contentsline {section}{\numberline {3.4}Intellectual contributions}{16}{section.3.4}
-\contentsline {chapter}{\numberline {4}Project Plan}{17}{chapter.4}
+\contentsline {section}{\numberline {3.3}Experiments}{17}{section.3.3}
+\contentsline {subsection}{\numberline {3.3.1}Test benches}{17}{subsection.3.3.1}
+\contentsline {subsection}{\numberline {3.3.2}Test methodology}{18}{subsection.3.3.2}
+\contentsline {subsection}{\numberline {3.3.3}Educational purpose}{18}{subsection.3.3.3}
+\contentsline {section}{\numberline {3.4}Intellectual contributions}{18}{section.3.4}
+\contentsline {chapter}{\numberline {4}Project Plan}{19}{chapter.4}

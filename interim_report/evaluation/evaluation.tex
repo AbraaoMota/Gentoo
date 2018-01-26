@@ -82,31 +82,8 @@ The main method of testing my extension is to pit my extension against other exi
 
 Since the browser extension makes use of user input, it is important to test the application with people of different security backgrounds. This relies on adequate classification in this group by the person undertaking the test. There will be 3 proposed categories of user experience when testing the tool; advanced, intermediate and beginner. An advanced user is expected to be well versed in web security, and have had prior experience in diagnosing (perhaps exploiting) vulnerabilities. An intermediate user may be someone getting to grips with this area, perhaps a student who is only now learning about these concepts, but hasn't \emph{necessarily} got experience in detecting or exploiting vulnerabilities. Beginner users are expected to be web savvy, people who are acquainted with using browsers and web applications, but are not necessarily interested or knowledgeable in web security. It is hoped that enough data is gathered to be able to have at least 5 unique people per suggested user group - it may be particularly hard to find advanced users that are willing to test the tool, whereas users who fit the other categories should be much easier to find. \\
 
+To quantify how well the tool performs its job, the success rates of all 3 groups will be analysed when using the extension to find vulnerabilities. A very successful implementation of the project will have made it easy for non-experts to detect vulnerabilities, meaning that results from the beginner group would not vary very much from those in the intermediate and advanced groups using the tool. Therefore, inter-group vulnerability detection success rates will be analysed. From these success rates, it may be possible to extrapolate data on how educational the project was to users in the beginner and intermediate groups. This data could be further backed up by an additional quiz on whether the user has understood the type of vulnerability they detected, and whether they understand the ramifications of doing so by providing an example of a potential exploit they might design as a result. \\
 
+Additionally, comparing each group success rate to the success rates of each of the automated scanners is useful to be able to validate the claim that a user driven, semi-automated approach is advantageous. This should be done within the context of what vulnerabilities the extension is able to detect - if an automated scanner can find more types of vulnerabilities than the ones the extension has been designed to find, then these will not be counted in the results. For a fair comparison in that aspect, it is assumed that with more development time, the extension may be developed further to be able to identify another type of vulnerability. \\
 
-measure the rates of success of detecting a vulnerability of someone with no knowlegde vs expert knowledge
-ask quantifiable survey about understanding of vulnerability -> attached quiz?
-
-
-run automated scanners on benchmarks vs mine
--> OWASP ZAP
-
--> w3af
-
--> Arachni?
-
--> burpsuite?
-
--> Grabber/
-
-Ask acunetix if i can use theirs? \\
-
-run passive mode vs real applications, determine if actions would violate and if so avoid, otherwise explore opportunities for vulnerabilities. any real vulnerabilities found would be cool.  Passive mode of the extension to throw at a real website .. more muzzled - passive analysis of the traffic to try and flag up things that are interesting and 'tamperable'
-
-\subsection{Educational purpose}
-
-
-
-
-\section{Intellectual contributions}
-concluding paragraph to summarise innovations - user driven, 'action replay' seems to be novel
+Another means of testing the success of the application would be to put it to test against real world applications. By activating the described passive mode as needed, and browsing web application domains, it is possible that a user of the extension finds vulnerabilities in the target application. Should this happen, it would be a great validating factor for the success of the tool.

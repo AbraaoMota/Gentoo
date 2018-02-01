@@ -1,0 +1,25 @@
+{
+  "manifest_version": 2,
+  "name": "Extension",
+  "description": "Find vulnerabilities in sites you're using!",
+  "version": "1.0",
+  "icons": {
+    "16": "penguin.png",
+    "48": "penguin.png",
+    "128": "penguin.png"
+  },
+  "content_scripts": [
+    {
+      "matches": ["*://*/*"],
+       "css": ["main.css"],
+      "js": ["bloop.js"]
+    }
+  ],
+
+  "browser_action": {
+    "default_icon": "penguin.png",
+    "default_popup": "popup.html",
+    "default_title": "Extension"
+  },
+  "update_url": "http://0.0.0.0"
+}

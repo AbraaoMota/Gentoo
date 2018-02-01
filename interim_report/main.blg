@@ -3,7 +3,7 @@ Capacity: max_strings=100000, hash_size=100000, hash_prime=85009
 The top-level auxiliary file: main.aux
 The style file: plain.bst
 Database file #1: bibs/sample.bib
-Repeated entry---line 253 of file bibs/sample.bib
+Repeated entry---line 287 of file bibs/sample.bib
  : @inproceedings {stateAwareBlackBoxWebVulnScanner
  :                                                 ,
 I'm skipping whatever remains of this entry
@@ -63,45 +63,45 @@ Too many commas in name 1 of "Felmetsger, V., Cavedon, L., Kruegel, C., and Vign
 while executing---line 1090 of file plain.bst
 Too many commas in name 1 of "Felmetsger, V., Cavedon, L., Kruegel, C., and Vigna, G." for entry Waler
 while executing---line 1090 of file plain.bst
-You've used 31 entries,
+You've used 35 entries,
             2118 wiz_defined-function locations,
-            672 strings with 9392 characters,
-and the built_in function-call counts, 8740 in all, are:
-= -- 871
-> -- 345
+            693 strings with 10162 characters,
+and the built_in function-call counts, 9594 in all, are:
+= -- 955
+> -- 373
 < -- 6
-+ -- 142
-- -- 108
-* -- 394
-:= -- 1424
-add.period$ -- 118
-call.type$ -- 31
-change.case$ -- 146
++ -- 155
+- -- 116
+* -- 414
+:= -- 1568
+add.period$ -- 134
+call.type$ -- 35
+change.case$ -- 162
 chr.to.int$ -- 0
-cite$ -- 31
-duplicate$ -- 325
-empty$ -- 786
-format.name$ -- 108
-if$ -- 1928
+cite$ -- 35
+duplicate$ -- 353
+empty$ -- 874
+format.name$ -- 116
+if$ -- 2116
 int.to.chr$ -- 0
-int.to.str$ -- 31
+int.to.str$ -- 35
 missing$ -- 10
-newline$ -- 179
-num.names$ -- 64
-pop$ -- 280
+newline$ -- 203
+num.names$ -- 72
+pop$ -- 320
 preamble$ -- 1
-purify$ -- 115
+purify$ -- 127
 quote$ -- 0
-skip$ -- 245
+skip$ -- 265
 stack$ -- 0
-substring$ -- 373
-swap$ -- 85
+substring$ -- 394
+swap$ -- 89
 text.length$ -- 6
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 124
+type$ -- 140
 warning$ -- 0
-while$ -- 81
-width$ -- 33
-write$ -- 350
+while$ -- 89
+width$ -- 37
+write$ -- 394
 (There were 29 error messages)

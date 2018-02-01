@@ -2,14 +2,23 @@
 window.onload = function() {
   var url = new URL(window.location.href);
   var c = url.searchParams.get("injection");
+  console.log(c);
   document.getElementById("output").innerHTML = c;
 }
 </script>
 
 <h1>hello</h1>
 
-<form action="#">
-  <input type="text", name="injection", value="">
+<form action="">
+  <input type="text" name="injection" value=""/>
+  <input type="text" name="df" value="">
+  <input type="submit">
+</form>
+
+<form action="">
+  <input type="text", name="bloop", value="">
+  <input type="text", name="fd", value="">
+  <input type="submit">
 </form>
 
 <h2 id="output"></h2>

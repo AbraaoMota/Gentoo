@@ -8,6 +8,12 @@ chrome.webRequest.onBeforeSendHeaders.addListener(
       name: "X-XSS-Protection",
       value: 0
     };
+    var downGradeInsecureRequests = {
+      name: "UpgradeInsecureRequests",
+      value: 0
+    };
+
+    details.requestHeaders.push(downGradeInsecureRequests);
     details.requestHeaders.push(antiXSSAuditor);
     console.log(details.requestHeaders);
     // return { details.requestHeaders };

@@ -6,11 +6,11 @@ chrome.webRequest.onBeforeSendHeaders.addListener(
     alert("Logging");
     var antiXSSAuditor = {
       name: "X-XSS-Protection",
-      value: 0
+      value: "0"
     };
     var downGradeInsecureRequests = {
       name: "Upgrade-Insecure-Requests",
-      value: 0
+      value: "0"
     };
 
     details.requestHeaders.push(downGradeInsecureRequests);

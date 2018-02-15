@@ -9,7 +9,7 @@ chrome.webRequest.onBeforeSendHeaders.addListener(
       value: 0
     };
     var downGradeInsecureRequests = {
-      name: "UpgradeInsecureRequests",
+      name: "Upgrade-Insecure-Requests",
       value: 0
     };
 

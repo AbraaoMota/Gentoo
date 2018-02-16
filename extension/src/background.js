@@ -3,7 +3,12 @@ alert("BACKGROUND");
 
 chrome.webRequest.onBeforeSendHeaders.addListener(
   function(details) {
-    var overridesList = [
+
+    // ***********************
+    // REQUESTS
+    // ***********************
+
+    var overrideRequestList = [
       { name: "X-XSS-Protection",          value: "0" },
       { name: "Upgrade-Insecure-Requests", value: "0" }
     ];
@@ -12,7 +17,7 @@ chrome.webRequest.onBeforeSendHeaders.addListener(
     console.log(details.requestHeaders);
     for (i = 0; i < details.requestHeaders.length; i++) {
       for (j = 0; j < overridesList.length; j++) {
-        if (details.requestHeaders[i].name == overridesList[j].name) {
+        if (details.requestHeaders[i].name == overrideRequestList[j].name) {
           details.requestHeaders.splice(i, 1);
         }
       }
@@ -23,6 +28,10 @@ chrome.webRequest.onBeforeSendHeaders.addListener(
       details.requestHeaders.push(overridesList[i]);
     }
 
+
+    // ************************
+    // RESPONSES
+    // ************************
     console.log(details.requestHeaders);
     // return { details.requestHeaders };
   },

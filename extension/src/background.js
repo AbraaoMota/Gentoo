@@ -1,5 +1,7 @@
 
-alert("BACKGROUND");
+// alert("BACKGROUND");
+
+var native_alert = alert;
 
 chrome.webRequest.onBeforeSendHeaders.addListener(
   function(details) {
@@ -9,8 +11,8 @@ chrome.webRequest.onBeforeSendHeaders.addListener(
     // ***********************
 
     var overrideRequestList = [
-      { name: "X-XSS-Protection",          value: "0" },
-      { name: "Upgrade-Insecure-Requests", value: "0" }
+      // { name: "X-XSS-Protection",          value: "0" },
+      // { name: "Upgrade-Insecure-Requests", value: "0" }
     ];
 
     // Find any conflicting headers and remove them

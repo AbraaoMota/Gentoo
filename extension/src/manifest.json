@@ -15,7 +15,8 @@
     {
       "matches": ["*://*/*"],
        "css": ["main.css"],
-      "js": ["bloop.js"]
+      "js": ["bloop.js"],
+      "run_at": "document_start"
     }
   ],
   "permissions": [

@@ -1,18 +1,27 @@
+console.log(chrome.webRequest.HttpHeaders);
 
-// alert("BACKGROUND");
+chrome.webRequest.onSendHeaders.addListener(
+  function(details) {
+    // alert("ON SEND HEADERS");
+    console.log("HENLO ON SEND HEADERS");
+    console.log(details.requestHeaders);
+  },
+  {urls: ["<all_urls>"]},
+  ["requestHeaders"]
+);
 
-var native_alert = alert;
 
 chrome.webRequest.onBeforeSendHeaders.addListener(
   function(details) {
 
+    // alert("BEFORE SENDING HEADERS");
     // ***********************
     // REQUESTS
     // ***********************
 
     var overrideRequestList = [
-      // { name: "X-XSS-Protection",          value: "0" },
-      // { name: "Upgrade-Insecure-Requests", value: "0" }
+      { name: "X-XSS-Protection",          value: "0" },
+      { name: "Upgrade-Insecure-Requests", value: "0" }
     ];
 
     // Find any conflicting headers and remove them

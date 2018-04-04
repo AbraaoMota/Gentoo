@@ -8,7 +8,7 @@
     "48": "img/penguin.png",
     "128": "img/penguin.png"
   },
-  "content_security_policy": "script-src 'self' https://ajax.googleapis.com; object-src 'self'",
+  "content_security_policy": "script-src 'self'; object-src 'self'",
   "background": {
     "scripts": [
       "js/background.js"
@@ -33,7 +33,9 @@
           "webRequestBlocking",
           "webRequest",
           "cookies",
-          "*://localhost/*"
+          "storage",
+          "tabs",
+          "*://*/*"
   ],
   "browser_action": {
     "default_icon": "img/penguin.png",

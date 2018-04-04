@@ -4,24 +4,27 @@
   "description": "Find vulnerabilities in sites you're using!",
   "version": "1.0",
   "icons": {
-    "16": "penguin.png",
-    "48": "penguin.png",
-    "128": "penguin.png"
+    "16": "img/penguin.png",
+    "48": "img/penguin.png",
+    "128": "img/penguin.png"
   },
   "content_security_policy": "script-src 'self' https://ajax.googleapis.com; object-src 'self'",
   "background": {
     "scripts": [
-      "background.js"
+      "js/background.js"
     ]
   },
+   "web_accessible_resources": [
+     "request_logger.html"
+   ],
   "content_scripts": [
     {
       "matches": ["*://*/*"],
-       "css": ["main.css"],
+       "css": ["css/main.css"],
       "js": [
         "lib/jquery/jquery-3.3.1.min.js",
         "lib/jquery_form/jquery.form.js",
-        "bloop.js"
+        "js/bloop.js"
       ],
       "run_at": "document_start"
     }
@@ -29,10 +32,11 @@
   "permissions": [
           "webRequestBlocking",
           "webRequest",
-          "*://*/*"
+          "cookies",
+          "*://localhost/*"
   ],
   "browser_action": {
-    "default_icon": "penguin.png",
+    "default_icon": "img/penguin.png",
     "default_popup": "popup.html",
     "default_title": "Extension"
   },

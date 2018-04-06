@@ -1,5 +1,3 @@
-// console.log(chrome.webRequest);
-
 function extractParams(query) {
   var result = {};
   query.split("&").forEach(function(part) {
@@ -23,6 +21,7 @@ chrome.runtime.onMessage.addListener(
     console.log("Received msg in background");
     if (request.msg === "reflectedXSS") {
       // Warn the user that a reflected XSS URL has been found
+      // by displaying a badge
       chrome.browserAction.setBadgeText({ text: "!" });
       chrome.browserAction.setBadgeBackgroundColor({ color: "red" });
     }

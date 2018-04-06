@@ -57,11 +57,3 @@ function attemptXSS(inputElement, parentForm) {
   parentForm.submit();
 }
 
-// $(window).ready(function() {
-//   // bind 'myForm' and provide a simple callback function
-//   $('#boop').ajaxSubmit(function() {
-//     console.log("WE GOT TO AJAX SUBMIT");
-//     alert("Thank you for your comment!");
-//   });
-// });
-

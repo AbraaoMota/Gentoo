@@ -24,7 +24,7 @@
       "js": [
         "lib/jquery/jquery-3.3.1.min.js",
         "lib/jquery_form/jquery.form.js",
-        "js/bloop.js"
+        "js/attack.js"
       ],
       "run_at": "document_start"
     }

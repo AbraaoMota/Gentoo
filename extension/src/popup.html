@@ -27,12 +27,22 @@
     <h1> Welcome to the vuln finder </h1>
 
     <!-- Switch -->
-    <span> Enable or disable the extension (currently does nothing)</span>
+    <span>Enable or disable the extension (currently does nothing)</span>
     <div class="switch">
       <label>
         Off
         <input type="checkbox">
         <span id="derp" class="lever"></span>
+        On
+      </label>
+    </div>
+
+    <span>Action Replay mechanism</span>
+    <div class="switch">
+      <label>
+        Off
+        <input type="checkbox" id="checkboxAR">
+        <span id="actionReplayEnabled" class="lever"></span>
         On
       </label>
     </div>
@@ -52,24 +62,24 @@
         <p><strong>The following URL's have been detected to have an XSS vulnerability:</strong></p>
         <ul class="collapsible">
           <li>
-            <div class="collapsible-header"><i class="material-icons">flip</i>Reflected XSS</div>
-            <div class="collapsible-body" id="reflectedXSS"></div>
+            <div class="collapsible-header"><i class="material-icons">flip</i>XSS URL's</div>
+            <div class="collapsible-body" id="xssURLs"></div>
           </li>
         </ul>
 
         <p><strong>Reset XSS URL list</strong></p>
-        <a class="waves-effect waves-light btn btn-small red darken-2 modal-trigger" href="#reflectedXSSWarning">
+        <a class="waves-effect waves-light btn btn-small red darken-2 modal-trigger" href="#xssWarning">
           <i class="material-icons right">warning</i>Clear weak URL list
         </a>
 
-        <div id="reflectedXSSWarning" class="modal">
+        <div id="xssWarning" class="modal">
           <div class="modal-content">
-            <h4>Remove all URLs with a reflected XSS weakness</h4>
+            <h4>Remove all URLs with an XSS weakness</h4>
             <p>This action cannot be undone. Are you sure?</p>
           </div>
           <div class="modal-footer">
             <a href="#!" class="modal-action modal-close waves-effect waves-red btn-flat">Cancel</a>
-            <a id="clearReflectedXSS" href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Yes, delete URL list</a>
+            <a id="clearXssURLs" href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Yes, delete URL list</a>
           </div>
         </div>
 
@@ -79,6 +89,7 @@
       <div id="test2" class="col s12">Test 2. Henlo</div>
       <div id="test3" class="col s12">Test 3</div>
     </div>
+
 
 
 

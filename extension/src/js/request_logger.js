@@ -24,7 +24,6 @@ window.onload = function() {
 }
 
 function sendReflectedXSSNotification(url) {
-  console.log("Sending XSS message");
   chrome.runtime.sendMessage({
     msg: "reflectedXSS",
     data: {

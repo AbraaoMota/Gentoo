@@ -20,11 +20,15 @@
   "content_scripts": [
     {
       "matches": ["*://*/*"],
-       "css": ["css/main.css"],
+       "css": [
+         "css/main.css",
+         "css/action_replay.css"
+       ],
       "js": [
         "lib/jquery/jquery-3.3.1.min.js",
         "lib/jquery_form/jquery.form.js",
-        "js/attack.js"
+        "js/attack.js",
+        "js/action_replay.js"
       ],
       "run_at": "document_start"
     }

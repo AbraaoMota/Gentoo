@@ -7,18 +7,8 @@ function extractParams(query) {
   return result;
 }
 
-// function forwardMsgToPopup(request) {
-//   console.log("Sending this to POPUP: " + request.msg);
-//   chrome.runtime.sendMessage({
-//     msg: request.msg + "2",
-//     data: request.data
-//   });
-// }
-
-
 chrome.runtime.onMessage.addListener(
   function(request, sender, sendResponse) {
-    console.log("Received msg in background");
     if (request.msg === "reflectedXSS") {
       // Warn the user that a reflected XSS URL has been found
       // by displaying a badge
@@ -27,15 +17,6 @@ chrome.runtime.onMessage.addListener(
     }
   }
 );
-
-// chrome.extension.onConnect.addListener(function(port) {
-//     console.log("Connected .....");
-//     port.onMessage.addListener(function(msg) {
-//         console.log("message recieved " + msg);
-//         port.postMessage("Hi Popup.js");
-//     });
-// });
-
 
 chrome.webRequest.onSendHeaders.addListener(
   function(details) {

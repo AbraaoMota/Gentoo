@@ -18,6 +18,30 @@ chrome.runtime.onMessage.addListener(
   }
 );
 
+chrome.runtime.onConnect.addListener(
+  function(devToolsConnection) {
+    // assign the listener function to a variable so we can remove it later
+    var devToolsListener = function(message, sender, sendResponse) {
+      // Send a message to the action replay script
+      chrome.tabs.sendMessage({
+        reqCookies:  message.reqCookies,
+        reqHeaders:  message.reqHeaders,
+        reqParams:   message.reqParams,
+        respCookies: message.respCookies,
+        respHeaders: message.respHeaders
+      });
+    };
+
+    // Add the listener
+    devToolsConnection.onMessage.addListener(devToolsListener);
+
+    // Remove listener once finished
+    devToolsConnection.onDisconnect.addListener(function() {
+      devToolsConnection.onMessage.removeListener(devToolsListener);
+    });
+  }
+)
+
 chrome.webRequest.onSendHeaders.addListener(
   function(details) {
     // Initiator is the root URL that we are looking at

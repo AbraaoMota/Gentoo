@@ -1,4 +1,4 @@
-window.onload = function() {
+window.addEventListener("load", function() {
   var url = new URL(window.location.href);
   var weakReferrer = url.searchParams.get("ref");
   console.log("REF IS " + weakReferrer);
@@ -21,7 +21,7 @@ window.onload = function() {
     localStorage.weakURLs = JSON.stringify(weakURLs);
     sendReflectedXSSNotification(weakReferrer);
   }
-}
+}, false);
 
 function sendReflectedXSSNotification(url) {
   chrome.runtime.sendMessage({

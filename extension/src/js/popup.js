@@ -3,7 +3,7 @@ $(document).ready(function() {
   $('#xssWarning').modal();
 });
 
-window.onload = function() {
+window.addEventListener("load", function() {
   // Make notification badge disappear from popup when window opened
   chrome.browserAction.setBadgeText({ text: "" });
 
@@ -25,7 +25,7 @@ window.onload = function() {
       reflectedList.appendChild(p);
     }
   }
-}
+}, false);
 
 document.addEventListener('DOMContentLoaded', function() {
   var link = document.getElementById('derp');

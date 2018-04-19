@@ -5,8 +5,8 @@ function ignoreerror() {
 window.onerror = ignoreerror();
 
 // Run script after page load
-window.onload = function() {
-
+window.addEventListener("load", function() {
+  console.log("Attack js on load");
   // Inject "Investigate Form" buttons on input
   var forms = document.getElementsByTagName("form");
   for (var i = 0; i < forms.length; i++) {
@@ -37,7 +37,7 @@ window.onload = function() {
     newParent.appendChild(recommendation);
     currForm.insertBefore(newParent, currForm.firstChild);
   }
-}
+}, false);
 
 function attemptXSS(inputElement, parentForm) {
   // Here is one attempt - I'd want to pass arguments such as time limit, as well as a library of inputs to fuzz etc

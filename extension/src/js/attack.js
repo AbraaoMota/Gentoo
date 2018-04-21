@@ -4,9 +4,10 @@ function ignoreerror() {
 }
 window.onerror = ignoreerror();
 
-// Run script after page load
+// On page load, analyse any pre-existing forms and add in
+// an "Investigate form" button to attempt an attack.
+// TODO: at the moment this only attempts a specific XSS
 window.addEventListener("load", function() {
-  console.log("Attack js on load");
   // Inject "Investigate Form" buttons on input
   var forms = document.getElementsByTagName("form");
   for (var i = 0; i < forms.length; i++) {
@@ -39,6 +40,8 @@ window.addEventListener("load", function() {
   }
 }, false);
 
+// This method attempts an XSS attack by using an exploit string,
+// adding it as input to the page
 function attemptXSS(inputElement, parentForm) {
   // Here is one attempt - I'd want to pass arguments such as time limit, as well as a library of inputs to fuzz etc
   // inputElement.value = "<img src=a onerror=\"alert('XSS Attack')\">";

@@ -1,14 +1,41 @@
+// This is a content script handling the logic for the action replay
+// mechanism
+
+// Listener for enabling the action replay mechanism in the `popup` page
+// This listens for any parameter message sent over 
+// from the `devtools` page through the `background` page
 chrome.runtime.onMessage.addListener(
-  function(request, sender, sendResponse) {
-    if (request.msg === "toggleAR") {
+  function(message, sender, sendResponse) {
+    console.log("HENLO WE HAS MSG AT ACTIONREPLAY"); 
+    if (message.msg === "toggleAR") {
       toggleActionRecordingButton();
+      
+      // Return true required to use this callback asynchronously
+      return true;
+
+    } else if (message.name === "devToolsParams" && localStorage.ARsession === "recording") {
+      
+      // Only important messages here are from devTools while the action replay session
+      // is recording
+
+      console.log("WE HAVE RECEIVED A DEVTOOLSPARAMS MESSAGE");
+      // Here we want to store any useful information for later analysis
+      // I also wanna grab the url here so i can set start and finish
+      // points for different potential attacks
+      // This needs to be a list of requests in a sorted fashion
+      // localStorage.reqCookies = msg.reqCookies;
+      // localStorage.
     }
 
     // Return true required to use this callback asynchronously
     return true;
+
   }
 );
 
+// If a new page has been loaded and a recording session
+// has previously been started, enable the button for
+// visual aid
 window.addEventListener("load", function() {
   console.log("Action replay onload");
   if (localStorage.ARsession == "recording") {
@@ -18,6 +45,7 @@ window.addEventListener("load", function() {
   }
 }, false);
 
+// Adds and removes the action replay button to the page when triggered
 function toggleActionRecordingButton() {
   var actionReplayButton = document.getElementById("actionReplayButton");
   if (actionReplayButton) {
@@ -29,6 +57,7 @@ function toggleActionRecordingButton() {
   }
 };
 
+// Creates and adds the button to the page, makes it draggable
 function addActionReplayButtonToPage() {
   // Button not present in the page - create and append to page
   actionReplayButton = document.createElement("button");
@@ -61,20 +90,26 @@ function addActionReplayButtonToPage() {
   }, false);
 }
 
+
+// This starts and stops the recording action when the button
+// is clicked, toggling between starting and closing the session
+// (Finishing a session may entail replaying actions to find attacks)
 function toggleARrecording() {
   if (actionReplayButton.className === "notRec") {
     // Add actual Action Replay logic here
     actionReplayButton.className = "Rec";
     localStorage.ARsession = "recording";
 
-    // IDEA - if im not allowed to have this here create a queue of 
+    // IDEA - if im not allowed to have this here create a queue of
     // requests, only add to it if the timing of most recent toggle is
     // matches the message timing
     // Record any inputs, URL params, post data sent
+
     chrome.runtime.onMessage.addListener(
       function(msg, sender, sendResponse) {
-        if (msg.reqHeaders && msg.respHeaders) {
-          // Here we want to store any useful information for later analysis 
+        if (msg.name === "devToolsParams") {
+          console.log("WE HAVE RECEIVED A DEVTOOLSPARAMS MESSAGE");
+          // Here we want to store any useful information for later analysis
           // I also wanna grab the url here so i can set start and finish
           // points for different potential attacks
           // This needs to be a list of requests in a sorted fashion
@@ -86,7 +121,6 @@ function toggleARrecording() {
         return true;
       }
     );
-
   } else {
     // Recording was stopped
     actionReplayButton.className = "notRec";

@@ -1,8 +1,9 @@
-// Initialize modals on doc ready
+// Initialize modals whenever the page is ready
 $(document).ready(function() {
   $('#xssWarning').modal();
 });
 
+// Update visuals on popup page load
 window.addEventListener("load", function() {
   // Make notification badge disappear from popup when window opened
   chrome.browserAction.setBadgeText({ text: "" });
@@ -27,11 +28,8 @@ window.addEventListener("load", function() {
   }
 }, false);
 
+// Add listeners to the page for events created from the popup page
 document.addEventListener('DOMContentLoaded', function() {
-  var link = document.getElementById('derp');
-  link.addEventListener("click", function() {
-    console.log("Henlo switch");
-  });
 
   // Settings regarding activating Action replay
   var actionReplay = document.getElementById("actionReplayEnabled");
@@ -50,6 +48,8 @@ document.addEventListener('DOMContentLoaded', function() {
   });
 });
 
+// Clears out the list of URLs to which we have been redirected from to reach
+// the `request_logger` page
 function clearReflectedXSS() {
   // Clear weakURL list
   var clearXssURLs = document.getElementById("clearXssURLs");
@@ -59,6 +59,7 @@ function clearReflectedXSS() {
   });
 }
 
+// Function switch for activating the AR button functionality on a page
 function toggleActionReplay() {
   var checkboxAR = document.getElementById("checkboxAR");
 

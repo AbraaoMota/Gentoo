@@ -1,9 +1,18 @@
+// This page logs requests as well as a referrer page
+// This page is used as a sure way to ensure an XSS attack
+// was successful - currently, the only way to reach this
+// page is programatically, so the referrer must have suffered
+// from an executed XSS attack
+
+
+// Whenever this page is loaded, store information regarding
+// the referrer URL and append it to the list of weak URLs
+// kept in localStorage
 window.addEventListener("load", function() {
+
   var url = new URL(window.location.href);
   var weakReferrer = url.searchParams.get("ref");
-  console.log("REF IS " + weakReferrer);
   document.getElementById("output").innerHTML = weakReferrer;
-
 
   // Attempt to write the contents of the URL from which
   // the XSS request came from to LocalStorage
@@ -23,6 +32,7 @@ window.addEventListener("load", function() {
   }
 }, false);
 
+// Send a message to the popup page to notify a new weak URL has been found
 function sendReflectedXSSNotification(url) {
   chrome.runtime.sendMessage({
     msg: "reflectedXSS",

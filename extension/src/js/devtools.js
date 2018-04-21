@@ -13,7 +13,7 @@ chrome.runtime.sendMessage({
   scriptToInject: "action_replay.js"
 });
 
-// In order for this to work as intended, the devtools page has to 
+// In order for this to work as intended, the devtools page has to
 // be open in the background so that these parameters can be sent
 // after every request
 chrome.devtools.network.onRequestFinished.addListener(
@@ -21,23 +21,28 @@ chrome.devtools.network.onRequestFinished.addListener(
     var request = r.request;
     var response = r.response;
 
-    var requestCookies = request.cookies;
-    var requestHeaders = request.headers;
-    var requestQueryParameters = request.queryString;
+    // var requestCookies = request.cookies;
+    // var requestHeaders = request.headers;
+    // var requestQueryParameters = request.queryString;
 
-    var responseCookies = response.cookies;
-    var responseHeaders = response.headers;
+    // var responseCookies = response.cookies;
+    // var responseHeaders = response.headers;
 
-    sendParametersToActionReplay();
+
+    var backgroundPageConnection = chrome.runtime.connect({
+      name: "devTools"
+    });
+
+    console.log("WE'RE SENDING A MESSAGE FROM DEV TOOLS TO BACKGROUND");
+    backgroundPageConnection.postMessage({
+    // chrome.runtime.sendMessage({
+      name:        "devToolsParams",
+      tabId:       chrome.devtools.inspectedWindow.tabId,
+      reqCookies:  request.cookies,
+      reqHeaders:  request.headers,
+      reqParams:   request.queryString,
+      respCookies: response.cookies,
+      respHeaders: response.headers
+    });
   }
 );
-
-function sendParametersToActionReplay() {
-  chrome.runtime.sendMessage({
-    reqCookies:  requestCookies,
-    reqHeaders:  reqHeaders,
-    reqParams:   requestQueryParameters,
-    respCookies: respCookies,
-    respHeaders: responseHeaders
-  });
-}

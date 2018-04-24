@@ -38,13 +38,12 @@ chrome.runtime.onConnect.addListener(
         connections[message.tabId] = port;
 
         // Send a message to the action replay script
-        console.log("WE'VE RECEIVED A MESSAGE FROM DEVTOOLS - FORWARDING TO ACTION REPLAY");
-
         chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
           chrome.tabs.sendMessage(
             tabs[0].id, 
             {
               name:        message.name,
+              url:         message.url,
               reqCookies:  message.reqCookies,
               reqHeaders:  message.reqHeaders,
               reqParams:   message.reqParams,

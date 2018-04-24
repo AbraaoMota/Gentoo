@@ -21,23 +21,14 @@ chrome.devtools.network.onRequestFinished.addListener(
     var request = r.request;
     var response = r.response;
 
-    // var requestCookies = request.cookies;
-    // var requestHeaders = request.headers;
-    // var requestQueryParameters = request.queryString;
-
-    // var responseCookies = response.cookies;
-    // var responseHeaders = response.headers;
-
-
     var backgroundPageConnection = chrome.runtime.connect({
       name: "devTools"
     });
 
-    console.log("WE'RE SENDING A MESSAGE FROM DEV TOOLS TO BACKGROUND");
     backgroundPageConnection.postMessage({
-    // chrome.runtime.sendMessage({
       name:        "devToolsParams",
       tabId:       chrome.devtools.inspectedWindow.tabId,
+      url:         request.url,
       reqCookies:  request.cookies,
       reqHeaders:  request.headers,
       reqParams:   request.queryString,

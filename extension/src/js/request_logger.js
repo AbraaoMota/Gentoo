@@ -16,20 +16,34 @@ window.addEventListener("load", function() {
 
   // Attempt to write the contents of the URL from which
   // the XSS request came from to LocalStorage
-  if (localStorage.weakURLs) {
-    var weakURLs = JSON.parse(localStorage.getItem("weakURLs"));
-    var urlSet = new Set(weakURLs);
-    urlSet.add(weakReferrer);
-    weakURLs = Array.from(urlSet);
-    console.log("Adding to local store");
-    localStorage.weakURLs = JSON.stringify(weakURLs);
-    sendReflectedXSSNotification(weakReferrer);
-  } else {
-    var weakURLs = [weakReferrer];
-    console.log("Adding to local store for first time");
-    localStorage.weakURLs = JSON.stringify(weakURLs);
-    sendReflectedXSSNotification(weakReferrer);
-  }
+  // if (localStorage.weakURLs) {
+  //   var weakURLs = JSON.parse(localStorage.getItem("weakURLs"));
+  //   var urlSet = new Set(weakURLs);
+  //   urlSet.add(weakReferrer);
+  //   weakURLs = Array.from(urlSet);
+  //   localStorage.weakURLs = JSON.stringify(weakURLs);
+  //   sendReflectedXSSNotification(weakReferrer);
+  // } else {
+  //   var weakURLs = [weakReferrer];
+  //   localStorage.weakURLs = JSON.stringify(weakURLs);
+  //   sendReflectedXSSNotification(weakReferrer);
+  // }
+  
+  chrome.storage.local.get("weakURLs", function(urlList) {
+    if (chrome.runtime.lastError) {
+      // First time this field is set in storage
+      chrome.storage.local.set({ "weakURLs": [weakReferrer] });
+    } else {
+      // Append to existing field
+      var urlSet = new Set(urlList);
+      urlSet.add(weakReferrer);
+      var weakURLs = Array.from(urlSet);
+      chrome.storage.local.set({ "weakURLs": weakURLs });
+    }
+  });
+
+  sendReflectedXSSNotification(weakReferrer);
+
 }, false);
 
 // Send a message to the popup page to notify a new weak URL has been found

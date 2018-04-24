@@ -1,48 +1,94 @@
 // This is a content script handling the logic for the action replay
 // mechanism
 
-// Listener for enabling the action replay mechanism in the `popup` page
-// This listens for any parameter message sent over 
-// from the `devtools` page through the `background` page
+// Message listener for different messages
 chrome.runtime.onMessage.addListener(
   function(message, sender, sendResponse) {
-    console.log("HENLO WE HAS MSG AT ACTIONREPLAY"); 
-    if (message.msg === "toggleAR") {
-      toggleActionRecordingButton();
-      
-      // Return true required to use this callback asynchronously
-      return true;
+    // var ARsession;
+    chrome.storage.local.get(function(storage) {
+      var ARsession = storage["ARsession"];
+      // ARsession = storage["ARsession"];
 
-    } else if (message.name === "devToolsParams" && localStorage.ARsession === "recording") {
-      
-      // Only important messages here are from devTools while the action replay session
-      // is recording
+    // });
+      console.log("RECEIVED MSG");
+      console.log(message);
+      console.log("ARsession is: " + ARsession);
+      console.log(ARsession === "recording");
 
-      console.log("WE HAVE RECEIVED A DEVTOOLSPARAMS MESSAGE");
-      // Here we want to store any useful information for later analysis
-      // I also wanna grab the url here so i can set start and finish
-      // points for different potential attacks
-      // This needs to be a list of requests in a sorted fashion
-      // localStorage.reqCookies = msg.reqCookies;
-      // localStorage.
-    }
+      if (message.msg === "toggleAR") {
+        // Either start or stop Action Replay session
+        toggleActionRecordingButton();
 
-    // Return true required to use this callback asynchronously
-    return true;
+        // Return true required to use this callback asynchronously
+        return true;
 
+      } else if (message.name === "devToolsParams" && ARsession === "recording") {
+
+        console.log("WE HAVE RECEIVED A MESSAGE");
+        // Log important parameters sent in requests and responses, forwarded from devTools page
+        // Only important messages here are while the action replay session is recording
+
+        // Incoming message parameters:
+        // name: "devToolsParams"
+        // tabId,
+        // url,
+        // reqCookies,
+        // reqHeaders,
+        // reqParams,
+        // respCookies,
+        // respHeaders
+
+        // Create a minimal set of important information to store per request
+        var requestDetails = {
+          url:         message.url,
+          reqCookies:  message.reqCookies,
+          reqHeaders:  message.reqHeaders,
+          reqParams:   message.reqParams,
+          respCookies: message.respCookies,
+          respHeaders: message.respHeaders
+        };
+
+        // Append to / create an array of requests for localStorage
+        chrome.storage.local.get("ARrequests", function(requestList) {
+          if (Object.keys(requestList).length === 0) {
+            chrome.storage.local.set({ "ARrequests": [requestDetails] });
+          } else {
+            var newList = requestList["ARrequests"].push(requestDetails);
+            chrome.storage.local.set({ "ARrequests": newList });
+          }
+        });
+
+        // Return true required to use this callback asynchronously
+        return true;
+      }
+    });
   }
 );
 
-// If a new page has been loaded and a recording session
-// has previously been started, enable the button for
-// visual aid
+// If a new page has been loaded and AR is enabled
+// or is currently recording, show the button accordingly
 window.addEventListener("load", function() {
-  console.log("Action replay onload");
-  if (localStorage.ARsession == "recording") {
-    addActionReplayButtonToPage();
-    var actionReplayButton = document.getElementById("actionReplayButton");
-    actionReplayButton.className = "Rec";
-  }
+  // if (localStorage.enableAR === "1") {
+  //   addActionReplayButtonToPage();
+  //   if (localStorage.ARsession === "recording") {
+  //     var actionReplayButton = document.getElementById("actionReplayButton");
+  //     actionReplayButton.className = "Rec";
+  //   }
+  // }
+
+  chrome.storage.local.get(function(store) {
+    var enableAR = store["enableAR"];
+    var ARsession = store["ARsession"];
+
+    if (enableAR) {
+      addActionReplayButtonToPage();
+      if (ARsession === "recording") {
+        var actionReplayButton = document.getElementById("actionReplayButton");
+        actionReplayButton.className = "Rec";
+      }
+    }
+  });
+
 }, false);
 
 // Adds and removes the action replay button to the page when triggered
@@ -90,7 +136,6 @@ function addActionReplayButtonToPage() {
   }, false);
 }
 
-
 // This starts and stops the recording action when the button
 // is clicked, toggling between starting and closing the session
 // (Finishing a session may entail replaying actions to find attacks)
@@ -98,33 +143,15 @@ function toggleARrecording() {
   if (actionReplayButton.className === "notRec") {
     // Add actual Action Replay logic here
     actionReplayButton.className = "Rec";
-    localStorage.ARsession = "recording";
+    // localStorage.ARsession = "recording";
+    chrome.storage.local.set({ "ARsession": "recording" });
 
-    // IDEA - if im not allowed to have this here create a queue of
-    // requests, only add to it if the timing of most recent toggle is
-    // matches the message timing
-    // Record any inputs, URL params, post data sent
-
-    chrome.runtime.onMessage.addListener(
-      function(msg, sender, sendResponse) {
-        if (msg.name === "devToolsParams") {
-          console.log("WE HAVE RECEIVED A DEVTOOLSPARAMS MESSAGE");
-          // Here we want to store any useful information for later analysis
-          // I also wanna grab the url here so i can set start and finish
-          // points for different potential attacks
-          // This needs to be a list of requests in a sorted fashion
-          // localStorage.reqCookies = msg.reqCookies;
-          // localStorage.
-        }
-
-        // Return true required to use this callback asynchronously
-        return true;
-      }
-    );
   } else {
     // Recording was stopped
     actionReplayButton.className = "notRec";
-    localStorage.ARsession = "finished";
+    // localStorage.ARsession = "finished";
+    chrome.storage.local.set({ "ARsession": "finished" });
+
 
     // Need to initiate the replay of the actions recorded
     // Change any inputs necessary

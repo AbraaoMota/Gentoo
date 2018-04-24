@@ -12,12 +12,19 @@ window.addEventListener("load", function() {
   // Visual switch checking is a separate element to the lever that
   // triggers the switch
   var checkboxAR = document.getElementById("checkboxAR");
-  console.log("ENABLE AR IS GOING TO BE " + localStorage.enableAR);
-  checkboxAR.checked = parseInt(localStorage.enableAR);
+  chrome.storage.local.get("enableAR", function(flag) {
+    if (flag["enableAR"] === 1) {
+      checkboxAR.checked = flag;
+    }
+  });
 
   // Create elements for the weak URL list to appear
-  // This list is kept in localStorage under the 'weakURLs' key
-  var weakURLs = JSON.parse(localStorage.getItem("weakURLs"));
+  // This list is kept in local storage under the 'weakURLs' key
+  var weakURLs;
+  chrome.storage.local.get("weakURLs", function(urlList) {
+    weakURLs = urlList;
+  });
+
   var reflectedList = document.getElementById("xssURLs");
   if (weakURLs) {
     for (i = 0; i < weakURLs.length; i++) {
@@ -54,25 +61,37 @@ function clearReflectedXSS() {
   // Clear weakURL list
   var clearXssURLs = document.getElementById("clearXssURLs");
   clearXssURLs.addEventListener('click', function() {
-    localStorage.removeItem("weakURLs");
+    chrome.storage.local.removeItem("weakURLs");
     location.reload();
   });
 }
 
 // Function switch for activating the AR button functionality on a page
 function toggleActionReplay() {
-  var checkboxAR = document.getElementById("checkboxAR");
+  chrome.storage.local.get(function(storage) {
+    var enableAR = storage["enableAR"];
+    var ARsession = storage["ARsession"];
 
-  if (!localStorage.getItem("enableAR")) {
-    // If it hasn't been set yet, the switch was just checked, thus set it to 1
-    localStorage.enableAR = 1;
-  } else {
-    // Toggle storage
-    localStorage.enableAR = 1 - parseInt(localStorage.enableAR);
+    if (!enableAR) {
+      // This hasn't been set yet, switch was just enabled, therefore set to 1
+      chrome.storage.local.set({ "enableAR": 1 });
+    } else {
+      // Toggle Storage
+      chrome.storage.local.set({ "enableAR": 1 - enableAR });
+      if (ARsession === "recording") {
+        chrome.storage.local.set({ "ARsession": "finished" });
+      }
+    }
+  });
 
-    // Send out a message
-    chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
-      chrome.tabs.sendMessage(tabs[0].id, {msg: "toggleAR"}, function(response) {});
-    });
-  }
+  // Send out a message
+  chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
+    chrome.tabs.sendMessage(
+      tabs[0].id,
+      {
+        msg: "toggleAR"
+      },
+      function(response) {}
+    );
+  });
 }

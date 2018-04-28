@@ -1,3 +1,6 @@
+// Set this in storage as the extension starts
+chrome.storage.local.set({ "ARrequests": [] });
+
 // This looks at the URL and returns any existing query parameters
 function extractParams(query) {
   var result = {};
@@ -26,7 +29,6 @@ chrome.runtime.onMessage.addListener(
 // This message is sent to the `action_replay.js` content script, where
 // It filters information brought across based on whether the action replay recording
 // has started or not
-
 var connections = {};
 
 chrome.runtime.onConnect.addListener(
@@ -40,7 +42,7 @@ chrome.runtime.onConnect.addListener(
         // Send a message to the action replay script
         chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
           chrome.tabs.sendMessage(
-            tabs[0].id, 
+            tabs[0].id,
             {
               name:        message.name,
               url:         message.url,
@@ -48,7 +50,8 @@ chrome.runtime.onConnect.addListener(
               reqHeaders:  message.reqHeaders,
               reqParams:   message.reqParams,
               respCookies: message.respCookies,
-              respHeaders: message.respHeaders
+              respHeaders: message.respHeaders,
+              respContent: message.respContent
             },
             function(response) {}
           );
@@ -85,61 +88,61 @@ chrome.runtime.onConnect.addListener(
 )
 
 // Listener for whatever happens after sending headers
-chrome.webRequest.onSendHeaders.addListener(
-  function(details) {
-    // Initiator is the root URL that we are looking at
-    var initiator = details.initiator;
-    var url = details.url;
+// chrome.webRequest.onSendHeaders.addListener(
+//   function(details) {
+//     // Initiator is the root URL that we are looking at
+//     var initiator = details.initiator;
+//     var url = details.url;
 
-    var urlParams = {}
-    // String comparison not the same - will very likely happen if we are not at a homepage
-    if (initiator !== url) {
-      // Analyse for URL parameters
-      var paramIndex = url.indexOf("?");
+//     var urlParams = {}
+//     // String comparison not the same - will very likely happen if we are not at a homepage
+//     if (initiator !== url) {
+//       // Analyse for URL parameters
+//       var paramIndex = url.indexOf("?");
 
-      // We have url params
-      if (paramIndex >= 0) {
-        urlParams = (extractParams(url.slice(paramIndex + 1)));
-      }
-    }
-  },
-  {urls: ["<all_urls>"]},
-  ["requestHeaders"]
-);
+//       // We have url params
+//       if (paramIndex >= 0) {
+//         urlParams = (extractParams(url.slice(paramIndex + 1)));
+//       }
+//     }
+//   },
+//   {urls: ["<all_urls>"]},
+//   ["requestHeaders"]
+// );
 
 // Alters headers before every request
-chrome.webRequest.onBeforeSendHeaders.addListener(
-  function(details) {
+// chrome.webRequest.onBeforeSendHeaders.addListener(
+//   function(details) {
 
-    // ***********************
-    // REQUESTS
-    // ***********************
+//     // ***********************
+//     // REQUESTS
+//     // ***********************
 
-    var overrideRequestList = [
-      // { name: "X-XSS-Protection",          value: "0" },
-      // { name: "Upgrade-Insecure-Requests", value: "0" }
-    ];
+//     var overrideRequestList = [
+//       // { name: "X-XSS-Protection",          value: "0" },
+//       // { name: "Upgrade-Insecure-Requests", value: "0" }
+//     ];
 
-    // Find any conflicting headers and remove them
-    // console.log(details.requestHeaders);
-    for (i = 0; i < details.requestHeaders.length; i++) {
-      for (j = 0; j < overrideRequestList.length; j++) {
-        if (details.requestHeaders[i].name == overrideRequestList[j].name) {
-          details.requestHeaders.splice(i, 1);
-        }
-      }
-    }
+//     // Find any conflicting headers and remove them
+//     // console.log(details.requestHeaders);
+//     for (i = 0; i < details.requestHeaders.length; i++) {
+//       for (j = 0; j < overrideRequestList.length; j++) {
+//         if (details.requestHeaders[i].name == overrideRequestList[j].name) {
+//           details.requestHeaders.splice(i, 1);
+//         }
+//       }
+//     }
 
-    // Add in all new headers
-    for (i = 0; i < overrideRequestList.length; i++) {
-      details.requestHeaders.push(overrideRequestList[i]);
-    }
-    // ************************
-    // RESPONSES
-    // ************************
-    // console.log(details.requestHeaders);
-    // return { details.requestHeaders };
-  },
-  {urls: ["<all_urls>"]},
-  ["blocking", "requestHeaders"]
-);
+//     // Add in all new headers
+//     for (i = 0; i < overrideRequestList.length; i++) {
+//       details.requestHeaders.push(overrideRequestList[i]);
+//     }
+//     // ************************
+//     // RESPONSES
+//     // ************************
+//     // console.log(details.requestHeaders);
+//     // return { details.requestHeaders };
+//   },
+//   {urls: ["<all_urls>"]},
+//   ["blocking", "requestHeaders"]
+// );

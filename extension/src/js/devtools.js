@@ -18,6 +18,10 @@ chrome.runtime.sendMessage({
 // after every request
 chrome.devtools.network.onRequestFinished.addListener(
   function(r) {
+
+    console.log("REQUEST HERE");
+    console.log(r);
+
     var request = r.request;
     var response = r.response;
 
@@ -25,15 +29,19 @@ chrome.devtools.network.onRequestFinished.addListener(
       name: "devTools"
     });
 
-    backgroundPageConnection.postMessage({
-      name:        "devToolsParams",
-      tabId:       chrome.devtools.inspectedWindow.tabId,
-      url:         request.url,
-      reqCookies:  request.cookies,
-      reqHeaders:  request.headers,
-      reqParams:   request.queryString,
-      respCookies: response.cookies,
-      respHeaders: response.headers
+    // Wrap message in content access callback
+    r.getContent(function(responseContent, encoding) {
+      backgroundPageConnection.postMessage({
+        name:        "devToolsParams",
+        tabId:       chrome.devtools.inspectedWindow.tabId,
+        url:         request.url,
+        reqCookies:  request.cookies,
+        reqHeaders:  request.headers,
+        reqParams:   request.queryString,
+        respCookies: response.cookies,
+        respHeaders: response.headers,
+        respContent: responseContent
+      });
     });
   }
 );

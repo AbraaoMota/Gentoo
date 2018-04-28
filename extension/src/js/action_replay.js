@@ -1,80 +1,66 @@
-// This is a content script handling the logic for the action replay
-// mechanism
+// This is a content script handling the logic for the action replay mechanism
 
-// Message listener for different messages
-chrome.runtime.onMessage.addListener(
-  function(message, sender, sendResponse) {
-    // var ARsession;
-    chrome.storage.local.get(function(storage) {
-      var ARsession = storage["ARsession"];
-      // ARsession = storage["ARsession"];
+// Message handling logic - contains a flag to synchronously process messages
+// to avoid async DB overwrites
+var messageHandlerBusy = false;
+var messageHandler = function(message, sender, sendResponse) {
 
-    // });
-      console.log("RECEIVED MSG");
-      console.log(message);
-      console.log("ARsession is: " + ARsession);
-      console.log(ARsession === "recording");
-
-      if (message.msg === "toggleAR") {
-        // Either start or stop Action Replay session
-        toggleActionRecordingButton();
-
-        // Return true required to use this callback asynchronously
-        return true;
-
-      } else if (message.name === "devToolsParams" && ARsession === "recording") {
-
-        console.log("WE HAVE RECEIVED A MESSAGE");
-        // Log important parameters sent in requests and responses, forwarded from devTools page
-        // Only important messages here are while the action replay session is recording
-
-        // Incoming message parameters:
-        // name: "devToolsParams"
-        // tabId,
-        // url,
-        // reqCookies,
-        // reqHeaders,
-        // reqParams,
-        // respCookies,
-        // respHeaders
-
-        // Create a minimal set of important information to store per request
-        var requestDetails = {
-          url:         message.url,
-          reqCookies:  message.reqCookies,
-          reqHeaders:  message.reqHeaders,
-          reqParams:   message.reqParams,
-          respCookies: message.respCookies,
-          respHeaders: message.respHeaders
-        };
-
-        // Append to / create an array of requests for localStorage
-        chrome.storage.local.get("ARrequests", function(requestList) {
-          if (Object.keys(requestList).length === 0) {
-            chrome.storage.local.set({ "ARrequests": [requestDetails] });
-          } else {
-            var newList = requestList["ARrequests"].push(requestDetails);
-            chrome.storage.local.set({ "ARrequests": newList });
-          }
-        });
-
-        // Return true required to use this callback asynchronously
-        return true;
-      }
-    });
+  if (messageHandlerBusy) {
+    window.setTimeout(function() {
+      messageHandler(message, sender, sendResponse);
+    }, 0);
+    return;
   }
-);
+
+  messageHandlerBusy = true;
+
+  chrome.storage.local.get(function(storage) {
+    var ARsession = storage["ARsession"];
+
+    if (message.msg === "toggleAR") {
+
+      // Either start or stop Action Replay session
+      toggleActionRecordingButton();
+      messageHandlerBusy = false;
+
+    } else if (message.name === "devToolsParams" && ARsession === "recording") {
+
+      storeARrequests(storage, message);
+      messageHandlerBusy = false;
+
+    }
+  });
+}
+
+// Set messageHandler to listen to messages
+chrome.runtime.onMessage.addListener(messageHandler);
+
+// Log important parameters sent in requests and responses, forwarded from devTools page
+// Only important messages here are while the action replay session is recording
+function storeARrequests(storage, message) {
+
+  var ARlist = storage["ARrequests"];
+  if (!ARlist) {
+    ARlist = [];
+  }
+
+  ARlist.push({
+    url:         message.url,
+    reqCookies:  message.reqCookies,
+    reqHeaders:  message.reqHeaders,
+    reqParams:   message.reqParams,
+    respCookies: message.respCookies,
+    respHeaders: message.respHeaders,
+    respContent: message.respContent
+  });
+
+  chrome.storage.local.set({ ARrequests: ARlist });
+
+}
 
 // If a new page has been loaded and AR is enabled
 // or is currently recording, show the button accordingly
 window.addEventListener("load", function() {
-  // if (localStorage.enableAR === "1") {
-  //   addActionReplayButtonToPage();
-  //   if (localStorage.ARsession === "recording") {
-  //     var actionReplayButton = document.getElementById("actionReplayButton");
-  //     actionReplayButton.className = "Rec";
-  //   }
-  // }
 
   chrome.storage.local.get(function(store) {
     var enableAR = store["enableAR"];
@@ -93,18 +79,24 @@ window.addEventListener("load", function() {
 
 // Adds and removes the action replay button to the page when triggered
 function toggleActionRecordingButton() {
+
   var actionReplayButton = document.getElementById("actionReplayButton");
   if (actionReplayButton) {
+
     // The button is already present and was clicked, therefore
     // stop recording
     actionReplayButton.parentNode.removeChild(actionReplayButton);
+
   } else {
+
     addActionReplayButtonToPage();
+
   }
 };
 
 // Creates and adds the button to the page, makes it draggable
 function addActionReplayButtonToPage() {
+
   // Button not present in the page - create and append to page
   actionReplayButton = document.createElement("button");
   actionReplayButton.innerHTML = "A.R.";
@@ -134,12 +126,14 @@ function addActionReplayButtonToPage() {
       // console.log("drag");
     }
   }, false);
+
 }
 
 // This starts and stops the recording action when the button
 // is clicked, toggling between starting and closing the session
 // (Finishing a session may entail replaying actions to find attacks)
 function toggleARrecording() {
+
   if (actionReplayButton.className === "notRec") {
     // Add actual Action Replay logic here
     actionReplayButton.className = "Rec";
@@ -152,10 +146,10 @@ function toggleARrecording() {
     // localStorage.ARsession = "finished";
     chrome.storage.local.set({ "ARsession": "finished" });
 
-
     // Need to initiate the replay of the actions recorded
     // Change any inputs necessary
   }
+
 }
 
 // Function code adapted from https://www.w3schools.com/howto/howto_js_draggable.asp

@@ -146,51 +146,92 @@ function toggleARrecording() {
 
 
     // Analysis and replay of actions here
-    chrome.storage.local.get(function(storage) {
-      var baselineRequests = storage["ARrequests"];
+    analyseAndReplayAttacks();
 
-      // For now, analyse only the requests which generate a response
-      // that matches the Content-Type "text/html"
-      for (var i = 0; i < baselineRequests.length; i++) {
-        var r = baselineRequests[i];
-        var contentTypeIndex = headerIndex(r, "respHeaders", "Content-type");
+  }
+}
 
-        if (contentTypeIndex >= 0 && r["respHeaders"][contentTypeIndex].value === "text/html") {
 
-          // Here we need to produce a list of parameters and other content which may be user
-          // injected - this could be query parameters or cookie values
-          var userInputs = [];
+var analyserBusy = false;
 
-          // Append all cookies to the list
-          for (var j = 0; j < r.reqCookies.length; j++) {
-            userInputs.push(r.reqCookies[j].value);
-          }
+function analyseAndReplayAttacks() {
 
-          // Append all query parameter values to the list
-          for (var k = 0; k < r.reqParams.length; k++) {
-            userInputs.push(r.reqParams[k].value);
-          }
+  if (analyserBusy) {
+    window.setTimeout(function() {
+      analyseAndReplayAttacks();
+    }, 0);
+    return;
+  }
 
-          // Append all header values to the list
-          for (var l = 0; l < r.reqHeaders.length; l++) {
-            userInputs.push(r.reqHeaders[l].value);
-          }
+  analyserBusy = true;
 
-          var content = r.respContent;
-          // Loop over all possible user inputs to compare against
-          for (var m = 0; m < userInputs.length; m++) {
-            var currUserInput = userInputs[m];
-            if (content.includes(currUserInput)) {
-              // You want to flag this up as a warning because it looks as though content has been injected
-              // into the page
-              
-            }
+  chrome.storage.local.get(function(storage) {
+    var baselineRequests = storage["ARrequests"];
+
+    // For now, analyse only the requests which generate a response
+    // that matches the Content-Type "text/html"
+    for (var i = 0; i < baselineRequests.length; i++) {
+      var r = baselineRequests[i];
+      var contentTypeIndex = headerIndex(r, "respHeaders", "Content-type");
+
+      if (contentTypeIndex >= 0 && r["respHeaders"][contentTypeIndex].value === "text/html") {
+
+        // Here we need to produce a list of parameters and other content which may be user
+        // injected - this could be query parameters or cookie values
+        var userInputs = [];
+
+        // Append all cookies to the list
+        for (var j = 0; j < r.reqCookies.length; j++) {
+          userInputs.push(r.reqCookies[j].value);
+        }
+
+        // Append all query parameter values to the list
+        for (var k = 0; k < r.reqParams.length; k++) {
+          userInputs.push(r.reqParams[k].value);
+        }
+
+        // Append all header values to the list
+        for (var l = 0; l < r.reqHeaders.length; l++) {
+          userInputs.push(r.reqHeaders[l].value);
+        }
+
+        var content = r.respContent;
+        var potentiallyDangerous = [];
+        // Loop over all possible user inputs to compare against
+        for (var m = 0; m < userInputs.length; m++) {
+          var currUserInput = userInputs[m];
+          if (content.includes(currUserInput)) {
+            // You want to flag this up as a warning because it looks as though content has been injected
+            // into the page - these are also the ones you want to attempt to hijack using JS
+            potentiallyDangerous.push(currUserInput);
           }
         }
-      }
 
-    });
-  }
+
+        chrome.storage.local.set({ "potentialXSS": potentiallyDangerous });
+        // Now we have a list of potentially dangerous inputs (things that seem reflected)
+        // we can send a warning message listing all of these out, as well as forge JS attacks
+        sendIntermediaryWarning(potentiallyDangerous);
+        replayAttacks(potentiallyDangerous);
+      }
+    }
+  });
+
+}
+
+// Warn the extension of potential XSS inputs
+function sendIntermediaryWarning(potentiallyDangerousInputs) {
+  chrome.runtime.sendMessage({
+    msg: "potentialXSS",
+    data: {
+      subject: "These inputs look like they may be reflected on the site",
+      content: potentiallyDangerousInputs
+    }
+  });
+}
+
+function replayAttacks(potentiallyDangerousInputs) {
+
 }
 
 // Helper function to determine whether a request has a given property within

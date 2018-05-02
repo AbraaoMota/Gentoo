@@ -15,9 +15,8 @@ function extractParams(query) {
 // setting the extension badge colour and text
 chrome.runtime.onMessage.addListener(
   function(request, sender, sendResponse) {
-    if (request.msg === "reflectedXSS") {
-      // Warn the user that a reflected XSS URL has been found
-      // by displaying a badge
+    if (request.msg === "reflectedXSS" || request.msg == "potentialXSS") {
+      // Warn the user of potential reflected XSS's by displaying a badge
       chrome.browserAction.setBadgeText({ text: "!" });
       chrome.browserAction.setBadgeBackgroundColor({ color: "red" });
     }

@@ -18,9 +18,9 @@ window.addEventListener("load", function() {
     }
   });
 
-  // Create elements for the weak URL list to appear
-  // This list is kept in local storage under the 'weakURLs' key
   chrome.storage.local.get(function(storage) {
+    // Create elements for the weak URL list to appear
+    // This list is kept in local storage under the 'weakURLs' key
     var weakURLs = storage["weakURLs"];
 
     var reflectedList = document.getElementById("xssURLs");
@@ -31,6 +31,10 @@ window.addEventListener("load", function() {
         reflectedList.appendChild(p);
       }
     }
+
+
+    // Create elements for the potentialXSS warning list
+
   });
 }, false);
 

@@ -137,19 +137,73 @@ function toggleARrecording() {
   if (actionReplayButton.className === "notRec") {
     // Add actual Action Replay logic here
     actionReplayButton.className = "Rec";
-    // localStorage.ARsession = "recording";
     chrome.storage.local.set({ "ARsession": "recording" });
 
   } else {
     // Recording was stopped
     actionReplayButton.className = "notRec";
-    // localStorage.ARsession = "finished";
     chrome.storage.local.set({ "ARsession": "finished" });
 
-    // Need to initiate the replay of the actions recorded
-    // Change any inputs necessary
+
+    // Analysis and replay of actions here
+    chrome.storage.local.get(function(storage) {
+      var baselineRequests = storage["ARrequests"];
+
+      // For now, analyse only the requests which generate a response
+      // that matches the Content-Type "text/html"
+      for (var i = 0; i < baselineRequests.length; i++) {
+        var r = baselineRequests[i];
+        var contentTypeIndex = headerIndex(r, "respHeaders", "Content-type");
+
+        if (contentTypeIndex >= 0 && r["respHeaders"][contentTypeIndex].value === "text/html") {
+
+          // Here we need to produce a list of parameters and other content which may be user
+          // injected - this could be query parameters or cookie values
+          var userInputs = [];
+
+          // Append all cookies to the list
+          for (var j = 0; j < r.reqCookies.length; j++) {
+            userInputs.push(r.reqCookies[j].value);
+          }
+
+          // Append all query parameter values to the list
+          for (var k = 0; k < r.reqParams.length; k++) {
+            userInputs.push(r.reqParams[k].value);
+          }
+
+          // Append all header values to the list
+          for (var l = 0; l < r.reqHeaders.length; l++) {
+            userInputs.push(r.reqHeaders[l].value);
+          }
+
+          var content = r.respContent;
+          // Loop over all possible user inputs to compare against
+          for (var m = 0; m < userInputs.length; m++) {
+            var currUserInput = userInputs[m];
+            if (content.includes(currUserInput)) {
+              // You want to flag this up as a warning because it looks as though content has been injected
+              // into the page
+              
+            }
+          }
+        }
+      }
+
+    });
+  }
+}
+
+// Helper function to determine whether a request has a given property within
+// the 'paramType' array, returns index in paramType, -1 if it doesn't exist
+function headerIndex(r, paramType, property) {
+  var paramType = r[paramType];
+  if (paramType) {
+    for (var i = 0; i < paramType.length; i++) {
+       if (paramType[i].name === property) return i;
+    }
   }
 
+  return -1;
 }
 
 // Function code adapted from https://www.w3schools.com/howto/howto_js_draggable.asp

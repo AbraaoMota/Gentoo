@@ -20,19 +20,18 @@ window.addEventListener("load", function() {
 
   // Create elements for the weak URL list to appear
   // This list is kept in local storage under the 'weakURLs' key
-  var weakURLs;
-  chrome.storage.local.get("weakURLs", function(urlList) {
-    weakURLs = urlList;
-  });
+  chrome.storage.local.get(function(storage) {
+    var weakURLs = storage["weakURLs"];
 
-  var reflectedList = document.getElementById("xssURLs");
-  if (weakURLs) {
-    for (i = 0; i < weakURLs.length; i++) {
-      var p = document.createElement("p");
-      p.innerHTML = weakURLs[i];
-      reflectedList.appendChild(p);
+    var reflectedList = document.getElementById("xssURLs");
+    if (weakURLs) {
+      for (i = 0; i < weakURLs.length; i++) {
+        var p = document.createElement("p");
+        p.innerHTML = weakURLs[i];
+        reflectedList.appendChild(p);
+      }
     }
-  }
+  });
 }, false);
 
 // Add listeners to the page for events created from the popup page
@@ -61,7 +60,7 @@ function clearReflectedXSS() {
   // Clear weakURL list
   var clearXssURLs = document.getElementById("clearXssURLs");
   clearXssURLs.addEventListener('click', function() {
-    chrome.storage.local.removeItem("weakURLs");
+    chrome.storage.local.remove("weakURLs");
     location.reload();
   });
 }

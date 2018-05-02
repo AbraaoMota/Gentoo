@@ -16,21 +16,9 @@ window.addEventListener("load", function() {
 
   // Attempt to write the contents of the URL from which
   // the XSS request came from to LocalStorage
-  // if (localStorage.weakURLs) {
-  //   var weakURLs = JSON.parse(localStorage.getItem("weakURLs"));
-  //   var urlSet = new Set(weakURLs);
-  //   urlSet.add(weakReferrer);
-  //   weakURLs = Array.from(urlSet);
-  //   localStorage.weakURLs = JSON.stringify(weakURLs);
-  //   sendReflectedXSSNotification(weakReferrer);
-  // } else {
-  //   var weakURLs = [weakReferrer];
-  //   localStorage.weakURLs = JSON.stringify(weakURLs);
-  //   sendReflectedXSSNotification(weakReferrer);
-  // }
-  
-  chrome.storage.local.get("weakURLs", function(urlList) {
-    if (chrome.runtime.lastError) {
+  chrome.storage.local.get(function(storage) {
+    var urlList = storage["weakURLs"];
+    if (!urlList) {
       // First time this field is set in storage
       chrome.storage.local.set({ "weakURLs": [weakReferrer] });
     } else {

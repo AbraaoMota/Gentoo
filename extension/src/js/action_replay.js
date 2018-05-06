@@ -180,19 +180,47 @@ function analyseAndReplayAttacks() {
         // injected - this could be query parameters or cookie values
         var userInputs = [];
 
+        // Here we want to create a userInput object which stores different values
+        // pertinent to a user input. This is necessary to know which parameters to
+        // override in the request when being replayed - Namely:
+        //
+        // var input = {
+        //   type: "cookie" / "param" / "header",
+        //   name: ""
+        //   value: ""
+        // }
+
         // Append all cookies to the list
         for (var j = 0; j < r.reqCookies.length; j++) {
-          userInputs.push(r.reqCookies[j].value);
+          var uInput = {
+            type: "cookie",
+            name: r.reqCookies[j].name,
+            value: r.reqCookies[j].value
+          }
+          userInputs.push(uInput);
+          // userInputs.push(r.reqCookies[j].value);
         }
 
         // Append all query parameter values to the list
         for (var k = 0; k < r.reqParams.length; k++) {
-          userInputs.push(r.reqParams[k].value);
+          var uInput = {
+            type: "param",
+            name: r.reqParams[k].name,
+            value: r.reqParams[k].value
+          }
+          userInputs.push(uInput);
+          // userInputs.push(r.reqParams[k].value);
         }
 
         // Append all header values to the list
         for (var l = 0; l < r.reqHeaders.length; l++) {
-          userInputs.push(r.reqHeaders[l].value);
+          var uInput = {
+            type: "header",
+            name: r.reqHeaders[l].name,
+            value: r.reqHeaders[l].value
+          }
+          userInputs.push(uInput);
+          // userInputs.push(r.reqHeaders[l].value);
         }
 
         var content = r.respContent;
@@ -207,12 +235,17 @@ function analyseAndReplayAttacks() {
           }
         }
 
+        chrome.storage.local.set({
+          "potentialXSS": potentiallyDangerous
+        }, function() {
+          analyserBusy = false;
+        });
 
-        chrome.storage.local.set({ "potentialXSS": potentiallyDangerous });
         // Now we have a list of potentially dangerous inputs (things that seem reflected)
         // we can send a warning message listing all of these out, as well as forge JS attacks
         sendIntermediaryWarning(potentiallyDangerous);
         replayAttacks(potentiallyDangerous);
+
       }
     }
   });
@@ -230,8 +263,19 @@ function sendIntermediaryWarning(potentiallyDangerousInputs) {
   });
 }
 
+// In this function, you want to attempt several different attacks PER potentially
+// dangerous input until you find at least 1 that works. At this point, you want
+// to report that the website in question is vulnerable (this should be
+// automatically done if the XSS is successful as we attempt to redirect to the
+// request logger page
 function replayAttacks(potentiallyDangerousInputs) {
+  for (var i = 0; i < potentiallyDangerousInputs.length; i++) {
+    // Loop over our library of attacks, applying each attack to the input as
+    // necessary. Here we want a generalised API to 'apply' an attack to an
+    // input
 
+
+  }
 }
 
 // Helper function to determine whether a request has a given property within

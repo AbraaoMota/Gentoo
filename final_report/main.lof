@@ -1,6 +1,10 @@
 \select@language {english}
 \addvspace {10\p@ }
 \addvspace {10\p@ }
+\contentsline {figure}{\numberline {2.1}{\ignorespaces A black box scanner derives behaviour strictly from I/O, whilst a white box scanner has all the inner workings of a (web) application at its disposal for analysis\relax }}{10}{figure.caption.4}
+\contentsline {figure}{\numberline {2.2}{\ignorespaces The typical structure of a vulnerability scanner. The crawling phase builds up a database of potential pages to attack. During attack, malicious inputs are fired towards pages to try and trigger undesired behaviour - the analyser reads response contents with some heuristics to determine what responses seem to indicate vulnerabilities.\relax }}{12}{figure.caption.5}
+\contentsline {figure}{\numberline {2.3}{\ignorespaces An extension is split into 2 main areas. The \texttt {background.html} page has access to all extension privileges and is where the business logic of the extension is stored. It cannot interact with user webpages. Content scripts can be injected to interact with the DOM of a page. The \texttt {background.html} can contact the content script via a message passing API. Image courtesy of Google Developer documentation. \cite {chromeExtensionArchitecture}\relax }}{14}{figure.caption.6}
+\contentsline {figure}{\numberline {2.4}{\ignorespaces A visualization of the proposed action replay algorithm. The tool records user input for a time period determined by the user. The tool then replicates actions using fuzzed inputs to try and uncover vulnerabilities if the first attempt was unsuccessful.\relax }}{15}{figure.caption.7}
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }

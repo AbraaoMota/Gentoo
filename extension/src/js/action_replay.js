@@ -167,6 +167,7 @@ function analyseAndReplayAttacks() {
 
   chrome.storage.local.get(function(storage) {
     var baselineRequests = storage["ARrequests"];
+    var weakURLs = storage["weakURLs"];
 
     // For now, analyse only the requests which generate a response
     // that matches the Content-Type "text/html"
@@ -244,7 +245,7 @@ function analyseAndReplayAttacks() {
         // Now we have a list of potentially dangerous inputs (things that seem reflected)
         // we can send a warning message listing all of these out, as well as forge JS attacks
         sendIntermediaryWarning(potentiallyDangerous);
-        replayAttacks(potentiallyDangerous);
+        replayAttacks(potentiallyDangerous, weakURLs);
 
       }
     }
@@ -264,18 +265,32 @@ function sendIntermediaryWarning(potentiallyDangerousInputs) {
 }
 
 // In this function, you want to attempt several different attacks PER potentially
-// dangerous input until you find at least 1 that works. At this point, you want
-// to report that the website in question is vulnerable (this should be
-// automatically done if the XSS is successful as we attempt to redirect to the
-// request logger page
-function replayAttacks(potentiallyDangerousInputs) {
+// dangerous input, and report all different attacks that succeed.
+// The vulnerable website report should be automatically done if the XSS is
+// successful as we attempt to redirect to the request logger page
+// In order to report how many new attacks we have been able to detect
+// in the replay, we must first grab the present number of weakURLs for comparison
+function replayAttacks(potentiallyDangerousInputs, weakURLs) {
+
+  var attackVictims = [];
+
+  // An attackVictim will be an object storing the attack, the given potentiallyDangerousInput
+  //
+
+
   for (var i = 0; i < potentiallyDangerousInputs.length; i++) {
     // Loop over our library of attacks, applying each attack to the input as
     // necessary. Here we want a generalised API to 'apply' an attack to an
     // input
+    for (var j = 0; j < XSSattacks; j++) {
+      var attack = XSSattacks[j];
 
-
+      attack.apply(potentiallyDangerousInputs[i]);
+    }
   }
+
+  // Once we finish replaying attacks, the newly highlighted URL will be flagged
+  // as
 }
 
 // Helper function to determine whether a request has a given property within

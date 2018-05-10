@@ -171,6 +171,9 @@ function analyseAndReplayAttacks() {
 
     // For now, analyse only the requests which generate a response
     // that matches the Content-Type "text/html"
+    if (!baselineRequests) {
+      return;
+    }
     for (var i = 0; i < baselineRequests.length; i++) {
       var r = baselineRequests[i];
       var contentTypeIndex = headerIndex(r, "respHeaders", "Content-type");
@@ -199,7 +202,6 @@ function analyseAndReplayAttacks() {
             value: r.reqCookies[j].value
           }
           userInputs.push(uInput);
-          // userInputs.push(r.reqCookies[j].value);
         }
 
         // Append all query parameter values to the list
@@ -210,7 +212,6 @@ function analyseAndReplayAttacks() {
             value: r.reqParams[k].value
           }
           userInputs.push(uInput);
-          // userInputs.push(r.reqParams[k].value);
         }
 
         // Append all header values to the list
@@ -220,16 +221,22 @@ function analyseAndReplayAttacks() {
             name: r.reqHeaders[l].name,
             value: r.reqHeaders[l].value
           }
-          userInputs.push(uInput);
-          // userInputs.push(r.reqHeaders[l].value);
+         userInputs.push(uInput);
         }
 
         var content = r.respContent;
         var potentiallyDangerous = [];
+
+        console.log("WE'VE GOTTEN HERE");
         // Loop over all possible user inputs to compare against
+        console.l
+        if (!userInputs) {
+          return;
+        }
         for (var m = 0; m < userInputs.length; m++) {
           var currUserInput = userInputs[m];
-          if (content.includes(currUserInput)) {
+          // if (content.includes(currUserInput.value)) {
+          if (couldBeDangerous(content, currUserInput)) {
             // You want to flag this up as a warning because it looks as though content has been injected
             // into the page - these are also the ones you want to attempt to hijack using JS
             potentiallyDangerous.push(currUserInput);
@@ -245,11 +252,78 @@ function analyseAndReplayAttacks() {
         // Now we have a list of potentially dangerous inputs (things that seem reflected)
         // we can send a warning message listing all of these out, as well as forge JS attacks
         sendIntermediaryWarning(potentiallyDangerous);
-        replayAttacks(potentiallyDangerous, weakURLs);
+        replayAttacks(potentiallyDangerous);
 
       }
     }
   });
+}
+
+// Helper function to determine whether an input might be dangerous or not
+function couldBeDangerous(webContent, input) {
+
+  if (!input.value) {
+    return false;
+  }
+  if (webContent.includes(input.value)) {
+    return true;
+  }
+
+  // TODO: move these into global vars to avoid creating everytime
+  // TODO: also apply different types of fuzzings
+  // TODO: suffixes and different regex applications
+  var tagEncodings = [
+    "<",
+    "%3C",
+    "%3D",
+    "%3E",
+    ""
+  ];
+
+  var htmlTags = [
+    "applet",
+    "body",
+    "embed",
+    "frame",
+    "script",
+    "frameset",
+    "html",
+    "iframe",
+    "img",
+    "style",
+    "layer",
+    "ilayer",
+    "meta",
+    "object"
+  ];
+
+  var possiblyDangerous = [];
+
+  for (var i = 0; i < tagEncodings.length; i++) {
+    for (var j = 0; j < htmlTags.length; j++) {
+      possiblyDangerous.push(tagEncodings[i] + htmlTags[j]);
+    }
+  }
+
+  for (var i = 0; i < possiblyDangerous.length; i++) {
+    // If we apply a lowercase change to the input value we are more
+    // likely to catch attacks taking advantage of case sensitivity
+    if (input.value.toLowerCase().includes(possiblyDangerous[i])) {
+      return true;
+    }
+  }
+
+  // try {
+    // If the value of the input evaluates to a valid JS function
+    // then it might be potentially dangerous
+    // TODO: this check is insufficient and too permissive
+    // new Function(input.value);
+    // return true;
+  // } catch (e) {
+    // // if (e.name === "SyntaxError") {
+    //   return false;
+    // // }
+  // }
 
 }
 
@@ -268,29 +342,42 @@ function sendIntermediaryWarning(potentiallyDangerousInputs) {
 // dangerous input, and report all different attacks that succeed.
 // The vulnerable website report should be automatically done if the XSS is
 // successful as we attempt to redirect to the request logger page
-// In order to report how many new attacks we have been able to detect
-// in the replay, we must first grab the present number of weakURLs for comparison
-function replayAttacks(potentiallyDangerousInputs, weakURLs) {
+function replayAttacks(potentiallyDangerousInputs) {
 
-  var attackVictims = [];
+  var XSSattacks = readTextFile("chrome-extension://" + chrome.runtime.id + "/js/attacks/xss.js")
 
-  // An attackVictim will be an object storing the attack, the given potentiallyDangerousInput
-  //
-
+  console.log("WE HAVE THESE XSS ATTACKS");
+  console.log(XSSattacks);
 
   for (var i = 0; i < potentiallyDangerousInputs.length; i++) {
-    // Loop over our library of attacks, applying each attack to the input as
-    // necessary. Here we want a generalised API to 'apply' an attack to an
-    // input
     for (var j = 0; j < XSSattacks; j++) {
-      var attack = XSSattacks[j];
+      var attackName = XSSattacks[j].name;
+      var attackValue = XSSattacks[j].value;
 
-      attack.apply(potentiallyDangerousInputs[i]);
+      // We have enough information to repeat the request using
+      // the new attackValue
+      var attackRequest = new XMLHttpRequest();
+      attackRequest
+
     }
   }
 
-  // Once we finish replaying attacks, the newly highlighted URL will be flagged
-  // as
+}
+
+function readTextFile(file) {
+  var rawFile = new XMLHttpRequest();
+  rawFile.open("GET", file, false);
+  rawFile.onreadystatechange = function () {
+    if(rawFile.readyState === 4) {
+      if(rawFile.status === 200 || rawFile.status == 0) {
+        var allText = rawFile.responseText;
+        rawFile.fileContents = allText;
+      }
+    }
+  }
+  rawFile.send(null);
+
+  return rawFile.fileContents;
 }
 
 // Helper function to determine whether a request has a given property within

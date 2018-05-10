@@ -21,8 +21,16 @@
 \usepackage{subcaption}
 \setcounter{secnumdepth}{3}
 
+\usepackage{fancyhdr} % page layout
 
-\title{Project Title}
+\renewcommand{\footrulewidth}{0.75pt}
+\renewcommand{\headrulewidth}{0.75pt}
+
+\pagestyle{fancy}
+
+\pagenumbering{roman}
+
+\title{Webapp vulnerability detection through semi-automated black-box scanning}
 \author{Abra\~{a}o Pacheco Dos Santos Peres Mota}
 % Update supervisor and other title stuff in title/title.tex
 
@@ -30,8 +38,13 @@
 \input{title/title.tex}
 
 \begin{abstract}
+
+	
 Your abstract goes here
 \end{abstract}
+
+
+\clearpage{\pagestyle{fancy}\cleardoublepage}
 
 \renewcommand{\abstractname}{Acknowledgements}
 \begin{abstract}
@@ -39,17 +52,20 @@ Thanks mum!
 \end{abstract}
 
 \tableofcontents
-\listoffigures
-\listoftables
+%\listoffigures
+%\listoftables
 
+\pagenumbering{arabic}
 \input{introduction/introduction.tex}
 \input{background/background.tex}
-\input{project/project.tex}
+\input{project/project_design.tex}
+\input{project/implementation.tex}
 \input{evaluation/evaluation.tex}
+\input{future/future.tex}
 \input{conclusion/conclusion.tex}
 \input{appendix/appendix.tex}
 
-\bibliographystyle{alpha}
-\bibliography{bibs/sample}
+\bibliographystyle{plain}
+\bibliography{bibs/sample.bib}
 
 \end{document}

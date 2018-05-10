@@ -1,3 +1,228 @@
-\begin{thebibliography}{}
+\begin{thebibliography}{10}
+
+\bibitem{darpaAIChallenge}
+Defense Advanced Research~Projects Agency.
+\newblock Darpa celebrates cyber grand challenge winners.
+\newblock \url{https://www.darpa.mil/news-events/2016-08-05a}.
+\newblock Accessed: 23/01/2018.
+
+\bibitem{Saner}
+Cova M. Felmetsger V. Jovanovic N. Kirda E. Kruegel~C. Balzarotti, D. and
+  G.~Vigna.
+\newblock Saner: Composing static and dynamic analysis to validate sanitization
+  in web applications.
+\newblock {\em 2008 IEEE Symposium on Security and Privacy}, 2008.
+
+\bibitem{stateOfArtAutomatedBlackBoxWebAppVulnTesting}
+J.~Bau, E.~Bursztein, D.~Gupta, and J.~Mitchell.
+\newblock State of the art: Automated black-box web application vulnerability
+  testing.
+\newblock In {\em 2010 IEEE Symposium on Security and Privacy}, pages 332--345,
+  May 2010.
+
+\bibitem{evalChromeExtensionSecurityArchitecture}
+Nicholas Carlini, Adrienne~Porter Felt, and David Wagner.
+\newblock An evaluation of the google chrome extension security architecture.
+\newblock In {\em Presented as part of the 21st {USENIX} Security Symposium
+  ({USENIX} Security 12)}, pages 97--111, Bellevue, WA, 2012. {USENIX}.
+
+\bibitem{defcon16Results}
+DEF CON.
+\newblock 2016 def con ctf final scores.
+\newblock \url{https://www.defcon.org/html/defcon-24/dc-24-ctf.html}.
+\newblock Accessed: 23/01/2018.
+
+\bibitem{wackoPickoGithub}
+Adam Doup\'e.
+\newblock Github - wackopicko.
+\newblock \url{https://github.com/adamdoupe/WackoPicko}.
+\newblock Accessed: 25/01/2018.
+
+\bibitem{stateAwareBlackBoxWebVulnScanner}
+Adam Doup{\'e}, Ludovico Cavedon, Christopher Kruegel, and Giovanni Vigna.
+\newblock Enemy of the state: A state-aware black-box web vulnerability
+  scanner.
+\newblock In {\em Presented as part of the 21st {USENIX} Security Symposium
+  ({USENIX} Security 12)}, pages 523--538, Bellevue, WA, 2012. {USENIX}.
+
+\bibitem{whyJohnnyCantPentest}
+Adam Doup{\'e}, Marco Cova, and Giovanni Vigna.
+\newblock Why johnny can't pentest: An analysis of black-box web vulnerability
+  scanners.
+\newblock In Christian Kreibich and Marko Jahnke, editors, {\em Detection of
+  Intrusions and Malware, and Vulnerability Assessment}, pages 111--131,
+  Berlin, Heidelberg, 2010. Springer Berlin Heidelberg.
+
+\bibitem{Waler}
+Cavedon L. Kruegel~C. Felmetsger, V. and G.~Vigna.
+\newblock Toward automated detection of logic vulnerabilities in web
+  applications.
+\newblock {\em Proceedings of the USENIX Security Sym posium (Washington, DC,
+  August 2010)}, 2010.
+
+\bibitem{djangoCSRF}
+Django~Software Foundation.
+\newblock Django project documentation - cross site request forgery protection.
+\newblock \url{https://docs.djangoproject.com/en/2.0/ref/csrf/}.
+\newblock Accessed: 10/01/2018.
+
+\bibitem{chromeExtensionArchitecture}
+Google.
+\newblock Google developer - extensions - overview.
+\newblock \url{https://developer.chrome.com/extensions/overview}.
+\newblock Accessed: 23/01/2018.
+
+\bibitem{wannaCryHacks}
+The Guardian.
+\newblock Wannacry, petya, notpetya: how ransomware hit the big time in 2017.
+\newblock
+  \url{https://www.theguardian.com/technology/2017/dec/30/wannacry-petya-notpetya-ransomware}.
+\newblock Accessed: 26/01/2018.
+
+\bibitem{rubyOnRailsCSRF}
+Rails Guides.
+\newblock Rails guides - csrf countermeasures.
+\newblock
+  \url{http://guides.rubyonrails.org/security.html#csrf-countermeasures}.
+\newblock Accessed: 10/01/2018.
+
+\bibitem{hackerone2017}
+HackerOne.
+\newblock The hacker-powered security report 2017.
+\newblock
+  \url{https://www.hackerone.com/sites/default/files/2017-06/The%20Hacker-Powered%20Security%20Report.pdf}.
+\newblock Accessed: 25/01/2018.
+
+\bibitem{hackerone2018}
+HackerOne.
+\newblock The hacker-powered security report 2018.
+\newblock
+  \url{https://www.hackerone.com/sites/default/files/2018-01/2018_Hacker_Report.pdf}.
+\newblock Accessed: 25/01/2018.
+
+\bibitem{webAppSecThreatsCountermeasuresPitfalls}
+H.~C. Huang, Z.~K. Zhang, H.~W. Cheng, and S.~W. Shieh.
+\newblock Web application security: Threats, countermeasures, and pitfalls.
+\newblock {\em Computer}, 50(6):81--85, 2017.
+
+\bibitem{appscan}
+IBM.
+\newblock Ibm security appscan.
+\newblock \url{https://www.ibm.com/security/application-security/appscan}.
+\newblock Accessed 20/01/2018.
+
+\bibitem{Kals:2006:SWV:1135777.1135817}
+Stefan Kals, Engin Kirda, Christopher Kruegel, and Nenad Jovanovic.
+\newblock Secubat: A web vulnerability scanner.
+\newblock In {\em Proceedings of the 15th International Conference on World
+  Wide Web}, WWW '06, pages 247--256, New York, NY, USA, 2006. ACM.
+
+\bibitem{KUISMA200775}
+Tuire Kuisma, Tommi Laukkanen, and Mika Hiltunen.
+\newblock Mapping the reasons for resistance to internet banking: A means-end
+  approach.
+\newblock {\em International Journal of Information Management}, 27(2):75 --
+  85, 2007.
+
+\bibitem{acunetix}
+Acunetix Ltd.
+\newblock Acunetix web vulnerability scanner.
+\newblock \url{https://www.acunetix.com/}.
+\newblock Accessed 20/01/2018.
+
+\bibitem{acunetixQuoteCrawling}
+Acunetix Ltd.
+\newblock Acunetix web vulnerability scanner - crawling.
+\newblock
+  \url{https://www.acunetix.com/vulnerability-scanner/javascript-html5-security/}.
+\newblock Accessed 20/01/2018.
+
+\bibitem{hacmeBankMcAfee}
+McAfee.
+\newblock Mcafee - hacmebank v2.0.
+\newblock \url{https://www.mcafee.com/us/downloads/free-tools/hacme-bank.aspx}.
+\newblock Accessed: 25/01/2018.
+
+\bibitem{laravelCSRF}
+Taylor Otwell.
+\newblock Laravel docs - csrf protection.
+\newblock \url{https://laravel.com/docs/5.5/csrf}.
+\newblock Accessed: 10/01/2018.
+
+\bibitem{webgoatGithub}
+OWASP.
+\newblock Github - webgoat.
+\newblock \url{https://github.com/WebGoat/WebGoat}.
+\newblock Accessed: 25/01/2018.
+
+\bibitem{owaspPage}
+OWASP.
+\newblock Open web application security project.
+\newblock \url{https://www.owasp.org/index.php/Main_Page}.
+\newblock Accessed 20/01/2018.
+
+\bibitem{owaspVulnerableWebAppsList}
+OWASP.
+\newblock Owasp vulnerable web applications directory project/pages/offline.
+\newblock
+  \url{https://www.owasp.org/index.php/OWASP_Vulnerable_Web_Applications_Directory_Project/Pages/Offline}.
+\newblock Accessed: 25/01/2018.
+
+\bibitem{owaspZapPage}
+OWASP.
+\newblock Owasp zed attack proxy project.
+\newblock \url{https://www.owasp.org/index.php/OWASP_Zed_Attack_Proxy_Project}.
+\newblock Accessed: 25/01/2018.
+
+\bibitem{webgoatIntro}
+OWASP.
+\newblock Webgoat.
+\newblock \url{https://www.owasp.org/index.php/Category:OWASP_WebGoat_Project}.
+\newblock Accessed: 25/01/2018.
+
+\bibitem{analysisOfEffectivenessOfBlackBoxWebAppScannersStoredSQLStoredXSS}
+M.~Parvez, P.~Zavarsky, and N.~Khoury.
+\newblock Analysis of effectiveness of black-box web application scanners in
+  detection of stored sql injection and stored xss vulnerabilities.
+\newblock In {\em 2015 10th International Conference for Internet Technology
+  and Secured Transactions (ICITST)}, pages 186--191, Dec 2015.
+
+\bibitem{burpSuitePage}
+PortSwigger.
+\newblock Portswigger - burpsuite.
+\newblock \url{https://portswigger.net/burp}.
+\newblock Accessed: 25/01/2018.
+
+\bibitem{dvwaSite}
+Dewhurst Security.
+\newblock Dvwa.
+\newblock \url{http://www.dvwa.co.uk/}.
+\newblock Accessed: 24/01/2018.
+
+\bibitem{equifaxHacks}
+Ars Technica.
+\newblock Failure to patch two-month-old bug led to massive equifax breach.
+\newblock
+  \url{https://arstechnica.com/information-technology/2017/09/massive-equifax-breach-caused-by-failure-to-patch-two-month-old-bug/}.
+\newblock Accessed: 26/01/2018.
+
+\bibitem{veracodeDevopsSurvey}
+Veracode.
+\newblock The devsecops global skills survey.
+\newblock
+  \url{https://info.veracode.com/analyst-report-devsecops-global-skill-survey.html}.
+\newblock Accessed: 26/01/2018.
+
+\bibitem{w3af}
+w3af Org.
+\newblock w3af - web application attack and audit framework.
+\newblock \url{http://w3af.org/}.
+\newblock Accessed 20/01/2018.
+
+\bibitem{stuxnextHacks}
+Wired.
+\newblock An unprecedented look at stuxnet, the world's first digital weapon.
+\newblock \url{https://www.wired.com/2014/11/countdown-to-zero-day-stuxnet/}.
+\newblock Accessed: 25/01/2018.
 
 \end{thebibliography}

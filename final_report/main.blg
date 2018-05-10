@@ -1,82 +1,107 @@
 This is BibTeX, Version 0.99d (TeX Live 2017)
 Capacity: max_strings=100000, hash_size=100000, hash_prime=85009
 The top-level auxiliary file: main.aux
-The style file: alpha.bst
-Database file #1: bibs/sample.bib
-Warning--I didn't find a database entry for "chromeExtensionArchitecture"
-Warning--I didn't find a database entry for "KUISMA200775"
-Warning--I didn't find a database entry for "stuxnextHacks"
-Warning--I didn't find a database entry for "wannaCryHacks"
-Warning--I didn't find a database entry for "equifaxHacks"
-Warning--I didn't find a database entry for "veracodeDevopsSurvey"
-Warning--I didn't find a database entry for "djangoCSRF"
-Warning--I didn't find a database entry for "rubyOnRailsCSRF"
-Warning--I didn't find a database entry for "laravelCSRF"
-Warning--I didn't find a database entry for "owaspPage"
-Warning--I didn't find a database entry for "hackerone2017"
-Warning--I didn't find a database entry for "hackerone2018"
-Warning--I didn't find a database entry for "Saner"
-Warning--I didn't find a database entry for "Waler"
-Warning--I didn't find a database entry for "Kals:2006:SWV:1135777.1135817"
-Warning--I didn't find a database entry for "stateAwareBlackBoxWebVulnScanner"
-Warning--I didn't find a database entry for "acunetix"
-Warning--I didn't find a database entry for "appscan"
-Warning--I didn't find a database entry for "w3af"
-Warning--I didn't find a database entry for "whyJohnnyCantPentest"
-Warning--I didn't find a database entry for "stateOfArtAutomatedBlackBoxWebAppVulnTesting"
-Warning--I didn't find a database entry for "analysisOfEffectivenessOfBlackBoxWebAppScannersStoredSQLStoredXSS"
-Warning--I didn't find a database entry for "acunetixQuoteCrawling"
-Warning--I didn't find a database entry for "webAppSecThreatsCountermeasuresPitfalls"
-Warning--I didn't find a database entry for "darpaAIChallenge"
-Warning--I didn't find a database entry for "defcon16Results"
-Warning--I didn't find a database entry for "evalChromeExtensionSecurityArchitecture"
-Warning--I didn't find a database entry for "dvwaSite"
-Warning--I didn't find a database entry for "webgoatIntro"
-Warning--I didn't find a database entry for "webgoatGithub"
-Warning--I didn't find a database entry for "wackoPickoGithub"
-Warning--I didn't find a database entry for "hacmeBankMcAfee"
-Warning--I didn't find a database entry for "owaspVulnerableWebAppsList"
-Warning--I didn't find a database entry for "owaspZapPage"
-Warning--I didn't find a database entry for "burpSuitePage"
-You've used 0 entries,
-            2543 wiz_defined-function locations,
-            623 strings with 5657 characters,
-and the built_in function-call counts, 24 in all, are:
-= -- 0
-> -- 0
-< -- 0
-+ -- 0
-- -- 0
-* -- 2
-:= -- 10
-add.period$ -- 0
-call.type$ -- 0
-change.case$ -- 0
+The style file: plain.bst
+Database file #1: bibs/sample.bib.bib
+Repeated entry---line 287 of file bibs/sample.bib.bib
+ : @inproceedings {stateAwareBlackBoxWebVulnScanner
+ :                                                 ,
+I'm skipping whatever remains of this entry
+Name 1 in "Balzarotti, D., Cova, M., Felmetsger, V., Jovanovic, N., Kirda, E., Kruegel, C., and Vigna, G." has a comma at the end for entry Saner
+while executing---line 1049 of file plain.bst
+Too many commas in name 1 of "Balzarotti, D., Cova, M., Felmetsger, V., Jovanovic, N., Kirda, E., Kruegel, C., and Vigna, G." for entry Saner
+while executing---line 1049 of file plain.bst
+Too many commas in name 1 of "Balzarotti, D., Cova, M., Felmetsger, V., Jovanovic, N., Kirda, E., Kruegel, C., and Vigna, G." for entry Saner
+while executing---line 1049 of file plain.bst
+Too many commas in name 1 of "Balzarotti, D., Cova, M., Felmetsger, V., Jovanovic, N., Kirda, E., Kruegel, C., and Vigna, G." for entry Saner
+while executing---line 1049 of file plain.bst
+Too many commas in name 1 of "Balzarotti, D., Cova, M., Felmetsger, V., Jovanovic, N., Kirda, E., Kruegel, C., and Vigna, G." for entry Saner
+while executing---line 1049 of file plain.bst
+Too many commas in name 1 of "Balzarotti, D., Cova, M., Felmetsger, V., Jovanovic, N., Kirda, E., Kruegel, C., and Vigna, G." for entry Saner
+while executing---line 1049 of file plain.bst
+Too many commas in name 1 of "Balzarotti, D., Cova, M., Felmetsger, V., Jovanovic, N., Kirda, E., Kruegel, C., and Vigna, G." for entry Saner
+while executing---line 1049 of file plain.bst
+Too many commas in name 1 of "Balzarotti, D., Cova, M., Felmetsger, V., Jovanovic, N., Kirda, E., Kruegel, C., and Vigna, G." for entry Saner
+while executing---line 1049 of file plain.bst
+Too many commas in name 1 of "Balzarotti, D., Cova, M., Felmetsger, V., Jovanovic, N., Kirda, E., Kruegel, C., and Vigna, G." for entry Saner
+while executing---line 1049 of file plain.bst
+Too many commas in name 1 of "Balzarotti, D., Cova, M., Felmetsger, V., Jovanovic, N., Kirda, E., Kruegel, C., and Vigna, G." for entry Saner
+while executing---line 1049 of file plain.bst
+Name 1 in "Felmetsger, V., Cavedon, L., Kruegel, C., and Vigna, G." has a comma at the end for entry Waler
+while executing---line 1049 of file plain.bst
+Too many commas in name 1 of "Felmetsger, V., Cavedon, L., Kruegel, C., and Vigna, G." for entry Waler
+while executing---line 1049 of file plain.bst
+Too many commas in name 1 of "Felmetsger, V., Cavedon, L., Kruegel, C., and Vigna, G." for entry Waler
+while executing---line 1049 of file plain.bst
+Too many commas in name 1 of "Felmetsger, V., Cavedon, L., Kruegel, C., and Vigna, G." for entry Waler
+while executing---line 1049 of file plain.bst
+Name 1 in "Balzarotti, D., Cova, M., Felmetsger, V., Jovanovic, N., Kirda, E., Kruegel, C., and Vigna, G." has a comma at the end for entry Saner
+while executing---line 1090 of file plain.bst
+Too many commas in name 1 of "Balzarotti, D., Cova, M., Felmetsger, V., Jovanovic, N., Kirda, E., Kruegel, C., and Vigna, G." for entry Saner
+while executing---line 1090 of file plain.bst
+Too many commas in name 1 of "Balzarotti, D., Cova, M., Felmetsger, V., Jovanovic, N., Kirda, E., Kruegel, C., and Vigna, G." for entry Saner
+while executing---line 1090 of file plain.bst
+Too many commas in name 1 of "Balzarotti, D., Cova, M., Felmetsger, V., Jovanovic, N., Kirda, E., Kruegel, C., and Vigna, G." for entry Saner
+while executing---line 1090 of file plain.bst
+Too many commas in name 1 of "Balzarotti, D., Cova, M., Felmetsger, V., Jovanovic, N., Kirda, E., Kruegel, C., and Vigna, G." for entry Saner
+while executing---line 1090 of file plain.bst
+Too many commas in name 1 of "Balzarotti, D., Cova, M., Felmetsger, V., Jovanovic, N., Kirda, E., Kruegel, C., and Vigna, G." for entry Saner
+while executing---line 1090 of file plain.bst
+Too many commas in name 1 of "Balzarotti, D., Cova, M., Felmetsger, V., Jovanovic, N., Kirda, E., Kruegel, C., and Vigna, G." for entry Saner
+while executing---line 1090 of file plain.bst
+Too many commas in name 1 of "Balzarotti, D., Cova, M., Felmetsger, V., Jovanovic, N., Kirda, E., Kruegel, C., and Vigna, G." for entry Saner
+while executing---line 1090 of file plain.bst
+Too many commas in name 1 of "Balzarotti, D., Cova, M., Felmetsger, V., Jovanovic, N., Kirda, E., Kruegel, C., and Vigna, G." for entry Saner
+while executing---line 1090 of file plain.bst
+Too many commas in name 1 of "Balzarotti, D., Cova, M., Felmetsger, V., Jovanovic, N., Kirda, E., Kruegel, C., and Vigna, G." for entry Saner
+while executing---line 1090 of file plain.bst
+Name 1 in "Felmetsger, V., Cavedon, L., Kruegel, C., and Vigna, G." has a comma at the end for entry Waler
+while executing---line 1090 of file plain.bst
+Too many commas in name 1 of "Felmetsger, V., Cavedon, L., Kruegel, C., and Vigna, G." for entry Waler
+while executing---line 1090 of file plain.bst
+Too many commas in name 1 of "Felmetsger, V., Cavedon, L., Kruegel, C., and Vigna, G." for entry Waler
+while executing---line 1090 of file plain.bst
+Too many commas in name 1 of "Felmetsger, V., Cavedon, L., Kruegel, C., and Vigna, G." for entry Waler
+while executing---line 1090 of file plain.bst
+You've used 35 entries,
+            2118 wiz_defined-function locations,
+            693 strings with 10166 characters,
+and the built_in function-call counts, 9594 in all, are:
+= -- 955
+> -- 373
+< -- 6
++ -- 155
+- -- 116
+* -- 414
+:= -- 1568
+add.period$ -- 134
+call.type$ -- 35
+change.case$ -- 162
 chr.to.int$ -- 0
-cite$ -- 0
-duplicate$ -- 0
-empty$ -- 1
-format.name$ -- 0
-if$ -- 2
-int.to.chr$ -- 1
-int.to.str$ -- 0
-missing$ -- 0
-newline$ -- 3
-num.names$ -- 0
-pop$ -- 0
+cite$ -- 35
+duplicate$ -- 353
+empty$ -- 874
+format.name$ -- 116
+if$ -- 2116
+int.to.chr$ -- 0
+int.to.str$ -- 35
+missing$ -- 10
+newline$ -- 203
+num.names$ -- 72
+pop$ -- 320
 preamble$ -- 1
-purify$ -- 0
+purify$ -- 127
 quote$ -- 0
-skip$ -- 2
+skip$ -- 265
 stack$ -- 0
-substring$ -- 0
-swap$ -- 0
-text.length$ -- 0
+substring$ -- 394
+swap$ -- 89
+text.length$ -- 6
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 0
+type$ -- 140
 warning$ -- 0
-while$ -- 0
-width$ -- 0
-write$ -- 2
-(There were 35 warnings)
+while$ -- 89
+width$ -- 37
+write$ -- 394
+(There were 29 error messages)

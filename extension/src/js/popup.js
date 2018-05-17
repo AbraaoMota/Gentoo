@@ -1,6 +1,7 @@
 // Initialize modals whenever the page is ready
 $(document).ready(function() {
   $('#xssWarning').modal();
+  $("#potentialWarning").modal();
 });
 
 // Update visuals on popup page load
@@ -73,12 +74,14 @@ document.addEventListener('DOMContentLoaded', function() {
 
   // Activate the listeners for the active tab
   clearReflectedXSS();
+  clearDangerousInputs();
 
   // Reactivate listeners for when we switch back into this tab
   // and DOM can't find the elements anymore
   var xssTab = document.getElementById("xssTab");
   xssTab.addEventListener("load", function() {
     clearReflectedXSS();
+    clearDangerousInputs();
   });
 });
 

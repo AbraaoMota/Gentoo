@@ -174,6 +174,9 @@ function analyseAndReplayAttacks() {
     if (!baselineRequests) {
       return;
     }
+
+    console.log("THESE ARE THE BASELINE REQUESTS WE HAVE");
+    console.log(baselineRequests);
     for (var i = 0; i < baselineRequests.length; i++) {
       var r = baselineRequests[i];
       var contentTypeIndex = headerIndex(r, "respHeaders", "Content-type");
@@ -233,7 +236,6 @@ function analyseAndReplayAttacks() {
 
         console.log("WE'VE GOTTEN HERE");
         // Loop over all possible user inputs to compare against
-        console.l
         if (!userInputs) {
           return;
         }
@@ -257,7 +259,7 @@ function analyseAndReplayAttacks() {
         // we can send a warning message listing all of these out, as well as forge JS attacks
         sendIntermediaryWarning(potentiallyDangerous);
         replayAttacks(potentiallyDangerous);
-
+        return;
       }
     }
   });
@@ -374,44 +376,19 @@ function replayAttacks(potentiallyDangerousInputs) {
       console.log(url);
 
       if (input.type === "param") {
-        // url = url.concat("&" + input.name + "=" + attackValue);
-        // url = url.replace(input.name + "=" + input.value, input.name + "=" + attackValue);
-        // url = encodeURI(url.replace(input.name + "=" + input.value, input.name + "=" + attackValue));
-        //
-        //
-        // var encodedQueryString = encodeURIComponent(input.name + "=" + attackValue).replace("%20", "+");
-        // url = encodeURI(url.replace(input.name + "=" + input.value, input.name + "=" + attackValue)).replace("%20", "+");
         url = url.replace(input.name + "=" + input.value, input.name + "=" + encodeURIComponent(attackValue).replace("%20", "+"));
       }
 
-
-// THIS URL REDIRECTS ME
-// http://localhost:8000/testpages/?injection=%3Cimg+src%3Da+onerror%3D%22window.location.replace%28%27chrome-extension%3A%2F%2Flegepcikgaoelkacchildfmacibkgidc%2Frequest_logger.html%3Fref%3Dhttp%3A%2F%2Flocalhost%3A8000%2Ftestpages%2F%27%29%22%3E&df=
-
-// THIS IS THE SUBMISSION FORM
-  // <img src=a onerror="window.location.replace('chrome-extension://legepcikgaoelkacchildfmacibkgidc/request_logger.html?ref=http://localhost:8000/testpages/')">
-
-// THIS ONE ALSO WORKS
-// http://localhost:8000/testpages/?injection=%3Cimg+src%3Da+onerror%3D%22window.location.replace%28%27chrome-extension%3A%2F%2Flegepcikgaoelkacchildfmacibkgidc%2Frequest_logger.html%3Fref%3Dhttp%3A%2F%2Flocalhost%3A8000%2Ftestpages%2F%3Finjection%3D%253Cimg%2520src%3Da%2520onerror%3D%5C%2522window.location.replace%28%2527chrome-extension%3A%2F%2F%2522%2520%2B%2520chrome.runtime.id%2520%2B%2520%2522%2Frequest_logger.html%3Fref%3D%2522%2520%2B%2520window.location%2520%2B%2520%2522%2527%29%5C%2522%253E%27%29%22%3E&df=
-
-// http://localhost:8080/?injection%3D%3Cimg+src%3Da%20onerror%3D%22window.location.replace('chrome-extension%3A%2F%2Flegepcikgaoelkacchildfmacibkgidc%2Frequest_logger.html%3Fref%3Dhttp%3A%2F%2Flocalhost%3A8080%2F%3Finjection%3D%253Cimg%2Bsrc%253Da%2Bonerror%253D%2527alert%2528%25221%2522%2529%253B%2527%253E%26df%3D')%22%3E&df=
-
-// http%3A%2F%2Flocalhost%3A8080%2F%3Finjection%3D%3Cimg+src%3Da%20onerror%3D%22window.location.replace('chrome-extension%3A%2F%2Flegepcikgaoelkacchildfmacibkgidc%2Frequest_logger.html%3Fref%3Dhttp%3A%2F%2Flocalhost%3A8080%2F%3Finjection%3D%253Cimg%2Bsrc%253Da%2Bonerror%253D%2527alert%2528%25221%2522%2529%253B%2527%253E%26df%3D')%22%3E%26df%3D
-
-// NEED SOMETHING LIKE THIS
-// http://localhost:8000/testpages/?injection=%3Cimg%20src=a%20onerror=%22window.location.replace(%27chrome-extension://legepcikgaoelkacchildfmacibkgidc/request_logger.html?ref=http://localhost:8000/testpages/?injection=%253Cimg+src%253Da+onerror%253D%2527alert%2528%25221%2522%2529%253B%2527%253E&df=%27)%22%3E&df=
-
-// http://localhost:8000/testpages/?injection=%3Cimg+src%3Da%20onerror%3D%22window.location.replace('chrome-extension%3A%2F%2Flegepcikgaoelkacchildfmacibkgidc%2Frequest_logger.html%3Fref%3Dhttp%3A%2F%2Flocalhost%3A8000%2Ftestpages%2F%3Finjection%3D%253Cimg%2Bsrc%253Da%2Bonerror%253D%2527alert%2528%25221%2522%2529%253B%2527%253E%26df%3D')%22%3E&df=
-
-
+      // THIS URL REDIRECTS ME
+      // http://localhost:8000/testpages/?injection=%3Cimg+src%3Da+onerror%3D%22window.location.replace%28%27chrome-extension%3A%2F%2Flegepcikgaoelkacchildfmacibkgidc%2Frequest_logger.html%3Fref%3Dhttp%3A%2F%2Flocalhost%3A8000%2Ftestpages%2F%27%29%22%3E&df=
 
       console.log("FINAL ATTACK URL IS");
       console.log(url);
 
       var windowName = "attack" + (i + j).toString();
+      console.log("OPENING THIS URL: " + url);
       var attackWindow = window.open(url, windowName);
-
-
+      return;
 
 
       // // We have enough information to repeat the request using

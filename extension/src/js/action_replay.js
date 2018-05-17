@@ -178,7 +178,7 @@ function analyseAndReplayAttacks() {
       var r = baselineRequests[i];
       var contentTypeIndex = headerIndex(r, "respHeaders", "Content-type");
 
-      if (contentTypeIndex >= 0 && r["respHeaders"][contentTypeIndex].value === "text/html") {
+      if (contentTypeIndex >= 0 && r["respHeaders"][contentTypeIndex].value.includes("text/html")) {
 
         // Here we need to produce a list of parameters and other content which may be user
         // injected - this could be query parameters or cookie values
@@ -190,8 +190,9 @@ function analyseAndReplayAttacks() {
         //
         // var input = {
         //   type: "cookie" / "param" / "header",
-        //   name: ""
-        //   value: ""
+        //   name: "",
+        //   value: "",
+        //   url: ""
         // }
 
         // Append all cookies to the list
@@ -199,7 +200,8 @@ function analyseAndReplayAttacks() {
           var uInput = {
             type: "cookie",
             name: r.reqCookies[j].name,
-            value: r.reqCookies[j].value
+            value: r.reqCookies[j].value,
+            url: r.url
           }
           userInputs.push(uInput);
         }
@@ -209,7 +211,8 @@ function analyseAndReplayAttacks() {
           var uInput = {
             type: "param",
             name: r.reqParams[k].name,
-            value: r.reqParams[k].value
+            value: r.reqParams[k].value,
+            url: r.url
           }
           userInputs.push(uInput);
         }
@@ -219,7 +222,8 @@ function analyseAndReplayAttacks() {
           var uInput = {
             type: "header",
             name: r.reqHeaders[l].name,
-            value: r.reqHeaders[l].value
+            value: r.reqHeaders[l].value,
+            url: r.url
           }
          userInputs.push(uInput);
         }
@@ -344,24 +348,179 @@ function sendIntermediaryWarning(potentiallyDangerousInputs) {
 // successful as we attempt to redirect to the request logger page
 function replayAttacks(potentiallyDangerousInputs) {
 
-  var XSSattacks = readTextFile("chrome-extension://" + chrome.runtime.id + "/js/attacks/xss.js")
+  // var XSSattacks = readTextFile("chrome-extension://" + chrome.runtime.id + "/js/attacks/xss.js");
+  // var XSSattacks = readTextFile("chrome-extension://" + chrome.runtime.id + "/js/attacks/xss.js");
+  var XSSattacks = [];
+
+  XSSattacks.push(imgonload());
 
   console.log("WE HAVE THESE XSS ATTACKS");
   console.log(XSSattacks);
 
+  console.log("WE HAVE THESE POTENTIALLY DANGEROUS INPUTS");
+  console.log(potentiallyDangerousInputs);
+
+  var attackRequests = [];
+
   for (var i = 0; i < potentiallyDangerousInputs.length; i++) {
-    for (var j = 0; j < XSSattacks; j++) {
+    for (var j = 0; j < XSSattacks.length; j++) {
+      var input = potentiallyDangerousInputs[i];
       var attackName = XSSattacks[j].name;
       var attackValue = XSSattacks[j].value;
 
-      // We have enough information to repeat the request using
-      // the new attackValue
-      var attackRequest = new XMLHttpRequest();
-      attackRequest
+      var url = input["url"];
 
+      console.log("PREVIOUS URL WAS");
+      console.log(url);
+
+      if (input.type === "param") {
+        // url = url.concat("&" + input.name + "=" + attackValue);
+        // url = url.replace(input.name + "=" + input.value, input.name + "=" + attackValue);
+        // url = encodeURI(url.replace(input.name + "=" + input.value, input.name + "=" + attackValue));
+        //
+        //
+        // var encodedQueryString = encodeURIComponent(input.name + "=" + attackValue).replace("%20", "+");
+        // url = encodeURI(url.replace(input.name + "=" + input.value, input.name + "=" + attackValue)).replace("%20", "+");
+        url = url.replace(input.name + "=" + input.value, input.name + "=" + encodeURIComponent(attackValue).replace("%20", "+"));
+      }
+
+
+// THIS URL REDIRECTS ME
+// http://localhost:8000/testpages/?injection=%3Cimg+src%3Da+onerror%3D%22window.location.replace%28%27chrome-extension%3A%2F%2Flegepcikgaoelkacchildfmacibkgidc%2Frequest_logger.html%3Fref%3Dhttp%3A%2F%2Flocalhost%3A8000%2Ftestpages%2F%27%29%22%3E&df=
+
+// THIS IS THE SUBMISSION FORM
+  // <img src=a onerror="window.location.replace('chrome-extension://legepcikgaoelkacchildfmacibkgidc/request_logger.html?ref=http://localhost:8000/testpages/')">
+
+// THIS ONE ALSO WORKS
+// http://localhost:8000/testpages/?injection=%3Cimg+src%3Da+onerror%3D%22window.location.replace%28%27chrome-extension%3A%2F%2Flegepcikgaoelkacchildfmacibkgidc%2Frequest_logger.html%3Fref%3Dhttp%3A%2F%2Flocalhost%3A8000%2Ftestpages%2F%3Finjection%3D%253Cimg%2520src%3Da%2520onerror%3D%5C%2522window.location.replace%28%2527chrome-extension%3A%2F%2F%2522%2520%2B%2520chrome.runtime.id%2520%2B%2520%2522%2Frequest_logger.html%3Fref%3D%2522%2520%2B%2520window.location%2520%2B%2520%2522%2527%29%5C%2522%253E%27%29%22%3E&df=
+
+// http://localhost:8080/?injection%3D%3Cimg+src%3Da%20onerror%3D%22window.location.replace('chrome-extension%3A%2F%2Flegepcikgaoelkacchildfmacibkgidc%2Frequest_logger.html%3Fref%3Dhttp%3A%2F%2Flocalhost%3A8080%2F%3Finjection%3D%253Cimg%2Bsrc%253Da%2Bonerror%253D%2527alert%2528%25221%2522%2529%253B%2527%253E%26df%3D')%22%3E&df=
+
+// http%3A%2F%2Flocalhost%3A8080%2F%3Finjection%3D%3Cimg+src%3Da%20onerror%3D%22window.location.replace('chrome-extension%3A%2F%2Flegepcikgaoelkacchildfmacibkgidc%2Frequest_logger.html%3Fref%3Dhttp%3A%2F%2Flocalhost%3A8080%2F%3Finjection%3D%253Cimg%2Bsrc%253Da%2Bonerror%253D%2527alert%2528%25221%2522%2529%253B%2527%253E%26df%3D')%22%3E%26df%3D
+
+// NEED SOMETHING LIKE THIS
+// http://localhost:8000/testpages/?injection=%3Cimg%20src=a%20onerror=%22window.location.replace(%27chrome-extension://legepcikgaoelkacchildfmacibkgidc/request_logger.html?ref=http://localhost:8000/testpages/?injection=%253Cimg+src%253Da+onerror%253D%2527alert%2528%25221%2522%2529%253B%2527%253E&df=%27)%22%3E&df=
+
+// http://localhost:8000/testpages/?injection=%3Cimg+src%3Da%20onerror%3D%22window.location.replace('chrome-extension%3A%2F%2Flegepcikgaoelkacchildfmacibkgidc%2Frequest_logger.html%3Fref%3Dhttp%3A%2F%2Flocalhost%3A8000%2Ftestpages%2F%3Finjection%3D%253Cimg%2Bsrc%253Da%2Bonerror%253D%2527alert%2528%25221%2522%2529%253B%2527%253E%26df%3D')%22%3E&df=
+
+
+
+      console.log("FINAL ATTACK URL IS");
+      console.log(url);
+
+      var windowName = "attack" + (i + j).toString();
+      var attackWindow = window.open(url, windowName);
+
+
+
+
+      // // We have enough information to repeat the request using
+      // // the new attackValue
+      // attackRequests.push(new XMLHttpRequest());
+      // var attackRequest = attackRequests[i+j];
+      // var url = input["url"];
+
+      // // if (input.type === "param") {
+      // //   url = url.concat("&" + input.name + "=" + attackValue);
+      // // }
+
+      // console.log("We are attempting an attack to URL\n" + url);
+
+      // // This may be SUPER DANGEROUS
+      // attackRequest.onreadystatechange = function() {
+      //   if ((attackRequest.status == 200) && (attackRequest.readyState == 4)) {
+      //     // Here we want to try and run the JS from the page as if we were on it
+      //     // this will allow us to detect any potential XSS ran generated from the
+      //     // attack
+      //     // console.log("READY STATE IS: " + attackRequest.readyState);
+      //     // console.log("STATUS IS: " + attackRequest.status);
+      //     var testDiv = document.createElement("div");
+      //     testDiv.id = "testDiv";
+      //     document.body.appendChild(testDiv);
+      //     console.log("WERE IN SET HTML FOR THIS INPUT");
+      //     console.log(input);
+      //     // console.log("This is the attack requests list");
+      //     // console.log(attackRequests);
+      //     sethtml(testDiv, attackRequest.responseText);
+      //   }
+      // };
+
+      // if (input.type === "param") {
+      //   url = url.replace(input.name + "=" + input.value, "");
+      // }
+
+      // // attackRequest.open("GET", url, false);
+      // attackRequest.open("POST", url, false);
+      // attackRequest.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+
+      // if (input.type === "header") {
+      //   attackRequest.setRequestHeader(input.name, attackValue);
+      // } else if (input.type === "cookie") {
+      //   // TODO: this may not be possible, look into a way of making
+      //   // this work
+      //   attackRequest.withCredentials = true;
+      // }
+
+      // if (input.type !== "param") {
+      //   attackRequest.send();
+      // } else {
+      //   attackRequest.send(input.name + "=" + attackValue);
+      // }
+
+      // // At this point, if any of the attacks is successful, it should
+      // // be reported in the request logger
+      // console.log("SENT ONE REQUEST WHILE MEDDLING WITH THIS INPUT");
+      // console.log(input.type);
     }
   }
 
+}
+
+function sethtml(div,content) {
+  var search = content;
+  var script;
+  var truScript;
+
+
+  console.log("SEARCHING THROUGH THIS CONTENT");
+  console.log(content);
+  // while (script = search.match(/(<script[^>]+javascript[^>]+>\s*(<!--)?)/i)) {
+  // while (script = search.match(/(<script[^>]*>?[^>]+\/script>\s*(<!--)?)/i)) {
+  while (script = search.match(/(<script([^>]+)?(javascript[^>]+)?>\s*(<!--)?)/i)) {
+    search = search.substr(search.indexOf(RegExp.$1) + RegExp.$1.length);
+
+
+
+    console.log("THIS IS THE SCRIPT I'VE EXTRACTED");
+    console.log(script);
+
+    console.log("SEARCH IS");
+    console.log(search);
+
+
+    if (!(endscript = search.match(/((-->)?\s*<\/script>)/))) break;
+
+    block = search.substr(0, search.indexOf(RegExp.$1));
+    search = search.substring(block.length + RegExp.$1.length);
+
+    console.log("BLOCK IS");
+    console.log(block);
+
+    console.log("SEARCH IS NOW");
+    console.log(search);
+
+    var oScript = document.createElement('script');
+    oScript.text = block;
+    document.getElementsByTagName("head").item(0).appendChild(oScript);
+    // truScript = document.createElement('script');
+    // truScript.text = block;
+    // document.getElementsByTagName("head").item(0).appendChild(truScript);
+  }
+
+  div.innerHTML = content;
+  // document.getElementById(div).innerHTML = content;
+  // document.getElementById("testDiv").innerHTML = content;
+  // eval(truScript);
 }
 
 function readTextFile(file) {
@@ -386,7 +545,8 @@ function headerIndex(r, paramType, property) {
   var paramType = r[paramType];
   if (paramType) {
     for (var i = 0; i < paramType.length; i++) {
-       if (paramType[i].name === property) return i;
+      // Lowercase both of these to minimise matching differences based on servers
+      if (paramType[i].name.toLowerCase() === property.toLowerCase()) return i;
     }
   }
 

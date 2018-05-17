@@ -17,6 +17,7 @@
   },
    "web_accessible_resources": [
      "request_logger.html",
+     "js/attacks/xss.json",
      "js/attacks/xss.js"
    ],
   "content_scripts": [
@@ -29,6 +30,7 @@
       "js": [
         "lib/jquery/jquery-3.3.1.min.js",
         "lib/jquery_form/jquery.form.js",
+        "js/attacks/xss.js",
         "js/attack.js",
         "js/action_replay.js"
       ],

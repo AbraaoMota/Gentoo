@@ -20,20 +20,44 @@ window.addEventListener("load", function() {
 
   chrome.storage.local.get(function(storage) {
     // Create elements for the weak URL list to appear
-    // This list is kept in local storage under the 'weakURLs' key
+    // This list is kept in chrome storage under the 'weakURLs' key
     var weakURLs = storage["weakURLs"];
 
     var reflectedList = document.getElementById("xssURLs");
     if (weakURLs) {
-      for (i = 0; i < weakURLs.length; i++) {
+      for (var i = 0; i < weakURLs.length; i++) {
         var p = document.createElement("p");
         p.innerHTML = weakURLs[i];
         reflectedList.appendChild(p);
       }
     }
 
+    // Create elements for the potentialXSS warning list,
+    // this list is also kept in chrome storage under "potentialXSS"
+    var potentialXSS = storage["potentialXSS"];
+    var potentiallyDangerousList = document.getElementById("potentialXSS");
 
-    // Create elements for the potentialXSS warning list
+    if (potentialXSS) {
+      var collection = document.createElement("ul");
+      collection.classList.add("collection");
+
+      for (var i = 0; i < potentialXSS.length; i++) {
+        var collItem = document.createElement("li");
+        collItem.classList.add("collection-item");
+
+        var inputTypeAndUrl = document.createElement("p");
+        inputTypeAndUrl.innerHTML = "This input is a <strong>" + potentialXSS[i].type + "</strong> from the URL:<br />" + potentialXSS[i].url;
+
+        var inputValues = document.createElement("p");
+        inputValues.innerHTML = "Name: " + potentialXSS[i].name + "<br />Value: " + potentialXSS[i].value;
+
+        collItem.appendChild(inputTypeAndUrl);
+        collItem.appendChild(inputValues);
+
+        collection.appendChild(collItem);
+      }
+      potentiallyDangerousList.appendChild(collection);
+    }
 
   });
 }, false);
@@ -65,6 +89,15 @@ function clearReflectedXSS() {
   var clearXssURLs = document.getElementById("clearXssURLs");
   clearXssURLs.addEventListener('click', function() {
     chrome.storage.local.remove("weakURLs");
+    location.reload();
+  });
+}
+
+// Clears out the list of potentially dangerous inputs added on attack inspection
+function clearDangerousInputs() {
+  var clearDangerousInputs = document.getElementById("clearDangerousInputs");
+  clearDangerousInputs.addEventListener("click", function() {
+    chrome.storage.local.remove("potentialXSS");
     location.reload();
   });
 }

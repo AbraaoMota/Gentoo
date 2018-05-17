@@ -68,9 +68,9 @@
           </li>
         </ul>
 
-        <p><strong>Reset XSS URL list</strong></p>
+        <!-- <p><strong>Reset XSS URL list</strong></p> -->
         <a class="waves-effect waves-light btn btn-small red darken-2 modal-trigger" href="#xssWarning">
-          <i class="material-icons right">warning</i>Clear weak URL list
+          <i class="material-icons right">clear</i>Clear weak URL list
         </a>
 
         <div id="xssWarning" class="modal">
@@ -84,16 +84,40 @@
           </div>
         </div>
 
+        <br>
+        <br>
+        <br>
+
+        <p><strong>The following inputs look like they might potentially lead to an attack:</strong></p>
+        <ul class="collapsible">
+          <li>
+            <div class="collapsible-header"><i class="material-icons">warning</i>Dangerous inputs</div>
+            <div class="collapsible-body" id="potentialXSS"></div>
+          </li>
+        </ul>
+
+        <!-- <p><strong>Reset dangerous input list</strong></p> -->
+        <a class="waves-effect waves-light btn btn-small red darken-2 modal-trigger" href="#potentialWarning">
+          <i class="material-icons right">clear</i>Clear dangerous input list
+        </a>
+
+        <div id="potentialWarning" class="modal">
+          <div class="modal-content">
+            <h4>Clear list of potentially dangerous inputs</h4>
+            <p>This action cannot be undone. Are you sure?</p>
+          </div>
+          <div class="modal-footer">
+            <a href="#!" class="modal-action modal-close waves-effect waves-red btn-flat">Cancel</a>
+            <a id="clearDangerousInputs" href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Yes, delete potentially dangerous input list</a>
+          </div>
+        </div>
+
       </div>
 
 
       <div id="test2" class="col s12">Test 2. Henlo</div>
       <div id="test3" class="col s12">Test 3</div>
     </div>
-
-
-
-
 
 
 

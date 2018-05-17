@@ -57,6 +57,6 @@ function attemptXSS(inputElement, parentForm) {
   inputElement.value = "<img src=a onerror=\"" + jsExploitStr + "')\">";
 
   // Submit form
-  parentForm.submit();
+  // parentForm.submit();
 }
 

@@ -63,8 +63,6 @@ chrome.runtime.onConnect.addListener(
     // Add the listener
     port.onMessage.addListener(devToolsListener);
 
-    // devToolsConnection.onMessage.addListener(devToolsListener);
-
     // Remove listener once finished
     port.onDisconnect.addListener(
       function(port) {
@@ -79,10 +77,6 @@ chrome.runtime.onConnect.addListener(
         }
       }
     );
-
-    // devToolsConnection.onDisconnect.addListener(function() {
-    //   devToolsConnection.onMessage.removeListener(devToolsListener);
-    // });
   }
 )
 

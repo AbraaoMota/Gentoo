@@ -1,0 +1,45 @@
+
+OBJECT TYPES STORED ACROSS THE APP:
+
+  INPUTS FOR INSPECTION (STORED UNDER potentialXSS):
+
+    var input = {
+      type: "cookie" / "param" / "header",
+      name: "",
+      value: "",
+      url: ""
+    }
+
+  LIST OF REQUESTS STORED DURING ACTION REPLAY (STORED UNDER ARrequests):
+
+    var ARrequests = {[
+      {
+        reqCookies = [{name: , value:],
+        reqParams = [{name: , value:],
+        reqHeaders = [{name: , value:],
+        respCookies = [{name: , value:],
+        respHeaders = [{name: , value:],
+        respContent = "",
+        url = ""
+      }
+    ]}
+
+  FLAG FOR WHETHER AR SESSION IS RECORDING OR NOT (UNDER ARsession):
+
+    var ARsession = "finished/recording"
+
+  SWITCH TO EN(DIS)ABLE AR (UNDER enableAR):
+
+    var enableAR = 0 / 1
+
+
+MESSAGES BEING SENT ACROSS THE APP
+
+> DEVTOOLS TO BACKGROUND
+
+> BACKGROUND TO ACTION REPLAY
+
+> BACKGROUND TO POPUP (?)
+
+> REQUEST LOGGER (?)
+

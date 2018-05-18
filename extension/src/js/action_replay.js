@@ -189,14 +189,7 @@ function analyseAndReplayAttacks() {
 
         // Here we want to create a userInput object which stores different values
         // pertinent to a user input. This is necessary to know which parameters to
-        // override in the request when being replayed - Namely:
-        //
-        // var input = {
-        //   type: "cookie" / "param" / "header",
-        //   name: "",
-        //   value: "",
-        //   url: ""
-        // }
+        // override in the request when being replayed. More info in design.txt
 
         // Append all cookies to the list
         for (var j = 0; j < r.reqCookies.length; j++) {
@@ -259,7 +252,7 @@ function analyseAndReplayAttacks() {
         // we can send a warning message listing all of these out, as well as forge JS attacks
         sendIntermediaryWarning(potentiallyDangerous);
         replayAttacks(potentiallyDangerous);
-        return;
+        // return;
       }
     }
   });
@@ -379,16 +372,18 @@ function replayAttacks(potentiallyDangerousInputs) {
         url = url.replace(input.name + "=" + input.value, input.name + "=" + encodeURIComponent(attackValue).replace("%20", "+"));
       }
 
-      // THIS URL REDIRECTS ME
-      // http://localhost:8000/testpages/?injection=%3Cimg+src%3Da+onerror%3D%22window.location.replace%28%27chrome-extension%3A%2F%2Flegepcikgaoelkacchildfmacibkgidc%2Frequest_logger.html%3Fref%3Dhttp%3A%2F%2Flocalhost%3A8000%2Ftestpages%2F%27%29%22%3E&df=
-
       console.log("FINAL ATTACK URL IS");
       console.log(url);
 
       var windowName = "attack" + (i + j).toString();
       console.log("OPENING THIS URL: " + url);
       var attackWindow = window.open(url, windowName);
-      return;
+      // At this point the window should have registered a request in the request logger and indicating if the page
+      // is weak. Close page after a short wait.
+      window.setTimeout(function() {
+        attackWindow.close();
+      }, 5000);
+      // return;
 
 
       // // We have enough information to repeat the request using
@@ -453,52 +448,31 @@ function replayAttacks(potentiallyDangerousInputs) {
 
 }
 
-function sethtml(div,content) {
-  var search = content;
-  var script;
-  var truScript;
+// function sethtml(div,content) {
+//   var search = content;
+//   var script;
+//   var truScript;
 
 
-  console.log("SEARCHING THROUGH THIS CONTENT");
-  console.log(content);
-  // while (script = search.match(/(<script[^>]+javascript[^>]+>\s*(<!--)?)/i)) {
-  // while (script = search.match(/(<script[^>]*>?[^>]+\/script>\s*(<!--)?)/i)) {
-  while (script = search.match(/(<script([^>]+)?(javascript[^>]+)?>\s*(<!--)?)/i)) {
-    search = search.substr(search.indexOf(RegExp.$1) + RegExp.$1.length);
+//   // console.log("SEARCHING THROUGH THIS CONTENT");
+//   // console.log(content);
+//   while (script = search.match(/(<script([^>]+)?(javascript[^>]+)?>\s*(<!--)?)/i)) {
 
+//     if (!(endscript = search.match(/((-->)?\s*<\/script>)/))) break;
 
+//     block = search.substr(0, search.indexOf(RegExp.$1));
+//     search = search.substring(block.length + RegExp.$1.length);
 
-    console.log("THIS IS THE SCRIPT I'VE EXTRACTED");
-    console.log(script);
+//     var oScript = document.createElement('script');
+//     oScript.text = block;
+//     document.getElementsByTagName("head").item(0).appendChild(oScript);
+//   }
 
-    console.log("SEARCH IS");
-    console.log(search);
-
-
-    if (!(endscript = search.match(/((-->)?\s*<\/script>)/))) break;
-
-    block = search.substr(0, search.indexOf(RegExp.$1));
-    search = search.substring(block.length + RegExp.$1.length);
-
-    console.log("BLOCK IS");
-    console.log(block);
-
-    console.log("SEARCH IS NOW");
-    console.log(search);
-
-    var oScript = document.createElement('script');
-    oScript.text = block;
-    document.getElementsByTagName("head").item(0).appendChild(oScript);
-    // truScript = document.createElement('script');
-    // truScript.text = block;
-    // document.getElementsByTagName("head").item(0).appendChild(truScript);
-  }
-
-  div.innerHTML = content;
-  // document.getElementById(div).innerHTML = content;
-  // document.getElementById("testDiv").innerHTML = content;
-  // eval(truScript);
-}
+//   div.innerHTML = content;
+//   // document.getElementById(div).innerHTML = content;
+//   // document.getElementById("testDiv").innerHTML = content;
+//   // eval(truScript);
+// }
 
 function readTextFile(file) {
   var rawFile = new XMLHttpRequest();

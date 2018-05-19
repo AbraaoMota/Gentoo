@@ -2,6 +2,7 @@
 $(document).ready(function() {
   $('#xssWarning').modal();
   $("#potentialWarning").modal();
+  $("#clearExtensionStorage").modal();
 });
 
 // Update visuals on popup page load
@@ -75,6 +76,7 @@ document.addEventListener('DOMContentLoaded', function() {
   // Activate the listeners for the active tab
   clearReflectedXSS();
   clearDangerousInputs();
+  deleteExtensionStorage();
 
   // Reactivate listeners for when we switch back into this tab
   // and DOM can't find the elements anymore
@@ -82,6 +84,7 @@ document.addEventListener('DOMContentLoaded', function() {
   xssTab.addEventListener("load", function() {
     clearReflectedXSS();
     clearDangerousInputs();
+    deleteExtensionStorage();
   });
 });
 
@@ -101,6 +104,14 @@ function clearDangerousInputs() {
   var clearDangerousInputs = document.getElementById("clearDangerousInputs");
   clearDangerousInputs.addEventListener("click", function() {
     chrome.storage.local.remove("potentialXSS");
+    location.reload();
+  });
+}
+// This function is a er to delete all extension storage content
+function deleteExtensionStorage() {
+  var deleteStorageContent = document.getElementById("deleteExtStorage");
+  deleteExtStorage.addEventListener("click", function() {
+    chrome.storage.local.clear();
     location.reload();
   });
 }

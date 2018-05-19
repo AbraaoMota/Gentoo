@@ -165,7 +165,6 @@ function analyseAndReplayAttacks() {
 
   analyserBusy = true;
 
-  console.log("ENTERED THE ANALYSER AT THIS TIME");
   chrome.storage.local.get(function(storage) {
     var baselineRequests = storage["ARrequests"];
     var weakURLs = storage["weakURLs"];

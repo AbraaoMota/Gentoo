@@ -165,18 +165,22 @@ function analyseAndReplayAttacks() {
 
   analyserBusy = true;
 
+  console.log("ENTERED THE ANALYSER AT THIS TIME");
   chrome.storage.local.get(function(storage) {
     var baselineRequests = storage["ARrequests"];
     var weakURLs = storage["weakURLs"];
+    var potentiallyDangerous = storage["potentialXSS"];
 
-    // For now, analyse only the requests which generate a response
-    // that matches the Content-Type "text/html"
     if (!baselineRequests) {
       return;
     }
+    
+    if (!potentiallyDangerous) {
+      potentiallyDangerous = [];
+    }
 
-    console.log("THESE ARE THE BASELINE REQUESTS WE HAVE");
-    console.log(baselineRequests);
+    // For now, analyse only the requests which generate a response
+    // that matches the Content-Type "text/html"
     for (var i = 0; i < baselineRequests.length; i++) {
       var r = baselineRequests[i];
       var contentTypeIndex = headerIndex(r, "respHeaders", "Content-type");
@@ -221,40 +225,39 @@ function analyseAndReplayAttacks() {
             value: r.reqHeaders[l].value,
             url: r.url
           }
-         userInputs.push(uInput);
+          userInputs.push(uInput);
         }
 
         var content = r.respContent;
-        var potentiallyDangerous = [];
-
-        console.log("WE'VE GOTTEN HERE");
-        // Loop over all possible user inputs to compare against
+      
         if (!userInputs) {
           return;
         }
+
+        var newlyDangerous = [];
+        // Loop over all possible user inputs to compare against
         for (var m = 0; m < userInputs.length; m++) {
           var currUserInput = userInputs[m];
-          // if (content.includes(currUserInput.value)) {
           if (couldBeDangerous(content, currUserInput)) {
-            // You want to flag this up as a warning because it looks as though content has been injected
-            // into the page - these are also the ones you want to attempt to hijack using JS
+            // Here we flag up these inputs as a warning because it looks
+            // as though content has been injected into the page
+            // However that is the complete list, we only want to replay
+            // the newly added dangerous inputs
             potentiallyDangerous.push(currUserInput);
+            newlyDangerous.push(currUserInput);
           }
         }
 
-        chrome.storage.local.set({
-          "potentialXSS": potentiallyDangerous
-        }, function() {
-          analyserBusy = false;
-        });
+        chrome.storage.local.set({ "potentialXSS": potentiallyDangerous });
 
         // Now we have a list of potentially dangerous inputs (things that seem reflected)
         // we can send a warning message listing all of these out, as well as forge JS attacks
         sendIntermediaryWarning(potentiallyDangerous);
-        replayAttacks(potentiallyDangerous);
-        // return;
+        // replayAttacks(potentiallyDangerous, i);
+        replayAttacks(newlyDangerous, i);
       }
     }
+    analyserBusy = false;
   });
 }
 
@@ -341,50 +344,34 @@ function sendIntermediaryWarning(potentiallyDangerousInputs) {
 // dangerous input, and report all different attacks that succeed.
 // The vulnerable website report should be automatically done if the XSS is
 // successful as we attempt to redirect to the request logger page
-function replayAttacks(potentiallyDangerousInputs) {
+function replayAttacks(potentiallyDangerousInputs, requestNumber) {
 
-  // var XSSattacks = readTextFile("chrome-extension://" + chrome.runtime.id + "/js/attacks/xss.js");
-  // var XSSattacks = readTextFile("chrome-extension://" + chrome.runtime.id + "/js/attacks/xss.js");
   var XSSattacks = [];
-
-  XSSattacks.push(imgonload());
-
-  console.log("WE HAVE THESE XSS ATTACKS");
-  console.log(XSSattacks);
-
-  console.log("WE HAVE THESE POTENTIALLY DANGEROUS INPUTS");
-  console.log(potentiallyDangerousInputs);
-
   var attackRequests = [];
+
+  // Load here all the attacks we have
+  XSSattacks.push(imgonload());
 
   for (var i = 0; i < potentiallyDangerousInputs.length; i++) {
     for (var j = 0; j < XSSattacks.length; j++) {
       var input = potentiallyDangerousInputs[i];
       var attackName = XSSattacks[j].name;
       var attackValue = XSSattacks[j].value;
-
       var url = input["url"];
 
-      console.log("PREVIOUS URL WAS");
-      console.log(url);
-
       if (input.type === "param") {
-        url = url.replace(input.name + "=" + input.value, input.name + "=" + encodeURIComponent(attackValue).replace("%20", "+"));
+        var encodedAttackValue = encodeURIComponent(attackValue).replace("%20", "+")
+        url = url.replace(input.name + "=" + input.value, input.name + "=" + encodedAttackValue);
       }
 
-      console.log("FINAL ATTACK URL IS");
-      console.log(url);
+      var newWindowName = "request" + requestNumber + "attack" + (i + j).toString();
+      var attackWindow = window.open(url, newWindowName);
 
-      var windowName = "attack" + (i + j).toString();
-      console.log("OPENING THIS URL: " + url);
-      var attackWindow = window.open(url, windowName);
-      // At this point the window should have registered a request in the request logger and indicating if the page
-      // is weak. Close page after a short wait.
+      // At this point the window should have registered a request in the request logger
+      // and indicating if the page is weak. Close page after a short wait.
       window.setTimeout(function() {
         attackWindow.close();
       }, 5000);
-      // return;
-
 
       // // We have enough information to repeat the request using
       // // the new attackValue

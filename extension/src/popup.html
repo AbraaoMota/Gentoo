@@ -47,45 +47,48 @@
 
           <div id="settings" class="modal">
             <div class="modal-content">
-              <ul class="collection">
+              <h2><i class="material-icons">build</i> Settings </h2>
+              <ul class="collapsible">
+                <li>
+                  <div class="collapsible-header">
+                    <i class="material-icons">comment</i><strong>Recommendations</strong>
+                  </div>
+                  <div class="collapsible-body">
 
-                <li class="collection-item">
-                  <h4>Recommendation sensitivity</h4>
-                  <p>This regulates how sensitive the recommendation system is - the more sensitive, the more opportunities for investigation the extension will suggest</p>
-                  <form action="#">
-                    <!-- <div class="row"> -->
-                    <!--   <div class="col s1"> -->
-                    <!--     <a class="waves-effect waves-light btn-small" href="#" > -->
-                    <!--       <i class="material-icons">chevron_left</i> -->
-                    <!--     </a> -->
-                    <!--   </div> -->
-                      <!-- <div class="col s8"> -->
-                        <p class="range-field">
-                        <input type="range" id="recommenderSensitivity" min="1" max="4" defaultValue=1" />
-                        </p>
-                      <!-- </div> -->
-                      <!-- <div class="col s1"> -->
-                      <!--   <a class="waves-effect waves-light btn-small" href="#"> -->
-                      <!--     <i class="material-icons">chevron_right</i> -->
-                      <!--   </a> -->
-                      <!-- </div> -->
-                      <!-- <div class="col s1"> -->
-                      <!--   <p id="sensitivityVal"> -->
-                      <!-- </div> -->
-                    <!-- </div> -->
-                  </form>
+                    <span>Enable / disable recommendations</span>
+                    <div class="switch">
+                      <label>
+                        Off
+                        <input type="checkbox" id="checkboxRecommendations">
+                        <span id="recommendationsEnabled" class="lever"></span>
+                        On
+                      </label>
+                    </div>
+
+                    <h5>Recommendation sensitivity</h5>
+                    <p>This regulates how sensitive the recommendation system is - the more sensitive, the more opportunities for investigation the extension will suggest</p>
+                    <form action="#">
+                      <p class="range-field">
+                        <input type="range" id="recommenderSensitivity" min="1" max="3" defaultValue="1" />
+                      </p>
+                    </form>
+                  </div>
                 </li>
 
-                <li class="collection-item">Alvin</li>
-                <li class="collection-item">Alvin</li>
-                <li class="collection-item">Alvin</li>
+                <!-- <li> -->
+                <!--   <div class="collapsible-header"> -->
+                <!--   </div> -->
+                <!--   <div class="collapsible-body"> -->
+                <!--   </div> -->
+                <!-- </li> -->
 
               </ul>
             </div>
 
             <div class="modal-footer">
+              <span>Remember to refresh the page after applying your changes</span>
               <a id="forgetSettings" href="#!" class="modal-action modal-close waves-effect waves-red btn-flat">Cancel</a>
-              <a id="saveSettings" href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Apply changes and reload</a>
+              <a id="saveSettings" href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Apply changes</a>
             </div>
           </div>
 

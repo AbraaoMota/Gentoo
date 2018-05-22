@@ -25,6 +25,7 @@ function settingsModalLoaded() {
   saveSettingsListener();
   forgetSettingsListener();
   recommenderSensitivityValueListener();
+  recommenderEnablerListener();
 }
 
 // Update visuals on popup page load
@@ -111,6 +112,51 @@ document.addEventListener('DOMContentLoaded', function() {
 
 });
 
+// Enables and disables recommender engine
+function recommenderEnablerListener() {
+  var checkboxRecommendations = document.getElementById("checkboxRecommendations");
+  // Get the setting if it has already been set
+  chrome.storage.local.get(function(storage) {
+    var settings = storage["settings"];
+    var recommendationsEnabled = settings["recommendationsEnabled"];
+    var sensitivity = document.getElementById("recommenderSensitivity");
+    if (!recommendationsEnabled) {
+      // Set default settings
+      recommendationsEnabled = 0;
+    }
+    checkboxRecommendations.checked = recommendationsEnabled;
+    if (recommendationsEnabled) {
+      sensitivity.disabled = false;
+    } else {
+      sensitivity.disabled = true;
+    }
+  });
+
+  var recommendationsEnabled = document.getElementById("recommendationsEnabled");
+  recommendationsEnabled.addEventListener("click", function() {
+    toggleRecommendations();
+  });
+}
+
+// Enable and disable recommendations
+function toggleRecommendations() {
+  chrome.storage.local.get(function(storage) {
+    var cachedSettings = storage["cachedSettings"];
+    var recommendationsEnabled = cachedSettings["recommendationsEnabled"];
+    var sensitivity = document.getElementById("recommenderSensitivity");
+
+    if (!recommendationsEnabled) {
+      cachedSettings["recommendationsEnabled"] = 1;
+      sensitivity.disabled = false;
+      chrome.storage.local.set({ "cachedSettings": cachedSettings });
+    } else {
+      cachedSettings["recommendationsEnabled"] = 0;
+      sensitivity.disabled = true;
+      chrome.storage.local.set({ "cachedSettings": cachedSettings });
+    }
+  });
+}
+
 // Forgets any setting changes when cancelling them
 function forgetSettingsListener() {
   var forgetSettings = document.getElementById("forgetSettings");
@@ -136,7 +182,6 @@ function forgetSettingsListener() {
 function saveSettingsListener() {
   var saveSettings = document.getElementById("saveSettings");
   saveSettings.addEventListener("click", function() {
-    console.log("WE'RE SAVING OUR SETTING CHANGES");
     chrome.storage.local.get(function(storage) {
       var cachedSettings = storage["cachedSettings"];
       var oldSettings = storage["settings"];

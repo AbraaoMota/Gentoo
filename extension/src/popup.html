@@ -26,27 +26,74 @@
 
     <h1> Welcome to the vuln finder </h1>
 
-    <!-- Switch -->
-    <!-- <span>Enable or disable the extension (currently does nothing)</span> -->
-    <!-- <div class="switch"> -->
-    <!--   <label> -->
-    <!--     Off -->
-    <!--     <input type="checkbox"> -->
-    <!--     <span id="derp" class="lever"></span> -->
-    <!--     On -->
-    <!--   </label> -->
-    <!-- </div> -->
+    <div class="row">
+      <div class="col s8">
+        <span>Action Replay mechanism</span>
+        <div class="switch">
+          <label>
+            Off
+            <input type="checkbox" id="checkboxAR">
+            <span id="actionReplayEnabled" class="lever"></span>
+            On
+          </label>
+        </div>
+        <p><i>In order for the Action Replay mechanism to work as intended, open the DevTools page for the page under inspection by right clicking on the tab and clicking "Inspect". From there, use the page as normal.</i></p>
+      </div>
 
-    <span>Action Replay mechanism</span>
-    <div class="switch">
-      <label>
-        Off
-        <input type="checkbox" id="checkboxAR">
-        <span id="actionReplayEnabled" class="lever"></span>
-        On
-      </label>
+      <div class="col s1 offset-s1">
+          <a class="btn-floating btn-large waves-effect waves-light red modal-trigger" href="#settings">
+            <i class="material-icons">settings</i>
+          </a>
+
+          <div id="settings" class="modal">
+            <div class="modal-content">
+              <ul class="collection">
+
+                <li class="collection-item">
+                  <h4>Recommendation sensitivity</h4>
+                  <p>This regulates how sensitive the recommendation system is - the more sensitive, the more opportunities for investigation the extension will suggest</p>
+                  <form action="#">
+                    <!-- <div class="row"> -->
+                    <!--   <div class="col s1"> -->
+                    <!--     <a class="waves-effect waves-light btn-small" href="#" > -->
+                    <!--       <i class="material-icons">chevron_left</i> -->
+                    <!--     </a> -->
+                    <!--   </div> -->
+                      <!-- <div class="col s8"> -->
+                        <p class="range-field">
+                        <input type="range" id="recommenderSensitivity" min="1" max="4" defaultValue=1" />
+                        </p>
+                      <!-- </div> -->
+                      <!-- <div class="col s1"> -->
+                      <!--   <a class="waves-effect waves-light btn-small" href="#"> -->
+                      <!--     <i class="material-icons">chevron_right</i> -->
+                      <!--   </a> -->
+                      <!-- </div> -->
+                      <!-- <div class="col s1"> -->
+                      <!--   <p id="sensitivityVal"> -->
+                      <!-- </div> -->
+                    <!-- </div> -->
+                  </form>
+                </li>
+
+                <li class="collection-item">Alvin</li>
+                <li class="collection-item">Alvin</li>
+                <li class="collection-item">Alvin</li>
+
+              </ul>
+            </div>
+
+            <div class="modal-footer">
+              <a id="forgetSettings" href="#!" class="modal-action modal-close waves-effect waves-red btn-flat">Cancel</a>
+              <a id="saveSettings" href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Apply changes and reload</a>
+            </div>
+          </div>
+
+
+      </div>
     </div>
-    <p><i>In order for the Action Replay mechanism to work as intended, open the DevTools page for the page under inspection by right clicking on the tab and clicking "Inspect". From there, use the page as normal.</i></p>
+
+
 
     <br>
     <div class="row">

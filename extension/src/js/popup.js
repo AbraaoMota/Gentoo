@@ -3,7 +3,29 @@ $(document).ready(function() {
   $('#xssWarning').modal();
   $("#potentialWarning").modal();
   $("#clearExtensionStorage").modal();
+  $("#settings").modal({
+    ready: settingsModalLoaded
+  });
 });
+
+
+function settingsModalLoaded() {
+  var recommenderSensitivity = document.getElementById("recommenderSensitivity");
+  chrome.storage.local.get(function(storage) {
+    var settings = storage["settings"];
+    if (!settings) {
+      settings = {
+        "recommenderSensitivity": "1"
+      }
+    }
+    recommenderSensitivity.value = settings["recommenderSensitivity"];
+  });
+
+  // Add appropriate listeners for whenever the settings modal is opened
+  saveSettingsListener();
+  forgetSettingsListener();
+  recommenderSensitivityValueListener();
+}
 
 // Update visuals on popup page load
 window.addEventListener("load", function() {
@@ -86,7 +108,53 @@ document.addEventListener('DOMContentLoaded', function() {
     clearDangerousInputs();
     deleteExtensionStorage();
   });
+
 });
+
+// Forgets any setting changes when cancelling them
+function forgetSettingsListener() {
+  var forgetSettings = document.getElementById("forgetSettings");
+  forgetSettings.addEventListener("click", function() {
+    console.log("WE'RE FORGETTING OUR SETTING CHANGES");
+    chrome.storage.local.get(function(storage) {
+      var settings = storage["settings"];
+      if (!settings) {
+        // Set the default settings
+        settings = {
+          "recommenderSensitivity": "1"
+        };
+      }
+
+      // Reset the cached settings to the previously known settings list
+      chrome.storage.local.set({ cachedSettings: settings });
+    });
+    location.reload();
+  });
+}
+
+// This saves any settings being changed on the settings page
+function saveSettingsListener() {
+  var saveSettings = document.getElementById("saveSettings");
+  saveSettings.addEventListener("click", function() {
+    console.log("WE'RE SAVING OUR SETTING CHANGES");
+    chrome.storage.local.get(function(storage) {
+      var cachedSettings = storage["cachedSettings"];
+      var oldSettings = storage["settings"];
+      if (!cachedSettings) {
+        if (!oldSettings) {
+          // Set the default settings
+          oldSettings = {
+            "recommenderSensitivity": "1"
+          };
+        }
+        cachedSettings = oldSettings;
+      }
+      // Set the used settings to the cachedSettings we have
+      chrome.storage.local.set({ settings: cachedSettings });
+    });
+    location.reload();
+  });
+}
 
 // Clears out the list of URLs to which we have been redirected from to reach
 // the `request_logger` page
@@ -107,12 +175,37 @@ function clearDangerousInputs() {
     location.reload();
   });
 }
-// This function is a er to delete all extension storage content
+// This function deletes all extension storage content
 function deleteExtensionStorage() {
   var deleteStorageContent = document.getElementById("deleteExtStorage");
   deleteExtStorage.addEventListener("click", function() {
     chrome.storage.local.clear();
     location.reload();
+  });
+}
+
+// Update recommender sensitivity settings on change
+function recommenderSensitivityValueListener() {
+  var recommenderSensitivity = document.getElementById("recommenderSensitivity");
+  recommenderSensitivity.addEventListener("input", function() {
+    var newVal = recommenderSensitivity.value;
+    chrome.storage.local.get(function(storage) {
+      var cachedSetting = storage["cachedSettings"];
+      var oldSettings = storage["settings"];
+      if (!cachedSetting) {
+        if (!oldSettings) {
+          // Use default settings
+          oldSettings = {
+            "recommenderSensitivity": "1"
+          };
+        }
+        cachedSetting = oldSettings;
+      }
+
+      cachedSetting["recommenderSensitivity"] = newVal;
+      console.log("WE'RE UPDATING THE SENSITIVITY TO " + newVal);
+      chrome.storage.local.set({ cachedSettings: cachedSetting });
+    });
   });
 }
 

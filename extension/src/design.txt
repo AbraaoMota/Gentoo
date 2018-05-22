@@ -1,6 +1,22 @@
 
 OBJECT TYPES STORED ACROSS THE APP:
 
+  CACHED SETTINGS (BUFFER FOR SETTING UPDATES):
+
+    var cachedSettings = {
+      recommenderSensitivity: "1" / "2",
+      setting2: "",
+      setting3: ""
+    }
+
+  SETTINGS (STORES ALL USED SETTINGS):
+
+    var settings = {
+      recommenderSensitivity: "1" / "2",
+      setting2: "",
+      setting3: ""
+    }
+
   INPUTS FOR INSPECTION (STORED UNDER potentialXSS):
 
     var input = {
@@ -31,6 +47,8 @@ OBJECT TYPES STORED ACROSS THE APP:
   SWITCH TO EN(DIS)ABLE AR (UNDER enableAR):
 
     var enableAR = 0 / 1
+
+
 
 
 MESSAGES BEING SENT ACROSS THE APP

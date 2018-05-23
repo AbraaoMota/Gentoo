@@ -32,7 +32,8 @@
         "lib/jquery_form/jquery.form.js",
         "js/attacks/xss.js",
         "js/attack.js",
-        "js/action_replay.js"
+        "js/action_replay.js",
+        "js/passive_mode.js"
       ],
       "run_at": "document_start"
     }

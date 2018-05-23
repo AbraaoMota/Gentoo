@@ -77,16 +77,13 @@ function toggleActionRecordingButton() {
 
   var actionReplayButton = document.getElementById("actionReplayButton");
   if (actionReplayButton) {
-
     // The button is already present and was clicked, therefore
     // stop recording
     actionReplayButton.parentNode.removeChild(actionReplayButton);
-
   } else {
-
     addActionReplayButtonToPage();
-
   }
+
 };
 
 // Creates and adds the button to the page, makes it draggable
@@ -139,7 +136,6 @@ function toggleARrecording() {
     actionReplayButton.className = "notRec";
     chrome.storage.local.set({ "ARsession": "finished" });
 
-
     // Analysis and replay of actions here
     analyseAndReplayAttacks();
 
@@ -168,7 +164,7 @@ function analyseAndReplayAttacks() {
     if (!baselineRequests) {
       return;
     }
-    
+
     if (!potentiallyDangerous) {
       potentiallyDangerous = [];
     }
@@ -192,10 +188,10 @@ function analyseAndReplayAttacks() {
         // Append all cookies to the list
         for (var j = 0; j < r.reqCookies.length; j++) {
           var uInput = {
-            type: "cookie",
-            name: r.reqCookies[j].name,
-            value: r.reqCookies[j].value,
-            url: r.url
+            type:  "cookie",
+            url:   r.url,
+            name:  r.reqCookies[j].name,
+            value: r.reqCookies[j].value
           }
           userInputs.push(uInput);
         }
@@ -203,10 +199,10 @@ function analyseAndReplayAttacks() {
         // Append all query parameter values to the list
         for (var k = 0; k < r.reqParams.length; k++) {
           var uInput = {
-            type: "param",
-            name: r.reqParams[k].name,
-            value: r.reqParams[k].value,
-            url: r.url
+            type:  "param",
+            url:   r.url,
+            name:  r.reqParams[k].name,
+            value: r.reqParams[k].value
           }
           userInputs.push(uInput);
         }
@@ -214,16 +210,16 @@ function analyseAndReplayAttacks() {
         // Append all header values to the list
         for (var l = 0; l < r.reqHeaders.length; l++) {
           var uInput = {
-            type: "header",
-            name: r.reqHeaders[l].name,
-            value: r.reqHeaders[l].value,
-            url: r.url
+            type:  "header",
+            url:   r.url,
+            name:  r.reqHeaders[l].name,
+            value: r.reqHeaders[l].value
           }
           userInputs.push(uInput);
         }
 
         var content = r.respContent;
-      
+
         if (!userInputs) {
           return;
         }
@@ -247,7 +243,6 @@ function analyseAndReplayAttacks() {
         // Now we have a list of potentially dangerous inputs (things that seem reflected)
         // we can send a warning message listing all of these out, as well as forge JS attacks
         sendIntermediaryWarning(potentiallyDangerous);
-        // replayAttacks(potentiallyDangerous, i);
         replayAttacks(newlyDangerous, i);
       }
     }

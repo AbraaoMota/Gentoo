@@ -298,6 +298,17 @@ function togglePassiveMode() {
       chrome.storage.local.set({ "enablePassiveMode": 0 });
     }
   });
+
+  // Send out a message
+  chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
+    chrome.tabs.sendMessage(
+      tabs[0].id,
+      {
+        msg: "togglePassiveMode"
+      },
+      function(response) {}
+    );
+  });
 }
 
 // Function switch for activating the AR button functionality on a page

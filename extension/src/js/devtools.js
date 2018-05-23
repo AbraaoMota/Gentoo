@@ -9,8 +9,8 @@ backgroundPageConnection.onMessage.addListener(function (message) {
 
 // Relay the tab ID to the background page
 chrome.runtime.sendMessage({
-  tabId: chrome.devtools.inspectedWindow.tabId,
-  scriptToInject: "action_replay.js"
+  tabId: chrome.devtools.inspectedWindow.tabId
+  // scriptToInject: "action_replay.js"
 });
 
 // In order for this to work as intended, the devtools page has to
@@ -18,9 +18,6 @@ chrome.runtime.sendMessage({
 // after every request
 chrome.devtools.network.onRequestFinished.addListener(
   function(r) {
-
-    console.log("REQUEST HERE");
-    console.log(r);
 
     var request = r.request;
     var response = r.response;

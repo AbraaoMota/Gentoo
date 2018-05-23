@@ -34,10 +34,13 @@ window.onerror = ignoreerror();
 window.addEventListener("load", function() {
 
   chrome.storage.local.get(function(storage) {
-    var sensitivity = storage["settings"]["recommenderSensitivity"];
-    var recommendationsEnabled = storage["settings"]["recommendationsEnabled"];
-    if (recommendationsEnabled) {
-      addRecommendationsToPage(sensitivity);
+    var settings = storage["settings"];
+    if (settings) {
+      var sensitivity = settings["recommenderSensitivity"];
+      var recommendationsEnabled = settings["recommendationsEnabled"];
+      if (recommendationsEnabled && sensitivity) {
+        addRecommendationsToPage(sensitivity);
+      }
     }
   });
 

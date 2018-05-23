@@ -1,3 +1,9 @@
+// Store an object for the default settings
+var initialSettings = {
+  "recommenderSensitivity": "1",
+  "recommendationsEnabled": 0
+}
+
 // Initialize modals whenever the page is ready
 $(document).ready(function() {
   $('#xssWarning').modal();
@@ -8,7 +14,7 @@ $(document).ready(function() {
   });
 });
 
-
+// Load listeners in the settings page
 function settingsModalLoaded() {
   var recommenderSensitivity = document.getElementById("recommenderSensitivity");
   chrome.storage.local.get(function(storage) {
@@ -39,6 +45,11 @@ window.addEventListener("load", function() {
     if (flag["enableAR"] === 1) {
       checkboxAR.checked = flag;
     }
+  });
+
+  var checkboxPassiveMode = document.getElementById("checkboxPassiveMode");
+  chrome.storage.local.get(function(storage) {
+    checkboxPassiveMode.checked = storage["enablePassiveMode"];
   });
 
   chrome.storage.local.get(function(storage) {
@@ -92,6 +103,12 @@ document.addEventListener('DOMContentLoaded', function() {
   var actionReplay = document.getElementById("actionReplayEnabled");
   actionReplay.addEventListener("click", function() {
     toggleActionReplay();
+  });
+
+  // Settings for activating Passive Mode
+  var passiveMode = document.getElementById("passiveModeEnabled");
+  passiveModeEnabled.addEventListener("click", function() {
+    togglePassiveMode();
   });
 
   // Activate the listeners for the active tab
@@ -169,38 +186,10 @@ function toggleRecommendations() {
   });
 }
 
-// Initialize cached settings
-function initCachedSettings() {
-  chrome.storage.local.get(function(storage) {
-    var settings = storage["settings"];
-    if (!settings) {
-      initSettings();
-    }
-    settings = storage["settings"];
-    chrome.storage.local.set({ "cachedSettings": settings });
-  });
-}
-
-var initialSettings = {
-  "recommenderSensitivity": "1",
-  "recommendationsEnabled": 0
-}
-
-// Initialize main settings to default values
-// function initialSettings() {
-//   chrome.storage.local.set({
-//     "settings": {
-//       "recommenderSensitivity": "1",
-//       "recommendationsEnabled": 0
-//     }
-//   });
-// }
-
 // Forgets any setting changes when cancelling them
 function forgetSettingsListener() {
   var forgetSettings = document.getElementById("forgetSettings");
   forgetSettings.addEventListener("click", function() {
-    console.log("WE'RE FORGETTING OUR SETTING CHANGES");
     chrome.storage.local.get(function(storage) {
       var settings = storage["settings"];
       if (!settings) {
@@ -294,6 +283,20 @@ function recommenderSensitivityValueListener() {
       console.log("WE'RE UPDATING THE SENSITIVITY TO " + newVal);
       chrome.storage.local.set({ cachedSettings: cachedSetting });
     });
+  });
+}
+
+// Function switch for activating the passive mode
+function togglePassiveMode() {
+  chrome.storage.local.get(function(storage) {
+    var enablePassiveMode = storage["enablePassiveMode"];
+    if (!enablePassiveMode) {
+      // Either unset or set to 0 - enable now
+      chrome.storage.local.set({ "enablePassiveMode": 1 });
+    } else {
+      // Enable
+      chrome.storage.local.set({ "enablePassiveMode": 0 });
+    }
   });
 }
 

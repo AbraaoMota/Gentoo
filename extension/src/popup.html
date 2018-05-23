@@ -38,6 +38,21 @@
           </label>
         </div>
         <p><i>In order for the Action Replay mechanism to work as intended, open the DevTools page for the page under inspection by right clicking on the tab and clicking "Inspect". From there, use the page as normal.</i></p>
+
+        <br>
+        <br>
+
+        <span>Passive Mode</span>
+        <div class="switch">
+          <label>
+            Off
+            <input type="checkbox" id="checkboxPassiveMode">
+            <span id="passiveModeEnabled" class="lever"></span>
+            On
+          </label>
+        </div>
+        <p><i>Passive Mode analyses all your incoming and outgoing traffic and flags up any potentially dangerous inputs, highlighted below. It will not make any active requests. Remember to disable Action Replay and Recommendations for correct intended usage</i></p>
+
       </div>
 
       <div class="col s1 offset-s1">
@@ -103,9 +118,9 @@
       <div class="col s12">
         <ul class="tabs">
           <li id="xssTab" class="tab col s3"><a class="active" href="#xssContent">XSS</a></li>
-          <li class="tab col s3"><a href="#test2">SQL injections</a></li>
-          <li class="tab col s3"><a href="#test3">Poor Authentication</a></li>
-          <!-- <li class="tab col s3"><a href="#test4">Test 4</a></li> -->
+          <li id="sqliTab" class="tab col s3"><a href="#sqliContent">SQL injections</a></li>
+          <li id="authTab" class="tab col s3"><a href="#authContent">Poor Authentication</a></li>
+          <!-- <li id=""class="tab col s3"><a href="#test4">Test 4</a></li> -->
         </ul>
       </div>
       <div id="xssContent" class="col s12">
@@ -146,7 +161,6 @@
           </li>
         </ul>
 
-        <!-- <p><strong>Reset dangerous input list</strong></p> -->
         <a class="waves-effect waves-light btn btn-small red darken-2 modal-trigger" href="#potentialWarning">
           <i class="material-icons right">clear</i>Clear dangerous input list
         </a>
@@ -161,7 +175,6 @@
             <a id="clearDangerousInputs" href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Yes, delete potentially dangerous input list</a>
           </div>
         </div>
-
       </div>
 
 

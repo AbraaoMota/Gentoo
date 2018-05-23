@@ -18,16 +18,12 @@ var messageHandler = function(message, sender, sendResponse) {
     var ARsession = storage["ARsession"];
 
     if (message.msg === "toggleAR") {
-
       // Either start or stop Action Replay session
       toggleActionRecordingButton();
       messageHandlerBusy = false;
-
     } else if (message.name === "devToolsParams" && ARsession === "recording") {
-
       storeARrequests(storage, message);
       messageHandlerBusy = false;
-
     }
   });
 }
@@ -55,7 +51,6 @@ function storeARrequests(storage, message) {
   });
 
   chrome.storage.local.set({ ARrequests: ARlist });
-
 }
 
 // If a new page has been loaded and AR is enabled

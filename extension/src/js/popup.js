@@ -14,9 +14,7 @@ function settingsModalLoaded() {
   chrome.storage.local.get(function(storage) {
     var settings = storage["settings"];
     if (!settings) {
-      settings = {
-        "recommenderSensitivity": "1"
-      }
+      settings = initialSettings;
     }
     recommenderSensitivity.value = settings["recommenderSensitivity"];
   });
@@ -118,6 +116,11 @@ function recommenderEnablerListener() {
   // Get the setting if it has already been set
   chrome.storage.local.get(function(storage) {
     var settings = storage["settings"];
+    if (!settings) {
+      settings = initialSettings;
+    }
+    chrome.storage.local.set({ "settings": settings });
+
     var recommendationsEnabled = settings["recommendationsEnabled"];
     var sensitivity = document.getElementById("recommenderSensitivity");
     if (!recommendationsEnabled) {
@@ -142,6 +145,15 @@ function recommenderEnablerListener() {
 function toggleRecommendations() {
   chrome.storage.local.get(function(storage) {
     var cachedSettings = storage["cachedSettings"];
+    if (!cachedSettings) {
+      var settings = storage["settings"];
+      if (!settings) {
+        settings = initialSettings;
+        chrome.storage.local.set({ "settings": settings });
+      }
+      cachedSettings = settings;
+      chrome.storage.local.set({ "cachedSettings": cachedSettings });
+    }
     var recommendationsEnabled = cachedSettings["recommendationsEnabled"];
     var sensitivity = document.getElementById("recommenderSensitivity");
 
@@ -156,6 +168,33 @@ function toggleRecommendations() {
     }
   });
 }
+
+// Initialize cached settings
+function initCachedSettings() {
+  chrome.storage.local.get(function(storage) {
+    var settings = storage["settings"];
+    if (!settings) {
+      initSettings();
+    }
+    settings = storage["settings"];
+    chrome.storage.local.set({ "cachedSettings": settings });
+  });
+}
+
+var initialSettings = {
+  "recommenderSensitivity": "1",
+  "recommendationsEnabled": 0
+}
+
+// Initialize main settings to default values
+// function initialSettings() {
+//   chrome.storage.local.set({
+//     "settings": {
+//       "recommenderSensitivity": "1",
+//       "recommendationsEnabled": 0
+//     }
+//   });
+// }
 
 // Forgets any setting changes when cancelling them
 function forgetSettingsListener() {
@@ -174,7 +213,6 @@ function forgetSettingsListener() {
       // Reset the cached settings to the previously known settings list
       chrome.storage.local.set({ cachedSettings: settings });
     });
-    location.reload();
   });
 }
 
@@ -197,7 +235,6 @@ function saveSettingsListener() {
       // Set the used settings to the cachedSettings we have
       chrome.storage.local.set({ settings: cachedSettings });
     });
-    location.reload();
   });
 }
 
@@ -208,7 +245,10 @@ function clearReflectedXSS() {
   var clearXssURLs = document.getElementById("clearXssURLs");
   clearXssURLs.addEventListener('click', function() {
     chrome.storage.local.remove("weakURLs");
-    location.reload();
+    var xssURLs = document.getElementById("xssURLs");
+    while (xssURLs.firstChild) {
+      xssURLs.removeChild(xssURLs.firstChild);
+    }
   });
 }
 
@@ -217,7 +257,10 @@ function clearDangerousInputs() {
   var clearDangerousInputs = document.getElementById("clearDangerousInputs");
   clearDangerousInputs.addEventListener("click", function() {
     chrome.storage.local.remove("potentialXSS");
-    location.reload();
+    var potentialXSS = document.getElementById("potentialXSS");
+    while (potentialXSS.firstChild) {
+      potentialXSS.removeChild(potentialXSS.firstChild);
+    }
   });
 }
 // This function deletes all extension storage content

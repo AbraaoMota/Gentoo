@@ -1,16 +1,29 @@
 
 OBJECT TYPES STORED ACROSS THE APP:
 
-  PASSIVE REQUESTS (NEEDS TO ACT LIKE A SLIDING WINDOW, PER DOMAIN):
+  PASSIVE REQUESTS (NEEDS TO ACT LIKE A SLIDING WINDOW, (AS AN EXTENSION: PER DOMAIN)):
 
-
+    var passiveModeRequests = {
+      [
+        {
+          reqCookies =  [{ name: , value: }],
+          reqParams =   [{ name: , value: }],
+          reqHeaders =  [{ name: , value: }],
+          respCookies = [{ name: , value: }],
+          respHeaders = [{ name: , value: }],
+          respContent = "",
+          url = ""
+        }
+      ]
+    }
 
   CACHED SETTINGS (BUFFER FOR SETTING UPDATES):
 
     var cachedSettings = {
       recommenderSensitivity: "1" / "2" / "3",
       recommendationsEnabled: 0 / 1,
-      setting3: ""
+      passiveModeCrossChecks: 0 / 1,
+      passiveModeWindowSize: (number selection, 2+)
     }
 
   SETTINGS (STORES ALL SETTINGS IN USE):
@@ -18,7 +31,8 @@ OBJECT TYPES STORED ACROSS THE APP:
     var settings = {
       recommenderSensitivity: "1" / "2" / "3",
       recommendationsEnabled: 0 / 1,
-      setting3: ""
+      passiveModeCrossChecks: 0 / 1,
+      passiveModeWindowSize: (number selection)
     }
 
   INPUTS FOR INSPECTION (STORED UNDER potentialXSS):
@@ -35,11 +49,11 @@ OBJECT TYPES STORED ACROSS THE APP:
     var ARrequests = {
       [
         {
-          reqCookies = [{name: , value:],
-          reqParams = [{name: , value:],
-          reqHeaders = [{name: , value:],
-          respCookies = [{name: , value:],
-          respHeaders = [{name: , value:],
+          reqCookies =  [{ name: , value: }],
+          reqParams =   [{ name: , value: }],
+          reqHeaders =  [{ name: , value: }],
+          respCookies = [{ name: , value: }],
+          respHeaders = [{ name: , value: }],
           respContent = "",
           url = ""
         }
@@ -53,6 +67,10 @@ OBJECT TYPES STORED ACROSS THE APP:
   SWITCH TO EN(DIS)ABLE AR (UNDER enableAR):
 
     var enableAR = 0 / 1
+
+  SWITCH TO EN(DIS)ABLE PASSIVE MODE (UNDER enablePassiveMode):
+
+    var enablePassiveMode = 0 / 1
 
 
 MESSAGES BEING SENT ACROSS THE APP

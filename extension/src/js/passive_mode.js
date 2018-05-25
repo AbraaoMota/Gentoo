@@ -31,22 +31,40 @@ var messageHandler = function(message, sender, sendResponse) {
 
 // Log any requests and responses for analysis
 function storePassiveRequests(storage, message) {
+
   var passiveRequests = storage["passiveRequests"];
   if (!passiveRequests) {
     passiveRequests = [];
   }
 
-  passiveRequests.push({
-    url:         message.url,
-    reqCookies:  message.reqCookies,
-    reqHeaders:  message.reqHeaders,
-    reqParams:   message.reqParams,
-    respCookies: message.respCookies,
-    respHeaders: message.respHeaders,
-    respContent: message.respContent
-  });
+  if (shouldStorePassiveRequest(message, passiveRequests, storage)) {
+    var passiveModeWindowSize = storage["passiveModeWindowSize"];
+    if (passiveRequests.length >= passiveModeWindowSize) {
+      var evictedReqest = passiveRequests.shift();
+      console.log("WINDOW FULL. EVICTING THIS REQUEST:");
+      console.log(evictedReqest);
+    }
 
-  chrome.storage.local.set({ "passiveRequests": passiveRequests });
+    passiveRequests.push({
+      url:         message.url,
+      reqCookies:  message.reqCookies,
+      reqHeaders:  message.reqHeaders,
+      reqParams:   message.reqParams,
+      respCookies: message.respCookies,
+      respHeaders: message.respHeaders,
+      respContent: message.respContent
+    });
+
+    chrome.storage.local.set({ "passiveRequests": passiveRequests });
+  }
+}
+
+// Helper function do decide whether a passive request should be stored
+function shouldStorePassiveRequest(request, requestList, storage) {
+  var passiveModeEnabled = storage["enablePassiveMode"];
+
+
+
 }
 
 // Enable or disable Passive Mode

@@ -1,7 +1,9 @@
 // Store an object for the default settings
 var initialSettings = {
   "recommenderSensitivity": "1",
-  "recommendationsEnabled": 0
+  "recommendationsEnabled": 0,
+  "passiveModeCrossChecks": 0,
+  "passiveModeWindowSize": 2
 }
 
 // Initialize modals whenever the page is ready
@@ -16,13 +18,19 @@ $(document).ready(function() {
 
 // Load listeners in the settings page
 function settingsModalLoaded() {
-  var recommenderSensitivity = document.getElementById("recommenderSensitivity");
+  var recommenderSensitivity    = document.getElementById("recommenderSensitivity");
+  var recommenderSensitivityVal = document.getElementById("recommenderSensitivityVal");
+  var passiveModeWindowSize     = document.getElementById("passiveModeWindowSize");
+  var passiveModeWindowSizeVal  = document.getElementById("passiveModeWindowSizeVal");
   chrome.storage.local.get(function(storage) {
     var settings = storage["settings"];
     if (!settings) {
       settings = initialSettings;
     }
-    recommenderSensitivity.value = settings["recommenderSensitivity"];
+    recommenderSensitivity.value        = settings["recommenderSensitivity"];
+    recommenderSensitivityVal.innerHTML = settings["recommenderSensitivity"];
+    passiveModeWindowSize.value         = settings["passiveModeWindowSize"];
+    passiveModeWindowSizeVal.innerHTML  = settings["passiveModeWindowSize"];
   });
 
   // Add appropriate listeners for whenever the settings modal is opened
@@ -30,6 +38,8 @@ function settingsModalLoaded() {
   forgetSettingsListener();
   recommenderSensitivityValueListener();
   recommenderEnablerListener();
+  passiveModeCrossChecksEnablerListener();
+  passiveModeWindowSizeListener();
 }
 
 // Update visuals on popup page load
@@ -37,7 +47,6 @@ window.addEventListener("load", function() {
   // Make notification badge disappear from popup when window opened
   chrome.browserAction.setBadgeText({ text: "" });
 
-  // Update switches based on storage
   // Visual switch checking is a separate element to the lever that
   // triggers the switch
   var checkboxAR = document.getElementById("checkboxAR");
@@ -140,10 +149,10 @@ function recommenderEnablerListener() {
 
     var recommendationsEnabled = settings["recommendationsEnabled"];
     var sensitivity = document.getElementById("recommenderSensitivity");
-    if (!recommendationsEnabled) {
-      // Set default settings
-      recommendationsEnabled = 0;
-    }
+    // if (!recommendationsEnabled) {
+    //   // Set default settings
+    //   recommendationsEnabled = 0;
+    // }
     checkboxRecommendations.checked = recommendationsEnabled;
     if (recommendationsEnabled) {
       sensitivity.disabled = false;
@@ -155,6 +164,79 @@ function recommenderEnablerListener() {
   var recommendationsEnabled = document.getElementById("recommendationsEnabled");
   recommendationsEnabled.addEventListener("click", function() {
     toggleRecommendations();
+  });
+}
+
+// Enables and disables cross request passive checks
+function passiveModeCrossChecksEnablerListener() {
+  var checkboxPassiveCrossChecks = document.getElementById("checkboxPassiveCrossChecks");
+  // Get the setting if it has already been set
+  chrome.storage.local.get(function(storage) {
+    var settings = storage["settings"];
+    if (!settings) {
+      settings = initialSettings;
+    }
+    chrome.storage.local.set({ "settings": settings });
+
+    var passiveModeEnabled = storage["enablePassiveMode"];
+    var passiveModeCrossChecksEnabled = settings["passiveModeCrossChecks"];
+    var passiveModeWindowSize = document.getElementById("passiveModeWindowSize");
+    if (passiveModeEnabled) {
+      checkboxPassiveCrossChecks.disabled = false;
+      checkboxPassiveCrossChecks.checked = passiveModeCrossChecksEnabled;
+    } else {
+      checkboxPassiveCrossChecks.disabled = true;
+    }
+    if (passiveModeEnabled && passiveModeCrossChecksEnabled) {
+      passiveModeWindowSize.disabled = false;
+    } else {
+      passiveModeWindowSize.disabled = true;
+    }
+  });
+
+  var passiveCrossChecksEnabled = document.getElementById("passiveCrossChecksEnabled");
+  passiveCrossChecksEnabled.addEventListener("click", function() {
+    togglePassiveCrossChecks();
+  });
+}
+
+// Enable or disable passive mode cross request checking
+function togglePassiveCrossChecks() {
+  chrome.storage.local.get(function(storage) {
+    var cachedSettings = storage["cachedSettings"];
+    if (!cachedSettings) {
+      var settings = storage["settings"];
+      if (!settings) {
+        settings = initialSettings;
+        chrome.storage.local.set({ "settings": settings });
+      }
+      cachedSettings = settings;
+      chrome.storage.local.set({ "cachedSettings": cachedSettings });
+    }
+
+    var passiveModeEnabled = storage["enablePassiveMode"];
+    var passiveCrossChecksEnabled = cachedSettings["passiveModeCrossChecks"];
+    var passiveModeWindowSize = document.getElementById("passiveModeWindowSize");
+
+    if (passiveModeEnabled) {
+      if (passiveCrossChecksEnabled) {
+        // Disable cross checks
+        cachedSettings["passiveModeCrossChecks"] = 0;
+        passiveModeWindowSize.disabled = true;
+        chrome.storage.local.set({ "cachedSettings": cachedSettings });
+      } else {
+        // Enable cross checks
+        cachedSettings["passiveModeCrossChecks"] = 1;
+        passiveModeWindowSize.disabled = false;
+        chrome.storage.local.set({ "cachedSettings": cachedSettings });
+      }
+    } else {
+      // We shouldn't even get to this conditional because the input should be disabled
+      console.log("SHOULDN'T GET HERE");
+      if (passiveCrossChecksEnabled) {
+
+      }
+    }
   });
 }
 
@@ -194,9 +276,7 @@ function forgetSettingsListener() {
       var settings = storage["settings"];
       if (!settings) {
         // Set the default settings
-        settings = {
-          "recommenderSensitivity": "1"
-        };
+        settings = initialSettings;
       }
 
       // Reset the cached settings to the previously known settings list
@@ -215,9 +295,7 @@ function saveSettingsListener() {
       if (!cachedSettings) {
         if (!oldSettings) {
           // Set the default settings
-          oldSettings = {
-            "recommenderSensitivity": "1"
-          };
+          oldSettings = initialSettings;
         }
         cachedSettings = oldSettings;
       }
@@ -252,6 +330,7 @@ function clearDangerousInputs() {
     }
   });
 }
+
 // This function deletes all extension storage content
 function deleteExtensionStorage() {
   var deleteStorageContent = document.getElementById("deleteExtStorage");
@@ -267,21 +346,46 @@ function recommenderSensitivityValueListener() {
   recommenderSensitivity.addEventListener("input", function() {
     var newVal = recommenderSensitivity.value;
     chrome.storage.local.get(function(storage) {
-      var cachedSetting = storage["cachedSettings"];
+      var cachedSettings = storage["cachedSettings"];
       var oldSettings = storage["settings"];
-      if (!cachedSetting) {
+      if (!cachedSettings) {
         if (!oldSettings) {
           // Use default settings
-          oldSettings = {
-            "recommenderSensitivity": "1"
-          };
+          oldSettings = initialSettings;
         }
-        cachedSetting = oldSettings;
+        cachedSettings = oldSettings;
       }
 
-      cachedSetting["recommenderSensitivity"] = newVal;
+      cachedSettings["recommenderSensitivity"] = newVal;
+      var recommenderSensitivityVal = document.getElementById("recommenderSensitivityVal");
+      recommenderSensitivityVal.innerHTML = newVal;
       console.log("WE'RE UPDATING THE SENSITIVITY TO " + newVal);
-      chrome.storage.local.set({ cachedSettings: cachedSetting });
+      chrome.storage.local.set({ "cachedSettings": cachedSettings });
+    });
+  });
+}
+
+// Update passive mode window size settings on change
+function passiveModeWindowSizeListener() {
+  var passiveModeWindowSize = document.getElementById("passiveModeWindowSize");
+  passiveModeWindowSize.addEventListener("input", function() {
+    var newVal = passiveModeWindowSize.value;
+    chrome.storage.local.get(function(storage) {
+      var cachedSettings = storage["cachedSettings"];
+      var oldSettings = storage["settings"];
+      if (!cachedSettings) {
+        if (!oldSettings) {
+          // Use default Settings
+          oldSettings = initialSettings;
+        }
+        cachedSettings = oldSettings;
+      }
+
+      cachedSettings["passiveModeWindowSize"] = newVal;
+      var passiveModeWindowSizeVal = document.getElementById("passiveModeWindowSizeVal");
+      passiveModeWindowSizeVal.innerHTML = newVal;
+      console.log("WE'RE UPDATING WINDOW SIZE TO " + newVal);
+      chrome.storage.local.set({ "cachedSettings": cachedSettings });
     });
   });
 }
@@ -294,8 +398,13 @@ function togglePassiveMode() {
       // Either unset or set to 0 - enable now
       chrome.storage.local.set({ "enablePassiveMode": 1 });
     } else {
-      // Enable
+      // Disable
       chrome.storage.local.set({ "enablePassiveMode": 0 });
+      var settings = storage["settings"];
+      // Ensure cross checks are also disabled
+      if (settings["passiveModeCrossChecks"]) {
+        togglePassiveCrossChecks();
+      }
     }
   });
 

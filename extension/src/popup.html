@@ -82,20 +82,54 @@
 
                     <h5>Recommendation sensitivity</h5>
                     <p>This regulates how sensitive the recommendation system is - the more sensitive, the more opportunities for investigation the extension will suggest</p>
-                    <form action="#">
-                      <p class="range-field">
-                        <input type="range" id="recommenderSensitivity" min="1" max="3" defaultValue="1" />
-                      </p>
-                    </form>
+                    <div class="row valign-wrapper">
+                      <div class="col s10">
+                        <form action="#">
+                          <p class="range-field">
+                          <input type="range" id="recommenderSensitivity" min="1" max="3" defaultValue="1" />
+                          </p>
+                        </form>
+                      </div>
+                      <div class="col s2">
+                        <span id="recommenderSensitivityVal"></span>
+                      </div>
+                    </div>
                   </div>
                 </li>
 
-                <!-- <li> -->
-                <!--   <div class="collapsible-header"> -->
-                <!--   </div> -->
-                <!--   <div class="collapsible-body"> -->
-                <!--   </div> -->
-                <!-- </li> -->
+                <li>
+                  <div class="collapsible-header">
+                    <i class="material-icons">search</i><strong>Passive Mode</strong>
+                  </div>
+                  <div class="collapsible-body">
+                    <span>Enable / disable cross request checks - This will check a number of requests before the current one for correlations that could lead to vulnerabilities</span>
+                    <div class="switch">
+                      <label>
+                        Off
+                        <input type="checkbox" id="checkboxPassiveCrossChecks">
+                        <span id="passiveCrossChecksEnabled" class="lever"></span>
+                        On
+                      </label>
+                    </div>
+
+                    <br>
+
+                    <h5>Cross checks window size</h5>
+                    <p>When cross checking, passive mode works by analysing every new request against the previously gathered ones, up to the number defined by this window size. The larger the window, the more work there is to do </p>
+                    <div class="row valign-wrapper">
+                      <div class="col s10">
+                        <form action="#">
+                          <p class="range-field">
+                          <input type="range" id="passiveModeWindowSize" min="2" max="100" defaultValue="3" />
+                          </p>
+                        </form>
+                      </div>
+                      <div class="col s2">
+                        <span id="passiveModeWindowSizeVal"></span>
+                      </div>
+                    </div>
+                  </div>
+                </li>
 
               </ul>
             </div>
@@ -178,8 +212,8 @@
       </div>
 
 
-      <div id="test2" class="col s12">Test 2. Henlo</div>
-      <div id="test3" class="col s12">Test 3</div>
+      <div id="sqliContent" class="col s12">Test 2. Henlo</div>
+      <div id="authContent" class="col s12">Test 3</div>
     </div>
 
     <br>

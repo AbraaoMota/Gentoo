@@ -11,6 +11,7 @@ $(document).ready(function() {
   $('#xssWarning').modal();
   $("#potentialWarning").modal();
   $("#clearExtensionStorage").modal();
+  $("#weakHeaderWarning").modal();
   $("#settings").modal({
     ready: settingsModalLoaded
   });
@@ -42,69 +43,6 @@ function settingsModalLoaded() {
   passiveModeWindowSizeListener();
 }
 
-// Update visuals on popup page load
-window.addEventListener("load", function() {
-  // Make notification badge disappear from popup when window opened
-  chrome.browserAction.setBadgeText({ text: "" });
-
-  // Visual switch checking is a separate element to the lever that
-  // triggers the switch
-  var checkboxAR = document.getElementById("checkboxAR");
-  chrome.storage.local.get("enableAR", function(flag) {
-    if (flag["enableAR"] === 1) {
-      checkboxAR.checked = flag;
-    }
-  });
-
-  var checkboxPassiveMode = document.getElementById("checkboxPassiveMode");
-  chrome.storage.local.get(function(storage) {
-    checkboxPassiveMode.checked = storage["enablePassiveMode"];
-  });
-
-  chrome.storage.local.get(function(storage) {
-    // Create elements for the weak URL list to appear
-    // This list is kept in chrome storage under the 'weakURLs' key
-    var weakURLs = storage["weakURLs"];
-
-    var reflectedList = document.getElementById("xssURLs");
-    if (weakURLs) {
-      for (var i = 0; i < weakURLs.length; i++) {
-        var p = document.createElement("p");
-        p.innerHTML = weakURLs[i];
-        reflectedList.appendChild(p);
-      }
-    }
-
-    // Create elements for the potentialXSS warning list,
-    // this list is also kept in chrome storage under "potentialXSS"
-    var potentialXSS = storage["potentialXSS"];
-    var potentiallyDangerousList = document.getElementById("potentialXSS");
-
-    if (potentialXSS) {
-      var collection = document.createElement("ul");
-      collection.classList.add("collection");
-
-      for (var i = 0; i < potentialXSS.length; i++) {
-        var collItem = document.createElement("li");
-        collItem.classList.add("collection-item");
-
-        var inputTypeAndUrl = document.createElement("p");
-        inputTypeAndUrl.innerHTML = "This input is a <strong>" + potentialXSS[i].type + "</strong> from the URL:<br />" + potentialXSS[i].url;
-
-        var inputValues = document.createElement("p");
-        inputValues.innerHTML = "Name: " + potentialXSS[i].name + "<br />Value: " + potentialXSS[i].value;
-
-        collItem.appendChild(inputTypeAndUrl);
-        collItem.appendChild(inputValues);
-
-        collection.appendChild(collItem);
-      }
-      potentiallyDangerousList.appendChild(collection);
-    }
-
-  });
-}, false);
-
 // Add listeners to the page for events created from the popup page
 document.addEventListener('DOMContentLoaded', function() {
 
@@ -134,7 +72,116 @@ document.addEventListener('DOMContentLoaded', function() {
     deleteExtensionStorage();
   });
 
+  var passiveTab = document.getElementById("passiveTab");
+  passiveTab.addEventListener("load", function() {
+    clearWeakHeaders();
+  });
+
 });
+
+// Update visuals on popup page load
+window.addEventListener("load", function() {
+  // Make notification badge disappear from popup when window opened
+  chrome.browserAction.setBadgeText({ text: "" });
+
+  // Visual switch checking is a separate element to the lever that
+  // triggers the switch
+  var checkboxAR = document.getElementById("checkboxAR");
+  chrome.storage.local.get("enableAR", function(flag) {
+    if (flag["enableAR"] === 1) {
+      checkboxAR.checked = flag;
+    }
+  });
+
+  var checkboxPassiveMode = document.getElementById("checkboxPassiveMode");
+  chrome.storage.local.get(function(storage) {
+    checkboxPassiveMode.checked = storage["enablePassiveMode"];
+  });
+
+  chrome.storage.local.get(function(storage) {
+
+    renderWeakURLs(storage);
+    renderPotentialXSS(storage);
+    renderWeakHeaderRequests(storage);
+
+  });
+
+}, false);
+
+// Create elements for the weak URL list to appear
+// This list is kept in chrome storage under the 'weakURLs' key
+function renderWeakURLs(storage) {
+  var weakURLs = storage["weakURLs"];
+
+  var reflectedList = document.getElementById("xssURLs");
+  if (weakURLs) {
+    for (var i = 0; i < weakURLs.length; i++) {
+      var p = document.createElement("p");
+      p.innerHTML = weakURLs[i];
+      reflectedList.appendChild(p);
+    }
+  }
+}
+
+// Create elements for the potentialXSS warning list,
+// this list is also kept in chrome storage under "potentialXSS"
+function renderPotentialXSS(storage) {
+  var potentialXSS = storage["potentialXSS"];
+  var potentiallyDangerousList = document.getElementById("potentialXSS");
+
+  if (potentialXSS) {
+    var collection = document.createElement("ul");
+    collection.classList.add("collection");
+
+    for (var i = 0; i < potentialXSS.length; i++) {
+      var collItem = document.createElement("li");
+      collItem.classList.add("collection-item");
+
+      var inputTypeAndUrl = document.createElement("p");
+      inputTypeAndUrl.innerHTML = "This input is a <strong>" + potentialXSS[i].type + "</strong> from the URL:<br />" + potentialXSS[i].url;
+
+      var inputValues = document.createElement("p");
+      inputValues.innerHTML = "Name: " + potentialXSS[i].name + "<br />Value: " + potentialXSS[i].value;
+
+      collItem.appendChild(inputTypeAndUrl);
+      collItem.appendChild(inputValues);
+
+      collection.appendChild(collItem);
+    }
+    potentiallyDangerousList.appendChild(collection);
+  }
+}
+
+// Create elements for the requests with weak security headers
+function renderWeakHeaderRequests(storage) {
+  var passiveModeWeakHeaderRequests = storage["passiveModeWeakHeaderRequests"];
+  var weakHeaderRequestList = document.getElementById("insecureRequests");
+
+  if (passiveModeWeakHeaderRequests) {
+    var collection = document.createElement("ul");
+    collection.classList.add("collection");
+
+    for (var i = 0; i < passiveModeWeakHeaderRequests.length; i++) {
+      var collItem = document.createElement("li");
+      collItem.classList.add("collection-item");
+
+      var reqDescription = document.createElement("p");
+      reqDescription.innerHTML = "This request is from <strong>" + passiveModeWeakHeaderRequests[i].url + "</strong>";
+      collItem.appendChild(reqDescription);
+
+      var warnings = document.createElement("ul");
+      for (var j = 0; j < passiveModeWeakHeaderRequests[i]["warnings"].length; j++) {
+        var warning = document.createElement("p");
+        warning.innerHTML = passiveModeWeakHeaderRequests[i]["warnings"][j];
+        warnings.appendChild(warning);
+      }
+
+      collItem.appendChild(warnings);
+      collection.appendChild(collItem);
+    }
+    weakHeaderRequestList.appendChild(collection);
+  }
+}
 
 // Enables and disables recommender engine
 function recommenderEnablerListener() {
@@ -149,10 +196,7 @@ function recommenderEnablerListener() {
 
     var recommendationsEnabled = settings["recommendationsEnabled"];
     var sensitivity = document.getElementById("recommenderSensitivity");
-    // if (!recommendationsEnabled) {
-    //   // Set default settings
-    //   recommendationsEnabled = 0;
-    // }
+
     checkboxRecommendations.checked = recommendationsEnabled;
     if (recommendationsEnabled) {
       sensitivity.disabled = false;
@@ -230,12 +274,6 @@ function togglePassiveCrossChecks() {
         passiveModeWindowSize.disabled = false;
         chrome.storage.local.set({ "cachedSettings": cachedSettings });
       }
-    } else {
-      // We shouldn't even get to this conditional because the input should be disabled
-      console.log("SHOULDN'T GET HERE");
-      if (passiveCrossChecksEnabled) {
-
-      }
     }
   });
 }
@@ -305,6 +343,18 @@ function saveSettingsListener() {
   });
 }
 
+// Clears out list of requests with weak header settings
+function clearWeakHeaders() {
+  var clearHeaders = document.getElementById("clearWeakHeaders");
+  clearHeaders.addEventListener("click", function() {
+    chrome.storage.local.remove("passiveModeWeakHeaderRequests");
+    var weakRequests = document.getElementById("insecureRequests");
+    while (weakRequests.firstChild) {
+      weakRequests.removeChild(weakRequests.firstChild);
+    }
+  });
+}
+
 // Clears out the list of URLs to which we have been redirected from to reach
 // the `request_logger` page
 function clearReflectedXSS() {
@@ -359,7 +409,6 @@ function recommenderSensitivityValueListener() {
       cachedSettings["recommenderSensitivity"] = newVal;
       var recommenderSensitivityVal = document.getElementById("recommenderSensitivityVal");
       recommenderSensitivityVal.innerHTML = newVal;
-      console.log("WE'RE UPDATING THE SENSITIVITY TO " + newVal);
       chrome.storage.local.set({ "cachedSettings": cachedSettings });
     });
   });
@@ -384,7 +433,6 @@ function passiveModeWindowSizeListener() {
       cachedSettings["passiveModeWindowSize"] = newVal;
       var passiveModeWindowSizeVal = document.getElementById("passiveModeWindowSizeVal");
       passiveModeWindowSizeVal.innerHTML = newVal;
-      console.log("WE'RE UPDATING WINDOW SIZE TO " + newVal);
       chrome.storage.local.set({ "cachedSettings": cachedSettings });
     });
   });
@@ -406,17 +454,6 @@ function togglePassiveMode() {
         togglePassiveCrossChecks();
       }
     }
-  });
-
-  // Send out a message
-  chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
-    chrome.tabs.sendMessage(
-      tabs[0].id,
-      {
-        msg: "togglePassiveMode"
-      },
-      function(response) {}
-    );
   });
 }
 

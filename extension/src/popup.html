@@ -152,8 +152,8 @@
       <div class="col s12">
         <ul class="tabs">
           <li id="xssTab" class="tab col s3"><a class="active" href="#xssContent">XSS</a></li>
-          <li id="sqliTab" class="tab col s3"><a href="#sqliContent">SQL injections</a></li>
-          <li id="authTab" class="tab col s3"><a href="#authContent">Poor Authentication</a></li>
+          <li id="passiveTab" class="tab col s3"><a href="#passiveContent">Passive Analysis</a></li>
+          <!-- <li id="authTab" class="tab col s3"><a href="#authContent">Poor Authentication</a></li> -->
           <!-- <li id=""class="tab col s3"><a href="#test4">Test 4</a></li> -->
         </ul>
       </div>
@@ -167,10 +167,11 @@
           </li>
         </ul>
 
-        <!-- <p><strong>Reset XSS URL list</strong></p> -->
         <a class="waves-effect waves-light btn btn-small red darken-2 modal-trigger" href="#xssWarning">
           <i class="material-icons right">clear</i>Clear weak URL list
         </a>
+
+
 
         <div id="xssWarning" class="modal">
           <div class="modal-content">
@@ -212,8 +213,33 @@
       </div>
 
 
-      <div id="sqliContent" class="col s12">Test 2. Henlo</div>
-      <div id="authContent" class="col s12">Test 3</div>
+      <div id="passiveContent" class="col s12">
+
+        <p><strong>This is a list of requests detected to have weak header settings:</strong></p>
+        <ul class="collapsible">
+          <li>
+            <div class="collapsible-header"><i class="material-icons">flag</i>Weak Security headers</div>
+            <div class="collapsible-body" id="insecureRequests"></div>
+          </li>
+        </ul>
+        <a class="waves-effect waves-light btn btn-small red darken-2 modal-trigger" href="#weakHeaderWarning">
+          <i class="material-icons right">clear</i>Clear weak security header list
+        </a>
+
+        <div id="weakHeaderWarning" class="modal">
+          <div class="modal-content">
+            <h4>Clear list of requests with weak security headers</h4>
+            <p>This action cannot be undone. Are you sure?</p>
+          </div>
+          <div class="modal-footer">
+            <a href="#!" class="modal-action modal-close waves-effect waves-red btn-flat">Cancel</a>
+            <a id="clearWeakHeaders" href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Yes, delete weak security header list</a>
+          </div>
+        </div>
+
+
+
+      </div>
     </div>
 
     <br>

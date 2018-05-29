@@ -2,17 +2,17 @@
 
 // Message handling logic - contains a flag to synchronously process messages
 // to avoid async DB overwrites
-var messageHandlerBusy = false;
-var messageHandler = function(message, sender, sendResponse) {
+var ARMessageHandlerBusy = false;
+var ARMessageHandler = function(message, sender, sendResponse) {
 
-  if (messageHandlerBusy) {
+  if (ARMessageHandlerBusy) {
     window.setTimeout(function() {
-      messageHandler(message, sender, sendResponse);
+      ARMessageHandler(message, sender, sendResponse);
     }, 0);
     return;
   }
 
-  messageHandlerBusy = true;
+  ARMessageHandlerBusy = true;
 
   chrome.storage.local.get(function(storage) {
     var ARsession = storage["ARsession"];
@@ -20,16 +20,18 @@ var messageHandler = function(message, sender, sendResponse) {
     if (message.msg === "toggleAR") {
       // Either start or stop Action Replay session
       toggleActionRecordingButton();
-      messageHandlerBusy = false;
+      ARMessageHandlerBusy = false;
     } else if (message.name === "devToolsParams" && ARsession === "recording") {
       storeARrequests(storage, message);
-      messageHandlerBusy = false;
+      ARMessageHandlerBusy = false;
     }
   });
+
+  // return true;
 }
 
 // Set messageHandler to listen to messages
-chrome.runtime.onMessage.addListener(messageHandler);
+chrome.runtime.onMessage.addListener(ARMessageHandler);
 
 // Log important parameters sent in requests and responses, forwarded from devTools page
 // Only important messages here are while the action replay session is recording
@@ -423,32 +425,6 @@ function replayAttacks(potentiallyDangerousInputs, requestNumber) {
   }
 
 }
-
-// function sethtml(div,content) {
-//   var search = content;
-//   var script;
-//   var truScript;
-
-
-//   // console.log("SEARCHING THROUGH THIS CONTENT");
-//   // console.log(content);
-//   while (script = search.match(/(<script([^>]+)?(javascript[^>]+)?>\s*(<!--)?)/i)) {
-
-//     if (!(endscript = search.match(/((-->)?\s*<\/script>)/))) break;
-
-//     block = search.substr(0, search.indexOf(RegExp.$1));
-//     search = search.substring(block.length + RegExp.$1.length);
-
-//     var oScript = document.createElement('script');
-//     oScript.text = block;
-//     document.getElementsByTagName("head").item(0).appendChild(oScript);
-//   }
-
-//   div.innerHTML = content;
-//   // document.getElementById(div).innerHTML = content;
-//   // document.getElementById("testDiv").innerHTML = content;
-//   // eval(truScript);
-// }
 
 function readTextFile(file) {
   var rawFile = new XMLHttpRequest();

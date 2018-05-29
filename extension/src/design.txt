@@ -6,13 +6,30 @@ OBJECT TYPES STORED ACROSS THE APP:
     var passiveModeRequests = {
       [
         {
-          reqCookies =  [{ name: , value: }],
-          reqParams =   [{ name: , value: }],
-          reqHeaders =  [{ name: , value: }],
-          respCookies = [{ name: , value: }],
-          respHeaders = [{ name: , value: }],
-          respContent = "",
-          url = ""
+          reqCookies:  [{ name: , value: }],
+          reqParams:   [{ name: , value: }],
+          reqHeaders:  [{ name: , value: }],
+          respCookies: [{ name: , value: }],
+          respHeaders: [{ name: , value: }],
+          respContent: "",
+          url: ""
+        }
+      ]
+    }
+
+  WEAK PASSIVE REQUESTS (Requests with weak headers):
+
+    var passiveModeWeakHeaderRequests = {
+      [
+        {
+          reqCookies:  [{ name: , value: }],
+          reqParams:   [{ name: , value: }],
+          reqHeaders:  [{ name: , value: }],
+          respCookies: [{ name: , value: }],
+          respHeaders: [{ name: , value: }],
+          respContent: "",
+          url: "",
+          warnings: [ "Weak 1", "Weak 2"]
         }
       ]
     }
@@ -49,13 +66,13 @@ OBJECT TYPES STORED ACROSS THE APP:
     var ARrequests = {
       [
         {
-          reqCookies =  [{ name: , value: }],
-          reqParams =   [{ name: , value: }],
-          reqHeaders =  [{ name: , value: }],
-          respCookies = [{ name: , value: }],
-          respHeaders = [{ name: , value: }],
-          respContent = "",
-          url = ""
+          reqCookies:  [{ name: , value: }],
+          reqParams:   [{ name: , value: }],
+          reqHeaders:  [{ name: , value: }],
+          respCookies: [{ name: , value: }],
+          respHeaders: [{ name: , value: }],
+          respContent: "",
+          url: ""
         }
       ]
     }
@@ -85,3 +102,6 @@ MESSAGES BEING SENT ACROSS THE APP
 
 > REQUEST LOGGER (?)
 
+> AR TO BACKGROUND (?)
+
+> PASSIVE MODE TO BACKGROUND (?)

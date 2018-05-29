@@ -67,12 +67,12 @@ function runPassiveAnalysis(r) {
 function analyseRequestHeaders(r) {
 
   var secureHeaders = {
-    "Content-Security-Policy":   "",
-    "Referrer-Policy":           "",
-    "Strict-Transport-Security": "",
-    "X-Content-Type-Options":    "",
-    "X-Frame-Options":           "",
-    "X-XSS-Protection":          ""
+    "content-security-policy":   "",
+    "referrer-policy":           "",
+    "strict-transport-security": "",
+    "x-content-type-options":    "",
+    "x-frame-options":           "",
+    "x-xss-protection":          ""
   }
 
   var reqHeaders = r.reqHeaders;
@@ -82,7 +82,7 @@ function analyseRequestHeaders(r) {
   // Loop over all headers in the request, if they match
   // any in the secure headers, keep their value
   for (var i = 0; i < allHeaders.length; i++) {
-    var headerName = allHeaders[i]["name"];
+    var headerName = allHeaders[i]["name"].toLowerCase();
     var headerValue = allHeaders[i]["value"];
 
     if (Object.keys(secureHeaders).indexOf(headerName) >= 0) {
@@ -93,6 +93,8 @@ function analyseRequestHeaders(r) {
 
   var warnings = [];
 
+  console.log("THESE ARE THE SECURE HEADERS");
+  console.log(secureHeaders);
   var secureHeaderKeys = Object.keys(secureHeaders);
   // Loop over security header values and produce appropriate response
   for (var j = 0; j < secureHeaderKeys.length; j++) {
@@ -100,44 +102,44 @@ function analyseRequestHeaders(r) {
     var value = secureHeaders[header];
 
     switch (header) {
-      case "Content-Security-Policy":
+      case "content-security-policy":
         if (value === "") {
-          warnings.push("The Content-Security-Policy header is not set. This may result in malicious assets being loaded.");
+          warnings.push("The <b>Content-Security-Policy</b> header is not set. This may result in malicious assets being loaded.");
         }
         break;
 
-      case "Referrer-Policy":
+      case "referrer-policy":
         if (value === "") {
-          warnings.push("The Referrer-Policy header is not set. This controls how much information is given by the site on navigation away from it.");
-        }
-
-        break;
-
-      case "Strict-Transport-Security":
-        if (value === "") {
-          warnings.push("The Strict-Transport-Security header is not set. Setting it strengthens the TLS implementation by enforcing the User Agent to use HTTPS.");
-        }
-
-
-        break;
-
-      case "X-Content-Type-Options":
-        if (value === "") {
-          warnings.push("The X-Content-Type-Options header is not set. Setting it to \"nosniff\" prevents any MIME type sniffing attacks.");
+          warnings.push("The <b>Referrer-Policy</b> header is not set. This controls how much information is given by the site on navigation away from it.");
         }
 
         break;
 
-      case "X-Frame-Options":
+      case "strict-transport-security":
         if (value === "") {
-          warnings.push("The X-Frame-Options header is not set. Setting it can prevent clickjacking attacks by rendering the site in external frames. Recommended value is: \"SAMEORIGIN\".");
+          warnings.push("The <b>Strict-Transport-Security</b> header is not set. Setting it strengthens the TLS implementation by enforcing the User Agent to use HTTPS.");
+        }
+
+
+        break;
+
+      case "x-content-type-options":
+        if (value === "") {
+          warnings.push("The <b>X-Content-Type-Options</b> header is not set. Setting it to <b>\"nosniff\"</b> prevents any MIME type sniffing attacks.");
         }
 
         break;
 
-      case "X-XSS-Protection":
+      case "x-frame-options":
         if (value === "") {
-          warnings.push("The X-XSS-Protection header is not set. Setting it to \"1;mode=block\" will prevent the page from loading on some browsers if reflected XSS is detected.");
+          warnings.push("The <b>X-Frame-Options</b> header is not set. Setting it can prevent clickjacking attacks by rendering the site in external frames. Recommended value is: <b>\"SAMEORIGIN\"</b>.");
+        }
+
+        break;
+
+      case "x-xss-protection":
+        if (value === "") {
+          warnings.push("The <b>X-XSS-Protection</b> header is not set. Setting it to <b>\"1;mode=block\"</b> will prevent the page from loading on some browsers if reflected XSS is detected.");
         }
 
         break;

@@ -61,6 +61,7 @@ document.addEventListener('DOMContentLoaded', function() {
   // Activate the listeners for the active tab
   clearReflectedXSS();
   clearDangerousInputs();
+  clearWeakHeaders();
   deleteExtensionStorage();
 
   // Reactivate listeners for when we switch back into this tab

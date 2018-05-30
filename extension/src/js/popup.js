@@ -3,6 +3,7 @@ var initialSettings = {
   "recommenderSensitivity": "1",
   "recommendationsEnabled": 0,
   "passiveModeCSRFEnabled": 0,
+  "passiveModeCookiesEnabled": 0,
   "passiveModeCrossChecks": 0,
   "passiveModeWindowSize": 2
 }
@@ -41,6 +42,7 @@ function settingsModalLoaded() {
   recommenderSensitivityValueListener();
   recommenderEnablerListener();
   passiveModeCSRFEnablerListener();
+  passiveModeCookiesEnablerListener();
   passiveModeCrossChecksEnablerListener();
   passiveModeWindowSizeListener();
 }
@@ -240,6 +242,34 @@ function passiveModeCSRFEnablerListener() {
   });
 }
 
+// Enables and disables weak Cookie settings in passive Mode
+function passiveModeCookiesEnablerListener() {
+  var checkboxPassiveCookies = document.getElementById("checkboxPassiveCookies");
+  // Get the setting if it has already been set
+  chrome.storage.local.get(function(storage) {
+    var settings = storage["settings"];
+    if (!settings) {
+      settings = initialSettings;
+    }
+    chrome.storage.local.set({ "settings": settings });
+
+    var passiveModeEnabled = storage["enablePassiveMode"];
+    var passiveModeCookiesEnabled = settings["passiveModeCookiesEnabled"];
+
+    if (passiveModeEnabled) {
+      checkboxPassiveCookies.disabled = false;
+      checkboxPassiveCookies.checked = passiveModeCSRFEnabled;
+    } else {
+      checkboxPassiveCSRF.disabled = true;
+    }
+  });
+
+  var passiveCookiesEnabled = document.getElementById("passiveCookiesEnabled");
+  passiveCookiesEnabled.addEventListener("click", function() {
+    togglePassiveCookies();
+  });
+}
+
 // Enables and disables cross request passive checks
 function passiveModeCrossChecksEnablerListener() {
   var checkboxPassiveCrossChecks = document.getElementById("checkboxPassiveCrossChecks");
@@ -331,6 +361,36 @@ function togglePassiveCSRF() {
         chrome.storage.local.set({ "cachedSettings": cachedSettings });
       } else {
         cachedSettings["passiveModeCSRFEnabled"] = 1;
+        chrome.storage.local.set({ "cachedSettings": cachedSettings });
+      }
+    }
+  });
+}
+
+// Enable or disable passive mode weak Cookie checks
+function togglePassiveCookies() {
+  chrome.storage.local.get(function(storage) {
+    var cachedSettings = storage["cachedSettings"];
+    if (!cachedSettings) {
+      var settings = storage["settings"];
+      if (!settings) {
+        settings = initialSettings;
+        chrome.storage.local.set({ "settings": settings });
+      }
+      cachedSettings = settings;
+      chrome.storage.local.set({ "cachedSettings": cachedSettings });
+    }
+
+    var passiveModeEnabled = storage["enablePassiveMode"];
+    var passiveModeCookiesEnabled = cachedSettings["passiveModeCookiesEnabled"];
+
+    if (passiveModeEnabled) {
+      if (passiveModeCookiesEnabled) {
+        // Disable passive cookie checks
+        cachedSettings["passiveModeCookiesEnabled"] = 0;
+        chrome.storage.local.set({ "cachedSettings": cachedSettings });
+      } else {
+        cachedSettings["passiveModeCookiesEnabled"] = 1;
         chrome.storage.local.set({ "cachedSettings": cachedSettings });
       }
     }

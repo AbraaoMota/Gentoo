@@ -67,6 +67,10 @@ function runPassiveAnalysis(storage, r) {
     if (passiveModeCSRFEnabled) {
       analyseRequestForCSRF(r);
     }
+
+    if (passiveModeCookiesEnabled) {
+      analyseRequestForCookies(r);
+    }
   }
 }
 
@@ -276,5 +280,26 @@ function analyseRequestForCSRF(r) {
     sendWeakRequestWarning(passiveModeWeakHeaderRequests);
   });
 
+}
+
+// Analyses the request for weak cookie settings if the cookie exists
+function analyseRequestForCookies(r) {
+
+
+
+  // Store requests with weak headers
+  chrome.storage.local.get(function(storage) {
+    var passiveModeWeakHeaderRequests = storage["passiveModeWeakHeaderRequests"];
+    if (!passiveModeWeakHeaderRequests) {
+      passiveModeWeakHeaderRequests = [];
+    }
+
+    passiveModeWeakHeaderRequests.push(r);
+
+    chrome.storage.local.set({ "passiveModeWeakHeaderRequests": passiveModeWeakHeaderRequests });
+
+    // Send warning to extension to display weak requests
+    sendWeakRequestWarning(passiveModeWeakHeaderRequests);
+  });
 }
 

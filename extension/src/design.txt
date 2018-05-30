@@ -37,21 +37,23 @@ OBJECT TYPES STORED ACROSS THE APP:
   CACHED SETTINGS (BUFFER FOR SETTING UPDATES):
 
     var cachedSettings = {
-      recommenderSensitivity: "1" / "2" / "3",
-      recommendationsEnabled: 0 / 1,
-      passiveModeCSRFEnabled: 0 / 1,
-      passiveModeCrossChecks: 0 / 1,
-      passiveModeWindowSize: (number selection, 2+)
+      recommenderSensitivity:    "1" / "2" / "3",
+      recommendationsEnabled:    0 / 1,
+      passiveModeCSRFEnabled:    0 / 1,
+      passiveModeCookiesEnabled: 0 / 1,
+      passiveModeCrossChecks:    0 / 1,
+      passiveModeWindowSize:     (number selection, 2+)
     }
 
   SETTINGS (STORES ALL SETTINGS IN USE):
 
     var settings = {
-      recommenderSensitivity: "1" / "2" / "3",
-      recommendationsEnabled: 0 / 1,
-      passiveModeCSRFEnabled: 0 / 1,
-      passiveModeCrossChecks: 0 / 1,
-      passiveModeWindowSize: (number selection)
+      recommenderSensitivity:    "1" / "2" / "3",
+      recommendationsEnabled:    0 / 1,
+      passiveModeCSRFEnabled:    0 / 1,
+      passiveModeCookiesEnabled: 0 / 1,
+      passiveModeCrossChecks:    0 / 1,
+      passiveModeWindowSize:     (number selection)
     }
 
   INPUTS FOR INSPECTION (STORED UNDER potentialXSS):

@@ -17,7 +17,7 @@ var passiveMessageHandler = function(message, sender, sendResponse) {
 
     if (message.name === "devToolsParams" && enablePassiveMode) {
       storePassiveRequests(storage, message);
-      runPassiveAnalysis(message);
+      runPassiveAnalysis(storage, message);
       passiveMessageHandlerBusy = false;
     }
   });
@@ -52,14 +52,21 @@ function storePassiveRequests(storage, message) {
 }
 
 // Passive Analysis algorithm
-function runPassiveAnalysis(r) {
+function runPassiveAnalysis(storage, r) {
 
+  // This mode *should* only be enabled after turning it on in the settings, meaning
+  // it won't attempt an undefined array access
+  var passiveModeCSRFEnabled = storage["settings"]["passiveModeCSRFEnabled"];
   // We only want to analyse "text/html" type requests for now
   var contentTypeIndex = headerIndex(r, "respHeaders", "Content-type");
 
   if (contentTypeIndex >= 0 && r["respHeaders"][contentTypeIndex].value.includes("text/html")) {
     console.log("ANALYSING HEADERS FOR A REQUEST");
     analyseRequestHeaders(r);
+
+    if (passiveModeCSRFEnabled) {
+      analyseRequestForCSRF(r);
+    }
   }
 }
 
@@ -92,9 +99,6 @@ function analyseRequestHeaders(r) {
   }
 
   var warnings = [];
-
-  console.log("THESE ARE THE SECURE HEADERS");
-  console.log(secureHeaders);
   var secureHeaderKeys = Object.keys(secureHeaders);
   // Loop over security header values and produce appropriate response
   for (var j = 0; j < secureHeaderKeys.length; j++) {
@@ -151,10 +155,11 @@ function analyseRequestHeaders(r) {
     return;
   }
 
-  console.log("WE'VE GOT A REQUEST WITH WARNINGS");
-
   // Attach warnings to request
-  r["warnings"] = warnings;
+  if (!r["warnings"]) {
+    r["warnings"] = [];
+  }
+  r["warnings"] = r["warnings"].concat(warnings);
 
   // Store requests with weak headers
   chrome.storage.local.get(function(storage) {
@@ -171,7 +176,7 @@ function analyseRequestHeaders(r) {
     sendWeakRequestWarning(passiveModeWeakHeaderRequests);
   });
 
-  }
+}
 
 // Function to warn popup page about requests with weak headers
 function sendWeakRequestWarning(passiveModeWeakHeaderRequests) {
@@ -183,3 +188,93 @@ function sendWeakRequestWarning(passiveModeWeakHeaderRequests) {
     }
   });
 }
+
+// Run some basic CSRF warning checks on the request
+function analyseRequestForCSRF(r) {
+
+  // In this check we are assuming that the page in question matches some basic
+  // requirements:
+  // 1) Must have a form for submission
+  // 2) A session related cookie has been set
+  // 3) The form does not contain a hidden input
+  // If the website has a mix of these then it is possible that the website is
+  // purely using cookies to handle sessions as opposed to extra form inputs
+  // in the form of Anti-CSRF tokens or extra randomised URL inputs. This
+  // is very difficult to fully automate checks for so will only produce a warning
+  // for now. Matching names will be done based on rudimentary checks against a
+  // preformed list.
+
+  var responseContent = r.respContent;
+
+  // No form to submit to potentially cause CSRF
+  if (!responseContent.includes("<form")) return;
+
+  var allCookies = r.reqCookies.concat(r.respCookies);
+
+  // A basic list of potential matches to check for in cookies
+  var cookieNameMatch = [
+    "phpsessid",
+    "jsessionid",
+    "cfid",
+    "cftoken",
+    "asp.net_sessionid",
+    "id",
+    "sess",
+  ];
+
+  var potentialSessionIdSet = false;
+  for (var i = 0; i < allCookies.length; i++) {
+    var currCookie = allCookies[i];
+
+    for (var j = 0; j < cookieNameMatch.length; j++) {
+      var currMatch = cookieNameMatch[j];
+
+      if (currCookie["name"].toLowerCase().includes(currMatch)) {
+        potentialSessionIdSet = true;
+        break;
+      }
+    }
+    if (potentialSessionIdSet) break;
+  }
+
+  // Couldn't find a potentially matching cookie for a session id
+  if (!potentialSessionIdSet) return;
+
+  // Search response content for a hidden input
+  var inputSearchRegex = /(<input)([^>])+>/g;
+
+  var matchInputs;
+  while ((matchInputs = inputSearchRegex.exec(responseContent)) !== null) {
+    var matchedString = matchInputs[0];
+    if (matchedString.toLowerCase().includes("type=\"hidden\"")) {
+      // We got this far and found a hidden input. Don't know for sure
+      // if it's an Anti-CSRF token but we will leave it there
+      return;
+    }
+  }
+
+  // We got this far and didn't find a hidden input. Issue a warning for potential CSRF
+  // Attach warnings to request
+  var warnings = ["This request showed signs of a <b>potential CSRF vulnerability</b>. It looks like a session cookie was set, and a form on this page is not using an Anti-CSRF token."];
+  if (!r["warnings"]) {
+    r["warnings"] = [];
+  }
+  r["warnings"] = r["warnings"].concat(warnings);
+
+  // Store requests with weak headers
+  chrome.storage.local.get(function(storage) {
+    var passiveModeWeakHeaderRequests = storage["passiveModeWeakHeaderRequests"];
+    if (!passiveModeWeakHeaderRequests) {
+      passiveModeWeakHeaderRequests = [];
+    }
+
+    passiveModeWeakHeaderRequests.push(r);
+
+    chrome.storage.local.set({ "passiveModeWeakHeaderRequests": passiveModeWeakHeaderRequests });
+
+    // Send warning to extension to display weak requests
+    sendWeakRequestWarning(passiveModeWeakHeaderRequests);
+  });
+
+}
+

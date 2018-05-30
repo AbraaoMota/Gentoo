@@ -51,7 +51,7 @@
             On
           </label>
         </div>
-        <p><i>Passive Mode analyses all your incoming and outgoing traffic and flags up any potentially dangerous inputs, highlighted below. It will not make any active requests. Remember to disable Action Replay and Recommendations for correct intended usage</i></p>
+        <p><i>Passive Mode analyses all your incoming and outgoing traffic and flags up any potentially dangerous inputs, highlighted below. It will not make any active requests. Remember to disable Action Replay and Recommendations for true passive mode (no requests made).</i></p>
 
       </div>
 
@@ -101,7 +101,20 @@
                   <div class="collapsible-header">
                     <i class="material-icons">search</i><strong>Passive Mode</strong>
                   </div>
+
                   <div class="collapsible-body">
+
+                    <span>Enable / disable basic CSRF alerts</span>
+                    <div class="switch">
+                      <label>
+                        Off
+                        <input type="checkbox" id="checkboxPassiveCSRF">
+                        <span id="passiveCSRFEnabled" class="lever"></span>
+                        On
+                      </label>
+                    </div>
+
+
                     <span>Enable / disable cross request checks - This will check a number of requests before the current one for correlations that could lead to vulnerabilities</span>
                     <div class="switch">
                       <label>

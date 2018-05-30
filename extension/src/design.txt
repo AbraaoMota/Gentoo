@@ -39,6 +39,7 @@ OBJECT TYPES STORED ACROSS THE APP:
     var cachedSettings = {
       recommenderSensitivity: "1" / "2" / "3",
       recommendationsEnabled: 0 / 1,
+      passiveModeCSRFEnabled: 0 / 1,
       passiveModeCrossChecks: 0 / 1,
       passiveModeWindowSize: (number selection, 2+)
     }
@@ -48,6 +49,7 @@ OBJECT TYPES STORED ACROSS THE APP:
     var settings = {
       recommenderSensitivity: "1" / "2" / "3",
       recommendationsEnabled: 0 / 1,
+      passiveModeCSRFEnabled: 0 / 1,
       passiveModeCrossChecks: 0 / 1,
       passiveModeWindowSize: (number selection)
     }

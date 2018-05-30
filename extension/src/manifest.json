@@ -44,6 +44,7 @@
           "cookies",
           "storage",
           "tabs",
+          "unlimitedStorage",
           "*://*/*"
   ],
   "browser_action": {

@@ -2,6 +2,7 @@
 var initialSettings = {
   "recommenderSensitivity": "1",
   "recommendationsEnabled": 0,
+  "passiveModeCSRFEnabled": 0,
   "passiveModeCrossChecks": 0,
   "passiveModeWindowSize": 2
 }
@@ -39,6 +40,7 @@ function settingsModalLoaded() {
   forgetSettingsListener();
   recommenderSensitivityValueListener();
   recommenderEnablerListener();
+  passiveModeCSRFEnablerListener();
   passiveModeCrossChecksEnablerListener();
   passiveModeWindowSizeListener();
 }
@@ -100,11 +102,9 @@ window.addEventListener("load", function() {
   });
 
   chrome.storage.local.get(function(storage) {
-
     renderWeakURLs(storage);
     renderPotentialXSS(storage);
     renderWeakHeaderRequests(storage);
-
   });
 
 }, false);
@@ -212,6 +212,34 @@ function recommenderEnablerListener() {
   });
 }
 
+// Enables and disables basic CSRF checks for the passive Mode
+function passiveModeCSRFEnablerListener() {
+  var checkboxPassiveCSRF = document.getElementById("checkboxPassiveCSRF");
+  // Get the setting if it has already been set
+  chrome.storage.local.get(function(storage) {
+    var settings = storage["settings"];
+    if (!settings) {
+      settings = initialSettings;
+    }
+    chrome.storage.local.set({ "settings": settings });
+
+    var passiveModeEnabled = storage["enablePassiveMode"];
+    var passiveModeCSRFEnabled = settings["passiveModeCSRFEnabled"];
+
+    if (passiveModeEnabled) {
+      checkboxPassiveCSRF.disabled = false;
+      checkboxPassiveCSRF.checked = passiveModeCSRFEnabled;
+    } else {
+      checkboxPassiveCSRF.disabled = true;
+    }
+  });
+
+  var passiveCSRFEnabled = document.getElementById("passiveCSRFEnabled");
+  passiveCSRFEnabled.addEventListener("click", function() {
+    togglePassiveCSRF();
+  });
+}
+
 // Enables and disables cross request passive checks
 function passiveModeCrossChecksEnablerListener() {
   var checkboxPassiveCrossChecks = document.getElementById("checkboxPassiveCrossChecks");
@@ -273,6 +301,36 @@ function togglePassiveCrossChecks() {
         // Enable cross checks
         cachedSettings["passiveModeCrossChecks"] = 1;
         passiveModeWindowSize.disabled = false;
+        chrome.storage.local.set({ "cachedSettings": cachedSettings });
+      }
+    }
+  });
+}
+
+// Enable or disable passive mode basic CSRF checks
+function togglePassiveCSRF() {
+  chrome.storage.local.get(function(storage) {
+    var cachedSettings = storage["cachedSettings"];
+    if (!cachedSettings) {
+      var settings = storage["settings"];
+      if (!settings) {
+        settings = initialSettings;
+        chrome.storage.local.set({ "settings": settings });
+      }
+      cachedSettings = settings;
+      chrome.storage.local.set({ "cachedSettings": cachedSettings });
+    }
+
+    var passiveModeEnabled = storage["enablePassiveMode"];
+    var passiveModeCSRFEnabled = cachedSettings["passiveModeCSRFEnabled"];
+
+    if (passiveModeEnabled) {
+      if (passiveModeCSRFEnabled) {
+        // Disabled passive CSRF
+        cachedSettings["passiveModeCSRFEnabled"] = 0;
+        chrome.storage.local.set({ "cachedSettings": cachedSettings });
+      } else {
+        cachedSettings["passiveModeCSRFEnabled"] = 1;
         chrome.storage.local.set({ "cachedSettings": cachedSettings });
       }
     }

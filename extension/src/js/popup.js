@@ -258,9 +258,9 @@ function passiveModeCookiesEnablerListener() {
 
     if (passiveModeEnabled) {
       checkboxPassiveCookies.disabled = false;
-      checkboxPassiveCookies.checked = passiveModeCSRFEnabled;
+      checkboxPassiveCookies.checked = passiveModeCookiesEnabled;
     } else {
-      checkboxPassiveCSRF.disabled = true;
+      checkboxPassiveCookies.disabled = true;
     }
   });
 
@@ -568,10 +568,10 @@ function togglePassiveMode() {
       // Disable
       chrome.storage.local.set({ "enablePassiveMode": 0 });
       var settings = storage["settings"];
-      // Ensure cross checks are also disabled
-      if (settings["passiveModeCrossChecks"]) {
-        togglePassiveCrossChecks();
-      }
+      // Ensure other passive sub modes are disabled
+      if (settings["passiveModeCrossChecks"])    togglePassiveCrossChecks();
+      if (settings["passiveModeCSRFEnabled"])    togglePassiveCSRF();
+      if (settings["passiveModeCookiesEnabled"]) togglePassiveCookies();
     }
   });
 }

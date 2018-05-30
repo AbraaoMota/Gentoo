@@ -57,6 +57,7 @@ function runPassiveAnalysis(storage, r) {
   // This mode *should* only be enabled after turning it on in the settings, meaning
   // it won't attempt an undefined array access
   var passiveModeCSRFEnabled = storage["settings"]["passiveModeCSRFEnabled"];
+  var passiveModeCookiesEnabled = storage["settings"]["passiveModeCookiesEnabled"];
   // We only want to analyse "text/html" type requests for now
   var contentTypeIndex = headerIndex(r, "respHeaders", "Content-type");
 
@@ -224,6 +225,7 @@ function analyseRequestForCSRF(r) {
     "asp.net_sessionid",
     "id",
     "sess",
+    "auth"
   ];
 
   var potentialSessionIdSet = false;
@@ -282,10 +284,67 @@ function analyseRequestForCSRF(r) {
 
 }
 
-// Analyses the request for weak cookie settings if the cookie exists
+// Analyses the request for weak cookie settings for potential session cookies
 function analyseRequestForCookies(r) {
+  // A basic list of potential matches to check for in cookies
+  var sessionCookieNameMatch = [
+    "phpsessid",
+    "jsessionid",
+    "cfid",
+    "cftoken",
+    "asp.net_sessionid",
+    "id",
+    "sess",
+    "auth"
+  ];
 
+  console.log("ANALYSING A REQUEST FOR WEAK COOKIE SETTINGS");
 
+  var allCookies = r.reqCookies.concat(r.respCookies);
+
+  console.log("ALL COOKIES");
+  console.log(allCookies);
+
+  var warnings = [];
+
+  for (var i = 0; i < allCookies.length; i++) {
+    var currCookie = allCookies[i];
+    var cookieName = currCookie["name"];
+    var secureSet = currCookie["secure"];
+    var httpOnlySet = currCookie["httpOnly"];
+    var cookieMatched = false;
+
+    for (var j = 0; j < sessionCookieNameMatch.length; j++) {
+      if (cookieMatched) break;
+      var currMatch = sessionCookieNameMatch[j];
+      if (currCookie["name"].toLowerCase().includes(currMatch)) {
+        // This is potentially a session id cookie, check for security
+        cookieMatched = true;
+        console.log(currCookie["name"]);
+        console.log(currMatch);
+        console.log("THIS IS A POTENTIAL WEAK COOKIE");
+        if (!secureSet || !httpOnlySet) {
+          var cookieWarning = "The cookie <b>" + cookieName + "</b> does not have the ";
+          if (!secureSet && httpOnlySet) {
+            cookieWarning = cookieWarning.concat("<b>secure</b> flag set.");
+          }
+          if (!httpOnlySet && secureSet) {
+            cookieWarning = cookieWarning.concat("<b>httpOnly</b> flag set.");
+          }
+          if (!secureSet && !httpOnlySet) {
+            cookieWarning = cookieWarning.concat("<b>httpOnly</b> or the <b>secure</b> flag set.");
+          }
+          warnings.push(cookieWarning);
+        }
+      }
+    }
+
+  }
+
+  if (!r["warnings"]) {
+    r["warnings"] = [];
+  }
+  r["warnings"] = r["warnings"].concat(warnings);
 
   // Store requests with weak headers
   chrome.storage.local.get(function(storage) {

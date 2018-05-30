@@ -169,7 +169,7 @@ function renderWeakHeaderRequests(storage) {
       collItem.classList.add("collection-item");
 
       var reqDescription = document.createElement("p");
-      reqDescription.innerHTML = "This request is from <strong>" + passiveModeWeakHeaderRequests[i].url + "</strong>";
+      reqDescription.innerHTML = "This request is from <b>" + passiveModeWeakHeaderRequests[i].url + "</b>";
       collItem.appendChild(reqDescription);
 
       var warnings = document.createElement("ul");

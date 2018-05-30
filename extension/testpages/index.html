@@ -3,6 +3,7 @@ window.onload = function() {
   var url = new URL(window.location.href);
   var c = url.searchParams.get("injection");
   document.getElementById("output").innerHTML = c;
+  document.cookie = "session_id=1234565423";
 }
 </script>
 

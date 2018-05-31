@@ -39,13 +39,13 @@
     }
   ],
   "permissions": [
-          "webRequestBlocking",
-          "webRequest",
-          "cookies",
-          "storage",
-          "tabs",
-          "unlimitedStorage",
-          "*://*/*"
+    "webRequestBlocking",
+    "webRequest",
+    "cookies",
+    "storage",
+    "tabs",
+    "unlimitedStorage",
+    "*://*/*"
   ],
   "browser_action": {
     "default_icon": "img/penguin.png",

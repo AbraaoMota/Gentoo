@@ -14,6 +14,7 @@ $(document).ready(function() {
   $("#potentialWarning").modal();
   $("#clearExtensionStorage").modal();
   $("#weakHeaderWarning").modal();
+  $("#passiveRequestWarning").modal();
   $("#settings").modal({
     ready: settingsModalLoaded
   });
@@ -66,6 +67,7 @@ document.addEventListener('DOMContentLoaded', function() {
   clearReflectedXSS();
   clearDangerousInputs();
   clearWeakHeaders();
+  clearPassiveRequests();
   deleteExtensionStorage();
 
   // Reactivate listeners for when we switch back into this tab
@@ -77,9 +79,22 @@ document.addEventListener('DOMContentLoaded', function() {
     deleteExtensionStorage();
   });
 
+  chrome.storage.local.get(function(storage) {
+    console.log("ABOUT TO SET INNER HTML");
+    var passiveRequestsNumber = document.getElementById("clearPassiveRequestsButton");
+    var passiveModeRequests = storage["passiveModeRequests"];
+    if (passiveModeRequests) {
+      passiveRequestsNumber.innerHTML = "<i class=\"material-icons right\">clear</i> Clear " + passiveModeRequests.length + " passively stored requests";
+    } else {
+      passiveRequestsNumber.style["pointer-events"] = "none";
+      passiveRequestsNumber.innerHTML = "No passively stored requests to clear";
+    }
+  });
+
   var passiveTab = document.getElementById("passiveTab");
   passiveTab.addEventListener("load", function() {
     clearWeakHeaders();
+    clearPassiveRequests();
   });
 
 });
@@ -471,6 +486,17 @@ function clearWeakHeaders() {
     while (weakRequests.firstChild) {
       weakRequests.removeChild(weakRequests.firstChild);
     }
+  });
+}
+
+// Clears out list of passively stored requests
+function clearPassiveRequests() {
+  var clearPassiveRequests = document.getElementById("clearPassiveRequests");
+  var passiveRequestsNumber = document.getElementById("clearPassiveRequestsButton");
+  clearPassiveRequests.addEventListener("click", function() {
+    chrome.storage.local.remove("passiveModeRequests");
+    passiveRequestsNumber.innerHTML = "No passively stored requests to clear";
+    passiveRequestsNumber.style["pointer-events"] = "none";
   });
 }
 

@@ -56,14 +56,19 @@ function runPassiveAnalysis(storage, r) {
 
   // This mode *should* only be enabled after turning it on in the settings, meaning
   // it won't attempt an undefined array access
-  var passiveModeCSRFEnabled = storage["settings"]["passiveModeCSRFEnabled"];
-  var passiveModeCookiesEnabled = storage["settings"]["passiveModeCookiesEnabled"];
+  var settings = storage["settings"];
+  var passiveModeCSRFEnabled, passiveModeCookiesEnabled;
+  if (settings) {
+    passiveModeCSRFEnabled = settings["passiveModeCSRFEnabled"];
+    passiveModeCookiesEnabled = settings["passiveModeCookiesEnabled"];
+  }
+
   // We only want to analyse "text/html" type requests for now
   var contentTypeIndex = headerIndex(r, "respHeaders", "Content-type");
 
   if (contentTypeIndex >= 0 && r["respHeaders"][contentTypeIndex].value.includes("text/html")) {
-    console.log("ANALYSING HEADERS FOR A REQUEST");
     analyseRequestHeaders(r);
+    analyseRequestReflectedInputs(r);
 
     if (passiveModeCSRFEnabled) {
       analyseRequestForCSRF(r);
@@ -73,6 +78,99 @@ function runPassiveAnalysis(storage, r) {
       analyseRequestForCookies(r);
     }
   }
+}
+
+// Function checking for reflected inputs across requests
+function analyseRequestReflectedInputs(r) {
+  console.log("ANALYSING REQUEST FOR REFLECTED INPUTS");
+  // Here we need to produce a list of parameters and other content which may be user
+  // injected - this could be query parameters or cookie values
+  var userInputs = [];
+  var potentiallyDangerousInputs = [];
+
+  // Here we want to create a userInput object which stores different values
+  // pertinent to a user input. This is necessary to know which parameters to
+  // override in the request when being replayed. More info in design.txt
+
+  // Append all cookies to the list
+  for (var j = 0; j < r.reqCookies.length; j++) {
+    var uInput = {
+      type:  "cookie",
+      url:   r.url,
+      name:  r.reqCookies[j].name,
+      value: r.reqCookies[j].value
+    }
+    userInputs.push(uInput);
+  }
+
+  // Append all query parameter values to the list
+  for (var k = 0; k < r.reqParams.length; k++) {
+    var uInput = {
+      type:  "param",
+      url:   r.url,
+      name:  r.reqParams[k].name,
+      value: r.reqParams[k].value
+    }
+    userInputs.push(uInput);
+  }
+
+  // Append all header values to the list
+  for (var l = 0; l < r.reqHeaders.length; l++) {
+    var uInput = {
+      type:  "header",
+      url:   r.url,
+      name:  r.reqHeaders[l].name,
+      value: r.reqHeaders[l].value
+    }
+    userInputs.push(uInput);
+  }
+
+  var content = r.respContent;
+
+  if (!userInputs) {
+    return;
+  }
+
+  // Loop over all possible user inputs to compare against
+  for (var m = 0; m < userInputs.length; m++) {
+    var currUserInput = userInputs[m];
+    if (couldBeDangerous(content, currUserInput)) {
+      // Here we flag up these inputs as a warning because it looks
+      // as though content has been injected into the page
+      // However that is the complete list, we only want to replay
+      // the newly added dangerous inputs
+      potentiallyDangerousInputs.push(currUserInput);
+    }
+  }
+
+  var warnings = [];
+
+  for (var n = 0; n < potentiallyDangerousInputs.length; n++) {
+    var dangerousInput = potentiallyDangerousInputs[n];
+    var warning = "There was a <b>" + dangerousInput.type + "</b> named <b>" + dangerousInput.name + "</b>, with value <b>" + dangerousInput.value + "</b>. The value was reflected somewhere in the response - this could potentially lead to a reflection attack.";
+    warnings.push(warning);
+  }
+
+  if (!r["warnings"]) {
+    r["warnings"] = [];
+  }
+  r["warnings"] = r["warnings"].concat(warnings);
+
+  // Store requests with weak headers
+  chrome.storage.local.get(function(storage) {
+    var passiveModeWeakHeaderRequests = storage["passiveModeWeakHeaderRequests"];
+    if (!passiveModeWeakHeaderRequests) {
+      passiveModeWeakHeaderRequests = [];
+    }
+
+    passiveModeWeakHeaderRequests.push(r);
+
+    chrome.storage.local.set({ "passiveModeWeakHeaderRequests": passiveModeWeakHeaderRequests });
+
+    // Send warning to extension to display weak requests
+    sendWeakRequestWarning(passiveModeWeakHeaderRequests);
+  });
+
 }
 
 // Function that checks for weak header settings
@@ -320,9 +418,6 @@ function analyseRequestForCookies(r) {
       if (currCookie["name"].toLowerCase().includes(currMatch)) {
         // This is potentially a session id cookie, check for security
         cookieMatched = true;
-        console.log(currCookie["name"]);
-        console.log(currMatch);
-        console.log("THIS IS A POTENTIAL WEAK COOKIE");
         if (!secureSet || !httpOnlySet) {
           var cookieWarning = "The cookie <b>" + cookieName + "</b> does not have the ";
           if (!secureSet && httpOnlySet) {

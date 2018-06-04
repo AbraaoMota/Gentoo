@@ -15,11 +15,11 @@
       "js/background.js"
     ]
   },
-   "web_accessible_resources": [
-     "request_logger.html",
-     "js/attacks/xss.json",
-     "js/attacks/xss.js"
-   ],
+  "web_accessible_resources": [
+    "request_logger.html",
+    "js/attacks/xss.json",
+    "js/attacks/xss.js"
+  ],
   "content_scripts": [
     {
       "matches": ["*://*/*"],

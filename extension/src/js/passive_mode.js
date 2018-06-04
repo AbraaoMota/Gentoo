@@ -1,6 +1,7 @@
 // Message handling logic - contains a flag to synchronously process messages
 // to avoid async DB overwrites
 var passiveMessageHandlerBusy = false;
+var passiveRequestStored = false;
 var passiveMessageHandler = function(message, sender, sendResponse) {
 
   if (passiveMessageHandlerBusy) {
@@ -17,7 +18,7 @@ var passiveMessageHandler = function(message, sender, sendResponse) {
 
     if (message.name === "devToolsParams" && enablePassiveMode) {
       storePassiveRequests(storage, message);
-      runPassiveAnalysis(storage, message);
+      runPassiveAnalysis(message);
       passiveMessageHandlerBusy = false;
     }
   });
@@ -47,42 +48,189 @@ function storePassiveRequests(storage, message) {
       respContent: message.respContent
     });
 
-    chrome.storage.local.set({ "passiveModeRequests": passiveModeRequests });
+    chrome.storage.local.set(
+      { "passiveModeRequests": passiveModeRequests },
+      function() { passiveRequestStored = true; }
+    );
   }
 }
 
 // Passive Analysis algorithm
-function runPassiveAnalysis(storage, r) {
+function runPassiveAnalysis(r) {
 
-  // This mode *should* only be enabled after turning it on in the settings, meaning
-  // it won't attempt an undefined array access
+  chrome.storage.local.get(function(storage) {
+    // This mode *should* only be enabled after turning it on in the settings, meaning
+    // it won't attempt an undefined array access
+    var settings = storage["settings"];
+    var passiveModeCSRFEnabled, passiveModeCookiesEnabled, passiveModeCrossChecksEnabled;
+    if (settings) {
+      passiveModeCSRFEnabled    = settings["passiveModeCSRFEnabled"];
+      passiveModeCookiesEnabled = settings["passiveModeCookiesEnabled"];
+      passiveModeCrossChecks    = settings["passiveModeCrossChecks"];
+    }
+
+    // We only want to analyse "text/html" type requests for now
+    var contentTypeIndex = headerIndex(r, "respHeaders", "Content-type");
+
+    if (contentTypeIndex >= 0 && r["respHeaders"][contentTypeIndex].value.includes("text/html")) {
+
+      console.log("RUNNING PASSIVE ANALYSIS");
+      analyseRequestHeaders(r);
+      analyseRequestReflectedInputs(r);
+
+      if (passiveModeCSRFEnabled)    analyseRequestForCSRF(r);
+      if (passiveModeCookiesEnabled) analyseRequestForCookies(r);
+      if (passiveModeCrossChecks)    analyseCrossRequests(storage, r);
+    }
+  });
+}
+
+// Function performing cross request checks
+function analyseCrossRequests(storage, r) {
+
+  console.log("TRYING TO DO CROSS REQUEST CHECKS");
   var settings = storage["settings"];
-  var passiveModeCSRFEnabled, passiveModeCookiesEnabled;
-  if (settings) {
-    passiveModeCSRFEnabled = settings["passiveModeCSRFEnabled"];
-    passiveModeCookiesEnabled = settings["passiveModeCookiesEnabled"];
-  }
+  // Window size includes the current request
+  var crossCheckWindow = settings["passiveModeWindowSize"] - 1;
+  console.log("Storage is");
+  console.log(storage);
+  var passiveRequests = storage["passiveModeRequests"];
+  if (passiveRequests.length === 1) return;
+  var checkLimit = (crossCheckWindow > passiveRequests.length) ? passiveRequests.length : crossCheckWindow;
 
-  // We only want to analyse "text/html" type requests for now
-  var contentTypeIndex = headerIndex(r, "respHeaders", "Content-type");
+  console.log("ENOUGH REQUESTS FOR CROSS CHECKS");
+  // We assume we are already looking at the last request all the time, skip that
+  for (var i = 0; i < checkLimit; i++) {
+    // Read the requests from the list in reverse order
+    var comparisonRequest = passiveRequests[passiveRequests.length - 2 - i];
 
-  if (contentTypeIndex >= 0 && r["respHeaders"][contentTypeIndex].value.includes("text/html")) {
-    analyseRequestHeaders(r);
-    analyseRequestReflectedInputs(r);
+    // Consider only requests of type "text/html"
+    var contentTypeIndex = headerIndex(comparisonRequest, "respHeaders", "Content-type");
 
-    if (passiveModeCSRFEnabled) {
-      analyseRequestForCSRF(r);
+    if (!(contentTypeIndex >= 0) ||
+        !comparisonRequest["respHeaders"][contentTypeIndex].value.includes("text/html")) {
+      // This doesn't count as a check in our window.
+      checkLimit++;
+      continue;
     }
 
-    if (passiveModeCookiesEnabled) {
-      analyseRequestForCookies(r);
-    }
+    // Since we are analysing the latest request, we want to compare the output of the latest
+    // to the input of the previous requests. This may point out potential 2nd order attacks
+
+    // Return 1 if successful in finding a comparison. Stop here to avoid cluttering with
+    // more comparisons
+    var successfulComparison = compareRequests(comparisonRequest, r);
+
+    if (successfulComparison) return;
   }
+}
+
+// Helper function for algorithm of comparing 2 cross requests
+// Returns 1 if successfully found a dangerous comparison, 0 otherwise
+function compareRequests(inputRequest, outputRequest) {
+  var userInputs = [];
+
+  console.log("PERFORMING CROSS CHECKS");
+  // Append all cookies from the input request into list
+  var allInputCookies = inputRequest.reqCookies.concat(inputRequest.respCookies);
+  for (var i = 0; i < allInputCookies.length; i++) {
+    if (allInputCookies[i].value === "") continue;
+    var uInput = {
+      type:  "cookie",
+      url:   inputRequest.url,
+      name:  allInputCookies[i].name,
+      value: allInputCookies[i].value
+    }
+    userInputs.push(uInput);
+  }
+
+  // Append all query parameters from input request into the list
+  var allInputQueryParams = inputRequest.reqParams;
+  console.log("ALL PARAMS FROM INPUT REQUEST ARE");
+  console.log(allInputQueryParams);
+  for (var j = 0; j < allInputQueryParams.length; j++) {
+    if (allInputQueryParams[j].value === "") continue;
+    var uInput = {
+      type:  "param",
+      url:   inputRequest.url,
+      name:  allInputQueryParams[j].name,
+      value: allInputQueryParams[j].value
+    }
+    userInputs.push(uInput);
+  }
+
+  // Append all header values from input request into the list
+  var allInputHeaders = inputRequest.reqHeaders.concat(inputRequest.respHeaders);
+  for (var k = 0; k < allInputHeaders.length; k++) {
+    if (allInputHeaders[k].value === "") continue;
+    var uInput = {
+      type:  "header",
+      url:   inputRequest.url,
+      name:  allInputHeaders[k].name,
+      value: allInputHeaders[k].value
+    }
+    userInputs.push(uInput);
+  }
+
+  if (!userInputs) return 0;
+
+  // We now have all the possible inputs from the input request into the
+  // userInput array. We can now analyse the output from the responseContent of
+  // outputRequest for any similarities between the two. This may point out
+  // delayed reflected / 2nd order attacks
+
+  // Compare against the latest request
+  var content = outputRequest.respContent;
+
+  console.log("TRYING TO DO JQUERY LOADING");
+
+  var w = window.open(outputRequest.url);
+  $(w.document.body).load(outputRequest.url, function() {
+    setTimeout(function() {
+      $(w).ready(function() {
+        var realContent = w.document.body.innerHTML;
+
+        var warnings = [];
+        // Loop over all possible inputs
+        for (var l = 0; l < userInputs.length; l++) {
+          var currUserInput = userInputs[l];
+          if (couldBeDangerous(content, currUserInput) ||
+            (currUserInput.type === "param" && realContent.includes(currUserInput.value))) {
+            // Not every input may be malicious / dangerous but if content includes it may be
+            // worth looking into. Parameters more likely to be directly included.
+            warning = "A <b>" + currUserInput.type + "</b> from a request made at " + currUserInput.url + " was identified at " + outputRequest.url + ".<br />Name: " + currUserInput.name + "<br />Value: " + currUserInput.value
+            warnings.push(warning);
+          }
+        }
+
+        if (!outputRequest["warnings"]) {
+          outputRequest["warnings"] = [];
+        }
+        outputRequest["warnings"] = outputRequest["warnings"].concat(warnings);
+
+        // Store requests with weak headers
+        chrome.storage.local.get(function(storage) {
+          var passiveModeWeakHeaderRequests = storage["passiveModeWeakHeaderRequests"];
+          if (!passiveModeWeakHeaderRequests) {
+            passiveModeWeakHeaderRequests = [];
+          }
+
+          passiveModeWeakHeaderRequests.push(outputRequest);
+
+          chrome.storage.local.set({ "passiveModeWeakHeaderRequests": passiveModeWeakHeaderRequests });
+
+          // Send warning to extension to display weak requests
+          sendWeakRequestWarning(passiveModeWeakHeaderRequests);
+        });
+
+        return 1;
+      }); // end ready callback
+    }, 3000); // end setTimeout
+  });
 }
 
 // Function checking for reflected inputs across requests
 function analyseRequestReflectedInputs(r) {
-  console.log("ANALYSING REQUEST FOR REFLECTED INPUTS");
   // Here we need to produce a list of parameters and other content which may be user
   // injected - this could be query parameters or cookie values
   var userInputs = [];

@@ -66,6 +66,19 @@ Django~Software Foundation.
 \newblock \url{https://docs.djangoproject.com/en/2.0/ref/csrf/}.
 \newblock Accessed: 10/01/2018.
 
+\bibitem{chromeExtensionCSP}
+Google.
+\newblock Google developer - extensions - content security policy (csp).
+\newblock \url{https://developer.chrome.com/extensions/contentSecurityPolicy}.
+\newblock Accessed: 02/07/2018.
+
+\bibitem{chromeExtensionWebAccessibleResources}
+Google.
+\newblock Google developer - extensions - manifest - web accessible resources.
+\newblock
+  \url{https://developer.chrome.com/extensions/manifest/web_accessible_resources}.
+\newblock Accessed: 04/07/2018.
+
 \bibitem{chromeExtensionArchitecture}
 Google.
 \newblock Google developer - extensions - overview.

@@ -70,6 +70,7 @@
 \citation{chromeExtensionArchitecture}
 \citation{chromeExtensionArchitecture}
 \@writefile{toc}{\contentsline {section}{\numberline {2.3}Browser extensions}{10}{section.2.3}}
+\newlabel{browserExtensions}{{2.3}{10}{Browser extensions}{section.2.3}{}}
 \citation{whyJohnnyCantPentest}
 \@writefile{lof}{\contentsline {figure}{\numberline {2.3}{\ignorespaces An extension is split into 2 main areas. The \texttt  {background.html} page has access to all extension privileges and is where the business logic of the extension is stored. It cannot interact with user webpages. Content scripts can be injected to interact with the DOM of a page. The \texttt  {background.html} can contact the content script via a message passing API. Image courtesy of Google Developer documentation. \cite  {chromeExtensionArchitecture}\relax }}{11}{figure.caption.4}}
 \newlabel{fig:test}{{2.3}{11}{An extension is split into 2 main areas. The \texttt {background.html} page has access to all extension privileges and is where the business logic of the extension is stored. It cannot interact with user webpages. Content scripts can be injected to interact with the DOM of a page. The \texttt {background.html} can contact the content script via a message passing API. Image courtesy of Google Developer documentation. \cite {chromeExtensionArchitecture}\relax }{figure.caption.4}{}}
@@ -96,25 +97,39 @@
 \@writefile{toc}{\contentsline {chapter}{\numberline {3}Overall Design}{15}{chapter.3}}
 \@writefile{lof}{\addvspace {10\p@ }}
 \@writefile{lot}{\addvspace {10\p@ }}
+\citation{chromeExtensionCSP}
 \@writefile{toc}{\contentsline {chapter}{\numberline {4}Implementation}{16}{chapter.4}}
 \@writefile{lof}{\addvspace {10\p@ }}
 \@writefile{lot}{\addvspace {10\p@ }}
-\@writefile{toc}{\contentsline {section}{\numberline {4.1}Test harness}{16}{section.4.1}}
-\@writefile{toc}{\contentsline {section}{\numberline {4.2}Popup page}{16}{section.4.2}}
-\@writefile{toc}{\contentsline {chapter}{\numberline {5}Applications}{17}{chapter.5}}
+\@writefile{lof}{\contentsline {figure}{\numberline {4.1}{\ignorespaces The directory structure used for the project\relax }}{16}{figure.caption.6}}
+\newlabel{fig:test}{{4.1}{16}{The directory structure used for the project\relax }{figure.caption.6}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {4.1}Manifest}{16}{section.4.1}}
+\citation{chromeExtensionWebAccessibleResources}
+\@writefile{toc}{\contentsline {section}{\numberline {4.2}Test harness}{17}{section.4.2}}
+\@writefile{toc}{\contentsline {section}{\numberline {4.3}Popup page}{17}{section.4.3}}
+\@writefile{lof}{\contentsline {figure}{\numberline {4.2}{\ignorespaces The main contents of the popup page when first clicked by a user.\relax }}{18}{figure.caption.7}}
+\newlabel{fig:test}{{4.2}{18}{The main contents of the popup page when first clicked by a user.\relax }{figure.caption.7}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {4.4}Background Page}{18}{section.4.4}}
+\@writefile{toc}{\contentsline {section}{\numberline {4.5}Message Design}{18}{section.4.5}}
+\@writefile{toc}{\contentsline {section}{\numberline {4.6}Action Replay}{18}{section.4.6}}
+\@writefile{toc}{\contentsline {section}{\numberline {4.7}Passive Mode}{18}{section.4.7}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.7.1}Recommendations}{18}{subsection.4.7.1}}
+\@writefile{lof}{\contentsline {figure}{\numberline {4.3}{\ignorespaces The main contents of the popup page when first clicked by a userw\relax }}{19}{figure.caption.8}}
+\newlabel{fig:test}{{4.3}{19}{The main contents of the popup page when first clicked by a userw\relax }{figure.caption.8}{}}
+\@writefile{toc}{\contentsline {chapter}{\numberline {5}Applications}{20}{chapter.5}}
 \@writefile{lof}{\addvspace {10\p@ }}
 \@writefile{lot}{\addvspace {10\p@ }}
-\@writefile{toc}{\contentsline {chapter}{\numberline {6}Evaluation}{18}{chapter.6}}
+\@writefile{toc}{\contentsline {chapter}{\numberline {6}Evaluation}{21}{chapter.6}}
 \@writefile{lof}{\addvspace {10\p@ }}
 \@writefile{lot}{\addvspace {10\p@ }}
-\@writefile{toc}{\contentsline {section}{\numberline {6.1}Intended functionality}{18}{section.6.1}}
-\@writefile{toc}{\contentsline {section}{\numberline {6.2}Metrics of success}{18}{section.6.2}}
+\@writefile{toc}{\contentsline {section}{\numberline {6.1}Intended functionality}{21}{section.6.1}}
+\@writefile{toc}{\contentsline {section}{\numberline {6.2}Metrics of success}{21}{section.6.2}}
 \citation{stateOfArtAutomatedBlackBoxWebAppVulnTesting}
 \citation{dvwaSite}
 \citation{webgoatIntro}
 \citation{webgoatGithub}
-\@writefile{toc}{\contentsline {section}{\numberline {6.3}Experiments}{19}{section.6.3}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {6.3.1}Test benches}{19}{subsection.6.3.1}}
+\@writefile{toc}{\contentsline {section}{\numberline {6.3}Experiments}{22}{section.6.3}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.3.1}Test benches}{22}{subsection.6.3.1}}
 \citation{wackoPickoGithub}
 \citation{hacmeBankMcAfee}
 \citation{owaspVulnerableWebAppsList}
@@ -122,16 +137,16 @@
 \citation{w3af}
 \citation{burpSuitePage}
 \citation{owaspVulnerableWebAppsList}
-\@writefile{toc}{\contentsline {subsection}{\numberline {6.3.2}Test methodology}{20}{subsection.6.3.2}}
-\@writefile{toc}{\contentsline {chapter}{\numberline {7}Future Work}{21}{chapter.7}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.3.2}Test methodology}{23}{subsection.6.3.2}}
+\@writefile{toc}{\contentsline {chapter}{\numberline {7}Future Work}{24}{chapter.7}}
 \@writefile{lof}{\addvspace {10\p@ }}
 \@writefile{lot}{\addvspace {10\p@ }}
-\@writefile{toc}{\contentsline {chapter}{\numberline {8}Conclusion}{22}{chapter.8}}
+\@writefile{toc}{\contentsline {chapter}{\numberline {8}Conclusion}{25}{chapter.8}}
 \@writefile{lof}{\addvspace {10\p@ }}
 \@writefile{lot}{\addvspace {10\p@ }}
 \bibstyle{plain}
 \bibdata{bibs/sample.bib}
-\@writefile{toc}{\contentsline {chapter}{\numberline {A}First Appendix}{23}{appendix.A}}
+\@writefile{toc}{\contentsline {chapter}{\numberline {A}First Appendix}{26}{appendix.A}}
 \@writefile{lof}{\addvspace {10\p@ }}
 \@writefile{lot}{\addvspace {10\p@ }}
 \bibcite{darpaAIChallenge}{1}
@@ -144,28 +159,30 @@
 \bibcite{whyJohnnyCantPentest}{8}
 \bibcite{Waler}{9}
 \bibcite{djangoCSRF}{10}
-\bibcite{chromeExtensionArchitecture}{11}
-\bibcite{wannaCryHacks}{12}
-\bibcite{rubyOnRailsCSRF}{13}
-\bibcite{hackerone2017}{14}
-\bibcite{hackerone2018}{15}
-\bibcite{webAppSecThreatsCountermeasuresPitfalls}{16}
-\bibcite{appscan}{17}
-\bibcite{Kals:2006:SWV:1135777.1135817}{18}
-\bibcite{KUISMA200775}{19}
-\bibcite{acunetix}{20}
-\bibcite{acunetixQuoteCrawling}{21}
-\bibcite{hacmeBankMcAfee}{22}
-\bibcite{laravelCSRF}{23}
-\bibcite{webgoatGithub}{24}
-\bibcite{owaspPage}{25}
-\bibcite{owaspVulnerableWebAppsList}{26}
-\bibcite{owaspZapPage}{27}
-\bibcite{webgoatIntro}{28}
-\bibcite{analysisOfEffectivenessOfBlackBoxWebAppScannersStoredSQLStoredXSS}{29}
-\bibcite{burpSuitePage}{30}
-\bibcite{dvwaSite}{31}
-\bibcite{equifaxHacks}{32}
-\bibcite{veracodeDevopsSurvey}{33}
-\bibcite{w3af}{34}
-\bibcite{stuxnextHacks}{35}
+\bibcite{chromeExtensionCSP}{11}
+\bibcite{chromeExtensionWebAccessibleResources}{12}
+\bibcite{chromeExtensionArchitecture}{13}
+\bibcite{wannaCryHacks}{14}
+\bibcite{rubyOnRailsCSRF}{15}
+\bibcite{hackerone2017}{16}
+\bibcite{hackerone2018}{17}
+\bibcite{webAppSecThreatsCountermeasuresPitfalls}{18}
+\bibcite{appscan}{19}
+\bibcite{Kals:2006:SWV:1135777.1135817}{20}
+\bibcite{KUISMA200775}{21}
+\bibcite{acunetix}{22}
+\bibcite{acunetixQuoteCrawling}{23}
+\bibcite{hacmeBankMcAfee}{24}
+\bibcite{laravelCSRF}{25}
+\bibcite{webgoatGithub}{26}
+\bibcite{owaspPage}{27}
+\bibcite{owaspVulnerableWebAppsList}{28}
+\bibcite{owaspZapPage}{29}
+\bibcite{webgoatIntro}{30}
+\bibcite{analysisOfEffectivenessOfBlackBoxWebAppScannersStoredSQLStoredXSS}{31}
+\bibcite{burpSuitePage}{32}
+\bibcite{dvwaSite}{33}
+\bibcite{equifaxHacks}{34}
+\bibcite{veracodeDevopsSurvey}{35}
+\bibcite{w3af}{36}
+\bibcite{stuxnextHacks}{37}

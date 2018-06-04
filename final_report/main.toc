@@ -17,15 +17,21 @@
 \contentsline {subsection}{\numberline {2.5.4}Ethics \& Handling of Results}{14}{subsection.2.5.4}
 \contentsline {chapter}{\numberline {3}Overall Design}{15}{chapter.3}
 \contentsline {chapter}{\numberline {4}Implementation}{16}{chapter.4}
-\contentsline {section}{\numberline {4.1}Test harness}{16}{section.4.1}
-\contentsline {section}{\numberline {4.2}Popup page}{16}{section.4.2}
-\contentsline {chapter}{\numberline {5}Applications}{17}{chapter.5}
-\contentsline {chapter}{\numberline {6}Evaluation}{18}{chapter.6}
-\contentsline {section}{\numberline {6.1}Intended functionality}{18}{section.6.1}
-\contentsline {section}{\numberline {6.2}Metrics of success}{18}{section.6.2}
-\contentsline {section}{\numberline {6.3}Experiments}{19}{section.6.3}
-\contentsline {subsection}{\numberline {6.3.1}Test benches}{19}{subsection.6.3.1}
-\contentsline {subsection}{\numberline {6.3.2}Test methodology}{20}{subsection.6.3.2}
-\contentsline {chapter}{\numberline {7}Future Work}{21}{chapter.7}
-\contentsline {chapter}{\numberline {8}Conclusion}{22}{chapter.8}
-\contentsline {chapter}{\numberline {A}First Appendix}{23}{appendix.A}
+\contentsline {section}{\numberline {4.1}Manifest}{16}{section.4.1}
+\contentsline {section}{\numberline {4.2}Test harness}{17}{section.4.2}
+\contentsline {section}{\numberline {4.3}Popup page}{17}{section.4.3}
+\contentsline {section}{\numberline {4.4}Background Page}{18}{section.4.4}
+\contentsline {section}{\numberline {4.5}Message Design}{18}{section.4.5}
+\contentsline {section}{\numberline {4.6}Action Replay}{18}{section.4.6}
+\contentsline {section}{\numberline {4.7}Passive Mode}{18}{section.4.7}
+\contentsline {subsection}{\numberline {4.7.1}Recommendations}{18}{subsection.4.7.1}
+\contentsline {chapter}{\numberline {5}Applications}{20}{chapter.5}
+\contentsline {chapter}{\numberline {6}Evaluation}{21}{chapter.6}
+\contentsline {section}{\numberline {6.1}Intended functionality}{21}{section.6.1}
+\contentsline {section}{\numberline {6.2}Metrics of success}{21}{section.6.2}
+\contentsline {section}{\numberline {6.3}Experiments}{22}{section.6.3}
+\contentsline {subsection}{\numberline {6.3.1}Test benches}{22}{subsection.6.3.1}
+\contentsline {subsection}{\numberline {6.3.2}Test methodology}{23}{subsection.6.3.2}
+\contentsline {chapter}{\numberline {7}Future Work}{24}{chapter.7}
+\contentsline {chapter}{\numberline {8}Conclusion}{25}{chapter.8}
+\contentsline {chapter}{\numberline {A}First Appendix}{26}{appendix.A}

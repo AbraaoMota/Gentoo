@@ -16,15 +16,21 @@
 \BOOKMARK [2][-]{subsection.2.5.4}{Ethics \046 Handling of Results}{section.2.5}% 16
 \BOOKMARK [0][-]{chapter.3}{Overall Design}{}% 17
 \BOOKMARK [0][-]{chapter.4}{Implementation}{}% 18
-\BOOKMARK [1][-]{section.4.1}{Test harness}{chapter.4}% 19
-\BOOKMARK [1][-]{section.4.2}{Popup page}{chapter.4}% 20
-\BOOKMARK [0][-]{chapter.5}{Applications}{}% 21
-\BOOKMARK [0][-]{chapter.6}{Evaluation}{}% 22
-\BOOKMARK [1][-]{section.6.1}{Intended functionality}{chapter.6}% 23
-\BOOKMARK [1][-]{section.6.2}{Metrics of success}{chapter.6}% 24
-\BOOKMARK [1][-]{section.6.3}{Experiments}{chapter.6}% 25
-\BOOKMARK [2][-]{subsection.6.3.1}{Test benches}{section.6.3}% 26
-\BOOKMARK [2][-]{subsection.6.3.2}{Test methodology}{section.6.3}% 27
-\BOOKMARK [0][-]{chapter.7}{Future Work}{}% 28
-\BOOKMARK [0][-]{chapter.8}{Conclusion}{}% 29
-\BOOKMARK [0][-]{appendix.A}{First Appendix}{}% 30
+\BOOKMARK [1][-]{section.4.1}{Manifest}{chapter.4}% 19
+\BOOKMARK [1][-]{section.4.2}{Test harness}{chapter.4}% 20
+\BOOKMARK [1][-]{section.4.3}{Popup page}{chapter.4}% 21
+\BOOKMARK [1][-]{section.4.4}{Background Page}{chapter.4}% 22
+\BOOKMARK [1][-]{section.4.5}{Message Design}{chapter.4}% 23
+\BOOKMARK [1][-]{section.4.6}{Action Replay}{chapter.4}% 24
+\BOOKMARK [1][-]{section.4.7}{Passive Mode}{chapter.4}% 25
+\BOOKMARK [2][-]{subsection.4.7.1}{Recommendations}{section.4.7}% 26
+\BOOKMARK [0][-]{chapter.5}{Applications}{}% 27
+\BOOKMARK [0][-]{chapter.6}{Evaluation}{}% 28
+\BOOKMARK [1][-]{section.6.1}{Intended functionality}{chapter.6}% 29
+\BOOKMARK [1][-]{section.6.2}{Metrics of success}{chapter.6}% 30
+\BOOKMARK [1][-]{section.6.3}{Experiments}{chapter.6}% 31
+\BOOKMARK [2][-]{subsection.6.3.1}{Test benches}{section.6.3}% 32
+\BOOKMARK [2][-]{subsection.6.3.2}{Test methodology}{section.6.3}% 33
+\BOOKMARK [0][-]{chapter.7}{Future Work}{}% 34
+\BOOKMARK [0][-]{chapter.8}{Conclusion}{}% 35
+\BOOKMARK [0][-]{appendix.A}{First Appendix}{}% 36

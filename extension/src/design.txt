@@ -102,18 +102,21 @@ MESSAGES BEING SENT ACROSS THE APP
 
 > BACKGROUND TO PASSIVE MODE ✅
 
-> BACKGROUND TO POPUP (For badge updates)
+> BACKGROUND TO POPUP (For badge updates)✅
   > ReflectedXss
   > PotentialXSS
   > WeakHeaderRequest
 
-> REQUEST LOGGER TO POPUP
+> REQUEST LOGGER TO POPUP ✅
   > reflectedXSS
 
-> AR TO POPUP
+> POPUP TO ACTION REPLAY✅
+
+> AR TO POPUP✅
   > PotentialXSS
 
-> PASSIVE MODE TO POPUP
+> PASSIVE MODE TO POPUP✅
   > weakHeaderRequest (this is more of a warning, requests included but they're accessed from storage)
 
-> POPUP TO ACTION REPLAY
+
+

@@ -79,15 +79,23 @@ More specifically, I am interested in the \texttt{devtools.network} API - this p
 
 To better understand the structure of the extension and how each feature ahead is to be implemented, it's good to create a high level overview of messaging between each component.  \\
 
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=0.95\textwidth]{images/message_passing.png}
+	\caption{This diagram illustrates the passing of messages within the different components in the extension}
+	\label{fig:test}
+\end{figure}
+
 In order to analyse the requests being made in different context scripts, the \texttt{devtools} script gathers every request made in the page which has the Developer Tools inspection windows open. Since this page cannot directly pass messages to the content scripts \cite{chromeExtensionDevTools}, it uses the background page as a mediator. It establishes a connection to the background page and passes to it every request it picks up. The background page then forwards these messages to the different content scripts that analyse the requests - \texttt{action\_replay} and \texttt{passive\_mode}. \\
 
-Whenever a request causes the \texttt{request\_logger} page to be loaded, 
-To toggle the enabling or disabling of the Action Replay algorithm, the popup page sends a message to the \texttt{action\_replay} script each time the corresponding switch is clicked. 
+Whenever a request causes the \texttt{request\_logger} page to be loaded, the page captures the information from the page it has just been referred to from, and forwards this information in a message to the \texttt{popup} page to update the list of vulnerable URLs. To toggle the enabling or disabling of the Action Replay algorithm, the popup page sends a message to the \texttt{action\_replay} script each time the corresponding switch is clicked. When the Action Replay is mid analysis, it will produce a warning list of inputs it has considered to be potentially dangerous, and passes a message to the \texttt{popup} page when it has detected this. Similarly, in the \texttt{passive\_mode} script, a message is passed to the \texttt{popup} alerting to any suspicious request behaviour. The \texttt{background} script also listens to several of these messages, and consequently updates the UI badge aesthetics, alerting the user to fresh information to analyse in the extension.
 
 
 \section{Recommendations}
 
-One of the large features intended for implementation in this project was the use of suggestions whilst browsing a page to attempt vulnerability exploits. This provides a low-effort means for a penetration tester to quickly test different types of attacks on a webpage. 
+One of the large features intended for implementation in this project was the use of suggestions whilst browsing a page to attempt vulnerability exploits. This provides a low-effort means for a penetration tester to quickly test different types of attacks on a webpage. \\
+
+
 
 I have implemented this by overriding every form on a page with an input of my own. 
 

@@ -27,7 +27,7 @@ A potential methodology to use in a setting like this would be to employ a bundl
 Other noteworthy details from the manifest file include:
 
 \begin{itemize}
-	\item The \texttt{devtools\_page} directive - this is necessary to access the developer tools API's within the extension, which provide extra information when using the extension such as the contents of the requests sent at any given time. This also provides a potential point of extension to the UI of the Chrome developer tools when inspecting pages.
+	\item The \texttt{devtools\_page} directive - this is necessary to access the developer tools API's within the extension, which provide extra information when using the extension such as the contents of the requests sent at any given time. See \ref{devtools}.
 	
 	\item The \texttt{web\_accessible\_resources} directive allows me to specify resources which should be accessible in the context of a normal browsing experience. This is a feature enabled in the more recent 2.0 version of the manifest, which blocks resources by default unless they are whitelisted in this manner. This prevents malicious attacks on the extension, such as fingerprinting or exploiting XSS vulnerabilities \cite{chromeExtensionWebAccessibleResources}. An example of a resource included here is the \texttt{request\_logger.html} page.
 	
@@ -44,16 +44,9 @@ In order to emulate the website as a server, I am using the out-of-the-box imple
 
 This is the main interaction point for a user utilizing the extension. The layout of this page makes a clear distinction between the different features available to use in the extension. \\
 
-\begin{figure}[h]
+\begin{figure}[h!]
 	\centering
-	\includegraphics[width=0.8\textwidth]{images/first_look.png}
-	\caption{The main contents of the popup page when first clicked by a user.}
-	\label{fig:test}
-\end{figure}
-
-\begin{figure}[h]
-	\centering
-	\includegraphics[width=0.8\textwidth]{images/popup_2.png}
+	\includegraphics[width=0.8\textwidth]{images/popup_full.png}
 	\caption{The main contents of the popup page when first clicked by a userw}
 	\label{fig:test}
 \end{figure}
@@ -65,12 +58,42 @@ This page offers an accessible means for tweaking and toggling all the options a
 
 The background page I am using in the extension is a persistent page, meaning it is constantly running. This is in contrast to event background pages, which are opened and closed as necessary depending on the occasion. I am using this page to listen for messages sent from other scripts to be able to set aesthetic updates, as well as establishing a connection with the \texttt{devtools} page to subscribe to and forward custom request messages to content scripts.
 
+\section{Request Logger}
+
+This page is designed to capture information from attacks that have successfully hijacked Javascript execution and diverted a user to this page. In order to be accessible from any other window, it must be declared as a \texttt{web\_accessible\_resource}. It captures the page it was referred from and reports it as a page where a vulnerability exists.
+
+\section{Devtools} \label{devtools}
+
+The devtools page has access to a specific set of API's designed to extend the experience for web developers using the browser. This includes access to the currently inspected window, the developer panels, and network request information \cite{chromeExtensionDevTools}. \\
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=0.55\textwidth]{images/devtools-extension.png}
+	\caption{An extension making use of the DevTools API's further extends the capabilities of a standard Chrome Extension. Diagram from \cite{chromeExtensionDevTools}}
+	\label{fig:test}
+\end{figure}
+
+More specifically, I am interested in the \texttt{devtools.network} API - this provides access to every request once it has finished. This contains a wealth of information which is otherwise difficult to obtain without using the devtools API. One of the APIs I am also using in the extension is the \texttt{chrome.webRequest}. This gives me access to several different events at different points of the lifetime of the request. It allows me to access some headers as well as change a limited set of these. It however does not provide sufficient information for the purposes of the extension - \texttt{devtools.network} gives access to the response content of any given request, which is vital in analysing outputs from a request to create attack correlations. Accessing the \texttt{devtools} APIs requires the Developer tools to be open for the page in question, which is only a small inconvenience when using the extension.
+
 \section{Message Design}
 
+To better understand the structure of the extension and how each feature ahead is to be implemented, it's good to create a high level overview of messaging between each component.  \\
 
+In order to analyse the requests being made in different context scripts, the \texttt{devtools} script gathers every request made in the page which has the Developer Tools inspection windows open. Since this page cannot directly pass messages to the content scripts \cite{chromeExtensionDevTools}, it uses the background page as a mediator. It establishes a connection to the background page and passes to it every request it picks up. The background page then forwards these messages to the different content scripts that analyse the requests - \texttt{action\_replay} and \texttt{passive\_mode}. \\
+
+Whenever a request causes the \texttt{request\_logger} page to be loaded, 
+To toggle the enabling or disabling of the Action Replay algorithm, the popup page sends a message to the \texttt{action\_replay} script each time the corresponding switch is clicked. 
+
+
+\section{Recommendations}
+
+One of the large features intended for implementation in this project was the use of suggestions whilst browsing a page to attempt vulnerability exploits. This provides a low-effort means for a penetration tester to quickly test different types of attacks on a webpage. 
+
+I have implemented this by overriding every form on a page with an input of my own. 
 
 \section{Action Replay}
 
+The Action 
 
 
 \section{Passive Mode}
@@ -78,4 +101,3 @@ The background page I am using in the extension is a persistent page, meaning it
 Mention about 2 different ways of doing it - passive mode with normal cross checks by default - sliding window with eviction of requests.
 Instead I keep window size and cross check only when enabled.
 
-\subsection{Recommendations}

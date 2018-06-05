@@ -29,7 +29,7 @@ chrome.runtime.onMessage.addListener(
 // A message contains request and response cookies, headers and query parameters.
 // This message is sent to the `action_replay.js` content script, where
 // It filters information brought across based on whether the action replay recording
-// has started or not
+// has started or not. Also sent to the `passive_mode.js` for analysis.
 var connections = {};
 
 chrome.runtime.onConnect.addListener(

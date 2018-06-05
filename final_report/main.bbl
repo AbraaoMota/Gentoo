@@ -70,14 +70,20 @@ Django~Software Foundation.
 Google.
 \newblock Google developer - extensions - content security policy (csp).
 \newblock \url{https://developer.chrome.com/extensions/contentSecurityPolicy}.
-\newblock Accessed: 02/07/2018.
+\newblock Accessed: 02/06/2018.
+
+\bibitem{chromeExtensionDevTools}
+Google.
+\newblock Google developer - extensions - devtools.
+\newblock \url{https://developer.chrome.com/extensions/devtools}.
+\newblock Accessed: 5/06/2018.
 
 \bibitem{chromeExtensionWebAccessibleResources}
 Google.
 \newblock Google developer - extensions - manifest - web accessible resources.
 \newblock
   \url{https://developer.chrome.com/extensions/manifest/web_accessible_resources}.
-\newblock Accessed: 04/07/2018.
+\newblock Accessed: 04/06/2018.
 
 \bibitem{chromeExtensionArchitecture}
 Google.

@@ -90,12 +90,38 @@ In order to analyse the requests being made in different context scripts, the \t
 
 Whenever a request causes the \texttt{request\_logger} page to be loaded, the page captures the information from the page it has just been referred to from, and forwards this information in a message to the \texttt{popup} page to update the list of vulnerable URLs. To toggle the enabling or disabling of the Action Replay algorithm, the popup page sends a message to the \texttt{action\_replay} script each time the corresponding switch is clicked. When the Action Replay is mid analysis, it will produce a warning list of inputs it has considered to be potentially dangerous, and passes a message to the \texttt{popup} page when it has detected this. Similarly, in the \texttt{passive\_mode} script, a message is passed to the \texttt{popup} alerting to any suspicious request behaviour. The \texttt{background} script also listens to several of these messages, and consequently updates the UI badge aesthetics, alerting the user to fresh information to analyse in the extension.
 
+\section{Chrome Storage}
+
+Google offers access to the \texttt{chrome.storage} API, which is a specialised storage designed for the needs and uses of an extension. This is an asynchronous storage that allows storing of objects (not solely strings as is found in \texttt{localStorage}). Perhaps most practically, it also allows each content script to access storage data without the need to relay this information through the background page. At the start of the project I was using \texttt{localStorage}, but quickly switched to \texttt{chrome.storage} once I ran into the hassles of using this (converting to and from a \textit{string} type on access and storage, as well as using the \texttt{background} as a proxy for every access). \\
+
+I am using this storage to keep a variety of settings and flags, as well as different lists of requests and analysis. Namely: 
+
+\begin{itemize}
+	\item \texttt{passiveModeRequests} - This collects all the requests gathered when running the Passive Mode in the extension. This stores request and response params, headers and cookies, as well as the response content and the URL pertinent to the request.
+	
+	\item \texttt{passiveModeWeakHeaderRequests} - Initially intended to store the requests which have been detected to have weak security Headers, this stores an array of requests with properties similar to the \texttt{passiveModeRequests}. The difference between what is stored is that in this array I also store a list of warnings added to the request by the passive mode if it has found any worrying information during its scan.
+	
+	\item \texttt{settings} - This is an array of flag settings determined in the settings section of the extension. It stores information such as the \texttt{recommenderSensitivity}, \texttt{passiveModeCSRFEnabled} and \texttt{passiveModeWindowSize}.
+	
+	\item \texttt{cachedSettings} - This stores the same information as \texttt{settings}; \texttt{cachedSettings} are used to store settings before these are saved in the settings window.
+	
+	\item \texttt{potentialXSS} - This stores a list of user controlled inputs involved in XSS detection. Each input stores its type - \textbf{cookie}, query \textbf{param}eter or \textbf{header}. The input also stores the URL of origin, and the name and corresponding value of each value in consideration.
+	
+	\item \texttt{ARrequests} - This list stores every request that is captured within the currently / last recorded session of the Action Replay algorithm. The information kept per request is similar to that kept in \texttt{passiveModeRequests}.
+	
+	\item \texttt{ARSession} - This flag keeps track of whether the current Action Replay session is recording or stopped.
+	
+	\item \texttt{enableAR} - Enables or disables Action Replay in the current page.
+	
+	\item \texttt{enablePassiveMode} - Enables or disables Passive Mode in the current page.
+	
+\end{itemize}
 
 \section{Recommendations}
 
 One of the large features intended for implementation in this project was the use of suggestions whilst browsing a page to attempt vulnerability exploits. This provides a low-effort means for a penetration tester to quickly test different types of attacks on a webpage. \\
 
-
+The recommendations in the extension work by analysing the contents of the page, and tweaking the page with visible inputs depending on the inputs present. 	
 
 I have implemented this by overriding every form on a page with an input of my own. 
 

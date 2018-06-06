@@ -13,12 +13,6 @@ var messageHandler = function(message, sender, sendResponse) {
   messageHandlerBusy = true;
 
   chrome.storage.local.get(function(storage) {
-    // var ARsession = storage["ARsession"];
-    // if (message.msg === "toggleRecommendations") {
-    //   // Enable or disable recommendations
-    //   toggleRecommendations();
-    //   messageHandlerBusy = false;
-    // }
   });
 }
 

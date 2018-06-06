@@ -90,7 +90,7 @@ In order to analyse the requests being made in different context scripts, the \t
 
 Whenever a request causes the \texttt{request\_logger} page to be loaded, the page captures the information from the page it has just been referred to from, and forwards this information in a message to the \texttt{popup} page to update the list of vulnerable URLs. To toggle the enabling or disabling of the Action Replay algorithm, the popup page sends a message to the \texttt{action\_replay} script each time the corresponding switch is clicked. When the Action Replay is mid analysis, it will produce a warning list of inputs it has considered to be potentially dangerous, and passes a message to the \texttt{popup} page when it has detected this. Similarly, in the \texttt{passive\_mode} script, a message is passed to the \texttt{popup} alerting to any suspicious request behaviour. The \texttt{background} script also listens to several of these messages, and consequently updates the UI badge aesthetics, alerting the user to fresh information to analyse in the extension.
 
-\section{Chrome Storage}
+\section{Chrome Storage} \label{storageSpecs}
 
 Google offers access to the \texttt{chrome.storage} API, which is a specialised storage designed for the needs and uses of an extension. This is an asynchronous storage that allows storing of objects (not solely strings as is found in \texttt{localStorage}). Perhaps most practically, it also allows each content script to access storage data without the need to relay this information through the background page. At the start of the project I was using \texttt{localStorage}, but quickly switched to \texttt{chrome.storage} once I ran into the hassles of using this (converting to and from a \textit{string} type on access and storage, as well as using the \texttt{background} as a proxy for every access). \\
 
@@ -121,13 +121,35 @@ I am using this storage to keep a variety of settings and flags, as well as diff
 
 One of the large features intended for implementation in this project was the use of suggestions whilst browsing a page to attempt vulnerability exploits. This provides a low-effort means for a penetration tester to quickly test different types of attacks on a webpage. \\
 
-The recommendations in the extension work by analysing the contents of the page, and tweaking the page with visible inputs depending on the inputs present. 	
+The recommendations in the extension work by analysing the contents of the page, and tweaking the page accordingly. It begins by reviewing every \texttt{form} tag in the page - for each form found in the page, it will detect any child \texttt{input} tags, and for the first of these will create a sibling node which acts as a prompt to analyse the page further. \\
 
-I have implemented this by overriding every form on a page with an input of my own. 
+The sibling node with the text \textit{Investigate form} is made into a clickable element, and upon click will initiate an attack attempt against the input in question. 
+
+\begin{figure}[h]
+	\centering
+	\begin{subfigure}{.5\textwidth}
+		\centering
+		\includegraphics[width=.8\linewidth]{images/test_page_investigate_form.png}
+		\label{fig:test_page_investigate_form}
+	\end{subfigure}%
+	\begin{subfigure}{.5\textwidth}
+		\centering
+		\includegraphics[width=.8\linewidth]{images/web_scanner_investigate_form.png}
+		\label{fig:whiteBox}
+	\end{subfigure}
+	\caption{The \textit{Investigate Form} input being added to different pages allows a user to attempt attacks against the page in question.}
+	\label{fig:test}
+\end{figure} 
 
 \section{Action Replay}
 
-The Action 
+Action Replay is a another attack algorithm that works in a slightly different way. This mode allows a user to use the application as normal, with the expectation that the user narrows down the attack surface to a specific set (or sequence) of inputs. \\
+
+Once the Action Replay mode is enabled, the extension adds a small input button to each page's body to allow the user to begin or terminate a session. A session is split into 2 parts - the recording phase and the replay phase. Once a session begins, it must firstly record the requests and inputs being made by the user. The extension does so by storing requests at the aforementioned array \texttt{ARrequests}. Once the user is happy that they have captured enough of the minimum behaviour required to potentially trigger a vulnerability, they can click the button once again to stop recording the session, thus starting the analysis and replay phase of the algorithm. At this stage the algorithm iterates through each of the requests stored in the \texttt{ARrequests} array and appends all of the captured user-controlled inputs to a list of custom \texttt{userInput}s to analyse. A meaningful user-controlled input in this case is either a \textbf{cookie}, a query \textbf{param}eter or a \textbf{header}. The \texttt{userInput} type has the parameters as defined for the data structure \texttt{potentialXSS} (see \label{storageSpecs}). \\
+
+In the interest of demonstrating a minimum behaviour within the time frame of the project, I analyse only the responses with the \texttt{Content-type} header set to \texttt{text/html}. This is because vulnerabilities in HTML responses are more readily detectable and easier to analyse than others (e.g. those in CSS files). \\
+
+Once the algorithm has gathered this information, it filters out a series of user inputs it does not deem to be harmful through some heuristics.
 
 
 \section{Passive Mode}

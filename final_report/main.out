@@ -14,26 +14,27 @@
 \BOOKMARK [2][-]{subsection.2.5.2}{Breadth of work}{section.2.5}% 14
 \BOOKMARK [2][-]{subsection.2.5.3}{Self security}{section.2.5}% 15
 \BOOKMARK [2][-]{subsection.2.5.4}{Ethics \046 Handling of Results}{section.2.5}% 16
-\BOOKMARK [0][-]{chapter.3}{Overall Design}{}% 17
-\BOOKMARK [0][-]{chapter.4}{Implementation}{}% 18
-\BOOKMARK [1][-]{section.4.1}{Manifest}{chapter.4}% 19
-\BOOKMARK [1][-]{section.4.2}{Test harness}{chapter.4}% 20
-\BOOKMARK [1][-]{section.4.3}{Popup page}{chapter.4}% 21
-\BOOKMARK [1][-]{section.4.4}{Background Page}{chapter.4}% 22
-\BOOKMARK [1][-]{section.4.5}{Request Logger}{chapter.4}% 23
-\BOOKMARK [1][-]{section.4.6}{Devtools}{chapter.4}% 24
-\BOOKMARK [1][-]{section.4.7}{Message Design}{chapter.4}% 25
-\BOOKMARK [1][-]{section.4.8}{Chrome Storage}{chapter.4}% 26
-\BOOKMARK [1][-]{section.4.9}{Recommendations}{chapter.4}% 27
-\BOOKMARK [1][-]{section.4.10}{Action Replay}{chapter.4}% 28
-\BOOKMARK [1][-]{section.4.11}{Passive Mode}{chapter.4}% 29
-\BOOKMARK [0][-]{chapter.5}{Applications}{}% 30
-\BOOKMARK [0][-]{chapter.6}{Evaluation}{}% 31
-\BOOKMARK [1][-]{section.6.1}{Intended functionality}{chapter.6}% 32
-\BOOKMARK [1][-]{section.6.2}{Metrics of success}{chapter.6}% 33
-\BOOKMARK [1][-]{section.6.3}{Experiments}{chapter.6}% 34
-\BOOKMARK [2][-]{subsection.6.3.1}{Test benches}{section.6.3}% 35
-\BOOKMARK [2][-]{subsection.6.3.2}{Test methodology}{section.6.3}% 36
-\BOOKMARK [0][-]{chapter.7}{Future Work}{}% 37
-\BOOKMARK [0][-]{chapter.8}{Conclusion}{}% 38
-\BOOKMARK [0][-]{appendix.A}{First Appendix}{}% 39
+\BOOKMARK [0][-]{chapter.3}{Implementation}{}% 17
+\BOOKMARK [1][-]{section.3.1}{Manifest}{chapter.3}% 18
+\BOOKMARK [1][-]{section.3.2}{Test harness}{chapter.3}% 19
+\BOOKMARK [1][-]{section.3.3}{Popup page}{chapter.3}% 20
+\BOOKMARK [1][-]{section.3.4}{Background Page}{chapter.3}% 21
+\BOOKMARK [1][-]{section.3.5}{Request Logger}{chapter.3}% 22
+\BOOKMARK [1][-]{section.3.6}{Devtools}{chapter.3}% 23
+\BOOKMARK [1][-]{section.3.7}{Message Design}{chapter.3}% 24
+\BOOKMARK [1][-]{section.3.8}{Chrome Storage}{chapter.3}% 25
+\BOOKMARK [1][-]{section.3.9}{Recommendations}{chapter.3}% 26
+\BOOKMARK [2][-]{subsection.3.9.1}{Recommendation Sensitivity}{section.3.9}% 27
+\BOOKMARK [1][-]{section.3.10}{Action Replay}{chapter.3}% 28
+\BOOKMARK [1][-]{section.3.11}{Passive Mode}{chapter.3}% 29
+\BOOKMARK [0][-]{chapter.4}{Applications}{}% 30
+\BOOKMARK [0][-]{chapter.5}{Experimentation}{}% 31
+\BOOKMARK [1][-]{section.5.1}{Intended functionality}{chapter.5}% 32
+\BOOKMARK [1][-]{section.5.2}{Metrics of success}{chapter.5}% 33
+\BOOKMARK [1][-]{section.5.3}{Experiments}{chapter.5}% 34
+\BOOKMARK [2][-]{subsection.5.3.1}{Test benches}{section.5.3}% 35
+\BOOKMARK [2][-]{subsection.5.3.2}{Test methodology}{section.5.3}% 36
+\BOOKMARK [0][-]{chapter.6}{Evaluation}{}% 37
+\BOOKMARK [0][-]{chapter.7}{Future Work}{}% 38
+\BOOKMARK [0][-]{chapter.8}{Conclusion}{}% 39
+\BOOKMARK [0][-]{appendix.A}{First Appendix}{}% 40

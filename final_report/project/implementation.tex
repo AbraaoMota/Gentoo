@@ -117,7 +117,7 @@ I am using this storage to keep a variety of settings and flags, as well as diff
 	
 \end{itemize}
 
-\section{Recommendations}
+\section{Recommendations} \label{recommendations}
 
 One of the large features intended for implementation in this project was the use of suggestions whilst browsing a page to attempt vulnerability exploits. This provides a low-effort means for a penetration tester to quickly test different types of attacks on a webpage. \\
 
@@ -141,18 +141,59 @@ The sibling node with the text \textit{Investigate form} is made into a clickabl
 	\label{fig:test}
 \end{figure} 
 
+\subsection{Recommendation Sensitivity}
+
+With the above implementation it would not be possible to ascertain whether an input that wasn't first in a form was susceptible to vulnerabilities or not. Adding the \textit{Investigate Form} button to every input in a page will \textit{usually} create too much clutter and make the page harder to use. It also creates elements for hidden inputs, which is likely to shift the contents of the page in unexpected ways. \\
+
+As a result, I added a setting to tweak the sensitivity of the Recommendations - the default setting of \textbf{1} will apply the algorithm above, adding a button for the first \texttt{input} tag per \texttt{form} on a page. Setting it to \textbf{2} will now add the button as above for \textbf{every} \texttt{input} tag per \texttt{form} on a page. The highest sensitivity (\textbf{3}) will append this button for every input in a page, regardless of being within a \texttt{form} tag or not. \\
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=0.7\textwidth]{images/tweaking_recommender_sensitivity.png}
+	\caption{Changing the recommendation sensitivity within the settings tab}
+	\label{fig:test}
+\end{figure}
+
+This adds a bit more complexity to the method in question - the conventional Javascript and JQuery \texttt{submit()} methods work on form elements only. In order to submit the attack attempt for this sensitivity, I manually submit a request to the base URL of the current window, setting the query parameter with the name corresponding to the name of the input being selected. The value for this query parameter is the attack string with some modifications for correct URL encoding. These are:
+
+\begin{enumerate}
+	\item Replace the escaped character \texttt{\%20} with \texttt{+}. URL encoding rules state that for query parameters, a whitespace should be set to the \texttt{+} symbol instead
+	
+	\item Replace instances of the character \texttt{\&} with its URL encoded equivalent \texttt{\%26} - We are now within the specific value of the query parameter, so the \texttt{\&} character must be encoded, otherwise it would be mistaken for the start of another query parameter value within the overall URL, which breaks the attack.
+\end{enumerate} 
+
 \section{Action Replay}
 
 Action Replay is a another attack algorithm that works in a slightly different way. This mode allows a user to use the application as normal, with the expectation that the user narrows down the attack surface to a specific set (or sequence) of inputs. \\
 
-Once the Action Replay mode is enabled, the extension adds a small input button to each page's body to allow the user to begin or terminate a session. A session is split into 2 parts - the recording phase and the replay phase. Once a session begins, it must firstly record the requests and inputs being made by the user. The extension does so by storing requests at the aforementioned array \texttt{ARrequests}. Once the user is happy that they have captured enough of the minimum behaviour required to potentially trigger a vulnerability, they can click the button once again to stop recording the session, thus starting the analysis and replay phase of the algorithm. At this stage the algorithm iterates through each of the requests stored in the \texttt{ARrequests} array and appends all of the captured user-controlled inputs to a list of custom \texttt{userInput}s to analyse. A meaningful user-controlled input in this case is either a \textbf{cookie}, a query \textbf{param}eter or a \textbf{header}. The \texttt{userInput} type has the parameters as defined for the data structure \texttt{potentialXSS} (see \label{storageSpecs}). \\
+Once the Action Replay mode is enabled, the extension adds a small input button to each page's body to allow the user to begin or terminate a session. A session is split into 2 parts - the recording phase and the replay phase. Once a session begins, it must firstly record the requests and inputs being made by the user. The extension does so by storing requests at the aforementioned array \texttt{ARrequests}. Once the user is happy that they have captured enough of the minimum behaviour required to potentially trigger a vulnerability, they can click the button once again to stop recording the session, thus starting the analysis and replay phase of the algorithm. At this stage the algorithm iterates through each of the requests stored in the \texttt{ARrequests} array and appends all of the captured user-controlled inputs to a list of custom \texttt{userInput}s to analyse. A meaningful user-controlled input in this case is either a \textbf{cookie}, a query \textbf{param}eter or a \textbf{header}. The \texttt{userInput} type has the parameters as defined for the data structure \texttt{potentialXSS} (see \ref{storageSpecs}). \\
+
+\begin{figure}[h]
+	\centering
+	\begin{subfigure}{.5\textwidth}
+		\centering
+		\includegraphics[width=.8\linewidth]{images/ar_initial.png}
+		\label{fig:test_page_investigate_form}
+	\end{subfigure}%
+	\begin{subfigure}{.5\textwidth}
+		\centering
+		\includegraphics[width=.8\linewidth]{images/ar_recording.png}
+		\label{fig:whiteBox}
+	\end{subfigure}
+	\caption{The Action Replay button before and during a session recording. A recording session starts and stops at the click of this button. In the interest of usability, the button can be moved by the user anywhere on the page so as to not obstruct other content indefinitely.}
+	\label{fig:test}
+\end{figure} 
 
 In the interest of demonstrating a minimum behaviour within the time frame of the project, I analyse only the responses with the \texttt{Content-type} header set to \texttt{text/html}. This is because vulnerabilities in HTML responses are more readily detectable and easier to analyse than others (e.g. those in CSS files). \\
 
-Once the algorithm has gathered this information, it filters out a series of user inputs it does not deem to be harmful through some heuristics.
+Once the algorithm has gathered this information, it filters out a series of user inputs it does not deem to be harmful through some heuristics. I focussed on detecting Cross Site Scripting (XSS) vulnerabilities, so the heuristics aim to detect any use of angled brackets (URL encoded or not) alongside potentially executable HTML tag names (such as \texttt{iframe}s, \texttt{img} tags or \texttt{script}). If a \texttt{userInput} is deemed to be potentially dangerous, I store these in the \texttt{potentialXSS} array and send a message to the extension warning of a detected reflection in the outputs. \\
+
+After this intermediary warning, assuming some potentially dangerous user-controlled inputs were found, the algorithm begins to replay the requests, attempting different attacks from a stored suite. For each of the potentially dangerous inputs found earlier, it will apply each of the attacks. To do this, similarly to the process described at \ref{recommendations}, a new window is open, setting the user input as appropriate to test whether the attack has worked on not. Accordingly, each attack is self-contained, so if it triggers a vulnerability (and Javascript was executed for example), it will (by design) refer itself to the \texttt{request\_logger}, which logs the vulnerability as described before.
 
 
 \section{Passive Mode}
+
+
 
 Mention about 2 different ways of doing it - passive mode with normal cross checks by default - sliding window with eviction of requests.
 Instead I keep window size and cross check only when enabled.

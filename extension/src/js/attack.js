@@ -144,7 +144,7 @@ function addRecommendationsToPage(sensitivity) {
 
       // Attempt XSS (or otherwise) upon clicking the form
       recommendation.addEventListener("click", function(evt) {
-        attemptXSS(evt.target.child, null);
+        attemptXSS(evt.target.parentElement.firstChild, null);
       });
 
       // Create new div wrapper for element to be next to input
@@ -179,11 +179,15 @@ function attemptXSS(inputElement, parentForm) {
   if (parentForm) {
     parentForm.submit();
   } else {
-    // Attempt to submit input by triggering the "Enter" key
-    var ev = document.createEvent('Event');
-    ev.initEvent('keypress');
-    ev.which = ev.keyCode = 13;
-    inputElement.dispatchEvent(ev);
+
+    // Attempt to submit the page by appropriately encoding the data into the URL
+    // as a query parameter
+    var dataName = inputElement.name;
+    var baseURL = location.protocol + '//' + location.host + location.pathname;
+
+    var encodedValue = inputElement.value.replace("%20", "+").replace("&", "%26");
+
+    window.location.href = baseURL + "?" + dataName + "=" + encodedValue;
   }
 }
 

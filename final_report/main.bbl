@@ -162,6 +162,27 @@ McAfee.
 \newblock \url{https://www.mcafee.com/us/downloads/free-tools/hacme-bank.aspx}.
 \newblock Accessed: 25/01/2018.
 
+\bibitem{refererHeader}
+Mozilla.
+\newblock Mdn web docs - referer.
+\newblock
+  \url{https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Referer}.
+\newblock Accessed: 7/06/2018.
+
+\bibitem{referrerPolicy}
+Mozilla.
+\newblock Mdn web docs - referrer policy.
+\newblock
+  \url{https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Referrer-Policy}.
+\newblock Accessed: 7/06/2018.
+
+\bibitem{xFrameOptions}
+Mozilla.
+\newblock Mdn web docs - x-frame-options.
+\newblock
+  \url{https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-Frame-Options}.
+\newblock Accessed: 7/06/2018.
+
 \bibitem{laravelCSRF}
 Taylor Otwell.
 \newblock Laravel docs - csrf protection.

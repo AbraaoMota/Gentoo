@@ -162,7 +162,7 @@ This adds a bit more complexity to the method in question - the conventional Jav
 	\item Replace instances of the character \texttt{\&} with its URL encoded equivalent \texttt{\%26} - We are now within the specific value of the query parameter, so the \texttt{\&} character must be encoded, otherwise it would be mistaken for the start of another query parameter value within the overall URL, which breaks the attack.
 \end{enumerate} 
 
-\section{Action Replay}
+\section{Action Replay} \label{actionReplay}
 
 Action Replay is a another attack algorithm that works in a slightly different way. This mode allows a user to use the application as normal, with the expectation that the user narrows down the attack surface to a specific set (or sequence) of inputs. \\
 
@@ -188,13 +188,45 @@ In the interest of demonstrating a minimum behaviour within the time frame of th
 
 Once the algorithm has gathered this information, it filters out a series of user inputs it does not deem to be harmful through some heuristics. I focussed on detecting Cross Site Scripting (XSS) vulnerabilities, so the heuristics aim to detect any use of angled brackets (URL encoded or not) alongside potentially executable HTML tag names (such as \texttt{iframe}s, \texttt{img} tags or \texttt{script}). If a \texttt{userInput} is deemed to be potentially dangerous, I store these in the \texttt{potentialXSS} array and send a message to the extension warning of a detected reflection in the outputs. \\
 
-After this intermediary warning, assuming some potentially dangerous user-controlled inputs were found, the algorithm begins to replay the requests, attempting different attacks from a stored suite. For each of the potentially dangerous inputs found earlier, it will apply each of the attacks. To do this, similarly to the process described at \ref{recommendations}, a new window is open, setting the user input as appropriate to test whether the attack has worked on not. Accordingly, each attack is self-contained, so if it triggers a vulnerability (and Javascript was executed for example), it will (by design) refer itself to the \texttt{request\_logger}, which logs the vulnerability as described before.
+After this intermediary warning, assuming some potentially dangerous user-controlled inputs were found, the algorithm begins to replay the requests, attempting different attacks from a stored suite. For each of the potentially dangerous inputs found earlier, it will apply each of the attacks. To do this, similarly to the process described at \ref{recommendations}, a new window is open, setting the user input to the specific attack value to test whether the attack worked on not. Accordingly, each attack is self-contained, so if it triggers a vulnerability (and Javascript was executed for example), it will (by design) refer itself to the \texttt{request\_logger}, which logs the vulnerability as described before.
 
 
 \section{Passive Mode}
 
+Passive Mode is designed to run in the background while browsing, gathering data about websites being visited and analysing requests to highlight warning signs of different vulnerabilities. It does so without making any requests of its own, meaning any potential misuse of a web application is entirely dependent on how the user navigates and uses it - this mode simply highlights information the user already has open access to. \\
+
+Once this mode is enabled, any eligible web requests are firstly stored in the \texttt{passiveModeRequests} structure in \texttt{chrome.storage.local}. The analysis is then ran separately per request. The scope of the analysis depends on the activated settings; by default each request is checked for weak security header settings and for potentially dangerous user-controlled inputs that are reflected in responses. The user can also activate further basic CSRF and Cookie safety checks, as well as enabling the \textit{cross checks} feature. 
+
+\subsection{Header Analysis}
+
+This performs some basic checks regarding a set of headers whose presence is designed to improve security in a website. These are:
+
+\begin{itemize}
+	\item \textbf{Content-Security-Policy} - This header specifies what sources it trusts content from, in a whitelist manner. XSS attacks abuse the trust that is often (unintentionally) conferred to the source of executable content in a page. With the correct settings, the CSP header will only allow scripts from trusted sources to run. At the same time, since you can specify specific sources as trusted, you can enforce that all content is loaded using SSL by specifying a source with a HTTPS scheme.
+	
+	\item \textbf{Referrer-Policy} - This policy controls what information to send (if any) on the \texttt{Referer} header\footnote{ Typo intended \cite{refererHeader}}. Many websites use the \texttt{Referer} header to analyse where their traffic comes from, and some even use this to validate permissions to access secure content. However, this may leak sensitive information - this header will usually include the URL of the page which the user was just on. It's often the case that a session ID or other sensitive query parameter is included in the URL, and leaking this information to another website indiscriminately could pose a security risk. The most strict of potential policies here is the \texttt{no-referrer}, which passes forward a blank \texttt{Referer} header. Other, more relaxed alternatives to this policy also exist \cite{referrerPolicy}.
+	
+	\item \textbf{Strict-Transport-Security} - 	This header (abbreviated to \texttt{HSTS}) allows browsers to determine whether a website should be only accessed using HTTPS or not. There is a small window for a man-in-the-middle attack when using this - if it is the user's first time accessing the website and they access the HTTP version, it is possible for an attacker to hijack their connection and instead connect them to a duplicated site, which allows their credentials to be stolen. Otherwise, as long as the user has visited the safe HTTPS version of the website in question at least once, the \texttt{HSTS} header will have let the browser remember that this website wishes its users to connect to it only through HTTPS, enforcing this for as long as the \texttt{max-age} directive within the header value allows. Additionally, it is recommended that a website also includes the \texttt{includeSubDomains} directive so that any subdomains belonging to this website also enforce a similar policy.
+	
+	\item \textbf{X-Content-Type-Options} - This header is set to ensure that a defined \texttt{MIME-type} is followed and not changed by a browser. In some cases where the browser is not certain about what content it has just received, it may try to guess this type, which can result in the execution of some (potentially malicious) content. This is called \textit{MIME-type sniffing}, and setting this header to \texttt{nosniff} prevents the browser from doing so.
+	
+	\item \textbf{X-Frame-Options} - This header can be set to determine whether a website may be rendered in another origin within a \texttt{<frame>}, \texttt{<iframe>} or \texttt{<object>} tag \cite{xFrameOptions}. Denying this behaviour can prevent clickjacking behaviour, where the content from a legitimate website is rendered on a malicious website to trick users into believing they are using the legitimate site.
+	
+	\item \textbf{X-XSS-Protection} - This is a slightly older header whose behaviour may be made redundant through appropriate use of the \texttt{Content-Security-Policy} header. Nonetheless, setting this header allows the browser to perform basic checks to prevent against reflected XSS attacks, and, depending on the mode set, will sanitize or block the page from being rendered altogether.
+	
+\end{itemize}
+
+The analysis of these headers does not require that the "recommended" values of these headers are set - although these are \textit{probably} the desired values to be set by the developers, we cannot be sure it isn't intentional on their part to do so. Instead, the extension warns when these headers have not been set, which is a higher indicator of negligence to their importance than a "weaker" setting. If that is the case, an appropriate warning is added to the request in the \texttt{passiveModeWeakHeaderRequests} structure. The \texttt{popup} page will render all the warnings for a request as appropriate. 
+
+\subsection{Reflected Input Checks}
+
+The process performed here is the same as the analysis part described in the Action Replay section \cite{actionReplay}. A difference between these is that any warnings found in this part will be generated and displayed in the \textit{Passive Analysis} tab in the extension, as opposed to the \textit{XSS} tab.
+
+\subsection{Basic CSRF Checks}
 
 
-Mention about 2 different ways of doing it - passive mode with normal cross checks by default - sliding window with eviction of requests.
-Instead I keep window size and cross check only when enabled.
+
+
+%Mention about 2 different ways of doing it - passive mode with normal cross checks by default - sliding window with eviction of requests.
+%Instead I keep window size and cross check only when enabled.
 

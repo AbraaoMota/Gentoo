@@ -32,18 +32,18 @@
 \contentsline {subsection}{\numberline {3.11.2}Reflected Input Checks}{24}{subsection.3.11.2}
 \contentsline {subsection}{\numberline {3.11.3}Basic CSRF Checks}{24}{subsection.3.11.3}
 \contentsline {subsection}{\numberline {3.11.4}Basic Cookie Setting Checks}{24}{subsection.3.11.4}
-\contentsline {subsection}{\numberline {3.11.5}Request Cross Checks}{24}{subsection.3.11.5}
-\contentsline {chapter}{\numberline {4}Applications}{25}{chapter.4}
-\contentsline {section}{\numberline {4.1}Recommendations}{25}{section.4.1}
-\contentsline {section}{\numberline {4.2}Action Replay}{25}{section.4.2}
-\contentsline {section}{\numberline {4.3}Passive Mode}{25}{section.4.3}
-\contentsline {chapter}{\numberline {5}Experimentation}{26}{chapter.5}
-\contentsline {section}{\numberline {5.1}Intended functionality}{26}{section.5.1}
-\contentsline {section}{\numberline {5.2}Metrics of success}{26}{section.5.2}
-\contentsline {section}{\numberline {5.3}Experiments}{27}{section.5.3}
-\contentsline {subsection}{\numberline {5.3.1}Test benches}{27}{subsection.5.3.1}
-\contentsline {subsection}{\numberline {5.3.2}Test methodology}{28}{subsection.5.3.2}
-\contentsline {chapter}{\numberline {6}Evaluation}{29}{chapter.6}
-\contentsline {chapter}{\numberline {7}Future Work}{30}{chapter.7}
-\contentsline {chapter}{\numberline {8}Conclusion}{31}{chapter.8}
-\contentsline {chapter}{\numberline {A}First Appendix}{32}{appendix.A}
+\contentsline {subsection}{\numberline {3.11.5}Request Cross Checks}{25}{subsection.3.11.5}
+\contentsline {chapter}{\numberline {4}Applications}{26}{chapter.4}
+\contentsline {section}{\numberline {4.1}Recommendations}{26}{section.4.1}
+\contentsline {section}{\numberline {4.2}Action Replay}{26}{section.4.2}
+\contentsline {section}{\numberline {4.3}Passive Mode}{26}{section.4.3}
+\contentsline {chapter}{\numberline {5}Experimentation}{27}{chapter.5}
+\contentsline {section}{\numberline {5.1}Intended functionality}{27}{section.5.1}
+\contentsline {section}{\numberline {5.2}Metrics of success}{27}{section.5.2}
+\contentsline {section}{\numberline {5.3}Experiments}{28}{section.5.3}
+\contentsline {subsection}{\numberline {5.3.1}Test benches}{28}{subsection.5.3.1}
+\contentsline {subsection}{\numberline {5.3.2}Test methodology}{29}{subsection.5.3.2}
+\contentsline {chapter}{\numberline {6}Evaluation}{30}{chapter.6}
+\contentsline {chapter}{\numberline {7}Future Work}{31}{chapter.7}
+\contentsline {chapter}{\numberline {8}Conclusion}{32}{chapter.8}
+\contentsline {chapter}{\numberline {A}First Appendix}{33}{appendix.A}

@@ -176,6 +176,13 @@ Mozilla.
   \url{https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Referrer-Policy}.
 \newblock Accessed: 7/06/2018.
 
+\bibitem{setCookie}
+Mozilla.
+\newblock Mdn web docs - set-cookie.
+\newblock
+  \url{https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Set-Cookie}.
+\newblock Accessed: 7/06/2018.
+
 \bibitem{xFrameOptions}
 Mozilla.
 \newblock Mdn web docs - x-frame-options.

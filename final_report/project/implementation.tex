@@ -228,19 +228,46 @@ This performs some basic checks regarding a set of headers whose presence is des
 
 The analysis of these headers does not require that the "recommended" values of these headers are set - although these are \textit{probably} the desired values to be set by the developers, we cannot be sure it isn't intentional on their part to do so. Instead, the extension warns when these headers have not been set, which is a higher indicator of negligence to their importance than a "weaker" setting. If that is the case, an appropriate warning is added to the request in the \texttt{passiveModeWeakHeaderRequests} structure. The \texttt{popup} page will render all the warnings for a request as appropriate. 
 
-\subsection{Reflected Input Checks}
+\subsection{Reflected Input Checks} \label{reflectedInputChecks}
 
 The process performed here is the same as the analysis part described in the Action Replay section \ref{actionReplay}. A difference between these is that any warnings found in this part will be generated and displayed in the \textit{Passive Analysis} tab in the extension, as opposed to the \textit{XSS} tab.
 
-\subsection{Basic CSRF Checks}
+\subsection{Basic CSRF Checks} \label{csrfChecks}
 
-The principle behind a CSRF attack is that 
+The principle behind a Cross Site Request Forgery (CSRF) attack is that a website relies on a user's identity to validate actions on their behalf. This identity may be kept as information in the user's browser, perhaps as a session ID stored in a cookie to distinguish this user from other users. The attack results from the user being tricked into performing state-changing actions on the application by an attacker who has exploited the trust mechanism used between the application and the user. These state-changing actions could happen if the attacker has also worked out which URLs the application would fabricate when performing these actions on behalf of the victim. \\
 
+In the context of checking this passively, I employ a very basic algorithm to establish a minimum set of requirements for a page that could be vulnerable to CSRF:
+
+\begin{enumerate}
+	\item \textbf{Target pages using client-side authentication} - The most basic means of doing this is to look for a cookie which establishes some means of authentication between the website and the user. The script executing in this part contains a list of well known cookie names known to store this type of information in different web frameworks. This could easily be bypassed by tweaking the name of this cookie slightly (with a number perhaps). Therefore, the check done is whether the cookie in question includes (in any part of its name), the strings contained in the "session cookie name blacklist".
+	
+	\item \textbf{Focus on pages with content to submit} - The algorithm now searches for any pages that contain a \texttt{form} tag within them. 
+	
+	\item \textbf{Emit a warning for any which don't contain a hidden input within the form} - One commonly included means of avoiding CSRF by web developers is to add an anti-CSRF token to forms that will be submitted. This adds an element of randomisation to the page, and means that the generated URL when submitting the form will be randomised, making it more difficult for an attacker to consistently generate a working URL that causes users to take undesired actions.
+\end{enumerate}
+
+If a page fulfills these checks then it is a potential candidate to a CSRF vulnerability, and the algorithm emits an appropriate warning for this. 
 
 \subsection{Basic Cookie Setting Checks}
 
+When setting a cookie in in the browser, the developer has several directives they can apply to that cookie for the future. When it comes to securing this information, there are 2 key directives a developer can use - setting the cookie to \texttt{secure} or to be \texttt{HttpOnly}. \\
+
+Setting the cookie to be \texttt{secure} means that the cookie will only be set when the request doing so is executed over SSL (that is, using a HTTPS connection). The principle is that cookies may contain sensitive information, so it is not adequate to set or disclose their contents over an unprotected network. The \texttt{HttpOnly} directive is set to prevent access to the contents of the cookie through Javascripts \texttt{document.cookie}, using \texttt{XMLHttpRequest}s or by using the \texttt{Request} API \cite{setCookie}. \\ 
+
+The algorithm here filters out Cookies that are likely to store important information - the list of 'critical' cookies is the same as the one used in \ref{csrfChecks}. If any of these are found, the extension issues a warning for any of these which have been set without the \texttt{secure} and \texttt{HttpOnly} directive. 
+
 \subsection{Request Cross Checks}
 
+The passive mode works by looking at each individual request and its equivalent direct response, and analysing the contents between these two. However, it may be the case that in some vulnerabilities, the weakness is only exposed in a later request/response pair than the initial request which triggered it. This is a close description of \textit{Second Order Attacks} - whether it is a command injection or an XSS vulnerability, these are attacks will only show their effects at a later point than their exploitation. \\
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=0.8\textwidth]{images/second_order_attack.png}
+	\caption{This illustrates a potential second-order XSS attack. In this example, an unsanitized user registration form \textbf{(1)} allows a user to register under a username that could cause a Javascript injection if their username is refelcted elsewhere on the page. There are intermediary steps between this vulnerability and its exploit however - in step \textbf{(2)} we see a registration successful page, and even in step \textbf{(3)} we have not yet experienced the attack. Only in step \textbf{(4)} do we see the effects of the attack as the user name is reflected in the page, injecting and executing the script.}
+	\label{fig:secondOrderAttack}
+\end{figure}
+
+This mode is our attempt at responding to these types of attacks. Enabling the Cross Checks functionality employs the same algorithm as that used for the \textit{Reflected Input checks} (\ref{reflectedInputChecks}), with the key difference that we are now not only looking at the immediate request inputs that generated the current response, but we also analyse the request inputs of previous requests to check for correlations in the outputs of the current response. Using \ref{fig:secondOrderAttack} as an example, in order to be able to identify the second-order attack, we would need to use a cross-check window size of 4. This is because our latest request \textbf{(4)} is victim to an attack input that was made in request \textbf{(1)}. Hence, setting the cross-check window size to 2 would only additionally look at step \textbf{(3)} in the figure, but this may come up short in terms of identifying such a vulnerability. Naturally, increasing the window size adds more analysis work to be done on every request, and is more likely to find false positives, so it may be difficult to strike a correct balance between not making the window so large so as to clutter the outputs with false positive warnings, but large enough to detect second-order attacks within a web application.
 
 %Mention about 2 different ways of doing it - passive mode with normal cross checks by default - sliding window with eviction of requests.
 %Instead I keep window size and cross check only when enabled.

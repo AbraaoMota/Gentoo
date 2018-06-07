@@ -195,7 +195,17 @@ After this intermediary warning, assuming some potentially dangerous user-contro
 
 Passive Mode is designed to run in the background while browsing, gathering data about websites being visited and analysing requests to highlight warning signs of different vulnerabilities. It does so without making any requests of its own, meaning any potential misuse of a web application is entirely dependent on how the user navigates and uses it - this mode simply highlights information the user already has open access to. \\
 
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=0.9\textwidth]{images/passive_mode_settings.png}
+	\caption{The settings tab can be used to configure which submodes are activated within the Passive Mode.}
+	\label{fig:test}
+\end{figure}
+
 Once this mode is enabled, any eligible web requests are firstly stored in the \texttt{passiveModeRequests} structure in \texttt{chrome.storage.local}. The analysis is then ran separately per request. The scope of the analysis depends on the activated settings; by default each request is checked for weak security header settings and for potentially dangerous user-controlled inputs that are reflected in responses. The user can also activate further basic CSRF and Cookie safety checks, as well as enabling the \textit{cross checks} feature. 
+
+
+
 
 \subsection{Header Analysis}
 
@@ -220,11 +230,16 @@ The analysis of these headers does not require that the "recommended" values of 
 
 \subsection{Reflected Input Checks}
 
-The process performed here is the same as the analysis part described in the Action Replay section \cite{actionReplay}. A difference between these is that any warnings found in this part will be generated and displayed in the \textit{Passive Analysis} tab in the extension, as opposed to the \textit{XSS} tab.
+The process performed here is the same as the analysis part described in the Action Replay section \ref{actionReplay}. A difference between these is that any warnings found in this part will be generated and displayed in the \textit{Passive Analysis} tab in the extension, as opposed to the \textit{XSS} tab.
 
 \subsection{Basic CSRF Checks}
 
+The principle behind a CSRF attack is that 
 
+
+\subsection{Basic Cookie Setting Checks}
+
+\subsection{Request Cross Checks}
 
 
 %Mention about 2 different ways of doing it - passive mode with normal cross checks by default - sliding window with eviction of requests.

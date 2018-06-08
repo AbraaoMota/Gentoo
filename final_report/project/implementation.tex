@@ -250,9 +250,9 @@ If a page fulfills these checks then it is a potential candidate to a CSRF vulne
 
 \subsection{Basic Cookie Setting Checks}
 
-When setting a cookie in in the browser, the developer has several directives they can apply to that cookie for the future. When it comes to securing this information, there are 2 key directives a developer can use - setting the cookie to \texttt{secure} or to be \texttt{HttpOnly}. \\
+When setting a cookie in in the browser, the developer has several directives they can apply to that cookie for the future. When it comes to securing the contents of the cookie, there are 2 key directives a developer can use - setting the cookie to be \texttt{secure} and / or to be \texttt{HttpOnly}. \\
 
-Setting the cookie to be \texttt{secure} means that the cookie will only be set when the request doing so is executed over SSL (that is, using a HTTPS connection). The principle is that cookies may contain sensitive information, so it is not adequate to set or disclose their contents over an unprotected network. The \texttt{HttpOnly} directive is set to prevent access to the contents of the cookie through Javascripts \texttt{document.cookie}, using \texttt{XMLHttpRequest}s or by using the \texttt{Request} API \cite{setCookie}. \\ 
+Setting the cookie to be \texttt{secure} means that the cookie will only be set when the request doing so is executed over SSL (that is, using a HTTPS connection). The principle is that cookies may contain sensitive information, so it is not adequate to set or disclose their contents over an unprotected network. The \texttt{HttpOnly} directive is set to prevent access to the contents of the cookie through Javascript's \texttt{document.cookie}, using \texttt{XMLHttpRequest}s or by using the \texttt{Request} API \cite{setCookie}. \\ 
 
 The algorithm here filters out Cookies that are likely to store important information - the list of 'critical' cookies is the same as the one used in \ref{csrfChecks}. If any of these are found, the extension issues a warning for any of these which have been set without the \texttt{secure} and \texttt{HttpOnly} directive. 
 

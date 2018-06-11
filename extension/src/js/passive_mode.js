@@ -90,13 +90,10 @@ function analyseCrossRequests(storage, r) {
   var settings = storage["settings"];
   // Window size includes the current request
   var crossCheckWindow = settings["passiveModeWindowSize"] - 1;
-  console.log("Storage is");
-  console.log(storage);
   var passiveRequests = storage["passiveModeRequests"];
   if (passiveRequests.length === 1) return;
   var checkLimit = (crossCheckWindow > passiveRequests.length) ? passiveRequests.length : crossCheckWindow;
 
-  console.log("ENOUGH REQUESTS FOR CROSS CHECKS");
   // We assume we are already looking at the last request all the time, skip that
   for (var i = 0; i < checkLimit; i++) {
     // Read the requests from the list in reverse order
@@ -128,7 +125,6 @@ function analyseCrossRequests(storage, r) {
 function compareRequests(inputRequest, outputRequest) {
   var userInputs = [];
 
-  console.log("PERFORMING CROSS CHECKS");
   // Append all cookies from the input request into list
   var allInputCookies = inputRequest.reqCookies.concat(inputRequest.respCookies);
   for (var i = 0; i < allInputCookies.length; i++) {
@@ -144,8 +140,6 @@ function compareRequests(inputRequest, outputRequest) {
 
   // Append all query parameters from input request into the list
   var allInputQueryParams = inputRequest.reqParams;
-  console.log("ALL PARAMS FROM INPUT REQUEST ARE");
-  console.log(allInputQueryParams);
   for (var j = 0; j < allInputQueryParams.length; j++) {
     if (allInputQueryParams[j].value === "") continue;
     var uInput = {
@@ -180,7 +174,6 @@ function compareRequests(inputRequest, outputRequest) {
   // Compare against the latest request
   var content = outputRequest.respContent;
 
-  console.log("TRYING TO DO JQUERY LOADING");
 
   var w = window.open(outputRequest.url);
   $(w.document.body).load(outputRequest.url, function() {
@@ -230,7 +223,6 @@ function compareRequests(inputRequest, outputRequest) {
 // Function checking for reflected inputs across requests
 function analyseRequestReflectedInputs(r) {
 
-  console.log("ANALYSING REFLECTED INPUTS");
   // Here we need to produce a list of parameters and other content which may be user
   // injected - this could be query parameters or cookie values
   var userInputs = [];
@@ -252,8 +244,6 @@ function analyseRequestReflectedInputs(r) {
   }
 
   // Append all query parameter values to the list
-  console.log("WE HAVE REQ PARAMS OF");
-  console.log(r.reqParams);
   for (var k = 0; k < r.reqParams.length; k++) {
     var uInput = {
       type:  "param",
@@ -276,8 +266,6 @@ function analyseRequestReflectedInputs(r) {
   }
 
   setTimeout(function() {
-    console.log("REQUEST IS");
-    console.log(r);
     var content = r.respContent;
 
     if (!userInputs) {
@@ -287,14 +275,11 @@ function analyseRequestReflectedInputs(r) {
     // Loop over all possible user inputs to compare against
     for (var m = 0; m < userInputs.length; m++) {
       var currUserInput = userInputs[m];
-      console.log("CHECKING IF FOLLOW USER INPUT IS DANGEROUS");
-      console.log(currUserInput);
       if (couldBeDangerous(content, currUserInput)) {
         // Here we flag up these inputs as a warning because it looks
         // as though content has been injected into the page
         // However that is the complete list, we only want to replay
         // the newly added dangerous inputs
-        console.log("WAS DANGEROUS");
         potentiallyDangerousInputs.push(currUserInput);
       }
     }
@@ -553,12 +538,7 @@ function analyseRequestForCookies(r) {
     "auth"
   ];
 
-  console.log("ANALYSING A REQUEST FOR WEAK COOKIE SETTINGS");
-
   var allCookies = r.reqCookies.concat(r.respCookies);
-
-  console.log("ALL COOKIES");
-  console.log(allCookies);
 
   var warnings = [];
 

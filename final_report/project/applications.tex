@@ -182,7 +182,7 @@ Besides headers, this mode also checks for potentially reflected user-controlled
 \end{figure}
 
 
-\subsection{CSRF alerts}
+\subsection{CSRF alerts} \label{applications_CSRF_alerts}
 
 As explained in Section \ref{csrfChecks}, this mode is also equipped to perform some basic checks to alert the user to factors which may facilitate the crafting of CSRF attacks, as long as the correct setting is enabled. To emulate this situation, we add some cookies to the Test Harness using Javascript. One of these is purposefully named with keywords that will trigger our filter that looks for cookies that store session IDs. We add the code in Listing \ref{lst:csrf_cookies} to the Javascript portion of our page.
 
@@ -210,9 +210,19 @@ The rest of our Test Harness page already fulfills the minimum requirements for 
 
 \subsection{Insecure Cookie Alerts}
 
-Passive mode can also check whether any potentially important or valuable cookies are being set with the appropriate security settings. 
+Passive mode can also check whether any potentially important or valuable cookies are being set with the appropriate security settings. Setting up an example to demonstrate this is the same as described in Section \ref{applications_CSRF_alerts} - we will reuse the same 3 cookies for this case. The only seemingly \textit{valuable} cookie in this case is the same, the one that stores the "session\_id" for the user. Only this cookie should raise any alerts about not being set securely. This is what we see shown in Figure \ref{fig:cookie_warning}. As expected, setting one or both of these flags in the cookie will change or delete the warning altogether.  \\
+
+\begin{figure}[h!]
+	\centering
+	\includegraphics[width=\textwidth]{images/cookie_warning.png}
+	\caption{The extension warns of any cookies that may be of particular value to the user experience (such as the session ID) and have not been set with the appropriate security flags.}
+	\label{fig:cookie_warning}
+\end{figure}
+
+
 
 \subsection{Request Cross Checks}
+
 
 
 \section{Live Vulnerability Test Case}

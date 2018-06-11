@@ -147,7 +147,7 @@ As before, once this stage is reached, we have the appropriately reported inform
 
 \section{Passive Mode}
 
-We now review the Passive Mode and highlight what useful information it can produce to a user while they use the website in a normal fashion. By default, this mode will check that a set of headers are being sent with each request and response. To demonstrate a worse case scenario of an insecure site, we make no intentional changes to the Test Harness page. As expected, this raises warnings for all of the headers enumerated in section \ref{header_analysis}. The outputs of this scan are shown in Figure \ref{fig:passive_weak_headers_1}. \\
+We now review the Passive Mode and highlight what useful information it can produce to a user while they use the website in a normal fashion. By default, this mode will check that a set of headers are being sent with each request and response. To demonstrate a worst case scenario of an insecure site, we make no intentional changes to the Test Harness page. As expected, this raises warnings for all of the headers enumerated in section \ref{header_analysis}. The outputs of this scan are shown in Figure \ref{fig:passive_weak_headers_1}. \\
 
 \begin{figure}[h!]
 	\centering
@@ -167,18 +167,50 @@ If we scan another website however, we are more likely to find a bit more attent
 
 \begin{figure}[h!]
 	\centering
-	\includegraphics[width=0.85\textwidth]{images/google_headers_2.png}
+	\includegraphics[width=\textwidth]{images/google_headers_2.png}
 	\caption{Looking at the request details in the Developer Tools in Chrome reveals that the headers that were not reported by the extension had been set by Google.}
 	\label{fig:google_headers_2}
 \end{figure}
 
-Besides headers, this mode also checks for potentially reflected user-controlled inputs (much like the Action Replay algorithm). Here we reuse the vulnerabilities from the Test Harness page as a means to test the outputs of this algorithm. 
+Besides headers, this mode also checks for potentially reflected user-controlled inputs (much like the Action Replay algorithm). Here we reuse the vulnerabilities from the Test Harness page as a means to test the outputs of this algorithm. As before, we submit the first input, which we know to be reflected on submission. This appends a warning to the log produced for this request, as shown in Figure \ref{fig:passive_reflection}.
 
+\begin{figure}[h!]
+	\centering
+	\includegraphics[width=\textwidth]{images/passive_reflection.png}
+	\caption{Although this mode is liberal in highlighting potential vulnerabilities, amidst the warnings we see that it has detected the reflected input caused by the query parameter.}
+	\label{fig:passive_reflection}
+\end{figure}
 
 
 \subsection{CSRF alerts}
 
+As explained in Section \ref{csrfChecks}, this mode is also equipped to perform some basic checks to alert the user to factors which may facilitate the crafting of CSRF attacks, as long as the correct setting is enabled. To emulate this situation, we add some cookies to the Test Harness using Javascript. One of these is purposefully named with keywords that will trigger our filter that looks for cookies that store session IDs. We add the code in Listing \ref{lst:csrf_cookies} to the Javascript portion of our page.
+
+\begin{lstlisting}[label={lst:csrf_cookies}, language={HTML}, caption={We add some cookies to the page - one of these is designed to trigger our filter to find Session ID related cookies}]
+...
+<script>
+	window.onload = function() {
+		...
+		document.cookie = "fake_cookie_1=BOOP;"
+		document.cookie = "session_id=1234565423";
+		document.cookie = "analytics_cookie=BEEP";
+	}
+<script>
+...
+\end{lstlisting}
+
+The rest of our Test Harness page already fulfills the minimum requirements for the CSRF alert - it contains forms but none of these are equipped with a hidden \texttt{<input>} tag (which would be expected to be used as an Anti-CSRF token). This results in the CSRF alert being produced for this page as shown in Figure \ref{fig:csrf_warning}.
+
+\begin{figure}[h!]
+	\centering
+	\includegraphics[width=\textwidth]{images/csrf_warning.png}
+	\caption{When the website conforms to the minimum requirements previously explained, the passive analysis produces this CSRF warning.}
+	\label{fig:csrf_warning}
+\end{figure}
+
 \subsection{Insecure Cookie Alerts}
+
+Passive mode can also check whether any potentially important or valuable cookies are being set with the appropriate security settings. 
 
 \subsection{Request Cross Checks}
 

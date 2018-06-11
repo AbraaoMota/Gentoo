@@ -229,6 +229,8 @@ function compareRequests(inputRequest, outputRequest) {
 
 // Function checking for reflected inputs across requests
 function analyseRequestReflectedInputs(r) {
+
+  console.log("ANALYSING REFLECTED INPUTS");
   // Here we need to produce a list of parameters and other content which may be user
   // injected - this could be query parameters or cookie values
   var userInputs = [];
@@ -250,6 +252,8 @@ function analyseRequestReflectedInputs(r) {
   }
 
   // Append all query parameter values to the list
+  console.log("WE HAVE REQ PARAMS OF");
+  console.log(r.reqParams);
   for (var k = 0; k < r.reqParams.length; k++) {
     var uInput = {
       type:  "param",
@@ -271,52 +275,59 @@ function analyseRequestReflectedInputs(r) {
     userInputs.push(uInput);
   }
 
-  var content = r.respContent;
+  setTimeout(function() {
+    console.log("REQUEST IS");
+    console.log(r);
+    var content = r.respContent;
 
-  if (!userInputs) {
-    return;
-  }
-
-  // Loop over all possible user inputs to compare against
-  for (var m = 0; m < userInputs.length; m++) {
-    var currUserInput = userInputs[m];
-    if (couldBeDangerous(content, currUserInput)) {
-      // Here we flag up these inputs as a warning because it looks
-      // as though content has been injected into the page
-      // However that is the complete list, we only want to replay
-      // the newly added dangerous inputs
-      potentiallyDangerousInputs.push(currUserInput);
-    }
-  }
-
-  var warnings = [];
-
-  for (var n = 0; n < potentiallyDangerousInputs.length; n++) {
-    var dangerousInput = potentiallyDangerousInputs[n];
-    var warning = "There was a <b>" + dangerousInput.type + "</b> named <b>" + dangerousInput.name + "</b>, with value <b>" + dangerousInput.value + "</b>. The value was reflected somewhere in the response - this could potentially lead to a reflection attack.";
-    warnings.push(warning);
-  }
-
-  if (!r["warnings"]) {
-    r["warnings"] = [];
-  }
-  r["warnings"] = r["warnings"].concat(warnings);
-
-  // Store requests with weak headers
-  chrome.storage.local.get(function(storage) {
-    var passiveModeWeakHeaderRequests = storage["passiveModeWeakHeaderRequests"];
-    if (!passiveModeWeakHeaderRequests) {
-      passiveModeWeakHeaderRequests = [];
+    if (!userInputs) {
+      return;
     }
 
-    passiveModeWeakHeaderRequests.push(r);
+    // Loop over all possible user inputs to compare against
+    for (var m = 0; m < userInputs.length; m++) {
+      var currUserInput = userInputs[m];
+      console.log("CHECKING IF FOLLOW USER INPUT IS DANGEROUS");
+      console.log(currUserInput);
+      if (couldBeDangerous(content, currUserInput)) {
+        // Here we flag up these inputs as a warning because it looks
+        // as though content has been injected into the page
+        // However that is the complete list, we only want to replay
+        // the newly added dangerous inputs
+        console.log("WAS DANGEROUS");
+        potentiallyDangerousInputs.push(currUserInput);
+      }
+    }
 
-    chrome.storage.local.set({ "passiveModeWeakHeaderRequests": passiveModeWeakHeaderRequests });
+    var warnings = [];
 
-    // Send warning to extension to display weak requests
-    sendWeakRequestWarning(passiveModeWeakHeaderRequests);
-  });
+    for (var n = 0; n < potentiallyDangerousInputs.length; n++) {
+      var dangerousInput = potentiallyDangerousInputs[n];
+      var warning = "There was a <b>" + dangerousInput.type + "</b> named <b>" + dangerousInput.name + "</b>, with value <b>" + dangerousInput.value + "</b>. The value was reflected somewhere in the response - this could potentially lead to a reflection attack.";
+      warnings.push(warning);
+    }
 
+    if (!r["warnings"]) {
+      r["warnings"] = [];
+    }
+    r["warnings"] = r["warnings"].concat(warnings);
+
+    // Store requests with weak headers
+    chrome.storage.local.get(function(storage) {
+      var passiveModeWeakHeaderRequests = storage["passiveModeWeakHeaderRequests"];
+      if (!passiveModeWeakHeaderRequests) {
+        passiveModeWeakHeaderRequests = [];
+      }
+
+      passiveModeWeakHeaderRequests.push(r);
+
+      chrome.storage.local.set({ "passiveModeWeakHeaderRequests": passiveModeWeakHeaderRequests });
+
+      // Send warning to extension to display weak requests
+      sendWeakRequestWarning(passiveModeWeakHeaderRequests);
+    });
+
+  }, 3000);
 }
 
 // Function that checks for weak header settings

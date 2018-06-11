@@ -258,6 +258,11 @@ function couldBeDangerous(webContent, input) {
   if (!input.value) {
     return false;
   }
+  console.log("WEBCONTENT IS");
+  console.log(webContent);
+  console.log("INPUT VALUE IS");
+  console.log(input.value);
+  console.log("INCLUDES IT IS: " + webContent.includes(input.value));
   if (webContent.includes(input.value)) {
     return true;
   }

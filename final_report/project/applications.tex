@@ -199,7 +199,7 @@ As explained in Section \ref{csrfChecks}, this mode is also equipped to perform 
 ...
 \end{lstlisting}
 
-The rest of our Test Harness page already fulfills the minimum requirements for the CSRF alert - it contains forms but none of these are equipped with a hidden \texttt{<input>} tag (which would be expected to be used as an Anti-CSRF token). This results in the CSRF alert being produced for this page as shown in Figure \ref{fig:csrf_warning}.
+The rest of our Test Harness page already fulfills the minimum requirements for the CSRF alert - it contains forms but none of these are equipped with a hidden \texttt{<input>} tag (which would be expected to be used as an Anti-CSRF token, given that it has a session cookie). This results in the CSRF alert being produced for this page as shown in Figure \ref{fig:csrf_warning}.
 
 \begin{figure}[h!]
 	\centering
@@ -214,7 +214,7 @@ Passive mode can also check whether any potentially important or valuable cookie
 
 \begin{figure}[h!]
 	\centering
-	\includegraphics[width=\textwidth]{images/cookie_warning.png}
+	\includegraphics[width=0.85\textwidth]{images/cookie_warning.png}
 	\caption{The extension warns of any cookies that may be of particular value to the user experience (such as the session ID) and have not been set with the appropriate security flags.}
 	\label{fig:cookie_warning}
 \end{figure}
@@ -223,11 +223,51 @@ Passive mode can also check whether any potentially important or valuable cookie
 
 \subsection{Request Cross Checks}
 
+Now we showcase the cross check feature at work. This component has the ability to detect patterns that manifest themselves an arbitrary amount of requests apart. It is designed to find second-order attacks, but we will simulate this in a simpler way - we take advantage of the reflection vulnerability in our test harness to analyse outputs across different requests. In order to demonstrate a convincing enough example of the algorithm at work, we adopt the following strategy:
+
+\begin{enumerate}
+	\item After setting up the extension to analyse cross requests, we set the window size to a value of 3. This gives us enough separation to analyse outputs with at least one "uncorrelated" request inbetween.
+	
+	\item We submit the first form of the Test Harness using both inputs - we use the reflected input as the ongoing vulnerability, and we use the previously \texttt{unused} input in the form to keep track of what request we are on. For the purpose of this example, we submit the \texttt{injection} parameter with the value \texttt{BLUE} and the \texttt{unused} parameter with the value \texttt{Number 1} (as it is our first request).
+	
+	\item On the resulting page, we now submit the same form using different values for the same inputs - the \texttt{injection} parameter will be \texttt{RED} and the \texttt{unused} parameter will be \texttt{Number 2}.
+	
+	\item The algorithm generates several pages as a result of comparisons (this is necessary to obtain the resulting output of running the Javascript code that causes the reflections). We select one of these pages and now submit the form with \texttt{injection} to be \texttt{BLUE} again (hence replicating the behaviour of being our "second-order vulnerability") and the \texttt{unused} input as \texttt{Number 3} (as it is our final request).
+\end{enumerate}
+
+This strategy should be sufficient to demonstrate an example that showcases the cross request comparison. After executing this, we find the desired results - amongst several other warnings due to a large number of comparison, the extension points out that the \texttt{BLUE} value as seen in the third request (the one where the \texttt{unused} parameter was \texttt{Number 3}) had been already seen as a parameter value back in the first request. A partial screenshot of the results is shown in Figure \ref{fig:cross_check_warnings}. This demonstrates the capacity of using some directed automated techniques to analyse data which may otherwise seem distant; finding this sort of vulnerability with a much larger request window size would be more 
+
+\begin{figure}[h!]
+	\centering
+	\includegraphics[width=0.85\textwidth]{images/cross_request_warnings.png}
+	\caption{The extension finds the reflected exploit across requests with a separating distance of at least 1 other request. The image omits a substantial amount of other warnings.}
+	\label{fig:cross_check_warnings}
+\end{figure}
 
 
 \section{Live Vulnerability Test Case}
 
-http://studios.fitpass.co.in/login
+This section will describe a series of steps taken while using the extension that lead to the discovery of a real vulnerability on a live website. As part of the section we will demonstrate how this vulnerability can further be exploited. The website belongs to a fitness organization based in India; the specific login page we will consider is regularly used by over 1000 gyms / fitness studios. According to \url{alexa.com},\footnote{Not to be confused with Amazon's voice assistant, although both services are owned by Amazon.} this login form accounts for approximately 27\% of the traffic on the main domain. The website is kept anonymous as a courtesy to its rightful owners. \\ 
+
+This particular vulnerability was discovered as a result of using the recommendations feature of the extension. Figure \ref{} shows the login form before and after enabling the recommendations in the extension, at a sensitivity of \textbf{2}.
+
+\begin{figure}[h]
+	\centering
+	\begin{subfigure}{.5\textwidth}
+		\centering
+		\includegraphics[width=.8\linewidth]{images/test_case_1/original_page_anon_cropped.png}
+		\label{fig:original_page_anon}
+	\end{subfigure}%
+	\begin{subfigure}{.5\textwidth}
+		\centering
+		\includegraphics[width=.8\linewidth]{images/test_case_1/recommendations_anon_cropped.png}
+		\label{fig:recommendations_anon}
+	\end{subfigure}
+	\caption{Here we see the website form before and after having the \textit{Recommendations} setting enabled. We see that it highlights both normal inputs in the form, as well as a hidden input, shown by the \textit{Investigate Form} button floating above the "Welcome Back" text.}
+	\label{fig:test}
+\end{figure} 
+
+%http://studios.fitpass.co.in/login
 
 
 

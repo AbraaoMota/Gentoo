@@ -89,14 +89,16 @@ function analyseCrossRequests(storage, r) {
 
   var settings = storage["settings"];
   // Window size includes the current request
-  var crossCheckWindow = settings["passiveModeWindowSize"] - 1;
+  var crossCheckWindow = settings["passiveModeWindowSize"];
   var passiveRequests = storage["passiveModeRequests"];
   if (passiveRequests.length === 1) return;
   var checkLimit = (crossCheckWindow > passiveRequests.length) ? passiveRequests.length : crossCheckWindow;
 
+  console.log("CHECK LIMIT IS " + checkLimit);
   // We assume we are already looking at the last request all the time, skip that
   for (var i = 0; i < checkLimit; i++) {
     // Read the requests from the list in reverse order
+    console.log("We are comparing latest request (" + (passiveRequests.length-1) + ") against request (" + (passiveRequests.length - 2 - i));
     var comparisonRequest = passiveRequests[passiveRequests.length - 2 - i];
 
     // Consider only requests of type "text/html"
@@ -105,6 +107,7 @@ function analyseCrossRequests(storage, r) {
     if (!(contentTypeIndex >= 0) ||
         !comparisonRequest["respHeaders"][contentTypeIndex].value.includes("text/html")) {
       // This doesn't count as a check in our window.
+      console.log("SKIPPING A REQUEST - WRONG COMPARISON. ADDING 1 TO CHECKLIMIT");
       checkLimit++;
       continue;
     }

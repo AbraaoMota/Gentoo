@@ -61,7 +61,7 @@ In order to set up the example to demonstrate a use case of the \textit{Recommen
 	\label{fig:test_harness_default}
 \end{figure} 
 
-Now we enable the recommendations in this page - setting the sensitivity parameter to \textbf{1}. At this stage, one input is added per form on the page, encouraging the user to "investigate" the first input on each of the forms, seen in \ref{fig:test_harness_recommendations_2}. 
+Now we enable the recommendations in this page - setting the sensitivity parameter to \textbf{1}. At this stage, one input is added per form on the page, encouraging the user to "investigate" the first input on each of the forms, seen in Figure \ref{fig:test_harness_recommendations_2}. 
 
 \begin{figure}[h]
 	\centering
@@ -96,59 +96,91 @@ The \texttt{request\_logger} page is equipped to deal with this specific type of
 	\label{fig:xss_vulnerable_url}
 \end{figure}
 
+However, this has only covered one of the vulnerabilities on the page - there is still another vulnerability in the last input on the page, which is reflected in the same way as above. However, clicking the second \textit{Investigate Form} button in this case will not reveal anything about the last vulnerable input - it will only attack the first input in the second form on the page. This attack results in nothing besides the submission of the second form and the reloading of the page. This emphasises the need for a Recommendation Sensitivity setting - if we change it from \textbf{1} to \textbf{2}, more suggestions are added to the page (1 for every \texttt{<input>} tag); we can now attack the last input. This results in a vulnerability detection process very similar to the one described above for the other input.   
 
 \section{Action Replay}
 
 Now we consider how we can use the Action Replay algorithm to automatically replay attacks on focussed inputs and requests. \\
 
-The vulnerability in this example is the same as the one from the \textit{Recommendations} section (\ref{applications_recommendations}) - the website suffers from a reflected XSS vulnerability. In this case however, we assume that through use of the website the user has noticed this, and attempts to exploit the website. Perhaps they attempt a similar injection as before to test their hypothesis:
+The vulnerability in this example is the same as the one from the \textit{Recommendations} section (\ref{applications_recommendations}) - the website suffers from a reflected XSS vulnerability. Here, we assume that through use of the website, the user has noticed there may be a vulnerability present, and attempts to exploit the website. Perhaps they attempt a similar injection as before to test their hypothesis:
 
 \begin{center}
 	\texttt{<img src=a >} 
 \end{center}
 
-Upon trying this input, this is the page they are confronted with:
+Upon trying this input, they are confronted with the page shown in Figure \ref{fig:action_replay_initial}. \\
 
-\begin{figure}[h]
+\begin{figure}[h!]
 	\centering
 	\includegraphics[width=0.7\textwidth]{images/action_replay_initial.png}
 	\caption{Injecting \texttt{<img src=a>} into an input results in this page}
 	\label{fig:action_replay_initial}
 \end{figure}
 
-To a web security analyst with a more trained eye, this may present a security risk, as they were freely able to inject a HTML tag into the page of their choosing. It is at this point where they decide to focus on this particular input and activate the Action Replay. After enabling and starting a recording, they reattempt the earlier injection. \\
+To a web security analyst with a more trained eye, this may present a security risk, as they were freely able to inject a HTML tag into the page of their choosing. It is at this point where they decide to focus on this particular input and activate the Action Replay. After enabling and starting a recording, they reattempt the earlier injection (Figure \ref{fig:action_replay_attack}). \\
 
-\begin{figure}[h]
+\begin{figure}[h!]
 	\centering
 	\includegraphics[width=0.7\textwidth]{images/action_replay_attack.png}
 	\caption{Retrying the attack while recording using Action Replay}
 	\label{fig:action_replay_attack}
 \end{figure}
 
-Once the new page loads, the user can then stop the recording by clicking the \textit{AR} button once again. At this point, the analysis and automated replay begins. If the algorithm has appropriately detected a set of potentially dangerous inputs it can override to begin an attack, then almost immediately after finishing the recording, Chrome will open several new windows, each of which attempts an attack. Not all of these are expected to yield successful vulnerability identifications, but, for this example, we see that one of the resultant tabs has ended up in the \textit{Request Logger} page. This can only indicate that the payload of one of the attacks was successful. \\ 
+Once the new page loads, the user can then stop the recording by clicking the \textit{AR} button once again. At this point, the analysis and automated replay begins. If the algorithm has appropriately detected a set of potentially dangerous inputs it can override to begin an attack, then almost immediately after finishing the recording, Chrome will open several new windows, each of which attempts an attack. Not all of these are expected to yield successful vulnerability identifications, but, for this example, we see that one of the resultant tabs has ended up in the \textit{Request Logger} page. This can only indicate that the payload of one of the attacks was successful (Figure \ref{fig:successful_replay}). \\ 
 
 
-\begin{figure}[h]
+\begin{figure}[h!]
 	\centering
 	\includegraphics[width=\textwidth]{images/successful_replay.png}
 	\caption{The Action Replay generates the outputs of several attacks in new windows. The 2nd of the inspected windows showcases a successfully detected vulnerability that executed a Javascript payload.}
 	\label{fig:successful_replay}
 \end{figure}
 
-As before, once this stage is reached, we have the appropriately reported information in the extension. The list of URLs that suffer from XSS vulnerabities is updated, containing the latest victim. Additionally, Action Replay publishes a list of inputs it considered to be dangerous, showing the user which inputs were targeted by the automated attacks.  \\
+As before, once this stage is reached, we have the appropriately reported information in the extension. The list of URLs that suffer from XSS vulnerabities is updated, containing the latest victim. Additionally, Action Replay publishes a list of inputs it considered to be dangerous, showing the user which inputs were targeted by the automated attacks (Figure \ref{fig:dangerous_inputs}).  \\
 
-\begin{figure}[h]
+\begin{figure}[h!]
 	\centering
 	\includegraphics[width=\textwidth]{images/dangerous_inputs.png}
 	\caption{The Action Replay outputs a list of inputs it has considered to be dangerous. In this screenshot, we see the \textbf{param} with the name \textbf{injection} is one of the potentially dangerous inputs. }
 	\label{fig:dangerous_inputs}
 \end{figure}
 
-
-
-
-
 \section{Passive Mode}
+
+We now review the Passive Mode and highlight what useful information it can produce to a user while they use the website in a normal fashion. By default, this mode will check that a set of headers are being sent with each request and response. To demonstrate a worse case scenario of an insecure site, we make no intentional changes to the Test Harness page. As expected, this raises warnings for all of the headers enumerated in section \ref{header_analysis}. The outputs of this scan are shown in Figure \ref{fig:passive_weak_headers_1}. \\
+
+\begin{figure}[h!]
+	\centering
+	\includegraphics[width=\textwidth]{images/passive_weak_headers_1.png}
+	\caption{A webpage which makes no effort to set secure headers (as the Test Harness does here) will raise up warnings by the passive mode in this regard.}
+	\label{fig:passive_weak_headers_1}
+\end{figure}
+
+If we scan another website however, we are more likely to find a bit more attention to detail in terms of setting secure headers. We scanned \url{http://google.com} and came up with better results than the Test Harness - at least half of these headers had been set to their recommended settings as shown in Figures \ref{fig:google_headers} and \ref{fig:google_headers_2}. \\
+
+\begin{figure}[h!]
+	\centering
+	\includegraphics[width=\textwidth]{images/google_headers.png}
+	\caption{The header analysis from scanning \texttt{http://google.com} shows that some of the security headers have been set, but others are still unset.}
+	\label{fig:google_headers}
+\end{figure}
+
+\begin{figure}[h!]
+	\centering
+	\includegraphics[width=0.85\textwidth]{images/google_headers_2.png}
+	\caption{Looking at the request details in the Developer Tools in Chrome reveals that the headers that were not reported by the extension had been set by Google.}
+	\label{fig:google_headers_2}
+\end{figure}
+
+Besides headers, this mode also checks for potentially reflected user-controlled inputs (much like the Action Replay algorithm). Here we reuse the vulnerabilities from the Test Harness page as a means to test the outputs of this algorithm. 
+
+
+
+\subsection{CSRF alerts}
+
+\subsection{Insecure Cookie Alerts}
+
+\subsection{Request Cross Checks}
 
 
 \section{Live Vulnerability Test Case}

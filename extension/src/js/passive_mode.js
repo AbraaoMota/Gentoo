@@ -74,7 +74,6 @@ function runPassiveAnalysis(r) {
 
     if (contentTypeIndex >= 0 && r["respHeaders"][contentTypeIndex].value.includes("text/html")) {
 
-      console.log("RUNNING PASSIVE ANALYSIS");
       analyseRequestHeaders(r);
       analyseRequestReflectedInputs(r);
 
@@ -88,7 +87,6 @@ function runPassiveAnalysis(r) {
 // Function performing cross request checks
 function analyseCrossRequests(storage, r) {
 
-  console.log("TRYING TO DO CROSS REQUEST CHECKS");
   var settings = storage["settings"];
   // Window size includes the current request
   var crossCheckWindow = settings["passiveModeWindowSize"] - 1;

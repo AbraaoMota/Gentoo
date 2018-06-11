@@ -147,6 +147,7 @@
 \citation{referrerPolicy}
 \citation{xFrameOptions}
 \@writefile{toc}{\contentsline {subsection}{\numberline {3.11.1}Header Analysis}{23}{subsection.3.11.1}}
+\newlabel{header_analysis}{{3.11.1}{23}{Header Analysis}{subsection.3.11.1}{}}
 \citation{setCookie}
 \@writefile{toc}{\contentsline {subsection}{\numberline {3.11.2}Reflected Input Checks}{24}{subsection.3.11.2}}
 \newlabel{reflectedInputChecks}{{3.11.2}{24}{Reflected Input Checks}{subsection.3.11.2}{}}
@@ -176,8 +177,8 @@
 \@writefile{lof}{\contentsline {figure}{\numberline {4.4}{\ignorespaces Opening the extension confirms that the suspicious URL was indeed vulnerable to XSS.\relax }}{28}{figure.caption.18}}
 \newlabel{fig:xss_vulnerable_url}{{4.4}{28}{Opening the extension confirms that the suspicious URL was indeed vulnerable to XSS.\relax }{figure.caption.18}{}}
 \@writefile{toc}{\contentsline {section}{\numberline {4.2}Action Replay}{28}{section.4.2}}
-\@writefile{lof}{\contentsline {figure}{\numberline {4.5}{\ignorespaces Injecting \texttt  {<img src=a>} into an input results in this page\relax }}{28}{figure.caption.19}}
-\newlabel{fig:action_replay_initial}{{4.5}{28}{Injecting \texttt {<img src=a>} into an input results in this page\relax }{figure.caption.19}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {4.5}{\ignorespaces Injecting \texttt  {<img src=a>} into an input results in this page\relax }}{29}{figure.caption.19}}
+\newlabel{fig:action_replay_initial}{{4.5}{29}{Injecting \texttt {<img src=a>} into an input results in this page\relax }{figure.caption.19}{}}
 \@writefile{lof}{\contentsline {figure}{\numberline {4.6}{\ignorespaces Retrying the attack while recording using Action Replay\relax }}{29}{figure.caption.20}}
 \newlabel{fig:action_replay_attack}{{4.6}{29}{Retrying the attack while recording using Action Replay\relax }{figure.caption.20}{}}
 \@writefile{lof}{\contentsline {figure}{\numberline {4.7}{\ignorespaces The Action Replay generates the outputs of several attacks in new windows. The 2nd of the inspected windows showcases a successfully detected vulnerability that executed a Javascript payload.\relax }}{29}{figure.caption.21}}
@@ -185,18 +186,27 @@
 \@writefile{lof}{\contentsline {figure}{\numberline {4.8}{\ignorespaces The Action Replay outputs a list of inputs it has considered to be dangerous. In this screenshot, we see the \textbf  {param} with the name \textbf  {injection} is one of the potentially dangerous inputs. \relax }}{30}{figure.caption.22}}
 \newlabel{fig:dangerous_inputs}{{4.8}{30}{The Action Replay outputs a list of inputs it has considered to be dangerous. In this screenshot, we see the \textbf {param} with the name \textbf {injection} is one of the potentially dangerous inputs. \relax }{figure.caption.22}{}}
 \@writefile{toc}{\contentsline {section}{\numberline {4.3}Passive Mode}{30}{section.4.3}}
-\@writefile{toc}{\contentsline {section}{\numberline {4.4}Live Vulnerability Test Case}{30}{section.4.4}}
-\@writefile{toc}{\contentsline {chapter}{\numberline {5}Experimentation}{31}{chapter.5}}
+\@writefile{lof}{\contentsline {figure}{\numberline {4.9}{\ignorespaces A webpage which makes no effort to set secure headers (as the Test Harness does here) will raise up warnings by the passive mode in this regard.\relax }}{31}{figure.caption.23}}
+\newlabel{fig:passive_weak_headers_1}{{4.9}{31}{A webpage which makes no effort to set secure headers (as the Test Harness does here) will raise up warnings by the passive mode in this regard.\relax }{figure.caption.23}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {4.10}{\ignorespaces The header analysis from scanning \texttt  {http://google.com} shows that some of the security headers have been set, but others are still unset.\relax }}{31}{figure.caption.24}}
+\newlabel{fig:google_headers}{{4.10}{31}{The header analysis from scanning \texttt {http://google.com} shows that some of the security headers have been set, but others are still unset.\relax }{figure.caption.24}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {4.11}{\ignorespaces Looking at the request details in the Developer Tools in Chrome reveals that the headers that were not reported by the extension had been set by Google.\relax }}{31}{figure.caption.25}}
+\newlabel{fig:google_headers_2}{{4.11}{31}{Looking at the request details in the Developer Tools in Chrome reveals that the headers that were not reported by the extension had been set by Google.\relax }{figure.caption.25}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.3.1}CSRF alerts}{32}{subsection.4.3.1}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.3.2}Insecure Cookie Alerts}{32}{subsection.4.3.2}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.3.3}Request Cross Checks}{32}{subsection.4.3.3}}
+\@writefile{toc}{\contentsline {section}{\numberline {4.4}Live Vulnerability Test Case}{32}{section.4.4}}
+\@writefile{toc}{\contentsline {chapter}{\numberline {5}Experimentation}{33}{chapter.5}}
 \@writefile{lof}{\addvspace {10\p@ }}
 \@writefile{lot}{\addvspace {10\p@ }}
-\@writefile{toc}{\contentsline {section}{\numberline {5.1}Intended functionality}{31}{section.5.1}}
-\@writefile{toc}{\contentsline {section}{\numberline {5.2}Metrics of success}{31}{section.5.2}}
+\@writefile{toc}{\contentsline {section}{\numberline {5.1}Intended functionality}{33}{section.5.1}}
+\@writefile{toc}{\contentsline {section}{\numberline {5.2}Metrics of success}{33}{section.5.2}}
 \citation{stateOfArtAutomatedBlackBoxWebAppVulnTesting}
 \citation{dvwaSite}
 \citation{webgoatIntro}
 \citation{webgoatGithub}
-\@writefile{toc}{\contentsline {section}{\numberline {5.3}Experiments}{32}{section.5.3}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {5.3.1}Test benches}{32}{subsection.5.3.1}}
+\@writefile{toc}{\contentsline {section}{\numberline {5.3}Experiments}{34}{section.5.3}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.3.1}Test benches}{34}{subsection.5.3.1}}
 \citation{wackoPickoGithub}
 \citation{hacmeBankMcAfee}
 \citation{owaspVulnerableWebAppsList}
@@ -204,19 +214,19 @@
 \citation{w3af}
 \citation{burpSuitePage}
 \citation{owaspVulnerableWebAppsList}
-\@writefile{toc}{\contentsline {subsection}{\numberline {5.3.2}Test methodology}{33}{subsection.5.3.2}}
-\@writefile{toc}{\contentsline {chapter}{\numberline {6}Evaluation}{34}{chapter.6}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.3.2}Test methodology}{35}{subsection.5.3.2}}
+\@writefile{toc}{\contentsline {chapter}{\numberline {6}Evaluation}{36}{chapter.6}}
 \@writefile{lof}{\addvspace {10\p@ }}
 \@writefile{lot}{\addvspace {10\p@ }}
-\@writefile{toc}{\contentsline {chapter}{\numberline {7}Future Work}{35}{chapter.7}}
+\@writefile{toc}{\contentsline {chapter}{\numberline {7}Future Work}{37}{chapter.7}}
 \@writefile{lof}{\addvspace {10\p@ }}
 \@writefile{lot}{\addvspace {10\p@ }}
-\@writefile{toc}{\contentsline {chapter}{\numberline {8}Conclusion}{36}{chapter.8}}
+\@writefile{toc}{\contentsline {chapter}{\numberline {8}Conclusion}{38}{chapter.8}}
 \@writefile{lof}{\addvspace {10\p@ }}
 \@writefile{lot}{\addvspace {10\p@ }}
 \bibstyle{plain}
 \bibdata{bibs/sample.bib}
-\@writefile{toc}{\contentsline {chapter}{\numberline {A}First Appendix}{37}{appendix.A}}
+\@writefile{toc}{\contentsline {chapter}{\numberline {A}First Appendix}{39}{appendix.A}}
 \@writefile{lof}{\addvspace {10\p@ }}
 \@writefile{lot}{\addvspace {10\p@ }}
 \bibcite{darpaAIChallenge}{1}

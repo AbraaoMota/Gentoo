@@ -21,7 +21,7 @@ In order to be able to perform the functionality as proposed above, the project 
 To appropriately judge the success of the extension, we must have some quantifiable metrics, described below
 
 \begin{enumerate}
-	\item \textbf{Time to vulnerability} - As mentioned in \ref{limitations}, measuring the total time taken to perform a scan in this human driven context is unfair; the tool does not set a boundary on total scans unlike an automated scanner does. Measuring time taken is however a useful metric, so in order to not completely circumvent using time, another more appropriate metric is suggested - \emph{time to vulnerability}. This will be measured as the total number of seconds taken from the moment a scan is initiated (the user clicks the visual cue given by the tool), until the scan is finished. A scan may finish under two circumstances: a vulnerability has been successfully reported or detected (this may happen at the first attempt by the user, or at a later try when the tool has fuzzed some inputs during the 'action replay' phase), or when the tool reports it could not find a vulnerability. These 2 conditions are bounded in terms of possible time taken, allowing the total time to be measured.
+	\item \textbf{Time to vulnerability} - As mentioned in \ref{limitations}, measuring the total time taken to perform a scan in this human driven context is unfair; the tool does not set a boundary on total scans unlike an automated scanner does. Measuring time taken is however a useful metric, so in order to not completely circumvent using time, another more appropriate metric is suggested - \emph{time to vulnerability}. This will be measured as the total number of seconds taken from the moment a scan is initiated (the user clicks the visual cue given by the tool), until the scan is finished. A scan may finish under two circumstances: a vulnerability has been successfully reported or detected (this may happen at the first attempt by the user, or at a later try when the tool has fuzzed some inputs during the Action Replay phase), or when the tool reports it could not find a vulnerability. These 2 conditions are bounded in terms of possible time taken, allowing the total time to be measured.
 	
 	\item \textbf{Interaction volume} - A metric that is sometimes found when evaluating automated scanners  is that of bytes sent and received by the application \cite{stateOfArtAutomatedBlackBoxWebAppVulnTesting}. This quantifies the impact the tool has when stressing the website by fuzzing inputs. The smaller this metric is, the more efficiently the tool is performing its job, by detecting vulnerabilities with fewer web requests sent.
 	
@@ -60,7 +60,7 @@ Another existing tool is WebGoat \cite{webgoatIntro, webgoatGithub}, supported b
 \item 	Buffer Overflows
 \item 	Code Quality
 \item 	Concurrency
-\item 	Cross-Site Scripting (XSS)
+\item 	XSS
 \item 	Improper Error Handling
 \item 	Injection Flaws
 \item 	Denial of Service

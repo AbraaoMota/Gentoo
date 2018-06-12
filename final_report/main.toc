@@ -41,13 +41,13 @@
 \contentsline {subsection}{\numberline {4.3.2}Insecure Cookie Alerts}{33}{subsection.4.3.2}
 \contentsline {subsection}{\numberline {4.3.3}Request Cross Checks}{33}{subsection.4.3.3}
 \contentsline {section}{\numberline {4.4}Live Vulnerability Test Case}{33}{section.4.4}
-\contentsline {chapter}{\numberline {5}Experimentation}{35}{chapter.5}
-\contentsline {section}{\numberline {5.1}Intended functionality}{35}{section.5.1}
-\contentsline {section}{\numberline {5.2}Metrics of success}{35}{section.5.2}
-\contentsline {section}{\numberline {5.3}Experiments}{36}{section.5.3}
-\contentsline {subsection}{\numberline {5.3.1}Test benches}{36}{subsection.5.3.1}
-\contentsline {subsection}{\numberline {5.3.2}Test methodology}{37}{subsection.5.3.2}
-\contentsline {chapter}{\numberline {6}Evaluation}{38}{chapter.6}
-\contentsline {chapter}{\numberline {7}Future Work}{39}{chapter.7}
-\contentsline {chapter}{\numberline {8}Conclusion}{40}{chapter.8}
-\contentsline {chapter}{\numberline {A}First Appendix}{41}{appendix.A}
+\contentsline {chapter}{\numberline {5}Experimentation}{38}{chapter.5}
+\contentsline {section}{\numberline {5.1}Intended functionality}{38}{section.5.1}
+\contentsline {section}{\numberline {5.2}Metrics of success}{38}{section.5.2}
+\contentsline {section}{\numberline {5.3}Experiments}{39}{section.5.3}
+\contentsline {subsection}{\numberline {5.3.1}Test benches}{39}{subsection.5.3.1}
+\contentsline {subsection}{\numberline {5.3.2}Test methodology}{40}{subsection.5.3.2}
+\contentsline {chapter}{\numberline {6}Evaluation}{41}{chapter.6}
+\contentsline {chapter}{\numberline {7}Future Work}{42}{chapter.7}
+\contentsline {chapter}{\numberline {8}Conclusion}{43}{chapter.8}
+\contentsline {chapter}{\numberline {A}First Appendix}{44}{appendix.A}

@@ -103,6 +103,7 @@ document.addEventListener('DOMContentLoaded', function() {
 window.addEventListener("load", function() {
   // Make notification badge disappear from popup when window opened
   chrome.browserAction.setBadgeText({ text: "" });
+  chrome.browserAction.setIcon({ path: "img/gentoo.png" });
 
   // Visual switch checking is a separate element to the lever that
   // triggers the switch

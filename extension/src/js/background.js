@@ -19,7 +19,7 @@ chrome.runtime.onMessage.addListener(
         request.msg === "potentialXSS" ||
         request.msg === "weakHeaderRequest") {
       // Warn the user of potential reflected XSS's by displaying a badge
-      console.log("ATTACK FINISHED");
+      chrome.browserAction.setIcon({ path: "img/gentoo_angry.png" });
       chrome.browserAction.setBadgeText({ text: "!" });
       chrome.browserAction.setBadgeBackgroundColor({ color: "red" });
     }

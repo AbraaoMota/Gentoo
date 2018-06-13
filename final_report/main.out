@@ -8,46 +8,45 @@
 \BOOKMARK [2][-]{subsection.2.2.1}{Black Box}{section.2.2}% 8
 \BOOKMARK [2][-]{subsection.2.2.2}{Automated Vulnerability Scanners}{section.2.2}% 9
 \BOOKMARK [1][-]{section.2.3}{Browser extensions}{chapter.2}% 10
-\BOOKMARK [1][-]{section.2.4}{Project Contribution}{chapter.2}% 11
-\BOOKMARK [1][-]{section.2.5}{Limitations}{chapter.2}% 12
-\BOOKMARK [2][-]{subsection.2.5.1}{Time taken}{section.2.5}% 13
-\BOOKMARK [2][-]{subsection.2.5.2}{Breadth of work}{section.2.5}% 14
-\BOOKMARK [2][-]{subsection.2.5.3}{Self security}{section.2.5}% 15
-\BOOKMARK [2][-]{subsection.2.5.4}{Ethics \046 Handling of Results}{section.2.5}% 16
-\BOOKMARK [0][-]{chapter.3}{Implementation}{}% 17
-\BOOKMARK [1][-]{section.3.1}{Manifest}{chapter.3}% 18
-\BOOKMARK [1][-]{section.3.2}{Test harness}{chapter.3}% 19
-\BOOKMARK [1][-]{section.3.3}{Popup page}{chapter.3}% 20
-\BOOKMARK [1][-]{section.3.4}{Background Page}{chapter.3}% 21
-\BOOKMARK [1][-]{section.3.5}{Request Logger}{chapter.3}% 22
-\BOOKMARK [1][-]{section.3.6}{Devtools}{chapter.3}% 23
-\BOOKMARK [1][-]{section.3.7}{Message Design}{chapter.3}% 24
-\BOOKMARK [1][-]{section.3.8}{Chrome Storage}{chapter.3}% 25
-\BOOKMARK [1][-]{section.3.9}{Recommendations}{chapter.3}% 26
-\BOOKMARK [2][-]{subsection.3.9.1}{Recommendation Sensitivity}{section.3.9}% 27
-\BOOKMARK [1][-]{section.3.10}{Action Replay}{chapter.3}% 28
-\BOOKMARK [1][-]{section.3.11}{Passive Mode}{chapter.3}% 29
-\BOOKMARK [2][-]{subsection.3.11.1}{Header Analysis}{section.3.11}% 30
-\BOOKMARK [2][-]{subsection.3.11.2}{Reflected Input Checks}{section.3.11}% 31
-\BOOKMARK [2][-]{subsection.3.11.3}{Basic CSRF Checks}{section.3.11}% 32
-\BOOKMARK [2][-]{subsection.3.11.4}{Basic Cookie Setting Checks}{section.3.11}% 33
-\BOOKMARK [2][-]{subsection.3.11.5}{Request Cross Checks}{section.3.11}% 34
-\BOOKMARK [0][-]{chapter.4}{Applications}{}% 35
-\BOOKMARK [1][-]{section.4.1}{Recommendations}{chapter.4}% 36
-\BOOKMARK [1][-]{section.4.2}{Action Replay}{chapter.4}% 37
-\BOOKMARK [1][-]{section.4.3}{Passive Mode}{chapter.4}% 38
-\BOOKMARK [2][-]{subsection.4.3.1}{CSRF alerts}{section.4.3}% 39
-\BOOKMARK [2][-]{subsection.4.3.2}{Insecure Cookie Alerts}{section.4.3}% 40
-\BOOKMARK [2][-]{subsection.4.3.3}{Request Cross Checks}{section.4.3}% 41
-\BOOKMARK [1][-]{section.4.4}{Live Vulnerability Test Case}{chapter.4}% 42
-\BOOKMARK [0][-]{chapter.5}{Experimentation}{}% 43
-\BOOKMARK [1][-]{section.5.1}{Intended functionality}{chapter.5}% 44
-\BOOKMARK [1][-]{section.5.2}{Metrics of success}{chapter.5}% 45
-\BOOKMARK [1][-]{section.5.3}{Experiments}{chapter.5}% 46
-\BOOKMARK [2][-]{subsection.5.3.1}{Test benches}{section.5.3}% 47
-\BOOKMARK [2][-]{subsection.5.3.2}{Test methodology}{section.5.3}% 48
-\BOOKMARK [0][-]{chapter.6}{Evaluation}{}% 49
-\BOOKMARK [0][-]{chapter.7}{Future Work}{}% 50
-\BOOKMARK [0][-]{chapter.8}{Conclusion}{}% 51
-\BOOKMARK [0][-]{appendix.A}{Appendix}{}% 52
-\BOOKMARK [1][-]{section.A.1}{Exploit Code}{appendix.A}% 53
+\BOOKMARK [0][-]{chapter.3}{Design}{}% 11
+\BOOKMARK [1][-]{section.3.1}{Project Contribution}{chapter.3}% 12
+\BOOKMARK [1][-]{section.3.2}{Limitations}{chapter.3}% 13
+\BOOKMARK [2][-]{subsection.3.2.1}{Time taken}{section.3.2}% 14
+\BOOKMARK [2][-]{subsection.3.2.2}{Breadth of work}{section.3.2}% 15
+\BOOKMARK [2][-]{subsection.3.2.3}{Self security}{section.3.2}% 16
+\BOOKMARK [2][-]{subsection.3.2.4}{Ethics \046 Handling of Results}{section.3.2}% 17
+\BOOKMARK [0][-]{chapter.4}{Implementation}{}% 18
+\BOOKMARK [1][-]{section.4.1}{Manifest}{chapter.4}% 19
+\BOOKMARK [1][-]{section.4.2}{Test harness}{chapter.4}% 20
+\BOOKMARK [1][-]{section.4.3}{Popup page}{chapter.4}% 21
+\BOOKMARK [1][-]{section.4.4}{Background Page}{chapter.4}% 22
+\BOOKMARK [1][-]{section.4.5}{Request Logger}{chapter.4}% 23
+\BOOKMARK [1][-]{section.4.6}{Devtools}{chapter.4}% 24
+\BOOKMARK [1][-]{section.4.7}{Message Design}{chapter.4}% 25
+\BOOKMARK [1][-]{section.4.8}{Chrome Storage}{chapter.4}% 26
+\BOOKMARK [1][-]{section.4.9}{Recommendations}{chapter.4}% 27
+\BOOKMARK [2][-]{subsection.4.9.1}{Recommendation Sensitivity}{section.4.9}% 28
+\BOOKMARK [1][-]{section.4.10}{Action Replay}{chapter.4}% 29
+\BOOKMARK [1][-]{section.4.11}{Passive Mode}{chapter.4}% 30
+\BOOKMARK [2][-]{subsection.4.11.1}{Header Analysis}{section.4.11}% 31
+\BOOKMARK [2][-]{subsection.4.11.2}{Reflected Input Checks}{section.4.11}% 32
+\BOOKMARK [2][-]{subsection.4.11.3}{Basic CSRF Checks}{section.4.11}% 33
+\BOOKMARK [2][-]{subsection.4.11.4}{Basic Cookie Setting Checks}{section.4.11}% 34
+\BOOKMARK [2][-]{subsection.4.11.5}{Request Cross Checks}{section.4.11}% 35
+\BOOKMARK [0][-]{chapter.5}{Applications}{}% 36
+\BOOKMARK [1][-]{section.5.1}{Recommendations}{chapter.5}% 37
+\BOOKMARK [1][-]{section.5.2}{Action Replay}{chapter.5}% 38
+\BOOKMARK [1][-]{section.5.3}{Passive Mode}{chapter.5}% 39
+\BOOKMARK [2][-]{subsection.5.3.1}{CSRF alerts}{section.5.3}% 40
+\BOOKMARK [2][-]{subsection.5.3.2}{Insecure Cookie Alerts}{section.5.3}% 41
+\BOOKMARK [2][-]{subsection.5.3.3}{Request Cross Checks}{section.5.3}% 42
+\BOOKMARK [1][-]{section.5.4}{Live Vulnerability Test Case}{chapter.5}% 43
+\BOOKMARK [0][-]{chapter.6}{Evaluation}{}% 44
+\BOOKMARK [1][-]{section.6.1}{Metrics of success}{chapter.6}% 45
+\BOOKMARK [1][-]{section.6.2}{Experiments}{chapter.6}% 46
+\BOOKMARK [2][-]{subsection.6.2.1}{Test benches}{section.6.2}% 47
+\BOOKMARK [2][-]{subsection.6.2.2}{Test methodology}{section.6.2}% 48
+\BOOKMARK [0][-]{chapter.7}{Future Work}{}% 49
+\BOOKMARK [0][-]{chapter.8}{Conclusion}{}% 50
+\BOOKMARK [0][-]{appendix.A}{Appendix}{}% 51
+\BOOKMARK [1][-]{section.A.1}{Exploit Code}{appendix.A}% 52

@@ -9,45 +9,44 @@
 \contentsline {subsection}{\numberline {2.2.1}Black Box}{7}{subsection.2.2.1}
 \contentsline {subsection}{\numberline {2.2.2}Automated Vulnerability Scanners}{8}{subsection.2.2.2}
 \contentsline {section}{\numberline {2.3}Browser extensions}{10}{section.2.3}
-\contentsline {section}{\numberline {2.4}Project Contribution}{11}{section.2.4}
-\contentsline {section}{\numberline {2.5}Limitations}{13}{section.2.5}
-\contentsline {subsection}{\numberline {2.5.1}Time taken}{13}{subsection.2.5.1}
-\contentsline {subsection}{\numberline {2.5.2}Breadth of work}{13}{subsection.2.5.2}
-\contentsline {subsection}{\numberline {2.5.3}Self security}{14}{subsection.2.5.3}
-\contentsline {subsection}{\numberline {2.5.4}Ethics \& Handling of Results}{14}{subsection.2.5.4}
-\contentsline {chapter}{\numberline {3}Implementation}{15}{chapter.3}
-\contentsline {section}{\numberline {3.1}Manifest}{15}{section.3.1}
-\contentsline {section}{\numberline {3.2}Test harness}{16}{section.3.2}
-\contentsline {section}{\numberline {3.3}Popup page}{16}{section.3.3}
-\contentsline {section}{\numberline {3.4}Background Page}{17}{section.3.4}
-\contentsline {section}{\numberline {3.5}Request Logger}{17}{section.3.5}
-\contentsline {section}{\numberline {3.6}Devtools}{18}{section.3.6}
-\contentsline {section}{\numberline {3.7}Message Design}{18}{section.3.7}
-\contentsline {section}{\numberline {3.8}Chrome Storage}{19}{section.3.8}
-\contentsline {section}{\numberline {3.9}Recommendations}{20}{section.3.9}
-\contentsline {subsection}{\numberline {3.9.1}Recommendation Sensitivity}{20}{subsection.3.9.1}
-\contentsline {section}{\numberline {3.10}Action Replay}{21}{section.3.10}
-\contentsline {section}{\numberline {3.11}Passive Mode}{22}{section.3.11}
-\contentsline {subsection}{\numberline {3.11.1}Header Analysis}{23}{subsection.3.11.1}
-\contentsline {subsection}{\numberline {3.11.2}Reflected Input Checks}{24}{subsection.3.11.2}
-\contentsline {subsection}{\numberline {3.11.3}Basic CSRF Checks}{24}{subsection.3.11.3}
-\contentsline {subsection}{\numberline {3.11.4}Basic Cookie Setting Checks}{24}{subsection.3.11.4}
-\contentsline {subsection}{\numberline {3.11.5}Request Cross Checks}{25}{subsection.3.11.5}
-\contentsline {chapter}{\numberline {4}Applications}{26}{chapter.4}
-\contentsline {section}{\numberline {4.1}Recommendations}{26}{section.4.1}
-\contentsline {section}{\numberline {4.2}Action Replay}{28}{section.4.2}
-\contentsline {section}{\numberline {4.3}Passive Mode}{30}{section.4.3}
-\contentsline {subsection}{\numberline {4.3.1}CSRF alerts}{30}{subsection.4.3.1}
-\contentsline {subsection}{\numberline {4.3.2}Insecure Cookie Alerts}{33}{subsection.4.3.2}
-\contentsline {subsection}{\numberline {4.3.3}Request Cross Checks}{33}{subsection.4.3.3}
-\contentsline {section}{\numberline {4.4}Live Vulnerability Test Case}{33}{section.4.4}
-\contentsline {chapter}{\numberline {5}Experimentation}{39}{chapter.5}
-\contentsline {section}{\numberline {5.1}Intended functionality}{39}{section.5.1}
-\contentsline {section}{\numberline {5.2}Metrics of success}{39}{section.5.2}
-\contentsline {section}{\numberline {5.3}Experiments}{40}{section.5.3}
-\contentsline {subsection}{\numberline {5.3.1}Test benches}{40}{subsection.5.3.1}
-\contentsline {subsection}{\numberline {5.3.2}Test methodology}{41}{subsection.5.3.2}
-\contentsline {chapter}{\numberline {6}Evaluation}{42}{chapter.6}
+\contentsline {chapter}{\numberline {3}Design}{12}{chapter.3}
+\contentsline {section}{\numberline {3.1}Project Contribution}{12}{section.3.1}
+\contentsline {section}{\numberline {3.2}Limitations}{14}{section.3.2}
+\contentsline {subsection}{\numberline {3.2.1}Time taken}{14}{subsection.3.2.1}
+\contentsline {subsection}{\numberline {3.2.2}Breadth of work}{14}{subsection.3.2.2}
+\contentsline {subsection}{\numberline {3.2.3}Self security}{14}{subsection.3.2.3}
+\contentsline {subsection}{\numberline {3.2.4}Ethics \& Handling of Results}{15}{subsection.3.2.4}
+\contentsline {chapter}{\numberline {4}Implementation}{16}{chapter.4}
+\contentsline {section}{\numberline {4.1}Manifest}{16}{section.4.1}
+\contentsline {section}{\numberline {4.2}Test harness}{17}{section.4.2}
+\contentsline {section}{\numberline {4.3}Popup page}{17}{section.4.3}
+\contentsline {section}{\numberline {4.4}Background Page}{18}{section.4.4}
+\contentsline {section}{\numberline {4.5}Request Logger}{18}{section.4.5}
+\contentsline {section}{\numberline {4.6}Devtools}{19}{section.4.6}
+\contentsline {section}{\numberline {4.7}Message Design}{19}{section.4.7}
+\contentsline {section}{\numberline {4.8}Chrome Storage}{20}{section.4.8}
+\contentsline {section}{\numberline {4.9}Recommendations}{21}{section.4.9}
+\contentsline {subsection}{\numberline {4.9.1}Recommendation Sensitivity}{21}{subsection.4.9.1}
+\contentsline {section}{\numberline {4.10}Action Replay}{22}{section.4.10}
+\contentsline {section}{\numberline {4.11}Passive Mode}{23}{section.4.11}
+\contentsline {subsection}{\numberline {4.11.1}Header Analysis}{24}{subsection.4.11.1}
+\contentsline {subsection}{\numberline {4.11.2}Reflected Input Checks}{25}{subsection.4.11.2}
+\contentsline {subsection}{\numberline {4.11.3}Basic CSRF Checks}{25}{subsection.4.11.3}
+\contentsline {subsection}{\numberline {4.11.4}Basic Cookie Setting Checks}{25}{subsection.4.11.4}
+\contentsline {subsection}{\numberline {4.11.5}Request Cross Checks}{26}{subsection.4.11.5}
+\contentsline {chapter}{\numberline {5}Applications}{27}{chapter.5}
+\contentsline {section}{\numberline {5.1}Recommendations}{27}{section.5.1}
+\contentsline {section}{\numberline {5.2}Action Replay}{29}{section.5.2}
+\contentsline {section}{\numberline {5.3}Passive Mode}{31}{section.5.3}
+\contentsline {subsection}{\numberline {5.3.1}CSRF alerts}{31}{subsection.5.3.1}
+\contentsline {subsection}{\numberline {5.3.2}Insecure Cookie Alerts}{34}{subsection.5.3.2}
+\contentsline {subsection}{\numberline {5.3.3}Request Cross Checks}{34}{subsection.5.3.3}
+\contentsline {section}{\numberline {5.4}Live Vulnerability Test Case}{34}{section.5.4}
+\contentsline {chapter}{\numberline {6}Evaluation}{40}{chapter.6}
+\contentsline {section}{\numberline {6.1}Metrics of success}{40}{section.6.1}
+\contentsline {section}{\numberline {6.2}Experiments}{40}{section.6.2}
+\contentsline {subsection}{\numberline {6.2.1}Test benches}{40}{subsection.6.2.1}
+\contentsline {subsection}{\numberline {6.2.2}Test methodology}{41}{subsection.6.2.2}
 \contentsline {chapter}{\numberline {7}Future Work}{43}{chapter.7}
 \contentsline {chapter}{\numberline {8}Conclusion}{44}{chapter.8}
 \contentsline {chapter}{\numberline {A}Appendix}{45}{appendix.A}

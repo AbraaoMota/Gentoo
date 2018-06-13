@@ -43,9 +43,9 @@
 \citation{hackerone2017}
 \citation{hackerone2018}
 \citation{Saner}
+\citation{stateAwareBlackBoxWebVulnScanner}
 \citation{Waler}
 \citation{Kals:2006:SWV:1135777.1135817}
-\citation{stateAwareBlackBoxWebVulnScanner}
 \citation{acunetix}
 \citation{appscan}
 \citation{w3af}
@@ -71,176 +71,178 @@
 \citation{chromeExtensionArchitecture}
 \@writefile{toc}{\contentsline {section}{\numberline {2.3}Browser extensions}{10}{section.2.3}}
 \newlabel{browserExtensions}{{2.3}{10}{Browser extensions}{section.2.3}{}}
-\citation{whyJohnnyCantPentest}
 \@writefile{lof}{\contentsline {figure}{\numberline {2.3}{\ignorespaces An extension is split into 2 main areas. The \texttt  {background.html} page has access to all extension privileges and is where the business logic of the extension is stored. It cannot interact with user webpages. Content scripts can be injected to interact with the DOM of a page. The \texttt  {background.html} can contact the content script via a message passing API. Image courtesy of Google Developer documentation. \cite  {chromeExtensionArchitecture}\relax }}{11}{figure.caption.4}}
 \newlabel{fig:test}{{2.3}{11}{An extension is split into 2 main areas. The \texttt {background.html} page has access to all extension privileges and is where the business logic of the extension is stored. It cannot interact with user webpages. Content scripts can be injected to interact with the DOM of a page. The \texttt {background.html} can contact the content script via a message passing API. Image courtesy of Google Developer documentation. \cite {chromeExtensionArchitecture}\relax }{figure.caption.4}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {2.4}Project Contribution}{11}{section.2.4}}
-\newlabel{contribution}{{2.4}{11}{Project Contribution}{section.2.4}{}}
+\citation{whyJohnnyCantPentest}
 \citation{analysisOfEffectivenessOfBlackBoxWebAppScannersStoredSQLStoredXSS}
+\@writefile{toc}{\contentsline {chapter}{\numberline {3}Design}{12}{chapter.3}}
+\@writefile{lof}{\addvspace {10\p@ }}
+\@writefile{lot}{\addvspace {10\p@ }}
+\@writefile{toc}{\contentsline {section}{\numberline {3.1}Project Contribution}{12}{section.3.1}}
+\newlabel{contribution}{{3.1}{12}{Project Contribution}{section.3.1}{}}
 \citation{analysisOfEffectivenessOfBlackBoxWebAppScannersStoredSQLStoredXSS}
 \citation{webAppSecThreatsCountermeasuresPitfalls}
 \citation{darpaAIChallenge}
 \citation{defcon16Results}
 \citation{whyJohnnyCantPentest}
-\@writefile{lof}{\contentsline {figure}{\numberline {2.4}{\ignorespaces A visualization of the proposed action replay algorithm. The tool records user input for a time period determined by the user. The tool then replicates actions using fuzzed inputs to try and uncover vulnerabilities if the first attempt was unsuccessful.\relax }}{12}{figure.caption.5}}
-\newlabel{fig:test}{{2.4}{12}{A visualization of the proposed action replay algorithm. The tool records user input for a time period determined by the user. The tool then replicates actions using fuzzed inputs to try and uncover vulnerabilities if the first attempt was unsuccessful.\relax }{figure.caption.5}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {2.5}Limitations}{13}{section.2.5}}
-\newlabel{limitations}{{2.5}{13}{Limitations}{section.2.5}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {2.5.1}Time taken}{13}{subsection.2.5.1}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {2.5.2}Breadth of work}{13}{subsection.2.5.2}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3.1}{\ignorespaces A visualization of the proposed action replay algorithm. The tool records user input for a time period determined by the user. The tool then replicates actions using fuzzed inputs to try and uncover vulnerabilities if the first attempt was unsuccessful.\relax }}{13}{figure.caption.5}}
+\newlabel{fig:test}{{3.1}{13}{A visualization of the proposed action replay algorithm. The tool records user input for a time period determined by the user. The tool then replicates actions using fuzzed inputs to try and uncover vulnerabilities if the first attempt was unsuccessful.\relax }{figure.caption.5}{}}
 \citation{evalChromeExtensionSecurityArchitecture}
 \citation{chromeExtensionArchitecture}
+\@writefile{toc}{\contentsline {section}{\numberline {3.2}Limitations}{14}{section.3.2}}
+\newlabel{limitations}{{3.2}{14}{Limitations}{section.3.2}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.2.1}Time taken}{14}{subsection.3.2.1}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.2.2}Breadth of work}{14}{subsection.3.2.2}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.2.3}Self security}{14}{subsection.3.2.3}}
 \citation{dvwaSite}
-\@writefile{toc}{\contentsline {subsection}{\numberline {2.5.3}Self security}{14}{subsection.2.5.3}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {2.5.4}Ethics \& Handling of Results}{14}{subsection.2.5.4}}
-\newlabel{ethics}{{2.5.4}{14}{Ethics \& Handling of Results}{subsection.2.5.4}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.2.4}Ethics \& Handling of Results}{15}{subsection.3.2.4}}
+\newlabel{ethics}{{3.2.4}{15}{Ethics \& Handling of Results}{subsection.3.2.4}{}}
 \citation{chromeExtensionCSP}
-\@writefile{toc}{\contentsline {chapter}{\numberline {3}Implementation}{15}{chapter.3}}
+\@writefile{toc}{\contentsline {chapter}{\numberline {4}Implementation}{16}{chapter.4}}
 \@writefile{lof}{\addvspace {10\p@ }}
 \@writefile{lot}{\addvspace {10\p@ }}
-\@writefile{lof}{\contentsline {figure}{\numberline {3.1}{\ignorespaces The directory structure used for the project\relax }}{15}{figure.caption.6}}
-\newlabel{fig:test}{{3.1}{15}{The directory structure used for the project\relax }{figure.caption.6}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {3.1}Manifest}{15}{section.3.1}}
+\@writefile{lof}{\contentsline {figure}{\numberline {4.1}{\ignorespaces The directory structure used for the project\relax }}{16}{figure.caption.6}}
+\newlabel{fig:test}{{4.1}{16}{The directory structure used for the project\relax }{figure.caption.6}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {4.1}Manifest}{16}{section.4.1}}
 \citation{chromeExtensionWebAccessibleResources}
-\@writefile{toc}{\contentsline {section}{\numberline {3.2}Test harness}{16}{section.3.2}}
-\@writefile{toc}{\contentsline {section}{\numberline {3.3}Popup page}{16}{section.3.3}}
+\@writefile{toc}{\contentsline {section}{\numberline {4.2}Test harness}{17}{section.4.2}}
+\@writefile{toc}{\contentsline {section}{\numberline {4.3}Popup page}{17}{section.4.3}}
 \citation{chromeExtensionDevTools}
-\@writefile{lof}{\contentsline {figure}{\numberline {3.2}{\ignorespaces The main contents of the popup page when first clicked by a userw\relax }}{17}{figure.caption.7}}
-\newlabel{fig:test}{{3.2}{17}{The main contents of the popup page when first clicked by a userw\relax }{figure.caption.7}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {3.4}Background Page}{17}{section.3.4}}
-\@writefile{toc}{\contentsline {section}{\numberline {3.5}Request Logger}{17}{section.3.5}}
+\@writefile{lof}{\contentsline {figure}{\numberline {4.2}{\ignorespaces The main contents of the popup page when first clicked by a userw\relax }}{18}{figure.caption.7}}
+\newlabel{fig:test}{{4.2}{18}{The main contents of the popup page when first clicked by a userw\relax }{figure.caption.7}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {4.4}Background Page}{18}{section.4.4}}
+\@writefile{toc}{\contentsline {section}{\numberline {4.5}Request Logger}{18}{section.4.5}}
 \citation{chromeExtensionDevTools}
 \citation{chromeExtensionDevTools}
 \citation{chromeExtensionDevTools}
-\@writefile{toc}{\contentsline {section}{\numberline {3.6}Devtools}{18}{section.3.6}}
-\newlabel{devtools}{{3.6}{18}{Devtools}{section.3.6}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {3.3}{\ignorespaces An extension making use of the DevTools API's further extends the capabilities of a standard Chrome Extension. Diagram from \cite  {chromeExtensionDevTools}\relax }}{18}{figure.caption.8}}
-\newlabel{fig:test}{{3.3}{18}{An extension making use of the DevTools API's further extends the capabilities of a standard Chrome Extension. Diagram from \cite {chromeExtensionDevTools}\relax }{figure.caption.8}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {3.7}Message Design}{18}{section.3.7}}
-\@writefile{lof}{\contentsline {figure}{\numberline {3.4}{\ignorespaces This diagram illustrates the passing of messages within the different components in the extension\relax }}{19}{figure.caption.9}}
-\newlabel{fig:test}{{3.4}{19}{This diagram illustrates the passing of messages within the different components in the extension\relax }{figure.caption.9}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {3.8}Chrome Storage}{19}{section.3.8}}
-\newlabel{storageSpecs}{{3.8}{19}{Chrome Storage}{section.3.8}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {3.9}Recommendations}{20}{section.3.9}}
-\newlabel{recommendations}{{3.9}{20}{Recommendations}{section.3.9}{}}
-\newlabel{fig:test_page_investigate_form}{{\caption@xref {fig:test_page_investigate_form}{ on input line 133}}{20}{Recommendations}{figure.caption.10}{}}
-\newlabel{sub@fig:test_page_investigate_form}{{}{20}{Recommendations}{figure.caption.10}{}}
-\newlabel{fig:whiteBox}{{\caption@xref {fig:whiteBox}{ on input line 138}}{20}{Recommendations}{figure.caption.10}{}}
-\newlabel{sub@fig:whiteBox}{{}{20}{Recommendations}{figure.caption.10}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {3.5}{\ignorespaces The \textit  {Investigate Form} input being added to different pages allows a user to attempt attacks against the page in question.\relax }}{20}{figure.caption.10}}
-\newlabel{fig:test}{{3.5}{20}{The \textit {Investigate Form} input being added to different pages allows a user to attempt attacks against the page in question.\relax }{figure.caption.10}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.9.1}Recommendation Sensitivity}{20}{subsection.3.9.1}}
-\@writefile{lof}{\contentsline {figure}{\numberline {3.6}{\ignorespaces Changing the recommendation sensitivity within the settings tab\relax }}{21}{figure.caption.11}}
-\newlabel{fig:test}{{3.6}{21}{Changing the recommendation sensitivity within the settings tab\relax }{figure.caption.11}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {3.10}Action Replay}{21}{section.3.10}}
-\newlabel{actionReplay}{{3.10}{21}{Action Replay}{section.3.10}{}}
-\newlabel{fig:test_page_investigate_form}{{\caption@xref {fig:test_page_investigate_form}{ on input line 176}}{22}{Action Replay}{figure.caption.12}{}}
-\newlabel{sub@fig:test_page_investigate_form}{{}{22}{Action Replay}{figure.caption.12}{}}
-\newlabel{fig:whiteBox}{{\caption@xref {fig:whiteBox}{ on input line 181}}{22}{Action Replay}{figure.caption.12}{}}
-\newlabel{sub@fig:whiteBox}{{}{22}{Action Replay}{figure.caption.12}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {3.7}{\ignorespaces The Action Replay button before and during a session recording. A recording session starts and stops at the click of this button. In the interest of usability, the button can be moved by the user anywhere on the page so as to not obstruct other content indefinitely.\relax }}{22}{figure.caption.12}}
-\newlabel{fig:test}{{3.7}{22}{The Action Replay button before and during a session recording. A recording session starts and stops at the click of this button. In the interest of usability, the button can be moved by the user anywhere on the page so as to not obstruct other content indefinitely.\relax }{figure.caption.12}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {3.11}Passive Mode}{22}{section.3.11}}
-\@writefile{lof}{\contentsline {figure}{\numberline {3.8}{\ignorespaces The settings tab can be used to configure which submodes are activated within the Passive Mode.\relax }}{22}{figure.caption.13}}
-\newlabel{fig:test}{{3.8}{22}{The settings tab can be used to configure which submodes are activated within the Passive Mode.\relax }{figure.caption.13}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {4.6}Devtools}{19}{section.4.6}}
+\newlabel{devtools}{{4.6}{19}{Devtools}{section.4.6}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {4.3}{\ignorespaces An extension making use of the DevTools API's further extends the capabilities of a standard Chrome Extension. Diagram from \cite  {chromeExtensionDevTools}\relax }}{19}{figure.caption.8}}
+\newlabel{fig:test}{{4.3}{19}{An extension making use of the DevTools API's further extends the capabilities of a standard Chrome Extension. Diagram from \cite {chromeExtensionDevTools}\relax }{figure.caption.8}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {4.7}Message Design}{19}{section.4.7}}
+\@writefile{lof}{\contentsline {figure}{\numberline {4.4}{\ignorespaces This diagram illustrates the passing of messages within the different components in the extension\relax }}{20}{figure.caption.9}}
+\newlabel{fig:test}{{4.4}{20}{This diagram illustrates the passing of messages within the different components in the extension\relax }{figure.caption.9}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {4.8}Chrome Storage}{20}{section.4.8}}
+\newlabel{storageSpecs}{{4.8}{20}{Chrome Storage}{section.4.8}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {4.9}Recommendations}{21}{section.4.9}}
+\newlabel{recommendations}{{4.9}{21}{Recommendations}{section.4.9}{}}
+\newlabel{fig:test_page_investigate_form}{{\caption@xref {fig:test_page_investigate_form}{ on input line 133}}{21}{Recommendations}{figure.caption.10}{}}
+\newlabel{sub@fig:test_page_investigate_form}{{}{21}{Recommendations}{figure.caption.10}{}}
+\newlabel{fig:whiteBox}{{\caption@xref {fig:whiteBox}{ on input line 138}}{21}{Recommendations}{figure.caption.10}{}}
+\newlabel{sub@fig:whiteBox}{{}{21}{Recommendations}{figure.caption.10}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {4.5}{\ignorespaces The \textit  {Investigate Form} input being added to different pages allows a user to attempt attacks against the page in question.\relax }}{21}{figure.caption.10}}
+\newlabel{fig:test}{{4.5}{21}{The \textit {Investigate Form} input being added to different pages allows a user to attempt attacks against the page in question.\relax }{figure.caption.10}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.9.1}Recommendation Sensitivity}{21}{subsection.4.9.1}}
+\@writefile{lof}{\contentsline {figure}{\numberline {4.6}{\ignorespaces Changing the recommendation sensitivity within the settings tab\relax }}{22}{figure.caption.11}}
+\newlabel{fig:test}{{4.6}{22}{Changing the recommendation sensitivity within the settings tab\relax }{figure.caption.11}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {4.10}Action Replay}{22}{section.4.10}}
+\newlabel{actionReplay}{{4.10}{22}{Action Replay}{section.4.10}{}}
+\newlabel{fig:test_page_investigate_form}{{\caption@xref {fig:test_page_investigate_form}{ on input line 176}}{23}{Action Replay}{figure.caption.12}{}}
+\newlabel{sub@fig:test_page_investigate_form}{{}{23}{Action Replay}{figure.caption.12}{}}
+\newlabel{fig:whiteBox}{{\caption@xref {fig:whiteBox}{ on input line 181}}{23}{Action Replay}{figure.caption.12}{}}
+\newlabel{sub@fig:whiteBox}{{}{23}{Action Replay}{figure.caption.12}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {4.7}{\ignorespaces The Action Replay button before and during a session recording. A recording session starts and stops at the click of this button. In the interest of usability, the button can be moved by the user anywhere on the page so as to not obstruct other content indefinitely.\relax }}{23}{figure.caption.12}}
+\newlabel{fig:test}{{4.7}{23}{The Action Replay button before and during a session recording. A recording session starts and stops at the click of this button. In the interest of usability, the button can be moved by the user anywhere on the page so as to not obstruct other content indefinitely.\relax }{figure.caption.12}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {4.11}Passive Mode}{23}{section.4.11}}
+\@writefile{lof}{\contentsline {figure}{\numberline {4.8}{\ignorespaces The settings tab can be used to configure which submodes are activated within the Passive Mode.\relax }}{23}{figure.caption.13}}
+\newlabel{fig:test}{{4.8}{23}{The settings tab can be used to configure which submodes are activated within the Passive Mode.\relax }{figure.caption.13}{}}
 \citation{refererHeader}
 \citation{referrerPolicy}
 \citation{xFrameOptions}
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.11.1}Header Analysis}{23}{subsection.3.11.1}}
-\newlabel{header_analysis}{{3.11.1}{23}{Header Analysis}{subsection.3.11.1}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.11.1}Header Analysis}{24}{subsection.4.11.1}}
+\newlabel{header_analysis}{{4.11.1}{24}{Header Analysis}{subsection.4.11.1}{}}
 \citation{setCookie}
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.11.2}Reflected Input Checks}{24}{subsection.3.11.2}}
-\newlabel{reflectedInputChecks}{{3.11.2}{24}{Reflected Input Checks}{subsection.3.11.2}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.11.3}Basic CSRF Checks}{24}{subsection.3.11.3}}
-\newlabel{csrfChecks}{{3.11.3}{24}{Basic CSRF Checks}{subsection.3.11.3}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.11.4}Basic Cookie Setting Checks}{24}{subsection.3.11.4}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.11.5}Request Cross Checks}{25}{subsection.3.11.5}}
-\@writefile{lof}{\contentsline {figure}{\numberline {3.9}{\ignorespaces This illustrates a potential second-order XSS attack. In this example, an unsanitized user registration form \textbf  {(1)} allows a user to register under a username that could cause a Javascript injection if their username is refelcted elsewhere on the page. There are intermediary steps between this vulnerability and its exploit however - in step \textbf  {(2)} we see a registration successful page, and even in step \textbf  {(3)} we have not yet experienced the attack. Only in step \textbf  {(4)} do we see the effects of the attack as the user name is reflected in the page, injecting and executing the script.\relax }}{25}{figure.caption.14}}
-\newlabel{fig:secondOrderAttack}{{3.9}{25}{This illustrates a potential second-order XSS attack. In this example, an unsanitized user registration form \textbf {(1)} allows a user to register under a username that could cause a Javascript injection if their username is refelcted elsewhere on the page. There are intermediary steps between this vulnerability and its exploit however - in step \textbf {(2)} we see a registration successful page, and even in step \textbf {(3)} we have not yet experienced the attack. Only in step \textbf {(4)} do we see the effects of the attack as the user name is reflected in the page, injecting and executing the script.\relax }{figure.caption.14}{}}
-\@writefile{toc}{\contentsline {chapter}{\numberline {4}Applications}{26}{chapter.4}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.11.2}Reflected Input Checks}{25}{subsection.4.11.2}}
+\newlabel{reflectedInputChecks}{{4.11.2}{25}{Reflected Input Checks}{subsection.4.11.2}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.11.3}Basic CSRF Checks}{25}{subsection.4.11.3}}
+\newlabel{csrfChecks}{{4.11.3}{25}{Basic CSRF Checks}{subsection.4.11.3}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.11.4}Basic Cookie Setting Checks}{25}{subsection.4.11.4}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.11.5}Request Cross Checks}{26}{subsection.4.11.5}}
+\@writefile{lof}{\contentsline {figure}{\numberline {4.9}{\ignorespaces This illustrates a potential second-order XSS attack. In this example, an unsanitized user registration form \textbf  {(1)} allows a user to register under a username that could cause a Javascript injection if their username is refelcted elsewhere on the page. There are intermediary steps between this vulnerability and its exploit however - in step \textbf  {(2)} we see a registration successful page, and even in step \textbf  {(3)} we have not yet experienced the attack. Only in step \textbf  {(4)} do we see the effects of the attack as the user name is reflected in the page, injecting and executing the script.\relax }}{26}{figure.caption.14}}
+\newlabel{fig:secondOrderAttack}{{4.9}{26}{This illustrates a potential second-order XSS attack. In this example, an unsanitized user registration form \textbf {(1)} allows a user to register under a username that could cause a Javascript injection if their username is refelcted elsewhere on the page. There are intermediary steps between this vulnerability and its exploit however - in step \textbf {(2)} we see a registration successful page, and even in step \textbf {(3)} we have not yet experienced the attack. Only in step \textbf {(4)} do we see the effects of the attack as the user name is reflected in the page, injecting and executing the script.\relax }{figure.caption.14}{}}
+\@writefile{toc}{\contentsline {chapter}{\numberline {5}Applications}{27}{chapter.5}}
 \@writefile{lof}{\addvspace {10\p@ }}
 \@writefile{lot}{\addvspace {10\p@ }}
-\@writefile{toc}{\contentsline {section}{\numberline {4.1}Recommendations}{26}{section.4.1}}
-\newlabel{applications_recommendations}{{4.1}{26}{Recommendations}{section.4.1}{}}
-\newlabel{lst:test_harness}{{4.1}{26}{The HTML contents of the Test Harness for this example. Two of the inputs in the page are reflected onto the page when they are submitted as query parameters (i.e. seen in the page URL)}{lstlisting.4.1}{}}
-\@writefile{lol}{\contentsline {lstlisting}{\numberline {4.1}The HTML contents of the Test Harness for this example. Two of the inputs in the page are reflected onto the page when they are submitted as query parameters (i.e. seen in the page URL)}{26}{lstlisting.4.1}}
-\newlabel{fig:test_harness_original}{{\caption@xref {fig:test_harness_original}{ on input line 53}}{27}{Recommendations}{figure.caption.15}{}}
-\newlabel{sub@fig:test_harness_original}{{}{27}{Recommendations}{figure.caption.15}{}}
-\newlabel{fig:test_harness_reflection_1}{{\caption@xref {fig:test_harness_reflection_1}{ on input line 58}}{27}{Recommendations}{figure.caption.15}{}}
-\newlabel{sub@fig:test_harness_reflection_1}{{}{27}{Recommendations}{figure.caption.15}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {4.1}{\ignorespaces The default Test harness page to demonstrate XSS vulnerabilities. Submitting the first input causes the reflection in the second image.\relax }}{27}{figure.caption.15}}
-\newlabel{fig:test_harness_default}{{4.1}{27}{The default Test harness page to demonstrate XSS vulnerabilities. Submitting the first input causes the reflection in the second image.\relax }{figure.caption.15}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {4.2}{\ignorespaces Enabling the recommendations on the Test Harness\relax }}{27}{figure.caption.16}}
-\newlabel{fig:test_harness_recommendations_2}{{4.2}{27}{Enabling the recommendations on the Test Harness\relax }{figure.caption.16}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {4.3}{\ignorespaces The request logger page warns the user that the reason they've reached this page is likely to have been due to an XSS vulnerability. Note that the extension badge is also updated with a warning \textbf  {(!)} label to indicate this (arrow added in diagram for emphasis).\relax }}{28}{figure.caption.17}}
-\newlabel{fig:request_logger_warning}{{4.3}{28}{The request logger page warns the user that the reason they've reached this page is likely to have been due to an XSS vulnerability. Note that the extension badge is also updated with a warning \textbf {(!)} label to indicate this (arrow added in diagram for emphasis).\relax }{figure.caption.17}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {4.4}{\ignorespaces Opening the extension confirms that the suspicious URL was indeed vulnerable to XSS.\relax }}{28}{figure.caption.18}}
-\newlabel{fig:xss_vulnerable_url}{{4.4}{28}{Opening the extension confirms that the suspicious URL was indeed vulnerable to XSS.\relax }{figure.caption.18}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {4.2}Action Replay}{28}{section.4.2}}
-\@writefile{lof}{\contentsline {figure}{\numberline {4.5}{\ignorespaces Injecting \texttt  {<img src=a>} into an input results in this page\relax }}{29}{figure.caption.19}}
-\newlabel{fig:action_replay_initial}{{4.5}{29}{Injecting \texttt {<img src=a>} into an input results in this page\relax }{figure.caption.19}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {4.6}{\ignorespaces Retrying the attack while recording using Action Replay\relax }}{29}{figure.caption.20}}
-\newlabel{fig:action_replay_attack}{{4.6}{29}{Retrying the attack while recording using Action Replay\relax }{figure.caption.20}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {4.7}{\ignorespaces The Action Replay generates the outputs of several attacks in new windows. The 2nd of the inspected windows showcases a successfully detected vulnerability that executed a Javascript payload.\relax }}{29}{figure.caption.21}}
-\newlabel{fig:successful_replay}{{4.7}{29}{The Action Replay generates the outputs of several attacks in new windows. The 2nd of the inspected windows showcases a successfully detected vulnerability that executed a Javascript payload.\relax }{figure.caption.21}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {4.8}{\ignorespaces The Action Replay outputs a list of inputs it has considered to be dangerous. In this screenshot, we see the \textbf  {param} with the name \textbf  {injection} is one of the potentially dangerous inputs. \relax }}{30}{figure.caption.22}}
-\newlabel{fig:dangerous_inputs}{{4.8}{30}{The Action Replay outputs a list of inputs it has considered to be dangerous. In this screenshot, we see the \textbf {param} with the name \textbf {injection} is one of the potentially dangerous inputs. \relax }{figure.caption.22}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {4.3}Passive Mode}{30}{section.4.3}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.3.1}CSRF alerts}{30}{subsection.4.3.1}}
-\newlabel{applications_CSRF_alerts}{{4.3.1}{30}{CSRF alerts}{subsection.4.3.1}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {4.9}{\ignorespaces A webpage which makes no effort to set secure headers (as the Test Harness does here) will raise up warnings by the passive mode in this regard.\relax }}{31}{figure.caption.23}}
-\newlabel{fig:passive_weak_headers_1}{{4.9}{31}{A webpage which makes no effort to set secure headers (as the Test Harness does here) will raise up warnings by the passive mode in this regard.\relax }{figure.caption.23}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {4.10}{\ignorespaces The header analysis from scanning \texttt  {http://google.com} shows that some of the security headers have been set, but others are still unset.\relax }}{31}{figure.caption.24}}
-\newlabel{fig:google_headers}{{4.10}{31}{The header analysis from scanning \texttt {http://google.com} shows that some of the security headers have been set, but others are still unset.\relax }{figure.caption.24}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {4.11}{\ignorespaces Looking at the request details in the Developer Tools in Chrome reveals that the headers that were not reported by the extension had been set by Google.\relax }}{31}{figure.caption.25}}
-\newlabel{fig:google_headers_2}{{4.11}{31}{Looking at the request details in the Developer Tools in Chrome reveals that the headers that were not reported by the extension had been set by Google.\relax }{figure.caption.25}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {4.12}{\ignorespaces Although this mode is liberal in highlighting potential vulnerabilities, amidst the warnings we see that it has detected the reflected input caused by the query parameter.\relax }}{32}{figure.caption.26}}
-\newlabel{fig:passive_reflection}{{4.12}{32}{Although this mode is liberal in highlighting potential vulnerabilities, amidst the warnings we see that it has detected the reflected input caused by the query parameter.\relax }{figure.caption.26}{}}
-\newlabel{lst:csrf_cookies}{{4.2}{32}{We add some cookies to the page - one of these is designed to trigger our filter to find Session ID related cookies}{lstlisting.4.2}{}}
-\@writefile{lol}{\contentsline {lstlisting}{\numberline {4.2}We add some cookies to the page - one of these is designed to trigger our filter to find Session ID related cookies}{32}{lstlisting.4.2}}
-\@writefile{lof}{\contentsline {figure}{\numberline {4.13}{\ignorespaces When the website conforms to the minimum requirements previously explained, the passive analysis produces this CSRF warning.\relax }}{32}{figure.caption.27}}
-\newlabel{fig:csrf_warning}{{4.13}{32}{When the website conforms to the minimum requirements previously explained, the passive analysis produces this CSRF warning.\relax }{figure.caption.27}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.3.2}Insecure Cookie Alerts}{33}{subsection.4.3.2}}
-\@writefile{lof}{\contentsline {figure}{\numberline {4.14}{\ignorespaces The extension warns of any cookies that may be of particular value to the user experience (such as the session ID) and have not been set with the appropriate security flags.\relax }}{33}{figure.caption.28}}
-\newlabel{fig:cookie_warning}{{4.14}{33}{The extension warns of any cookies that may be of particular value to the user experience (such as the session ID) and have not been set with the appropriate security flags.\relax }{figure.caption.28}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.3.3}Request Cross Checks}{33}{subsection.4.3.3}}
-\@writefile{toc}{\contentsline {section}{\numberline {4.4}Live Vulnerability Test Case}{33}{section.4.4}}
-\newlabel{live_vulnerability}{{4.4}{33}{Live Vulnerability Test Case}{section.4.4}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {4.15}{\ignorespaces The extension finds the reflected exploit across requests with a separating distance of at least 1 other request. The image omits a substantial amount of other warnings.\relax }}{34}{figure.caption.29}}
-\newlabel{fig:cross_check_warnings}{{4.15}{34}{The extension finds the reflected exploit across requests with a separating distance of at least 1 other request. The image omits a substantial amount of other warnings.\relax }{figure.caption.29}{}}
-\newlabel{fig:original_page_anon}{{\caption@xref {fig:original_page_anon}{ on input line 259}}{34}{Live Vulnerability Test Case}{figure.caption.30}{}}
-\newlabel{sub@fig:original_page_anon}{{}{34}{Live Vulnerability Test Case}{figure.caption.30}{}}
-\newlabel{fig:recommendations_anon}{{\caption@xref {fig:recommendations_anon}{ on input line 264}}{34}{Live Vulnerability Test Case}{figure.caption.30}{}}
-\newlabel{sub@fig:recommendations_anon}{{}{34}{Live Vulnerability Test Case}{figure.caption.30}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {4.16}{\ignorespaces Here we see the website form before and after having the \textit  {Recommendations} setting enabled. We see that it highlights both normal inputs in the form, as well as a hidden input, shown by the \textit  {Investigate Form} button floating above the "Welcome Back" text.\relax }}{34}{figure.caption.30}}
-\newlabel{fig:vuln_page}{{4.16}{34}{Here we see the website form before and after having the \textit {Recommendations} setting enabled. We see that it highlights both normal inputs in the form, as well as a hidden input, shown by the \textit {Investigate Form} button floating above the "Welcome Back" text.\relax }{figure.caption.30}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {4.17}{\ignorespaces Here the form returns an error with a warning saying that the \textit  {Password can't be blank}. However, this is not the interesting behaviour - we instead notice the presence of the following text after the Email address input: \texttt  {" autofocus>}. This wasn't there before, and is not part of the attack.\relax }}{35}{figure.caption.31}}
-\newlabel{fig:trigger_point}{{4.17}{35}{Here the form returns an error with a warning saying that the \textit {Password can't be blank}. However, this is not the interesting behaviour - we instead notice the presence of the following text after the Email address input: \texttt {" autofocus>}. This wasn't there before, and is not part of the attack.\relax }{figure.caption.31}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {4.18}{\ignorespaces The source code of the login form before adding the recommendations or submitting an attack.\relax }}{35}{figure.caption.32}}
-\newlabel{fig:src_code_before}{{4.18}{35}{The source code of the login form before adding the recommendations or submitting an attack.\relax }{figure.caption.32}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {4.19}{\ignorespaces The source code of the login form after executing the attack (edited for anonymity).\relax }}{35}{figure.caption.33}}
-\newlabel{fig:src_code_after}{{4.19}{35}{The source code of the login form after executing the attack (edited for anonymity).\relax }{figure.caption.33}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {4.20}{\ignorespaces Analysing the website using the Passive Mode of the extension reveals that of the security headers, only the \texttt  {Content-Security-Policy} header hasn't been set. \relax }}{36}{figure.caption.34}}
-\newlabel{fig:passive_analysis}{{4.20}{36}{Analysing the website using the Passive Mode of the extension reveals that of the security headers, only the \texttt {Content-Security-Policy} header hasn't been set. \relax }{figure.caption.34}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {4.21}{\ignorespaces This is the resulting page from prematurely closing DOM tags. \relax }}{37}{figure.caption.35}}
-\newlabel{fig:attack_form_1}{{4.21}{37}{This is the resulting page from prematurely closing DOM tags. \relax }{figure.caption.35}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {4.22}{\ignorespaces Scrolling down the page reveals the "missing" contents of the form to submit.\relax }}{37}{figure.caption.36}}
-\newlabel{fig:scroll_attack_1}{{4.22}{37}{Scrolling down the page reveals the "missing" contents of the form to submit.\relax }{figure.caption.36}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {4.23}{\ignorespaces Exploiting the injections in this form allow us to create a customized form of our own, where the Submit "button" downloads a file from an external website.\relax }}{38}{figure.caption.37}}
-\newlabel{fig:fake_form_anon}{{4.23}{38}{Exploiting the injections in this form allow us to create a customized form of our own, where the Submit "button" downloads a file from an external website.\relax }{figure.caption.37}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {4.24}{\ignorespaces The download is instantly initiated after pressing the \textit  {Sign in} button. This could pose a security risk if the contents of \texttt  {EVIL.dmg} were malicious.\relax }}{38}{figure.caption.38}}
-\newlabel{fig:download_completed}{{4.24}{38}{The download is instantly initiated after pressing the \textit {Sign in} button. This could pose a security risk if the contents of \texttt {EVIL.dmg} were malicious.\relax }{figure.caption.38}{}}
-\@writefile{toc}{\contentsline {chapter}{\numberline {5}Experimentation}{39}{chapter.5}}
-\@writefile{lof}{\addvspace {10\p@ }}
-\@writefile{lot}{\addvspace {10\p@ }}
-\@writefile{toc}{\contentsline {section}{\numberline {5.1}Intended functionality}{39}{section.5.1}}
-\@writefile{toc}{\contentsline {section}{\numberline {5.2}Metrics of success}{39}{section.5.2}}
+\@writefile{toc}{\contentsline {section}{\numberline {5.1}Recommendations}{27}{section.5.1}}
+\newlabel{applications_recommendations}{{5.1}{27}{Recommendations}{section.5.1}{}}
+\newlabel{lst:test_harness}{{5.1}{27}{The HTML contents of the Test Harness for this example. Two of the inputs in the page are reflected onto the page when they are submitted as query parameters (i.e. seen in the page URL)}{lstlisting.5.1}{}}
+\@writefile{lol}{\contentsline {lstlisting}{\numberline {5.1}The HTML contents of the Test Harness for this example. Two of the inputs in the page are reflected onto the page when they are submitted as query parameters (i.e. seen in the page URL)}{27}{lstlisting.5.1}}
+\newlabel{fig:test_harness_original}{{\caption@xref {fig:test_harness_original}{ on input line 53}}{28}{Recommendations}{figure.caption.15}{}}
+\newlabel{sub@fig:test_harness_original}{{}{28}{Recommendations}{figure.caption.15}{}}
+\newlabel{fig:test_harness_reflection_1}{{\caption@xref {fig:test_harness_reflection_1}{ on input line 58}}{28}{Recommendations}{figure.caption.15}{}}
+\newlabel{sub@fig:test_harness_reflection_1}{{}{28}{Recommendations}{figure.caption.15}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {5.1}{\ignorespaces The default Test harness page to demonstrate XSS vulnerabilities. Submitting the first input causes the reflection in the second image.\relax }}{28}{figure.caption.15}}
+\newlabel{fig:test_harness_default}{{5.1}{28}{The default Test harness page to demonstrate XSS vulnerabilities. Submitting the first input causes the reflection in the second image.\relax }{figure.caption.15}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {5.2}{\ignorespaces Enabling the recommendations on the Test Harness\relax }}{28}{figure.caption.16}}
+\newlabel{fig:test_harness_recommendations_2}{{5.2}{28}{Enabling the recommendations on the Test Harness\relax }{figure.caption.16}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {5.3}{\ignorespaces The request logger page warns the user that the reason they've reached this page is likely to have been due to an XSS vulnerability. Note that the extension badge is also updated with a warning \textbf  {(!)} label to indicate this (arrow added in diagram for emphasis).\relax }}{29}{figure.caption.17}}
+\newlabel{fig:request_logger_warning}{{5.3}{29}{The request logger page warns the user that the reason they've reached this page is likely to have been due to an XSS vulnerability. Note that the extension badge is also updated with a warning \textbf {(!)} label to indicate this (arrow added in diagram for emphasis).\relax }{figure.caption.17}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {5.4}{\ignorespaces Opening the extension confirms that the suspicious URL was indeed vulnerable to XSS.\relax }}{29}{figure.caption.18}}
+\newlabel{fig:xss_vulnerable_url}{{5.4}{29}{Opening the extension confirms that the suspicious URL was indeed vulnerable to XSS.\relax }{figure.caption.18}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {5.2}Action Replay}{29}{section.5.2}}
+\@writefile{lof}{\contentsline {figure}{\numberline {5.5}{\ignorespaces Injecting \texttt  {<img src=a>} into an input results in this page\relax }}{30}{figure.caption.19}}
+\newlabel{fig:action_replay_initial}{{5.5}{30}{Injecting \texttt {<img src=a>} into an input results in this page\relax }{figure.caption.19}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {5.6}{\ignorespaces Retrying the attack while recording using Action Replay\relax }}{30}{figure.caption.20}}
+\newlabel{fig:action_replay_attack}{{5.6}{30}{Retrying the attack while recording using Action Replay\relax }{figure.caption.20}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {5.7}{\ignorespaces The Action Replay generates the outputs of several attacks in new windows. The 2nd of the inspected windows showcases a successfully detected vulnerability that executed a Javascript payload.\relax }}{30}{figure.caption.21}}
+\newlabel{fig:successful_replay}{{5.7}{30}{The Action Replay generates the outputs of several attacks in new windows. The 2nd of the inspected windows showcases a successfully detected vulnerability that executed a Javascript payload.\relax }{figure.caption.21}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {5.8}{\ignorespaces The Action Replay outputs a list of inputs it has considered to be dangerous. In this screenshot, we see the \textbf  {param} with the name \textbf  {injection} is one of the potentially dangerous inputs. \relax }}{31}{figure.caption.22}}
+\newlabel{fig:dangerous_inputs}{{5.8}{31}{The Action Replay outputs a list of inputs it has considered to be dangerous. In this screenshot, we see the \textbf {param} with the name \textbf {injection} is one of the potentially dangerous inputs. \relax }{figure.caption.22}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {5.3}Passive Mode}{31}{section.5.3}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.3.1}CSRF alerts}{31}{subsection.5.3.1}}
+\newlabel{applications_CSRF_alerts}{{5.3.1}{31}{CSRF alerts}{subsection.5.3.1}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {5.9}{\ignorespaces A webpage which makes no effort to set secure headers (as the Test Harness does here) will raise up warnings by the passive mode in this regard.\relax }}{32}{figure.caption.23}}
+\newlabel{fig:passive_weak_headers_1}{{5.9}{32}{A webpage which makes no effort to set secure headers (as the Test Harness does here) will raise up warnings by the passive mode in this regard.\relax }{figure.caption.23}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {5.10}{\ignorespaces The header analysis from scanning \texttt  {http://google.com} shows that some of the security headers have been set, but others are still unset.\relax }}{32}{figure.caption.24}}
+\newlabel{fig:google_headers}{{5.10}{32}{The header analysis from scanning \texttt {http://google.com} shows that some of the security headers have been set, but others are still unset.\relax }{figure.caption.24}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {5.11}{\ignorespaces Looking at the request details in the Developer Tools in Chrome reveals that the headers that were not reported by the extension had been set by Google.\relax }}{32}{figure.caption.25}}
+\newlabel{fig:google_headers_2}{{5.11}{32}{Looking at the request details in the Developer Tools in Chrome reveals that the headers that were not reported by the extension had been set by Google.\relax }{figure.caption.25}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {5.12}{\ignorespaces Although this mode is liberal in highlighting potential vulnerabilities, amidst the warnings we see that it has detected the reflected input caused by the query parameter.\relax }}{33}{figure.caption.26}}
+\newlabel{fig:passive_reflection}{{5.12}{33}{Although this mode is liberal in highlighting potential vulnerabilities, amidst the warnings we see that it has detected the reflected input caused by the query parameter.\relax }{figure.caption.26}{}}
+\newlabel{lst:csrf_cookies}{{5.2}{33}{We add some cookies to the page - one of these is designed to trigger our filter to find Session ID related cookies}{lstlisting.5.2}{}}
+\@writefile{lol}{\contentsline {lstlisting}{\numberline {5.2}We add some cookies to the page - one of these is designed to trigger our filter to find Session ID related cookies}{33}{lstlisting.5.2}}
+\@writefile{lof}{\contentsline {figure}{\numberline {5.13}{\ignorespaces When the website conforms to the minimum requirements previously explained, the passive analysis produces this CSRF warning.\relax }}{33}{figure.caption.27}}
+\newlabel{fig:csrf_warning}{{5.13}{33}{When the website conforms to the minimum requirements previously explained, the passive analysis produces this CSRF warning.\relax }{figure.caption.27}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.3.2}Insecure Cookie Alerts}{34}{subsection.5.3.2}}
+\@writefile{lof}{\contentsline {figure}{\numberline {5.14}{\ignorespaces The extension warns of any cookies that may be of particular value to the user experience (such as the session ID) and have not been set with the appropriate security flags.\relax }}{34}{figure.caption.28}}
+\newlabel{fig:cookie_warning}{{5.14}{34}{The extension warns of any cookies that may be of particular value to the user experience (such as the session ID) and have not been set with the appropriate security flags.\relax }{figure.caption.28}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.3.3}Request Cross Checks}{34}{subsection.5.3.3}}
+\@writefile{toc}{\contentsline {section}{\numberline {5.4}Live Vulnerability Test Case}{34}{section.5.4}}
+\newlabel{live_vulnerability}{{5.4}{34}{Live Vulnerability Test Case}{section.5.4}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {5.15}{\ignorespaces The extension finds the reflected exploit across requests with a separating distance of at least 1 other request. The image omits a substantial amount of other warnings.\relax }}{35}{figure.caption.29}}
+\newlabel{fig:cross_check_warnings}{{5.15}{35}{The extension finds the reflected exploit across requests with a separating distance of at least 1 other request. The image omits a substantial amount of other warnings.\relax }{figure.caption.29}{}}
+\newlabel{fig:original_page_anon}{{\caption@xref {fig:original_page_anon}{ on input line 259}}{35}{Live Vulnerability Test Case}{figure.caption.30}{}}
+\newlabel{sub@fig:original_page_anon}{{}{35}{Live Vulnerability Test Case}{figure.caption.30}{}}
+\newlabel{fig:recommendations_anon}{{\caption@xref {fig:recommendations_anon}{ on input line 264}}{35}{Live Vulnerability Test Case}{figure.caption.30}{}}
+\newlabel{sub@fig:recommendations_anon}{{}{35}{Live Vulnerability Test Case}{figure.caption.30}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {5.16}{\ignorespaces Here we see the website form before and after having the \textit  {Recommendations} setting enabled. We see that it highlights both normal inputs in the form, as well as a hidden input, shown by the \textit  {Investigate Form} button floating above the "Welcome Back" text.\relax }}{35}{figure.caption.30}}
+\newlabel{fig:vuln_page}{{5.16}{35}{Here we see the website form before and after having the \textit {Recommendations} setting enabled. We see that it highlights both normal inputs in the form, as well as a hidden input, shown by the \textit {Investigate Form} button floating above the "Welcome Back" text.\relax }{figure.caption.30}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {5.17}{\ignorespaces Here the form returns an error with a warning saying that the \textit  {Password can't be blank}. However, this is not the interesting behaviour - we instead notice the presence of the following text after the Email address input: \texttt  {" autofocus>}. This wasn't there before, and is not part of the attack.\relax }}{36}{figure.caption.31}}
+\newlabel{fig:trigger_point}{{5.17}{36}{Here the form returns an error with a warning saying that the \textit {Password can't be blank}. However, this is not the interesting behaviour - we instead notice the presence of the following text after the Email address input: \texttt {" autofocus>}. This wasn't there before, and is not part of the attack.\relax }{figure.caption.31}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {5.18}{\ignorespaces The source code of the login form before adding the recommendations or submitting an attack.\relax }}{36}{figure.caption.32}}
+\newlabel{fig:src_code_before}{{5.18}{36}{The source code of the login form before adding the recommendations or submitting an attack.\relax }{figure.caption.32}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {5.19}{\ignorespaces The source code of the login form after executing the attack (edited for anonymity).\relax }}{36}{figure.caption.33}}
+\newlabel{fig:src_code_after}{{5.19}{36}{The source code of the login form after executing the attack (edited for anonymity).\relax }{figure.caption.33}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {5.20}{\ignorespaces Analysing the website using the Passive Mode of the extension reveals that of the security headers, only the \texttt  {Content-Security-Policy} header hasn't been set. \relax }}{37}{figure.caption.34}}
+\newlabel{fig:passive_analysis}{{5.20}{37}{Analysing the website using the Passive Mode of the extension reveals that of the security headers, only the \texttt {Content-Security-Policy} header hasn't been set. \relax }{figure.caption.34}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {5.21}{\ignorespaces This is the resulting page from prematurely closing DOM tags. \relax }}{38}{figure.caption.35}}
+\newlabel{fig:attack_form_1}{{5.21}{38}{This is the resulting page from prematurely closing DOM tags. \relax }{figure.caption.35}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {5.22}{\ignorespaces Scrolling down the page reveals the "missing" contents of the form to submit.\relax }}{38}{figure.caption.36}}
+\newlabel{fig:scroll_attack_1}{{5.22}{38}{Scrolling down the page reveals the "missing" contents of the form to submit.\relax }{figure.caption.36}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {5.23}{\ignorespaces Exploiting the injections in this form allow us to create a customized form of our own, where the Submit "button" downloads a file from an external website.\relax }}{39}{figure.caption.37}}
+\newlabel{fig:fake_form_anon}{{5.23}{39}{Exploiting the injections in this form allow us to create a customized form of our own, where the Submit "button" downloads a file from an external website.\relax }{figure.caption.37}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {5.24}{\ignorespaces The download is instantly initiated after pressing the \textit  {Sign in} button. This could pose a security risk if the contents of \texttt  {EVIL.dmg} were malicious.\relax }}{39}{figure.caption.38}}
+\newlabel{fig:download_completed}{{5.24}{39}{The download is instantly initiated after pressing the \textit {Sign in} button. This could pose a security risk if the contents of \texttt {EVIL.dmg} were malicious.\relax }{figure.caption.38}{}}
 \citation{stateOfArtAutomatedBlackBoxWebAppVulnTesting}
 \citation{dvwaSite}
+\@writefile{toc}{\contentsline {chapter}{\numberline {6}Evaluation}{40}{chapter.6}}
+\@writefile{lof}{\addvspace {10\p@ }}
+\@writefile{lot}{\addvspace {10\p@ }}
+\@writefile{toc}{\contentsline {section}{\numberline {6.1}Metrics of success}{40}{section.6.1}}
+\@writefile{toc}{\contentsline {section}{\numberline {6.2}Experiments}{40}{section.6.2}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.2.1}Test benches}{40}{subsection.6.2.1}}
 \citation{webgoatIntro}
 \citation{webgoatGithub}
-\@writefile{toc}{\contentsline {section}{\numberline {5.3}Experiments}{40}{section.5.3}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {5.3.1}Test benches}{40}{subsection.5.3.1}}
 \citation{wackoPickoGithub}
 \citation{hacmeBankMcAfee}
 \citation{owaspVulnerableWebAppsList}
@@ -248,10 +250,7 @@
 \citation{w3af}
 \citation{burpSuitePage}
 \citation{owaspVulnerableWebAppsList}
-\@writefile{toc}{\contentsline {subsection}{\numberline {5.3.2}Test methodology}{41}{subsection.5.3.2}}
-\@writefile{toc}{\contentsline {chapter}{\numberline {6}Evaluation}{42}{chapter.6}}
-\@writefile{lof}{\addvspace {10\p@ }}
-\@writefile{lot}{\addvspace {10\p@ }}
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.2.2}Test methodology}{41}{subsection.6.2.2}}
 \@writefile{toc}{\contentsline {chapter}{\numberline {7}Future Work}{43}{chapter.7}}
 \@writefile{lof}{\addvspace {10\p@ }}
 \@writefile{lot}{\addvspace {10\p@ }}

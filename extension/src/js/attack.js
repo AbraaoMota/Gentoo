@@ -43,61 +43,30 @@ window.addEventListener("load", function() {
 // This adds the "Investigate form" inputs to the page
 // as per the set sensitivity
 function addRecommendationsToPage(sensitivity) {
+
+  console.log("ADDING RECOMMENDATIONS TO PAGE?");
   // Inject "Investigate Form" buttons on input
   var forms = document.getElementsByTagName("form");
 
   if (sensitivity === "1") {
     // Add a button to the first input per form
-    for (var i = 0; i < forms.length; i++) {
-      var currForm = forms[i];
-      var inputs = currForm.getElementsByTagName("input");
-      if (!inputs.length) {
-        continue;
-      }
-      var firstInputChild = inputs[0];
-
-      var recommendation = document.createElement('a');
-      recommendation.classList.add("recommendation");
-      var text = document.createTextNode("Investigate form");
-      recommendation.appendChild(text);
-      // Make it look clickable
-      recommendation.setAttribute("href", "javascript:void(0)");
-
-      recommendation.child = firstInputChild;
-      recommendation.form = currForm;
-
-      // Attempt XSS (or otherwise) upon clicking the form
-      recommendation.addEventListener('click', function(evt) {
-        attemptXSS(evt.target.child, evt.target.form);
-      });
-
-      // Create new div wrapper for element to be next to input
-      var newParent = document.createElement("div");
-      newParent.appendChild(firstInputChild);
-      newParent.appendChild(recommendation);
-      currForm.insertBefore(newParent, currForm.firstChild);
-    }
-  } else if (sensitivity === "2") {
-    // Add a button for every input in a form
-    for (var i = 0; i < forms.length; i++) {
-      var currForm = forms[i];
-      var inputs = currForm.getElementsByTagName("input");
-
-      if (!inputs.length) {
-        continue;
-      }
-
-      for (var j = 0; j < inputs.length; j++) {
-        var currInput = inputs[j];
+    setTimeout(function() {
+      for (var i = 0; i < forms.length; i++) {
+        var currForm = forms[i];
+        var inputs = currForm.getElementsByTagName("input");
+        if (!inputs.length) {
+          continue;
+        }
+        var firstInputChild = inputs[0];
 
         var recommendation = document.createElement('a');
         recommendation.classList.add("recommendation");
-        var text = document.createTextNode("Investigate input");
+        var text = document.createTextNode("Investigate form");
         recommendation.appendChild(text);
         // Make it look clickable
         recommendation.setAttribute("href", "javascript:void(0)");
 
-        recommendation.child = currInput;
+        recommendation.child = firstInputChild;
         recommendation.form = currForm;
 
         // Attempt XSS (or otherwise) upon clicking the form
@@ -107,49 +76,101 @@ function addRecommendationsToPage(sensitivity) {
 
         // Create new div wrapper for element to be next to input
         var newParent = document.createElement("div");
+        newParent.appendChild(firstInputChild);
+        newParent.appendChild(recommendation);
+        currForm.insertBefore(newParent, currForm.firstChild);
+      }
+    }, 3000);
+  } else if (sensitivity === "2") {
+    // Add a button for every input in a form
+
+    setTimeout(function() {
+      for (var i = 0; i < forms.length; i++) {
+        var currForm = forms[i];
+        var inputs = currForm.getElementsByTagName("input");
+
+        if (!inputs.length) {
+          continue;
+        }
+
+        for (var j = 0; j < inputs.length; j++) {
+          var currInput = inputs[j];
+
+          var recommendation = document.createElement('a');
+          recommendation.classList.add("recommendation");
+          var text = document.createTextNode("Investigate input");
+          recommendation.appendChild(text);
+          // Make it look clickable
+          recommendation.setAttribute("href", "javascript:void(0)");
+
+          recommendation.child = currInput;
+          recommendation.form = currForm;
+
+          // Attempt XSS (or otherwise) upon clicking the form
+          recommendation.addEventListener('click', function(evt) {
+            attemptXSS(evt.target.child, evt.target.form);
+          });
+
+          // Create new div wrapper for element to be next to input
+          var newParent = document.createElement("div");
+          var oldParent = currInput.parentNode;
+          var oldSibling = currInput.nextSibling;
+          newParent.appendChild(currInput);
+          newParent.appendChild(recommendation);
+
+          // currForm.insertBefore(newParent, currForm.firstChild);
+          oldParent.insertBefore(newParent, oldSibling);
+        }
+      }
+    }, 3000);
+  } else if (sensitivity === "3") {
+    // Add a button for every input regardless of forms
+
+    setTimeout(function() {
+
+      var inputs = document.getElementsByTagName("input");
+      console.log("WE HAVE THESE INPUTS");
+      console.log(inputs);
+
+      if (!inputs.length) {
+        console.log(inputs);
+        console.log(inputs.length);
+        console.log(!inputs.length);
+        console.log("RETURNING???");
+        return;
+      }
+
+      console.log("continuing");
+      for (var i = 0; i < inputs.length; i++) {
+        var currInput = inputs[i];
+
+        console.log("LOOKING AT AN INPUT");
+        console.log(currInput);
+
+        var recommendation = document.createElement('a');
+        recommendation.classList.add("recommendation");
+        var text = document.createTextNode("Investigate input");
+        recommendation.appendChild(text);
+        // Make it look clickable
+        recommendation.setAttribute("href", "javascript:void(0)");
+
+        // recommendation.child = currInput;
+
+        // Attempt XSS (or otherwise) upon clicking the form
+        recommendation.addEventListener("click", function(evt) {
+          attemptXSS(evt.target.parentElement.firstChild, null);
+        });
+
+        // Create new div wrapper for element to be next to input
+        var newParent = document.createElement("div");
         var oldParent = currInput.parentNode;
         var oldSibling = currInput.nextSibling;
         newParent.appendChild(currInput);
         newParent.appendChild(recommendation);
 
-        // currForm.insertBefore(newParent, currForm.firstChild);
         oldParent.insertBefore(newParent, oldSibling);
       }
-    }
-  } else if (sensitivity === "3") {
-    // Add a button for every input regardless of forms
-    var inputs = document.getElementsByTagName("input");
-
-    if (!inputs.length) {
-      return;
-    }
-
-    for (var i = 0; i < inputs.length; i++) {
-      var currInput = inputs[i];
-
-      var recommendation = document.createElement('a');
-      recommendation.classList.add("recommendation");
-      var text = document.createTextNode("Investigate input");
-      recommendation.appendChild(text);
-      // Make it look clickable
-      recommendation.setAttribute("href", "javascript:void(0)");
-
-      // recommendation.child = currInput;
-
-      // Attempt XSS (or otherwise) upon clicking the form
-      recommendation.addEventListener("click", function(evt) {
-        attemptXSS(evt.target.parentElement.firstChild, null);
-      });
-
-      // Create new div wrapper for element to be next to input
-      var newParent = document.createElement("div");
-      var oldParent = currInput.parentNode;
-      var oldSibling = currInput.nextSibling;
-      newParent.appendChild(currInput);
-      newParent.appendChild(recommendation);
-
-      oldParent.insertBefore(newParent, oldSibling);
-    }
+    }, 3000);
   }
 }
 
@@ -171,6 +192,7 @@ function attemptXSS(inputElement, parentForm) {
 
   // Submit form / input
   if (parentForm) {
+    console.log("ATTACK STARTED");
     parentForm.submit();
   } else {
 
@@ -181,6 +203,7 @@ function attemptXSS(inputElement, parentForm) {
 
     var encodedValue = inputElement.value.replace("%20", "+").replace("&", "%26");
 
+    console.log("ATTACK STARTED");
     window.location.href = baseURL + "?" + dataName + "=" + encodedValue;
   }
 }

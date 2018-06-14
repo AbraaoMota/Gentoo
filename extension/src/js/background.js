@@ -15,6 +15,9 @@ function extractParams(query) {
 // setting the extension badge colour and text
 chrome.runtime.onMessage.addListener(
   function(request, sender, sendResponse) {
+    if (request.msg === "reflectedXSS") {
+      console.log("WE HAVE A SUCCESSFUL ATTACK");
+    }
     if (request.msg === "reflectedXSS" ||
         request.msg === "potentialXSS" ||
         request.msg === "weakHeaderRequest") {

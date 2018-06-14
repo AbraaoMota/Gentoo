@@ -146,6 +146,7 @@ function toggleARrecording() {
 
 
 var analyserBusy = false;
+var attackNumber = 1;
 
 function analyseAndReplayAttacks() {
 
@@ -249,6 +250,7 @@ function analyseAndReplayAttacks() {
       }
     }
     analyserBusy = false;
+    attackNumber = 1;
   });
 }
 
@@ -258,11 +260,7 @@ function couldBeDangerous(webContent, input) {
   if (!input.value) {
     return false;
   }
-  console.log("WEBCONTENT IS");
-  console.log(webContent);
-  console.log("INPUT VALUE IS");
-  console.log(input.value);
-  console.log("INCLUDES IT IS: " + webContent.includes(input.value));
+
   if (webContent.includes(input.value)) {
     return true;
   }
@@ -342,17 +340,16 @@ function sendIntermediaryWarning(potentiallyDangerousInputs) {
 // successful as we attempt to redirect to the request logger page
 function replayAttacks(potentiallyDangerousInputs, requestNumber) {
 
-  var XSSattacks = [];
+  // We have XSSattacks defined in `attacks/xss.js`
   var attackRequests = [];
-
-  // Load here all the attacks we have
-  XSSattacks.push(imgonload());
 
   for (var i = 0; i < potentiallyDangerousInputs.length; i++) {
     for (var j = 0; j < XSSattacks.length; j++) {
+      // Need to record number of attacks so far in here
       var input = potentiallyDangerousInputs[i];
-      var attackName = XSSattacks[j].name;
-      var attackValue = XSSattacks[j].value;
+      var attackValue = XSSattacks[j](attackNumber);
+      // var attackName = XSSattacks[j].name;
+      // var attackValue = XSSattacks[j].value;
       var url = input["url"];
 
       if (input.type === "param") {
@@ -360,14 +357,26 @@ function replayAttacks(potentiallyDangerousInputs, requestNumber) {
         url = url.replace(input.name + "=" + input.value, input.name + "=" + encodedAttackValue);
       }
 
-      var newWindowName = "request" + requestNumber + "attack" + (i + j).toString();
+      // Prepare URL to have the attack number and name as query params
+      // if (!url.includes("?")) {
+      //   url = url.concat("?");
+      // } else {
+      //   url = url.concat("&");
+      // }
+
+      // url = url.concat("attackNo=" + attackNumber + "&attackName=" + attackName);
+      console.log("WE ARE SENDING THIS URL TO BE ATTACKED");
+      console.log(url);
+
+      var newWindowName = "request" + requestNumber + "attack" + (attackNumber).toString();
       var attackWindow = window.open(url, newWindowName);
 
+      attackNumber++;
       // At this point the window should have registered a request in the request logger
       // and indicating if the page is weak. Close page after a short wait.
-      window.setTimeout(function() {
-        attackWindow.close();
-      }, 5000);
+      // window.setTimeout(function() {
+      //   attackWindow.close();
+      // }, 5000);
 
       // // We have enough information to repeat the request using
       // // the new attackValue

@@ -135,8 +135,9 @@ function renderWeakURLs(storage) {
   var reflectedList = document.getElementById("xssURLs");
   if (weakURLs) {
     for (var i = 0; i < weakURLs.length; i++) {
+      var weakURLObject = weakURLs[i];
       var p = document.createElement("p");
-      p.innerHTML = weakURLs[i];
+      p.innerHTML = "URL: <b>" + weakURLObject["url"] + "</b><br>Attack Name: " + weakURLObject["attackName"] + "<br>Attack Number: " + weakURLObject["attackNo"];
       reflectedList.appendChild(p);
     }
   }

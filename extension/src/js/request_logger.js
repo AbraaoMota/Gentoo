@@ -11,8 +11,19 @@
 window.addEventListener("load", function() {
 
   var url = new URL(window.location.href);
-  var weakReferrer = url.searchParams.get("ref");
+  console.log("REQUEST LOGGER HAS THIS URL");
+  console.log(url);
+  var referrerFull = new URL(url.searchParams.get("ref"));
+  var attackNumber = url.searchParams.get("attackNo");
+  var attackName   = url.searchParams.get("attackName");
+  var weakReferrer = referrerFull.toString();
   document.getElementById("output").innerHTML = weakReferrer;
+
+  var weakURLObject = {
+    url:        weakReferrer,
+    attackNo:   attackNumber,
+    attackName: attackName
+  }
 
   // Attempt to write the contents of the URL from which
   // the XSS request came from to LocalStorage
@@ -20,17 +31,17 @@ window.addEventListener("load", function() {
     var urlList = storage["weakURLs"];
     if (!urlList) {
       // First time this field is set in storage
-      chrome.storage.local.set({ "weakURLs": [weakReferrer] });
+      chrome.storage.local.set({ "weakURLs": [ weakURLObject ] });
     } else {
       // Append to existing field
       var urlSet = new Set(urlList);
-      urlSet.add(weakReferrer);
+      urlSet.add(weakURLObject);
       var weakURLs = Array.from(urlSet);
       chrome.storage.local.set({ "weakURLs": weakURLs });
     }
   });
 
-  sendReflectedXSSNotification(weakReferrer);
+  sendReflectedXSSNotification(weakURLObject);
 
 }, false);
 
@@ -125,16 +136,13 @@ window.addEventListener("load", function() {
 // window.XMLHttpRequest.prototype.send = sendReplacement;
 
 
-
-
-
 // Send a message to the popup page to notify a new weak URL has been found
-function sendReflectedXSSNotification(url) {
+function sendReflectedXSSNotification(weakURLObject) {
   chrome.runtime.sendMessage({
     msg: "reflectedXSS",
     data: {
-      subject: "New reflected XSS URL found!",
-      content: url
+      subject:       "New reflected XSS URL found!",
+      weakURLObject: weakURLObject
     }
   });
 }

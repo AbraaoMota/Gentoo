@@ -129,24 +129,13 @@ function addRecommendationsToPage(sensitivity) {
     setTimeout(function() {
 
       var inputs = document.getElementsByTagName("input");
-      console.log("WE HAVE THESE INPUTS");
-      console.log(inputs);
 
       if (!inputs.length) {
-        console.log(inputs);
-        console.log(inputs.length);
-        console.log(!inputs.length);
-        console.log("RETURNING???");
         return;
       }
 
-      console.log("continuing");
       for (var i = 0; i < inputs.length; i++) {
         var currInput = inputs[i];
-
-        console.log("LOOKING AT AN INPUT");
-        console.log(currInput);
-
         var recommendation = document.createElement('a');
         recommendation.classList.add("recommendation");
         var text = document.createTextNode("Investigate input");

@@ -83,6 +83,7 @@ function toggleActionRecordingButton() {
     // stop recording
     actionReplayButton.parentNode.removeChild(actionReplayButton);
   } else {
+    console.log("ADDING AR BUTTON TO PAGE");
     addActionReplayButtonToPage();
   }
 
@@ -129,6 +130,7 @@ function addActionReplayButtonToPage() {
 function toggleARrecording() {
 
   if (actionReplayButton.className === "notRec") {
+    console.log("STARTED RECORDING");
     // Add actual Action Replay logic here
     actionReplayButton.className = "Rec";
     chrome.storage.local.set({ "ARsession": "recording" });

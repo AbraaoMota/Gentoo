@@ -17,6 +17,7 @@ var passiveMessageHandler = function(message, sender, sendResponse) {
     var enablePassiveMode = storage["enablePassiveMode"];
 
     if (message.name === "devToolsParams" && enablePassiveMode) {
+      console.log("HANDLING PASSIVE REQUESTS");
       storePassiveRequests(storage, message);
       runPassiveAnalysis(message);
       passiveMessageHandlerBusy = false;

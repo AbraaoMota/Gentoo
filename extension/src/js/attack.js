@@ -44,7 +44,6 @@ window.addEventListener("load", function() {
 // as per the set sensitivity
 function addRecommendationsToPage(sensitivity) {
 
-  console.log("ADDING RECOMMENDATIONS TO PAGE?");
   // Inject "Investigate Form" buttons on input
   var forms = document.getElementsByTagName("form");
 
@@ -69,18 +68,20 @@ function addRecommendationsToPage(sensitivity) {
         recommendation.child = firstInputChild;
         recommendation.form = currForm;
 
-        // Attempt XSS (or otherwise) upon clicking the form
-        recommendation.addEventListener('click', function(evt) {
-          attemptXSS(evt.target.child, evt.target.form);
-        });
-
         // Create new div wrapper for element to be next to input
         var newParent = document.createElement("div");
         newParent.appendChild(firstInputChild);
         newParent.appendChild(recommendation);
         currForm.insertBefore(newParent, currForm.firstChild);
+
+        // Attempt XSS (or otherwise) upon clicking the form
+        recommendation.addEventListener('click', function(evt) {
+          // toggleAttackSelection(recommendation, evt.target.child, evt.target.form);
+          attemptXSS(evt.target.child, evt.target.form);
+        });
+
       }
-    }, 3000);
+    }, 500);
   } else if (sensitivity === "2") {
     // Add a button for every input in a form
 
@@ -122,7 +123,7 @@ function addRecommendationsToPage(sensitivity) {
           oldParent.insertBefore(newParent, oldSibling);
         }
       }
-    }, 3000);
+    }, 500);
   } else if (sensitivity === "3") {
     // Add a button for every input regardless of forms
 
@@ -159,9 +160,24 @@ function addRecommendationsToPage(sensitivity) {
 
         oldParent.insertBefore(newParent, oldSibling);
       }
-    }, 3000);
+    }, 500);
   }
 }
+
+// function toggleAttackSelection(parentElem, child, parentForm) {
+//   var selectForm = document.createElement("select");
+//   console.log("all attacks are");
+//   console.log(allAttacks);
+//   for (var i = 0; i < allAttacks.length; i++) {
+//     var currAttack = allAttacks[i];
+//     var option = document.createElement("option");
+//     option.value = currAttack.name;
+//     option.innerHTML = currAttack.name;
+//     selectForm.appendChild(option);
+//   }
+//   parentElem.appendChild(selectForm);
+
+// }
 
 // This method attempts an XSS attack by using an exploit string,
 // adding it as input to the page

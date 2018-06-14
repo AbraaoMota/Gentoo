@@ -357,17 +357,6 @@ function replayAttacks(potentiallyDangerousInputs, requestNumber) {
         url = url.replace(input.name + "=" + input.value, input.name + "=" + encodedAttackValue);
       }
 
-      // Prepare URL to have the attack number and name as query params
-      // if (!url.includes("?")) {
-      //   url = url.concat("?");
-      // } else {
-      //   url = url.concat("&");
-      // }
-
-      // url = url.concat("attackNo=" + attackNumber + "&attackName=" + attackName);
-      console.log("WE ARE SENDING THIS URL TO BE ATTACKED");
-      console.log(url);
-
       var newWindowName = "request" + requestNumber + "attack" + (attackNumber).toString();
       var attackWindow = window.open(url, newWindowName);
 

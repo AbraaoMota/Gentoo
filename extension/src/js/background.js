@@ -18,6 +18,9 @@ chrome.runtime.onMessage.addListener(
     if (request.msg === "reflectedXSS") {
       console.log("WE HAVE A SUCCESSFUL ATTACK");
     }
+    if (request.msg === "weakHeaderRequest") {
+      console.log("WE HAVE A WEAK PASSIVE HEADER");
+    }
     if (request.msg === "reflectedXSS" ||
         request.msg === "potentialXSS" ||
         request.msg === "weakHeaderRequest") {

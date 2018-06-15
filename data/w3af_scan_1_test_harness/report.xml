@@ -1,0 +1,2378 @@
+<?xml version="1.0" encoding="utf-8"?>
+<w3af-run start="1529073403" start-long="Fri Jun 15 15:36:43 2018" version="2.2">
+
+    <w3af-version>w3af - Web Application Attack and Audit Framework
+Version: 2018.5.24
+Revision: 356b14b975 - 24 May 2018 14:40
+Branch: master
+Local changes: No
+Author: Andres Riancho and the w3af team.</w3af-version>
+
+    <scan-info target="http://localhost:8000/">
+    <audit>
+            <plugin name="file_upload">
+                        <config parameter="extensions" value="gif,html"/>
+            </plugin>
+            <plugin name="eval">
+                        <config parameter="use_time_delay" value="True"/>
+                        <config parameter="use_echo" value="True"/>
+            </plugin>
+            <plugin name="un_ssl">
+            </plugin>
+            <plugin name="os_commanding">
+            </plugin>
+            <plugin name="lfi">
+            </plugin>
+            <plugin name="sqli">
+            </plugin>
+            <plugin name="preg_replace">
+            </plugin>
+            <plugin name="phishing_vector">
+            </plugin>
+            <plugin name="generic">
+                        <config parameter="diff_ratio" value="0.35"/>
+                        <config parameter="extensive" value="False"/>
+            </plugin>
+            <plugin name="format_string">
+            </plugin>
+            <plugin name="ldapi">
+            </plugin>
+            <plugin name="buffer_overflow">
+            </plugin>
+            <plugin name="redos">
+            </plugin>
+            <plugin name="global_redirect">
+            </plugin>
+            <plugin name="xpath">
+            </plugin>
+            <plugin name="cors_origin">
+                        <config parameter="origin_header_value" value="http://w3af.org/"/>
+            </plugin>
+            <plugin name="htaccess_methods">
+            </plugin>
+            <plugin name="dav">
+            </plugin>
+            <plugin name="ssi">
+            </plugin>
+            <plugin name="csrf">
+            </plugin>
+            <plugin name="xss">
+                        <config parameter="persistent_xss" value="True"/>
+            </plugin>
+            <plugin name="ssl_certificate">
+                        <config parameter="minExpireDays" value="30"/>
+                        <config parameter="caFileName" value="w3af/plugins/audit/ssl_certificate/ca.pem"/>
+            </plugin>
+            <plugin name="xst">
+            </plugin>
+            <plugin name="blind_sqli">
+                        <config parameter="eq_limit" value="0.9"/>
+            </plugin>
+            <plugin name="mx_injection">
+            </plugin>
+            <plugin name="response_splitting">
+            </plugin>
+            <plugin name="rfi">
+                        <config parameter="listen_address" value=""/>
+                        <config parameter="listen_port" value="44449"/>
+                        <config parameter="use_w3af_site" value="True"/>
+            </plugin>
+            <plugin name="frontpage">
+            </plugin>
+    </audit>
+    <infrastructure>
+            <plugin name="zone_h">
+            </plugin>
+            <plugin name="finger_google">
+            </plugin>
+            <plugin name="favicon_identification">
+            </plugin>
+            <plugin name="server_header">
+            </plugin>
+            <plugin name="shared_hosting">
+            </plugin>
+            <plugin name="fingerprint_os">
+            </plugin>
+            <plugin name="find_vhosts">
+            </plugin>
+            <plugin name="detect_transparent_proxy">
+            </plugin>
+            <plugin name="afd">
+            </plugin>
+            <plugin name="xssed_dot_com">
+            </plugin>
+            <plugin name="server_status">
+            </plugin>
+            <plugin name="http_vs_https_dist">
+                        <config parameter="httpPort" value="80"/>
+                        <config parameter="httpsPort" value="443"/>
+            </plugin>
+            <plugin name="detect_reverse_proxy">
+            </plugin>
+            <plugin name="find_jboss">
+            </plugin>
+            <plugin name="frontpage_version">
+            </plugin>
+            <plugin name="jetleak">
+            </plugin>
+            <plugin name="dot_net_errors">
+            </plugin>
+            <plugin name="finger_bing">
+            </plugin>
+            <plugin name="halberd">
+            </plugin>
+            <plugin name="domain_dot">
+            </plugin>
+            <plugin name="finger_pks">
+            </plugin>
+            <plugin name="fingerprint_WAF">
+            </plugin>
+            <plugin name="allowed_methods">
+                        <config parameter="execOneTime" value="True"/>
+                        <config parameter="reportDavOnly" value="True"/>
+            </plugin>
+            <plugin name="ms15_034">
+            </plugin>
+            <plugin name="php_eggs">
+            </plugin>
+            <plugin name="hmap">
+                        <config parameter="gen_fingerprint" value="False"/>
+                        <config parameter="threads" value="4"/>
+            </plugin>
+            <plugin name="dns_wildcard">
+            </plugin>
+            <plugin name="werkzeug_debugger">
+            </plugin>
+    </infrastructure>
+    <bruteforce>
+            <plugin name="basic_auth">
+                        <config parameter="usersFile" value="w3af/core/controllers/bruteforce/users.txt"/>
+                        <config parameter="passwdFile" value="w3af/core/controllers/bruteforce/passwords.txt"/>
+                        <config parameter="useSvnUsers" value="True"/>
+                        <config parameter="stopOnFirst" value="True"/>
+                        <config parameter="passEqUser" value="True"/>
+                        <config parameter="useLeetPasswd" value="True"/>
+                        <config parameter="useEmails" value="True"/>
+                        <config parameter="useProfiling" value="True"/>
+                        <config parameter="profilingNumber" value="50"/>
+                        <config parameter="comboFile" value=""/>
+                        <config parameter="comboSeparator" value=":"/>
+            </plugin>
+            <plugin name="form_auth">
+                        <config parameter="usersFile" value="w3af/core/controllers/bruteforce/users.txt"/>
+                        <config parameter="passwdFile" value="w3af/core/controllers/bruteforce/passwords.txt"/>
+                        <config parameter="useSvnUsers" value="True"/>
+                        <config parameter="stopOnFirst" value="True"/>
+                        <config parameter="passEqUser" value="True"/>
+                        <config parameter="useLeetPasswd" value="True"/>
+                        <config parameter="useEmails" value="True"/>
+                        <config parameter="useProfiling" value="True"/>
+                        <config parameter="profilingNumber" value="50"/>
+                        <config parameter="comboFile" value=""/>
+                        <config parameter="comboSeparator" value=":"/>
+            </plugin>
+    </bruteforce>
+    <grep>
+            <plugin name="symfony">
+                        <config parameter="override" value="False"/>
+            </plugin>
+            <plugin name="file_upload">
+            </plugin>
+            <plugin name="wsdl_greper">
+            </plugin>
+            <plugin name="cross_domain_js">
+                        <config parameter="secure_js_file" value="w3af/plugins/grep/cross_domain_js/secure-js-sources.txt"/>
+            </plugin>
+            <plugin name="http_auth_detect">
+            </plugin>
+            <plugin name="svn_users">
+            </plugin>
+            <plugin name="http_in_body">
+            </plugin>
+            <plugin name="xss_protection_header">
+            </plugin>
+            <plugin name="private_ip">
+            </plugin>
+            <plugin name="motw">
+            </plugin>
+            <plugin name="code_disclosure">
+            </plugin>
+            <plugin name="form_cleartext_password">
+            </plugin>
+            <plugin name="serialized_object">
+            </plugin>
+            <plugin name="blank_body">
+            </plugin>
+            <plugin name="path_disclosure">
+            </plugin>
+            <plugin name="strange_http_codes">
+            </plugin>
+            <plugin name="credit_cards">
+            </plugin>
+            <plugin name="websockets_links">
+            </plugin>
+            <plugin name="csp">
+            </plugin>
+            <plugin name="dom_xss">
+            </plugin>
+            <plugin name="strict_transport_security">
+            </plugin>
+            <plugin name="form_autocomplete">
+            </plugin>
+            <plugin name="clamav">
+            </plugin>
+            <plugin name="html_comments">
+            </plugin>
+            <plugin name="click_jacking">
+            </plugin>
+            <plugin name="strange_parameters">
+            </plugin>
+            <plugin name="url_session">
+            </plugin>
+            <plugin name="dot_net_event_validation">
+            </plugin>
+            <plugin name="objects">
+            </plugin>
+            <plugin name="error_500">
+            </plugin>
+            <plugin name="meta_tags">
+            </plugin>
+            <plugin name="lang">
+            </plugin>
+            <plugin name="directory_indexing">
+            </plugin>
+            <plugin name="password_profiling">
+            </plugin>
+            <plugin name="get_emails">
+                        <config parameter="only_target_domain" value="True"/>
+            </plugin>
+            <plugin name="hash_analysis">
+            </plugin>
+            <plugin name="error_pages">
+            </plugin>
+            <plugin name="strange_reason">
+            </plugin>
+            <plugin name="content_sniffing">
+            </plugin>
+            <plugin name="user_defined_regex">
+                        <config parameter="single_regex" value=""/>
+                        <config parameter="regex_file_path" value=""/>
+            </plugin>
+            <plugin name="cache_control">
+            </plugin>
+            <plugin name="strange_headers">
+            </plugin>
+            <plugin name="ssn">
+            </plugin>
+            <plugin name="oracle">
+            </plugin>
+            <plugin name="feeds">
+            </plugin>
+            <plugin name="analyze_cookies">
+            </plugin>
+    </grep>
+    <evasion>
+    </evasion>
+    <output>
+            <plugin name="text_file">
+                        <config parameter="verbose" value="True"/>
+                        <config parameter="output_file" value="/root/output.txt"/>
+                        <config parameter="http_output_file" value="/root/output-http.txt"/>
+            </plugin>
+            <plugin name="console">
+                        <config parameter="verbose" value="False"/>
+                        <config parameter="use_colors" value="True"/>
+            </plugin>
+            <plugin name="export_requests">
+            </plugin>
+            <plugin name="csv_file">
+            </plugin>
+            <plugin name="json_file">
+            </plugin>
+            <plugin name="html_file">
+            </plugin>
+            <plugin name="email_report">
+            </plugin>
+            <plugin name="xml_file">
+            </plugin>
+    </output>
+    <mangle>
+    </mangle>
+    <crawl>
+            <plugin name="web_spider">
+                        <config parameter="only_forward" value="False"/>
+                        <config parameter="follow_regex" value=".*"/>
+                        <config parameter="ignore_regex" value=""/>
+            </plugin>
+    </crawl>
+    <auth>
+    </auth>
+</scan-info>
+
+    <scan-status>
+    <status>Running</status>
+    <is-paused>False</is-paused>
+    <is-running>True</is-running>
+
+    <active-plugin>
+        <crawl>dot_net_errors</crawl>
+        <audit>frontpage</audit>
+    </active-plugin>
+
+    <current-request>
+        <crawl>GET http://localhost:8000/</crawl>
+        <audit>GET http://localhost:8000/</audit>
+    </current-request>
+
+    <queues>
+        <crawl>
+            <input-speed>None</input-speed>
+            <output-speed>None</output-speed>
+            <length>None</length>
+        </crawl>
+
+        <audit>
+            <input-speed>None</input-speed>
+            <output-speed>None</output-speed>
+            <length>None</length>
+        </audit>
+    </queues>
+
+    <eta>
+        <crawl>None</crawl>
+        <audit>None</audit>
+    </eta>
+
+    <rpm>501</rpm>
+
+    <total-urls>4</total-urls>
+</scan-status>
+
+        <vulnerability id="[260, 136, 19, 38, 43, 44, 46, 48, 50, 51, 52, 53, 55, 58, 187, 188, 189, 190, 192, 193, 68, 83, 224, 59, 231, 232, 60, 235, 236, 62]" method="GET" name="Missing X-Content-Type-Options header" plugin="content_sniffing" severity="Information" url="http://localhost:8000/" var="None">
+    <description>The remote web application sent 11 HTTP responses which do not contain the X-Content-Type-Options header. The first ten URLs which did not send the header are:
+ - http://localhost:8000/status
+ - http://localhost:8000/_vti_inf.html
+ - http://localhost:8000/web-console/ServerInfo.jsp
+ - http://localhost:8000/jmx-console/
+ - http://localhost:8000/
+ - http://localhost:8000/cMmBd
+ - http://localhost:8000/invoker/JMXInvokerServlet
+ - http://localhost:8000/WebConsole/Invoker
+ - http://localhost:8000/server-status
+ - http://localhost:8000/favicon.ico
+</description>
+
+    <long-description>'X-Content-Type-Options' is a type of HTTP header that can be used to prevent MIME
+content-sniffing attacks in Internet Explorer and Google Chrome. MIME content-sniffing
+is a mechanism that allows browsers to inspect and dynamically guess the content
+type and file type.
+
+MIME Sniffing checking algorithm has known problems which
+might allow users to upload files that might contain malicous code. If an attacker
+can spoof a file type/content and upload it to the application successfully, it is
+possible to inject malicous code which can be downloaded and viewed by other
+users of the application. This can lead to attacks such as persistant Cross-Site Scripting.</long-description>
+    <fix-guidance>'X-Content-Type-Options: nosniff' header should be implemented which
+allows a web server to force the browser into disabling MIME Sniffing
+for a served file. The nosniff option will only load any external resource
+if the content-type maches what is expected of the file type.</fix-guidance>
+    <fix-effort>50</fix-effort>
+    <references>
+            <reference title="Reducing MIME type security risks" url="https://msdn.microsoft.com/en-us/library/gg622941(v=vs.85).aspx" />
+    </references>
+
+    <http-transactions>
+            <http-transaction id="260">
+
+    <http-request>
+        <status>GET http://localhost:8000/?injection=%25n%25n%25n%25n%25n%25n%25n%25n%25n%25n&amp;unused=56 HTTP/1.1</status>
+        <headers>
+            <header field="Content-length" content="0" />
+            <header field="Accept-encoding" content="gzip, deflate" />
+            <header field="Accept" content="*/*" />
+            <header field="User-agent" content="w3af.org" />
+            <header field="Host" content="localhost:8000" />
+            <header field="Content-type" content="application/x-www-form-urlencoded" />
+        </headers>
+        <body content-encoding="base64"></body>
+    </http-request>
+
+    <http-response>
+        <status>HTTP/1.1 200 OK</status>
+        <headers>
+            <header field="date" content="Fri, 15 Jun 2018 14:36:50 GMT" />
+            <header field="last-modified" content="Thu, 14 Jun 2018 09:42:12 GMT" />
+            <header field="content-length" content="876" />
+            <header field="content-type" content="text/html" />
+            <header field="server" content="SimpleHTTP/0.6 Python/3.6.4" />
+        </headers>
+        <body content-encoding="base64">PHNjcmlwdD4KICB3aW5kb3cub25sb2FkID0gZnVuY3Rpb24oKSB7CiAgICB2YXIgdXJsID0gbmV3
+IFVSTCh3aW5kb3cubG9jYXRpb24uaHJlZik7CgogICAgdmFyIGMgPSB1cmwuc2VhcmNoUGFyYW1z
+LmdldCgiaW5qZWN0aW9uIik7CiAgICBpZiAoYykgewogICAgICBkb2N1bWVudC5nZXRFbGVtZW50
+QnlJZCgib3V0cHV0IikuaW5uZXJIVE1MID0gYzsKICAgIH0KCiAgICB2YXIgZCA9IHVybC5zZWFy
+Y2hQYXJhbXMuZ2V0KCJpbmplY3Rpb24yIik7CiAgICBpZiAoZCkgewogICAgICBkb2N1bWVudC5n
+ZXRFbGVtZW50QnlJZCgib3V0cHV0MiIpLmlubmVySFRNTCA9IGQ7CiAgICB9CgogICAgZG9jdW1l
+bnQuY29va2llID0gImZha2VfY29va2llXzE9Qk9PUDsiCiAgICBkb2N1bWVudC5jb29raWUgPSAi
+c2Vzc2lvbl9pZD0xMjM0NTY1NDIzIjsKICAgIGRvY3VtZW50LmNvb2tpZSA9ICJhbmFseXRpY3Nf
+Y29va2llPUJFRVAiOwogIH0KPC9zY3JpcHQ+Cgo8aDE+VnVsbmVyYWJpbGl0eSBUZXN0aW5nIHBh
+Z2U8L2gxPgoKPGZvcm0gaWQ9ImJvb3AiIGFjdGlvbj0iIj4KICA8aW5wdXQgdHlwZT0idGV4dCIg
+bmFtZT0iaW5qZWN0aW9uIiB2YWx1ZT0iIi8+CiAgPGlucHV0IHR5cGU9InRleHQiIG5hbWU9InVu
+dXNlZCIgdmFsdWU9IiI+CiAgPGlucHV0IHR5cGU9InN1Ym1pdCI+CjwvZm9ybT4KPGgyIGlkPSJv
+dXRwdXQiPjwvaDI+Cgo8Zm9ybSBpZD0iYmVlcCIgYWN0aW9uPSIiPgogIDxpbnB1dCB0eXBlPSJ0
+ZXh0IiBuYW1lPSJ1bnVzZWQiIHZhbHVlPSIiLz4KICA8aW5wdXQgdHlwZT0idGV4dCIgbmFtZT0i
+aW5qZWN0aW9uMiIgdmFsdWU9IiI+CiAgPGlucHV0IHR5cGU9InN1Ym1pdCI+CjwvZm9ybT4KPGgy
+IGlkPSJvdXRwdXQyIj48L2gyPgoK
+</body>
+    </http-response>
+
+</http-transaction>
+            <http-transaction id="136">
+
+    <http-request>
+        <status>GET http://localhost:8000/server-status HTTP/1.1</status>
+        <headers>
+            <header field="Host" content="localhost:8000" />
+            <header field="Accept-encoding" content="gzip, deflate" />
+            <header field="Accept" content="*/*" />
+            <header field="User-agent" content="w3af.org" />
+        </headers>
+        <body content-encoding="base64"></body>
+    </http-request>
+
+    <http-response>
+        <status>HTTP/1.1 404 File not found</status>
+        <headers>
+            <header field="date" content="Fri, 15 Jun 2018 14:36:47 GMT" />
+            <header field="connection" content="close" />
+            <header field="content-type" content="text/html;charset=utf-8" />
+            <header field="content-length" content="469" />
+            <header field="server" content="SimpleHTTP/0.6 Python/3.6.4" />
+        </headers>
+        <body content-encoding="base64">PCFET0NUWVBFIEhUTUwgUFVCTElDICItLy9XM0MvL0RURCBIVE1MIDQuMDEvL0VOIgogICAgICAg
+ICJodHRwOi8vd3d3LnczLm9yZy9UUi9odG1sNC9zdHJpY3QuZHRkIj4KPGh0bWw+CiAgICA8aGVh
+ZD4KICAgICAgICA8bWV0YSBodHRwLWVxdWl2PSJDb250ZW50LVR5cGUiIGNvbnRlbnQ9InRleHQv
+aHRtbDtjaGFyc2V0PXV0Zi04Ij4KICAgICAgICA8dGl0bGU+RXJyb3IgcmVzcG9uc2U8L3RpdGxl
+PgogICAgPC9oZWFkPgogICAgPGJvZHk+CiAgICAgICAgPGgxPkVycm9yIHJlc3BvbnNlPC9oMT4K
+ICAgICAgICA8cD5FcnJvciBjb2RlOiA0MDQ8L3A+CiAgICAgICAgPHA+TWVzc2FnZTogRmlsZSBu
+b3QgZm91bmQuPC9wPgogICAgICAgIDxwPkVycm9yIGNvZGUgZXhwbGFuYXRpb246IEhUVFBTdGF0
+dXMuTk9UX0ZPVU5EIC0gTm90aGluZyBtYXRjaGVzIHRoZSBnaXZlbiBVUkkuPC9wPgogICAgPC9i
+b2R5Pgo8L2h0bWw+Cg==
+</body>
+    </http-response>
+
+</http-transaction>
+            <http-transaction id="19">
+
+    <http-request>
+        <status>GET http://localhost:8000/ HTTP/1.1</status>
+        <headers>
+            <header field="Host" content="localhost:8000" />
+            <header field="Accept-encoding" content="gzip, deflate" />
+            <header field="Accept" content="*/*" />
+            <header field="User-agent" content="w3af.org" />
+        </headers>
+        <body content-encoding="base64"></body>
+    </http-request>
+
+    <http-response>
+        <status>HTTP/1.1 200 OK</status>
+        <headers>
+            <header field="date" content="Fri, 15 Jun 2018 14:36:44 GMT" />
+            <header field="last-modified" content="Thu, 14 Jun 2018 09:42:12 GMT" />
+            <header field="content-length" content="876" />
+            <header field="content-type" content="text/html" />
+            <header field="server" content="SimpleHTTP/0.6 Python/3.6.4" />
+        </headers>
+        <body content-encoding="base64">PHNjcmlwdD4KICB3aW5kb3cub25sb2FkID0gZnVuY3Rpb24oKSB7CiAgICB2YXIgdXJsID0gbmV3
+IFVSTCh3aW5kb3cubG9jYXRpb24uaHJlZik7CgogICAgdmFyIGMgPSB1cmwuc2VhcmNoUGFyYW1z
+LmdldCgiaW5qZWN0aW9uIik7CiAgICBpZiAoYykgewogICAgICBkb2N1bWVudC5nZXRFbGVtZW50
+QnlJZCgib3V0cHV0IikuaW5uZXJIVE1MID0gYzsKICAgIH0KCiAgICB2YXIgZCA9IHVybC5zZWFy
+Y2hQYXJhbXMuZ2V0KCJpbmplY3Rpb24yIik7CiAgICBpZiAoZCkgewogICAgICBkb2N1bWVudC5n
+ZXRFbGVtZW50QnlJZCgib3V0cHV0MiIpLmlubmVySFRNTCA9IGQ7CiAgICB9CgogICAgZG9jdW1l
+bnQuY29va2llID0gImZha2VfY29va2llXzE9Qk9PUDsiCiAgICBkb2N1bWVudC5jb29raWUgPSAi
+c2Vzc2lvbl9pZD0xMjM0NTY1NDIzIjsKICAgIGRvY3VtZW50LmNvb2tpZSA9ICJhbmFseXRpY3Nf
+Y29va2llPUJFRVAiOwogIH0KPC9zY3JpcHQ+Cgo8aDE+VnVsbmVyYWJpbGl0eSBUZXN0aW5nIHBh
+Z2U8L2gxPgoKPGZvcm0gaWQ9ImJvb3AiIGFjdGlvbj0iIj4KICA8aW5wdXQgdHlwZT0idGV4dCIg
+bmFtZT0iaW5qZWN0aW9uIiB2YWx1ZT0iIi8+CiAgPGlucHV0IHR5cGU9InRleHQiIG5hbWU9InVu
+dXNlZCIgdmFsdWU9IiI+CiAgPGlucHV0IHR5cGU9InN1Ym1pdCI+CjwvZm9ybT4KPGgyIGlkPSJv
+dXRwdXQiPjwvaDI+Cgo8Zm9ybSBpZD0iYmVlcCIgYWN0aW9uPSIiPgogIDxpbnB1dCB0eXBlPSJ0
+ZXh0IiBuYW1lPSJ1bnVzZWQiIHZhbHVlPSIiLz4KICA8aW5wdXQgdHlwZT0idGV4dCIgbmFtZT0i
+aW5qZWN0aW9uMiIgdmFsdWU9IiI+CiAgPGlucHV0IHR5cGU9InN1Ym1pdCI+CjwvZm9ybT4KPGgy
+IGlkPSJvdXRwdXQyIj48L2gyPgoK
+</body>
+    </http-response>
+
+</http-transaction>
+            <http-transaction id="38">
+
+    <http-request>
+        <status>GET http://localhost:8000/?pPfx9hs=4YbJGJA HTTP/1.1</status>
+        <headers>
+            <header field="Host" content="localhost:8000" />
+            <header field="Accept-encoding" content="gzip, deflate" />
+            <header field="Accept" content="*/*" />
+            <header field="User-agent" content="w3af.org" />
+        </headers>
+        <body content-encoding="base64"></body>
+    </http-request>
+
+    <http-response>
+        <status>HTTP/1.1 200 OK</status>
+        <headers>
+            <header field="date" content="Fri, 15 Jun 2018 14:36:46 GMT" />
+            <header field="last-modified" content="Thu, 14 Jun 2018 09:42:12 GMT" />
+            <header field="content-length" content="876" />
+            <header field="content-type" content="text/html" />
+            <header field="server" content="SimpleHTTP/0.6 Python/3.6.4" />
+        </headers>
+        <body content-encoding="base64">PHNjcmlwdD4KICB3aW5kb3cub25sb2FkID0gZnVuY3Rpb24oKSB7CiAgICB2YXIgdXJsID0gbmV3
+IFVSTCh3aW5kb3cubG9jYXRpb24uaHJlZik7CgogICAgdmFyIGMgPSB1cmwuc2VhcmNoUGFyYW1z
+LmdldCgiaW5qZWN0aW9uIik7CiAgICBpZiAoYykgewogICAgICBkb2N1bWVudC5nZXRFbGVtZW50
+QnlJZCgib3V0cHV0IikuaW5uZXJIVE1MID0gYzsKICAgIH0KCiAgICB2YXIgZCA9IHVybC5zZWFy
+Y2hQYXJhbXMuZ2V0KCJpbmplY3Rpb24yIik7CiAgICBpZiAoZCkgewogICAgICBkb2N1bWVudC5n
+ZXRFbGVtZW50QnlJZCgib3V0cHV0MiIpLmlubmVySFRNTCA9IGQ7CiAgICB9CgogICAgZG9jdW1l
+bnQuY29va2llID0gImZha2VfY29va2llXzE9Qk9PUDsiCiAgICBkb2N1bWVudC5jb29raWUgPSAi
+c2Vzc2lvbl9pZD0xMjM0NTY1NDIzIjsKICAgIGRvY3VtZW50LmNvb2tpZSA9ICJhbmFseXRpY3Nf
+Y29va2llPUJFRVAiOwogIH0KPC9zY3JpcHQ+Cgo8aDE+VnVsbmVyYWJpbGl0eSBUZXN0aW5nIHBh
+Z2U8L2gxPgoKPGZvcm0gaWQ9ImJvb3AiIGFjdGlvbj0iIj4KICA8aW5wdXQgdHlwZT0idGV4dCIg
+bmFtZT0iaW5qZWN0aW9uIiB2YWx1ZT0iIi8+CiAgPGlucHV0IHR5cGU9InRleHQiIG5hbWU9InVu
+dXNlZCIgdmFsdWU9IiI+CiAgPGlucHV0IHR5cGU9InN1Ym1pdCI+CjwvZm9ybT4KPGgyIGlkPSJv
+dXRwdXQiPjwvaDI+Cgo8Zm9ybSBpZD0iYmVlcCIgYWN0aW9uPSIiPgogIDxpbnB1dCB0eXBlPSJ0
+ZXh0IiBuYW1lPSJ1bnVzZWQiIHZhbHVlPSIiLz4KICA8aW5wdXQgdHlwZT0idGV4dCIgbmFtZT0i
+aW5qZWN0aW9uMiIgdmFsdWU9IiI+CiAgPGlucHV0IHR5cGU9InN1Ym1pdCI+CjwvZm9ybT4KPGgy
+IGlkPSJvdXRwdXQyIj48L2gyPgoK
+</body>
+    </http-response>
+
+</http-transaction>
+            <http-transaction id="43">
+
+    <http-request>
+        <status>GET http://localhost:8000/?pPfx9hs=..%2F..%2F..%2F..%2Fetc%2Fpasswd HTTP/1.1</status>
+        <headers>
+            <header field="Host" content="localhost:8000" />
+            <header field="Accept-encoding" content="gzip, deflate" />
+            <header field="Accept" content="*/*" />
+            <header field="User-agent" content="w3af.org" />
+        </headers>
+        <body content-encoding="base64"></body>
+    </http-request>
+
+    <http-response>
+        <status>HTTP/1.1 200 OK</status>
+        <headers>
+            <header field="date" content="Fri, 15 Jun 2018 14:36:46 GMT" />
+            <header field="last-modified" content="Thu, 14 Jun 2018 09:42:12 GMT" />
+            <header field="content-length" content="876" />
+            <header field="content-type" content="text/html" />
+            <header field="server" content="SimpleHTTP/0.6 Python/3.6.4" />
+        </headers>
+        <body content-encoding="base64">PHNjcmlwdD4KICB3aW5kb3cub25sb2FkID0gZnVuY3Rpb24oKSB7CiAgICB2YXIgdXJsID0gbmV3
+IFVSTCh3aW5kb3cubG9jYXRpb24uaHJlZik7CgogICAgdmFyIGMgPSB1cmwuc2VhcmNoUGFyYW1z
+LmdldCgiaW5qZWN0aW9uIik7CiAgICBpZiAoYykgewogICAgICBkb2N1bWVudC5nZXRFbGVtZW50
+QnlJZCgib3V0cHV0IikuaW5uZXJIVE1MID0gYzsKICAgIH0KCiAgICB2YXIgZCA9IHVybC5zZWFy
+Y2hQYXJhbXMuZ2V0KCJpbmplY3Rpb24yIik7CiAgICBpZiAoZCkgewogICAgICBkb2N1bWVudC5n
+ZXRFbGVtZW50QnlJZCgib3V0cHV0MiIpLmlubmVySFRNTCA9IGQ7CiAgICB9CgogICAgZG9jdW1l
+bnQuY29va2llID0gImZha2VfY29va2llXzE9Qk9PUDsiCiAgICBkb2N1bWVudC5jb29raWUgPSAi
+c2Vzc2lvbl9pZD0xMjM0NTY1NDIzIjsKICAgIGRvY3VtZW50LmNvb2tpZSA9ICJhbmFseXRpY3Nf
+Y29va2llPUJFRVAiOwogIH0KPC9zY3JpcHQ+Cgo8aDE+VnVsbmVyYWJpbGl0eSBUZXN0aW5nIHBh
+Z2U8L2gxPgoKPGZvcm0gaWQ9ImJvb3AiIGFjdGlvbj0iIj4KICA8aW5wdXQgdHlwZT0idGV4dCIg
+bmFtZT0iaW5qZWN0aW9uIiB2YWx1ZT0iIi8+CiAgPGlucHV0IHR5cGU9InRleHQiIG5hbWU9InVu
+dXNlZCIgdmFsdWU9IiI+CiAgPGlucHV0IHR5cGU9InN1Ym1pdCI+CjwvZm9ybT4KPGgyIGlkPSJv
+dXRwdXQiPjwvaDI+Cgo8Zm9ybSBpZD0iYmVlcCIgYWN0aW9uPSIiPgogIDxpbnB1dCB0eXBlPSJ0
+ZXh0IiBuYW1lPSJ1bnVzZWQiIHZhbHVlPSIiLz4KICA8aW5wdXQgdHlwZT0idGV4dCIgbmFtZT0i
+aW5qZWN0aW9uMiIgdmFsdWU9IiI+CiAgPGlucHV0IHR5cGU9InN1Ym1pdCI+CjwvZm9ybT4KPGgy
+IGlkPSJvdXRwdXQyIj48L2gyPgoK
+</body>
+    </http-response>
+
+</http-transaction>
+            <http-transaction id="44">
+
+    <http-request>
+        <status>GET http://localhost:8000/?pPfx9hs=exec%20master..xp_cmdshell%20dir HTTP/1.1</status>
+        <headers>
+            <header field="Host" content="localhost:8000" />
+            <header field="Accept-encoding" content="gzip, deflate" />
+            <header field="Accept" content="*/*" />
+            <header field="User-agent" content="w3af.org" />
+        </headers>
+        <body content-encoding="base64"></body>
+    </http-request>
+
+    <http-response>
+        <status>HTTP/1.1 200 OK</status>
+        <headers>
+            <header field="date" content="Fri, 15 Jun 2018 14:36:46 GMT" />
+            <header field="last-modified" content="Thu, 14 Jun 2018 09:42:12 GMT" />
+            <header field="content-length" content="876" />
+            <header field="content-type" content="text/html" />
+            <header field="server" content="SimpleHTTP/0.6 Python/3.6.4" />
+        </headers>
+        <body content-encoding="base64">PHNjcmlwdD4KICB3aW5kb3cub25sb2FkID0gZnVuY3Rpb24oKSB7CiAgICB2YXIgdXJsID0gbmV3
+IFVSTCh3aW5kb3cubG9jYXRpb24uaHJlZik7CgogICAgdmFyIGMgPSB1cmwuc2VhcmNoUGFyYW1z
+LmdldCgiaW5qZWN0aW9uIik7CiAgICBpZiAoYykgewogICAgICBkb2N1bWVudC5nZXRFbGVtZW50
+QnlJZCgib3V0cHV0IikuaW5uZXJIVE1MID0gYzsKICAgIH0KCiAgICB2YXIgZCA9IHVybC5zZWFy
+Y2hQYXJhbXMuZ2V0KCJpbmplY3Rpb24yIik7CiAgICBpZiAoZCkgewogICAgICBkb2N1bWVudC5n
+ZXRFbGVtZW50QnlJZCgib3V0cHV0MiIpLmlubmVySFRNTCA9IGQ7CiAgICB9CgogICAgZG9jdW1l
+bnQuY29va2llID0gImZha2VfY29va2llXzE9Qk9PUDsiCiAgICBkb2N1bWVudC5jb29raWUgPSAi
+c2Vzc2lvbl9pZD0xMjM0NTY1NDIzIjsKICAgIGRvY3VtZW50LmNvb2tpZSA9ICJhbmFseXRpY3Nf
+Y29va2llPUJFRVAiOwogIH0KPC9zY3JpcHQ+Cgo8aDE+VnVsbmVyYWJpbGl0eSBUZXN0aW5nIHBh
+Z2U8L2gxPgoKPGZvcm0gaWQ9ImJvb3AiIGFjdGlvbj0iIj4KICA8aW5wdXQgdHlwZT0idGV4dCIg
+bmFtZT0iaW5qZWN0aW9uIiB2YWx1ZT0iIi8+CiAgPGlucHV0IHR5cGU9InRleHQiIG5hbWU9InVu
+dXNlZCIgdmFsdWU9IiI+CiAgPGlucHV0IHR5cGU9InN1Ym1pdCI+CjwvZm9ybT4KPGgyIGlkPSJv
+dXRwdXQiPjwvaDI+Cgo8Zm9ybSBpZD0iYmVlcCIgYWN0aW9uPSIiPgogIDxpbnB1dCB0eXBlPSJ0
+ZXh0IiBuYW1lPSJ1bnVzZWQiIHZhbHVlPSIiLz4KICA8aW5wdXQgdHlwZT0idGV4dCIgbmFtZT0i
+aW5qZWN0aW9uMiIgdmFsdWU9IiI+CiAgPGlucHV0IHR5cGU9InN1Ym1pdCI+CjwvZm9ybT4KPGgy
+IGlkPSJvdXRwdXQyIj48L2gyPgoK
+</body>
+    </http-response>
+
+</http-transaction>
+            <http-transaction id="46">
+
+    <http-request>
+        <status>GET http://localhost:8000/?pPfx9hs=SELECT%20TOP%201%20name%20FROM%20sysusers HTTP/1.1</status>
+        <headers>
+            <header field="Host" content="localhost:8000" />
+            <header field="Accept-encoding" content="gzip, deflate" />
+            <header field="Accept" content="*/*" />
+            <header field="User-agent" content="w3af.org" />
+        </headers>
+        <body content-encoding="base64"></body>
+    </http-request>
+
+    <http-response>
+        <status>HTTP/1.1 200 OK</status>
+        <headers>
+            <header field="date" content="Fri, 15 Jun 2018 14:36:46 GMT" />
+            <header field="last-modified" content="Thu, 14 Jun 2018 09:42:12 GMT" />
+            <header field="content-length" content="876" />
+            <header field="content-type" content="text/html" />
+            <header field="server" content="SimpleHTTP/0.6 Python/3.6.4" />
+        </headers>
+        <body content-encoding="base64">PHNjcmlwdD4KICB3aW5kb3cub25sb2FkID0gZnVuY3Rpb24oKSB7CiAgICB2YXIgdXJsID0gbmV3
+IFVSTCh3aW5kb3cubG9jYXRpb24uaHJlZik7CgogICAgdmFyIGMgPSB1cmwuc2VhcmNoUGFyYW1z
+LmdldCgiaW5qZWN0aW9uIik7CiAgICBpZiAoYykgewogICAgICBkb2N1bWVudC5nZXRFbGVtZW50
+QnlJZCgib3V0cHV0IikuaW5uZXJIVE1MID0gYzsKICAgIH0KCiAgICB2YXIgZCA9IHVybC5zZWFy
+Y2hQYXJhbXMuZ2V0KCJpbmplY3Rpb24yIik7CiAgICBpZiAoZCkgewogICAgICBkb2N1bWVudC5n
+ZXRFbGVtZW50QnlJZCgib3V0cHV0MiIpLmlubmVySFRNTCA9IGQ7CiAgICB9CgogICAgZG9jdW1l
+bnQuY29va2llID0gImZha2VfY29va2llXzE9Qk9PUDsiCiAgICBkb2N1bWVudC5jb29raWUgPSAi
+c2Vzc2lvbl9pZD0xMjM0NTY1NDIzIjsKICAgIGRvY3VtZW50LmNvb2tpZSA9ICJhbmFseXRpY3Nf
+Y29va2llPUJFRVAiOwogIH0KPC9zY3JpcHQ+Cgo8aDE+VnVsbmVyYWJpbGl0eSBUZXN0aW5nIHBh
+Z2U8L2gxPgoKPGZvcm0gaWQ9ImJvb3AiIGFjdGlvbj0iIj4KICA8aW5wdXQgdHlwZT0idGV4dCIg
+bmFtZT0iaW5qZWN0aW9uIiB2YWx1ZT0iIi8+CiAgPGlucHV0IHR5cGU9InRleHQiIG5hbWU9InVu
+dXNlZCIgdmFsdWU9IiI+CiAgPGlucHV0IHR5cGU9InN1Ym1pdCI+CjwvZm9ybT4KPGgyIGlkPSJv
+dXRwdXQiPjwvaDI+Cgo8Zm9ybSBpZD0iYmVlcCIgYWN0aW9uPSIiPgogIDxpbnB1dCB0eXBlPSJ0
+ZXh0IiBuYW1lPSJ1bnVzZWQiIHZhbHVlPSIiLz4KICA8aW5wdXQgdHlwZT0idGV4dCIgbmFtZT0i
+aW5qZWN0aW9uMiIgdmFsdWU9IiI+CiAgPGlucHV0IHR5cGU9InN1Ym1pdCI+CjwvZm9ybT4KPGgy
+IGlkPSJvdXRwdXQyIj48L2gyPgoK
+</body>
+    </http-response>
+
+</http-transaction>
+            <http-transaction id="48">
+
+    <http-request>
+        <status>GET http://localhost:8000/?pPfx9hs=ps%20-aux HTTP/1.1</status>
+        <headers>
+            <header field="Host" content="localhost:8000" />
+            <header field="Accept-encoding" content="gzip, deflate" />
+            <header field="Accept" content="*/*" />
+            <header field="User-agent" content="w3af.org" />
+        </headers>
+        <body content-encoding="base64"></body>
+    </http-request>
+
+    <http-response>
+        <status>HTTP/1.1 200 OK</status>
+        <headers>
+            <header field="date" content="Fri, 15 Jun 2018 14:36:46 GMT" />
+            <header field="last-modified" content="Thu, 14 Jun 2018 09:42:12 GMT" />
+            <header field="content-length" content="876" />
+            <header field="content-type" content="text/html" />
+            <header field="server" content="SimpleHTTP/0.6 Python/3.6.4" />
+        </headers>
+        <body content-encoding="base64">PHNjcmlwdD4KICB3aW5kb3cub25sb2FkID0gZnVuY3Rpb24oKSB7CiAgICB2YXIgdXJsID0gbmV3
+IFVSTCh3aW5kb3cubG9jYXRpb24uaHJlZik7CgogICAgdmFyIGMgPSB1cmwuc2VhcmNoUGFyYW1z
+LmdldCgiaW5qZWN0aW9uIik7CiAgICBpZiAoYykgewogICAgICBkb2N1bWVudC5nZXRFbGVtZW50
+QnlJZCgib3V0cHV0IikuaW5uZXJIVE1MID0gYzsKICAgIH0KCiAgICB2YXIgZCA9IHVybC5zZWFy
+Y2hQYXJhbXMuZ2V0KCJpbmplY3Rpb24yIik7CiAgICBpZiAoZCkgewogICAgICBkb2N1bWVudC5n
+ZXRFbGVtZW50QnlJZCgib3V0cHV0MiIpLmlubmVySFRNTCA9IGQ7CiAgICB9CgogICAgZG9jdW1l
+bnQuY29va2llID0gImZha2VfY29va2llXzE9Qk9PUDsiCiAgICBkb2N1bWVudC5jb29raWUgPSAi
+c2Vzc2lvbl9pZD0xMjM0NTY1NDIzIjsKICAgIGRvY3VtZW50LmNvb2tpZSA9ICJhbmFseXRpY3Nf
+Y29va2llPUJFRVAiOwogIH0KPC9zY3JpcHQ+Cgo8aDE+VnVsbmVyYWJpbGl0eSBUZXN0aW5nIHBh
+Z2U8L2gxPgoKPGZvcm0gaWQ9ImJvb3AiIGFjdGlvbj0iIj4KICA8aW5wdXQgdHlwZT0idGV4dCIg
+bmFtZT0iaW5qZWN0aW9uIiB2YWx1ZT0iIi8+CiAgPGlucHV0IHR5cGU9InRleHQiIG5hbWU9InVu
+dXNlZCIgdmFsdWU9IiI+CiAgPGlucHV0IHR5cGU9InN1Ym1pdCI+CjwvZm9ybT4KPGgyIGlkPSJv
+dXRwdXQiPjwvaDI+Cgo8Zm9ybSBpZD0iYmVlcCIgYWN0aW9uPSIiPgogIDxpbnB1dCB0eXBlPSJ0
+ZXh0IiBuYW1lPSJ1bnVzZWQiIHZhbHVlPSIiLz4KICA8aW5wdXQgdHlwZT0idGV4dCIgbmFtZT0i
+aW5qZWN0aW9uMiIgdmFsdWU9IiI+CiAgPGlucHV0IHR5cGU9InN1Ym1pdCI+CjwvZm9ybT4KPGgy
+IGlkPSJvdXRwdXQyIj48L2gyPgoK
+</body>
+    </http-response>
+
+</http-transaction>
+            <http-transaction id="50">
+
+    <http-request>
+        <status>GET http://localhost:8000/?pPfx9hs=..%2F..%2F..%2F..%2Fbin%2Fchgrp%20nobody%20%2Fetc%2Fshadow%7C HTTP/1.1</status>
+        <headers>
+            <header field="Host" content="localhost:8000" />
+            <header field="Accept-encoding" content="gzip, deflate" />
+            <header field="Accept" content="*/*" />
+            <header field="User-agent" content="w3af.org" />
+        </headers>
+        <body content-encoding="base64"></body>
+    </http-request>
+
+    <http-response>
+        <status>HTTP/1.1 200 OK</status>
+        <headers>
+            <header field="date" content="Fri, 15 Jun 2018 14:36:46 GMT" />
+            <header field="last-modified" content="Thu, 14 Jun 2018 09:42:12 GMT" />
+            <header field="content-length" content="876" />
+            <header field="content-type" content="text/html" />
+            <header field="server" content="SimpleHTTP/0.6 Python/3.6.4" />
+        </headers>
+        <body content-encoding="base64">PHNjcmlwdD4KICB3aW5kb3cub25sb2FkID0gZnVuY3Rpb24oKSB7CiAgICB2YXIgdXJsID0gbmV3
+IFVSTCh3aW5kb3cubG9jYXRpb24uaHJlZik7CgogICAgdmFyIGMgPSB1cmwuc2VhcmNoUGFyYW1z
+LmdldCgiaW5qZWN0aW9uIik7CiAgICBpZiAoYykgewogICAgICBkb2N1bWVudC5nZXRFbGVtZW50
+QnlJZCgib3V0cHV0IikuaW5uZXJIVE1MID0gYzsKICAgIH0KCiAgICB2YXIgZCA9IHVybC5zZWFy
+Y2hQYXJhbXMuZ2V0KCJpbmplY3Rpb24yIik7CiAgICBpZiAoZCkgewogICAgICBkb2N1bWVudC5n
+ZXRFbGVtZW50QnlJZCgib3V0cHV0MiIpLmlubmVySFRNTCA9IGQ7CiAgICB9CgogICAgZG9jdW1l
+bnQuY29va2llID0gImZha2VfY29va2llXzE9Qk9PUDsiCiAgICBkb2N1bWVudC5jb29raWUgPSAi
+c2Vzc2lvbl9pZD0xMjM0NTY1NDIzIjsKICAgIGRvY3VtZW50LmNvb2tpZSA9ICJhbmFseXRpY3Nf
+Y29va2llPUJFRVAiOwogIH0KPC9zY3JpcHQ+Cgo8aDE+VnVsbmVyYWJpbGl0eSBUZXN0aW5nIHBh
+Z2U8L2gxPgoKPGZvcm0gaWQ9ImJvb3AiIGFjdGlvbj0iIj4KICA8aW5wdXQgdHlwZT0idGV4dCIg
+bmFtZT0iaW5qZWN0aW9uIiB2YWx1ZT0iIi8+CiAgPGlucHV0IHR5cGU9InRleHQiIG5hbWU9InVu
+dXNlZCIgdmFsdWU9IiI+CiAgPGlucHV0IHR5cGU9InN1Ym1pdCI+CjwvZm9ybT4KPGgyIGlkPSJv
+dXRwdXQiPjwvaDI+Cgo8Zm9ybSBpZD0iYmVlcCIgYWN0aW9uPSIiPgogIDxpbnB1dCB0eXBlPSJ0
+ZXh0IiBuYW1lPSJ1bnVzZWQiIHZhbHVlPSIiLz4KICA8aW5wdXQgdHlwZT0idGV4dCIgbmFtZT0i
+aW5qZWN0aW9uMiIgdmFsdWU9IiI+CiAgPGlucHV0IHR5cGU9InN1Ym1pdCI+CjwvZm9ybT4KPGgy
+IGlkPSJvdXRwdXQyIj48L2gyPgoK
+</body>
+    </http-response>
+
+</http-transaction>
+            <http-transaction id="51">
+
+    <http-request>
+        <status>GET http://localhost:8000/?pPfx9hs=%3C%3F%20passthru%28%22id%22%29&amp;%3F%3E= HTTP/1.1</status>
+        <headers>
+            <header field="Host" content="localhost:8000" />
+            <header field="Accept-encoding" content="gzip, deflate" />
+            <header field="Accept" content="*/*" />
+            <header field="User-agent" content="w3af.org" />
+        </headers>
+        <body content-encoding="base64"></body>
+    </http-request>
+
+    <http-response>
+        <status>HTTP/1.1 200 OK</status>
+        <headers>
+            <header field="date" content="Fri, 15 Jun 2018 14:36:46 GMT" />
+            <header field="last-modified" content="Thu, 14 Jun 2018 09:42:12 GMT" />
+            <header field="content-length" content="876" />
+            <header field="content-type" content="text/html" />
+            <header field="server" content="SimpleHTTP/0.6 Python/3.6.4" />
+        </headers>
+        <body content-encoding="base64">PHNjcmlwdD4KICB3aW5kb3cub25sb2FkID0gZnVuY3Rpb24oKSB7CiAgICB2YXIgdXJsID0gbmV3
+IFVSTCh3aW5kb3cubG9jYXRpb24uaHJlZik7CgogICAgdmFyIGMgPSB1cmwuc2VhcmNoUGFyYW1z
+LmdldCgiaW5qZWN0aW9uIik7CiAgICBpZiAoYykgewogICAgICBkb2N1bWVudC5nZXRFbGVtZW50
+QnlJZCgib3V0cHV0IikuaW5uZXJIVE1MID0gYzsKICAgIH0KCiAgICB2YXIgZCA9IHVybC5zZWFy
+Y2hQYXJhbXMuZ2V0KCJpbmplY3Rpb24yIik7CiAgICBpZiAoZCkgewogICAgICBkb2N1bWVudC5n
+ZXRFbGVtZW50QnlJZCgib3V0cHV0MiIpLmlubmVySFRNTCA9IGQ7CiAgICB9CgogICAgZG9jdW1l
+bnQuY29va2llID0gImZha2VfY29va2llXzE9Qk9PUDsiCiAgICBkb2N1bWVudC5jb29raWUgPSAi
+c2Vzc2lvbl9pZD0xMjM0NTY1NDIzIjsKICAgIGRvY3VtZW50LmNvb2tpZSA9ICJhbmFseXRpY3Nf
+Y29va2llPUJFRVAiOwogIH0KPC9zY3JpcHQ+Cgo8aDE+VnVsbmVyYWJpbGl0eSBUZXN0aW5nIHBh
+Z2U8L2gxPgoKPGZvcm0gaWQ9ImJvb3AiIGFjdGlvbj0iIj4KICA8aW5wdXQgdHlwZT0idGV4dCIg
+bmFtZT0iaW5qZWN0aW9uIiB2YWx1ZT0iIi8+CiAgPGlucHV0IHR5cGU9InRleHQiIG5hbWU9InVu
+dXNlZCIgdmFsdWU9IiI+CiAgPGlucHV0IHR5cGU9InN1Ym1pdCI+CjwvZm9ybT4KPGgyIGlkPSJv
+dXRwdXQiPjwvaDI+Cgo8Zm9ybSBpZD0iYmVlcCIgYWN0aW9uPSIiPgogIDxpbnB1dCB0eXBlPSJ0
+ZXh0IiBuYW1lPSJ1bnVzZWQiIHZhbHVlPSIiLz4KICA8aW5wdXQgdHlwZT0idGV4dCIgbmFtZT0i
+aW5qZWN0aW9uMiIgdmFsdWU9IiI+CiAgPGlucHV0IHR5cGU9InN1Ym1pdCI+CjwvZm9ybT4KPGgy
+IGlkPSJvdXRwdXQyIj48L2gyPgoK
+</body>
+    </http-response>
+
+</http-transaction>
+            <http-transaction id="52">
+
+    <http-request>
+        <status>GET http://localhost:8000/?pPfx9hs=id&amp;uname%20-a= HTTP/1.1</status>
+        <headers>
+            <header field="Host" content="localhost:8000" />
+            <header field="Accept-encoding" content="gzip, deflate" />
+            <header field="Accept" content="*/*" />
+            <header field="User-agent" content="w3af.org" />
+        </headers>
+        <body content-encoding="base64"></body>
+    </http-request>
+
+    <http-response>
+        <status>HTTP/1.1 200 OK</status>
+        <headers>
+            <header field="date" content="Fri, 15 Jun 2018 14:36:46 GMT" />
+            <header field="last-modified" content="Thu, 14 Jun 2018 09:42:12 GMT" />
+            <header field="content-length" content="876" />
+            <header field="content-type" content="text/html" />
+            <header field="server" content="SimpleHTTP/0.6 Python/3.6.4" />
+        </headers>
+        <body content-encoding="base64">PHNjcmlwdD4KICB3aW5kb3cub25sb2FkID0gZnVuY3Rpb24oKSB7CiAgICB2YXIgdXJsID0gbmV3
+IFVSTCh3aW5kb3cubG9jYXRpb24uaHJlZik7CgogICAgdmFyIGMgPSB1cmwuc2VhcmNoUGFyYW1z
+LmdldCgiaW5qZWN0aW9uIik7CiAgICBpZiAoYykgewogICAgICBkb2N1bWVudC5nZXRFbGVtZW50
+QnlJZCgib3V0cHV0IikuaW5uZXJIVE1MID0gYzsKICAgIH0KCiAgICB2YXIgZCA9IHVybC5zZWFy
+Y2hQYXJhbXMuZ2V0KCJpbmplY3Rpb24yIik7CiAgICBpZiAoZCkgewogICAgICBkb2N1bWVudC5n
+ZXRFbGVtZW50QnlJZCgib3V0cHV0MiIpLmlubmVySFRNTCA9IGQ7CiAgICB9CgogICAgZG9jdW1l
+bnQuY29va2llID0gImZha2VfY29va2llXzE9Qk9PUDsiCiAgICBkb2N1bWVudC5jb29raWUgPSAi
+c2Vzc2lvbl9pZD0xMjM0NTY1NDIzIjsKICAgIGRvY3VtZW50LmNvb2tpZSA9ICJhbmFseXRpY3Nf
+Y29va2llPUJFRVAiOwogIH0KPC9zY3JpcHQ+Cgo8aDE+VnVsbmVyYWJpbGl0eSBUZXN0aW5nIHBh
+Z2U8L2gxPgoKPGZvcm0gaWQ9ImJvb3AiIGFjdGlvbj0iIj4KICA8aW5wdXQgdHlwZT0idGV4dCIg
+bmFtZT0iaW5qZWN0aW9uIiB2YWx1ZT0iIi8+CiAgPGlucHV0IHR5cGU9InRleHQiIG5hbWU9InVu
+dXNlZCIgdmFsdWU9IiI+CiAgPGlucHV0IHR5cGU9InN1Ym1pdCI+CjwvZm9ybT4KPGgyIGlkPSJv
+dXRwdXQiPjwvaDI+Cgo8Zm9ybSBpZD0iYmVlcCIgYWN0aW9uPSIiPgogIDxpbnB1dCB0eXBlPSJ0
+ZXh0IiBuYW1lPSJ1bnVzZWQiIHZhbHVlPSIiLz4KICA8aW5wdXQgdHlwZT0idGV4dCIgbmFtZT0i
+aW5qZWN0aW9uMiIgdmFsdWU9IiI+CiAgPGlucHV0IHR5cGU9InN1Ym1pdCI+CjwvZm9ybT4KPGgy
+IGlkPSJvdXRwdXQyIj48L2gyPgoK
+</body>
+    </http-response>
+
+</http-transaction>
+            <http-transaction id="53">
+
+    <http-request>
+        <status>GET http://localhost:8000/_vti_inf.html HTTP/1.1</status>
+        <headers>
+            <header field="Host" content="localhost:8000" />
+            <header field="Accept-encoding" content="gzip, deflate" />
+            <header field="Accept" content="*/*" />
+            <header field="User-agent" content="w3af.org" />
+        </headers>
+        <body content-encoding="base64"></body>
+    </http-request>
+
+    <http-response>
+        <status>HTTP/1.1 404 File not found</status>
+        <headers>
+            <header field="date" content="Fri, 15 Jun 2018 14:36:46 GMT" />
+            <header field="connection" content="close" />
+            <header field="content-type" content="text/html;charset=utf-8" />
+            <header field="content-length" content="469" />
+            <header field="server" content="SimpleHTTP/0.6 Python/3.6.4" />
+        </headers>
+        <body content-encoding="base64">PCFET0NUWVBFIEhUTUwgUFVCTElDICItLy9XM0MvL0RURCBIVE1MIDQuMDEvL0VOIgogICAgICAg
+ICJodHRwOi8vd3d3LnczLm9yZy9UUi9odG1sNC9zdHJpY3QuZHRkIj4KPGh0bWw+CiAgICA8aGVh
+ZD4KICAgICAgICA8bWV0YSBodHRwLWVxdWl2PSJDb250ZW50LVR5cGUiIGNvbnRlbnQ9InRleHQv
+aHRtbDtjaGFyc2V0PXV0Zi04Ij4KICAgICAgICA8dGl0bGU+RXJyb3IgcmVzcG9uc2U8L3RpdGxl
+PgogICAgPC9oZWFkPgogICAgPGJvZHk+CiAgICAgICAgPGgxPkVycm9yIHJlc3BvbnNlPC9oMT4K
+ICAgICAgICA8cD5FcnJvciBjb2RlOiA0MDQ8L3A+CiAgICAgICAgPHA+TWVzc2FnZTogRmlsZSBu
+b3QgZm91bmQuPC9wPgogICAgICAgIDxwPkVycm9yIGNvZGUgZXhwbGFuYXRpb246IEhUVFBTdGF0
+dXMuTk9UX0ZPVU5EIC0gTm90aGluZyBtYXRjaGVzIHRoZSBnaXZlbiBVUkkuPC9wPgogICAgPC9i
+b2R5Pgo8L2h0bWw+Cg==
+</body>
+    </http-response>
+
+</http-transaction>
+            <http-transaction id="55">
+
+    <http-request>
+        <status>GET http://localhost:8000/?pPfx9hs=..%2F..%2FWINNT%2Fsystem32%2Fcmd.exe%3Fdir%20c%3A%5C HTTP/1.1</status>
+        <headers>
+            <header field="Host" content="localhost:8000" />
+            <header field="Accept-encoding" content="gzip, deflate" />
+            <header field="Accept" content="*/*" />
+            <header field="User-agent" content="w3af.org" />
+        </headers>
+        <body content-encoding="base64"></body>
+    </http-request>
+
+    <http-response>
+        <status>HTTP/1.1 200 OK</status>
+        <headers>
+            <header field="date" content="Fri, 15 Jun 2018 14:36:46 GMT" />
+            <header field="last-modified" content="Thu, 14 Jun 2018 09:42:12 GMT" />
+            <header field="content-length" content="876" />
+            <header field="content-type" content="text/html" />
+            <header field="server" content="SimpleHTTP/0.6 Python/3.6.4" />
+        </headers>
+        <body content-encoding="base64">PHNjcmlwdD4KICB3aW5kb3cub25sb2FkID0gZnVuY3Rpb24oKSB7CiAgICB2YXIgdXJsID0gbmV3
+IFVSTCh3aW5kb3cubG9jYXRpb24uaHJlZik7CgogICAgdmFyIGMgPSB1cmwuc2VhcmNoUGFyYW1z
+LmdldCgiaW5qZWN0aW9uIik7CiAgICBpZiAoYykgewogICAgICBkb2N1bWVudC5nZXRFbGVtZW50
+QnlJZCgib3V0cHV0IikuaW5uZXJIVE1MID0gYzsKICAgIH0KCiAgICB2YXIgZCA9IHVybC5zZWFy
+Y2hQYXJhbXMuZ2V0KCJpbmplY3Rpb24yIik7CiAgICBpZiAoZCkgewogICAgICBkb2N1bWVudC5n
+ZXRFbGVtZW50QnlJZCgib3V0cHV0MiIpLmlubmVySFRNTCA9IGQ7CiAgICB9CgogICAgZG9jdW1l
+bnQuY29va2llID0gImZha2VfY29va2llXzE9Qk9PUDsiCiAgICBkb2N1bWVudC5jb29raWUgPSAi
+c2Vzc2lvbl9pZD0xMjM0NTY1NDIzIjsKICAgIGRvY3VtZW50LmNvb2tpZSA9ICJhbmFseXRpY3Nf
+Y29va2llPUJFRVAiOwogIH0KPC9zY3JpcHQ+Cgo8aDE+VnVsbmVyYWJpbGl0eSBUZXN0aW5nIHBh
+Z2U8L2gxPgoKPGZvcm0gaWQ9ImJvb3AiIGFjdGlvbj0iIj4KICA8aW5wdXQgdHlwZT0idGV4dCIg
+bmFtZT0iaW5qZWN0aW9uIiB2YWx1ZT0iIi8+CiAgPGlucHV0IHR5cGU9InRleHQiIG5hbWU9InVu
+dXNlZCIgdmFsdWU9IiI+CiAgPGlucHV0IHR5cGU9InN1Ym1pdCI+CjwvZm9ybT4KPGgyIGlkPSJv
+dXRwdXQiPjwvaDI+Cgo8Zm9ybSBpZD0iYmVlcCIgYWN0aW9uPSIiPgogIDxpbnB1dCB0eXBlPSJ0
+ZXh0IiBuYW1lPSJ1bnVzZWQiIHZhbHVlPSIiLz4KICA8aW5wdXQgdHlwZT0idGV4dCIgbmFtZT0i
+aW5qZWN0aW9uMiIgdmFsdWU9IiI+CiAgPGlucHV0IHR5cGU9InN1Ym1pdCI+CjwvZm9ybT4KPGgy
+IGlkPSJvdXRwdXQyIj48L2gyPgoK
+</body>
+    </http-response>
+
+</http-transaction>
+            <http-transaction id="58">
+
+    <http-request>
+        <status>GET http://localhost:8000/?pPfx9hs=.%2F..%2F..%2F..%2Fetc%2Fmotd%00html HTTP/1.1</status>
+        <headers>
+            <header field="Host" content="localhost:8000" />
+            <header field="Accept-encoding" content="gzip, deflate" />
+            <header field="Accept" content="*/*" />
+            <header field="User-agent" content="w3af.org" />
+        </headers>
+        <body content-encoding="base64"></body>
+    </http-request>
+
+    <http-response>
+        <status>HTTP/1.1 200 OK</status>
+        <headers>
+            <header field="date" content="Fri, 15 Jun 2018 14:36:46 GMT" />
+            <header field="last-modified" content="Thu, 14 Jun 2018 09:42:12 GMT" />
+            <header field="content-length" content="876" />
+            <header field="content-type" content="text/html" />
+            <header field="server" content="SimpleHTTP/0.6 Python/3.6.4" />
+        </headers>
+        <body content-encoding="base64">PHNjcmlwdD4KICB3aW5kb3cub25sb2FkID0gZnVuY3Rpb24oKSB7CiAgICB2YXIgdXJsID0gbmV3
+IFVSTCh3aW5kb3cubG9jYXRpb24uaHJlZik7CgogICAgdmFyIGMgPSB1cmwuc2VhcmNoUGFyYW1z
+LmdldCgiaW5qZWN0aW9uIik7CiAgICBpZiAoYykgewogICAgICBkb2N1bWVudC5nZXRFbGVtZW50
+QnlJZCgib3V0cHV0IikuaW5uZXJIVE1MID0gYzsKICAgIH0KCiAgICB2YXIgZCA9IHVybC5zZWFy
+Y2hQYXJhbXMuZ2V0KCJpbmplY3Rpb24yIik7CiAgICBpZiAoZCkgewogICAgICBkb2N1bWVudC5n
+ZXRFbGVtZW50QnlJZCgib3V0cHV0MiIpLmlubmVySFRNTCA9IGQ7CiAgICB9CgogICAgZG9jdW1l
+bnQuY29va2llID0gImZha2VfY29va2llXzE9Qk9PUDsiCiAgICBkb2N1bWVudC5jb29raWUgPSAi
+c2Vzc2lvbl9pZD0xMjM0NTY1NDIzIjsKICAgIGRvY3VtZW50LmNvb2tpZSA9ICJhbmFseXRpY3Nf
+Y29va2llPUJFRVAiOwogIH0KPC9zY3JpcHQ+Cgo8aDE+VnVsbmVyYWJpbGl0eSBUZXN0aW5nIHBh
+Z2U8L2gxPgoKPGZvcm0gaWQ9ImJvb3AiIGFjdGlvbj0iIj4KICA8aW5wdXQgdHlwZT0idGV4dCIg
+bmFtZT0iaW5qZWN0aW9uIiB2YWx1ZT0iIi8+CiAgPGlucHV0IHR5cGU9InRleHQiIG5hbWU9InVu
+dXNlZCIgdmFsdWU9IiI+CiAgPGlucHV0IHR5cGU9InN1Ym1pdCI+CjwvZm9ybT4KPGgyIGlkPSJv
+dXRwdXQiPjwvaDI+Cgo8Zm9ybSBpZD0iYmVlcCIgYWN0aW9uPSIiPgogIDxpbnB1dCB0eXBlPSJ0
+ZXh0IiBuYW1lPSJ1bnVzZWQiIHZhbHVlPSIiLz4KICA8aW5wdXQgdHlwZT0idGV4dCIgbmFtZT0i
+aW5qZWN0aW9uMiIgdmFsdWU9IiI+CiAgPGlucHV0IHR5cGU9InN1Ym1pdCI+CjwvZm9ybT4KPGgy
+IGlkPSJvdXRwdXQyIj48L2gyPgoK
+</body>
+    </http-response>
+
+</http-transaction>
+            <http-transaction id="187">
+
+    <http-request>
+        <status>GET http://localhost:8000/admin-console/ HTTP/1.1</status>
+        <headers>
+            <header field="Host" content="localhost:8000" />
+            <header field="Accept-encoding" content="gzip, deflate" />
+            <header field="Accept" content="*/*" />
+            <header field="User-agent" content="w3af.org" />
+        </headers>
+        <body content-encoding="base64"></body>
+    </http-request>
+
+    <http-response>
+        <status>HTTP/1.1 404 File not found</status>
+        <headers>
+            <header field="date" content="Fri, 15 Jun 2018 14:36:48 GMT" />
+            <header field="connection" content="close" />
+            <header field="content-type" content="text/html;charset=utf-8" />
+            <header field="content-length" content="469" />
+            <header field="server" content="SimpleHTTP/0.6 Python/3.6.4" />
+        </headers>
+        <body content-encoding="base64">PCFET0NUWVBFIEhUTUwgUFVCTElDICItLy9XM0MvL0RURCBIVE1MIDQuMDEvL0VOIgogICAgICAg
+ICJodHRwOi8vd3d3LnczLm9yZy9UUi9odG1sNC9zdHJpY3QuZHRkIj4KPGh0bWw+CiAgICA8aGVh
+ZD4KICAgICAgICA8bWV0YSBodHRwLWVxdWl2PSJDb250ZW50LVR5cGUiIGNvbnRlbnQ9InRleHQv
+aHRtbDtjaGFyc2V0PXV0Zi04Ij4KICAgICAgICA8dGl0bGU+RXJyb3IgcmVzcG9uc2U8L3RpdGxl
+PgogICAgPC9oZWFkPgogICAgPGJvZHk+CiAgICAgICAgPGgxPkVycm9yIHJlc3BvbnNlPC9oMT4K
+ICAgICAgICA8cD5FcnJvciBjb2RlOiA0MDQ8L3A+CiAgICAgICAgPHA+TWVzc2FnZTogRmlsZSBu
+b3QgZm91bmQuPC9wPgogICAgICAgIDxwPkVycm9yIGNvZGUgZXhwbGFuYXRpb246IEhUVFBTdGF0
+dXMuTk9UX0ZPVU5EIC0gTm90aGluZyBtYXRjaGVzIHRoZSBnaXZlbiBVUkkuPC9wPgogICAgPC9i
+b2R5Pgo8L2h0bWw+Cg==
+</body>
+    </http-response>
+
+</http-transaction>
+            <http-transaction id="188">
+
+    <http-request>
+        <status>GET http://localhost:8000/jmx-console/ HTTP/1.1</status>
+        <headers>
+            <header field="Host" content="localhost:8000" />
+            <header field="Accept-encoding" content="gzip, deflate" />
+            <header field="Accept" content="*/*" />
+            <header field="User-agent" content="w3af.org" />
+        </headers>
+        <body content-encoding="base64"></body>
+    </http-request>
+
+    <http-response>
+        <status>HTTP/1.1 404 File not found</status>
+        <headers>
+            <header field="date" content="Fri, 15 Jun 2018 14:36:48 GMT" />
+            <header field="connection" content="close" />
+            <header field="content-type" content="text/html;charset=utf-8" />
+            <header field="content-length" content="469" />
+            <header field="server" content="SimpleHTTP/0.6 Python/3.6.4" />
+        </headers>
+        <body content-encoding="base64">PCFET0NUWVBFIEhUTUwgUFVCTElDICItLy9XM0MvL0RURCBIVE1MIDQuMDEvL0VOIgogICAgICAg
+ICJodHRwOi8vd3d3LnczLm9yZy9UUi9odG1sNC9zdHJpY3QuZHRkIj4KPGh0bWw+CiAgICA8aGVh
+ZD4KICAgICAgICA8bWV0YSBodHRwLWVxdWl2PSJDb250ZW50LVR5cGUiIGNvbnRlbnQ9InRleHQv
+aHRtbDtjaGFyc2V0PXV0Zi04Ij4KICAgICAgICA8dGl0bGU+RXJyb3IgcmVzcG9uc2U8L3RpdGxl
+PgogICAgPC9oZWFkPgogICAgPGJvZHk+CiAgICAgICAgPGgxPkVycm9yIHJlc3BvbnNlPC9oMT4K
+ICAgICAgICA8cD5FcnJvciBjb2RlOiA0MDQ8L3A+CiAgICAgICAgPHA+TWVzc2FnZTogRmlsZSBu
+b3QgZm91bmQuPC9wPgogICAgICAgIDxwPkVycm9yIGNvZGUgZXhwbGFuYXRpb246IEhUVFBTdGF0
+dXMuTk9UX0ZPVU5EIC0gTm90aGluZyBtYXRjaGVzIHRoZSBnaXZlbiBVUkkuPC9wPgogICAgPC9i
+b2R5Pgo8L2h0bWw+Cg==
+</body>
+    </http-response>
+
+</http-transaction>
+            <http-transaction id="189">
+
+    <http-request>
+        <status>GET http://localhost:8000/status HTTP/1.1</status>
+        <headers>
+            <header field="Host" content="localhost:8000" />
+            <header field="Accept-encoding" content="gzip, deflate" />
+            <header field="Accept" content="*/*" />
+            <header field="User-agent" content="w3af.org" />
+        </headers>
+        <body content-encoding="base64"></body>
+    </http-request>
+
+    <http-response>
+        <status>HTTP/1.1 404 File not found</status>
+        <headers>
+            <header field="date" content="Fri, 15 Jun 2018 14:36:48 GMT" />
+            <header field="connection" content="close" />
+            <header field="content-type" content="text/html;charset=utf-8" />
+            <header field="content-length" content="469" />
+            <header field="server" content="SimpleHTTP/0.6 Python/3.6.4" />
+        </headers>
+        <body content-encoding="base64">PCFET0NUWVBFIEhUTUwgUFVCTElDICItLy9XM0MvL0RURCBIVE1MIDQuMDEvL0VOIgogICAgICAg
+ICJodHRwOi8vd3d3LnczLm9yZy9UUi9odG1sNC9zdHJpY3QuZHRkIj4KPGh0bWw+CiAgICA8aGVh
+ZD4KICAgICAgICA8bWV0YSBodHRwLWVxdWl2PSJDb250ZW50LVR5cGUiIGNvbnRlbnQ9InRleHQv
+aHRtbDtjaGFyc2V0PXV0Zi04Ij4KICAgICAgICA8dGl0bGU+RXJyb3IgcmVzcG9uc2U8L3RpdGxl
+PgogICAgPC9oZWFkPgogICAgPGJvZHk+CiAgICAgICAgPGgxPkVycm9yIHJlc3BvbnNlPC9oMT4K
+ICAgICAgICA8cD5FcnJvciBjb2RlOiA0MDQ8L3A+CiAgICAgICAgPHA+TWVzc2FnZTogRmlsZSBu
+b3QgZm91bmQuPC9wPgogICAgICAgIDxwPkVycm9yIGNvZGUgZXhwbGFuYXRpb246IEhUVFBTdGF0
+dXMuTk9UX0ZPVU5EIC0gTm90aGluZyBtYXRjaGVzIHRoZSBnaXZlbiBVUkkuPC9wPgogICAgPC9i
+b2R5Pgo8L2h0bWw+Cg==
+</body>
+    </http-response>
+
+</http-transaction>
+            <http-transaction id="190">
+
+    <http-request>
+        <status>GET http://localhost:8000/web-console/ServerInfo.jsp HTTP/1.1</status>
+        <headers>
+            <header field="Host" content="localhost:8000" />
+            <header field="Accept-encoding" content="gzip, deflate" />
+            <header field="Accept" content="*/*" />
+            <header field="User-agent" content="w3af.org" />
+        </headers>
+        <body content-encoding="base64"></body>
+    </http-request>
+
+    <http-response>
+        <status>HTTP/1.1 404 File not found</status>
+        <headers>
+            <header field="date" content="Fri, 15 Jun 2018 14:36:48 GMT" />
+            <header field="connection" content="close" />
+            <header field="content-type" content="text/html;charset=utf-8" />
+            <header field="content-length" content="469" />
+            <header field="server" content="SimpleHTTP/0.6 Python/3.6.4" />
+        </headers>
+        <body content-encoding="base64">PCFET0NUWVBFIEhUTUwgUFVCTElDICItLy9XM0MvL0RURCBIVE1MIDQuMDEvL0VOIgogICAgICAg
+ICJodHRwOi8vd3d3LnczLm9yZy9UUi9odG1sNC9zdHJpY3QuZHRkIj4KPGh0bWw+CiAgICA8aGVh
+ZD4KICAgICAgICA8bWV0YSBodHRwLWVxdWl2PSJDb250ZW50LVR5cGUiIGNvbnRlbnQ9InRleHQv
+aHRtbDtjaGFyc2V0PXV0Zi04Ij4KICAgICAgICA8dGl0bGU+RXJyb3IgcmVzcG9uc2U8L3RpdGxl
+PgogICAgPC9oZWFkPgogICAgPGJvZHk+CiAgICAgICAgPGgxPkVycm9yIHJlc3BvbnNlPC9oMT4K
+ICAgICAgICA8cD5FcnJvciBjb2RlOiA0MDQ8L3A+CiAgICAgICAgPHA+TWVzc2FnZTogRmlsZSBu
+b3QgZm91bmQuPC9wPgogICAgICAgIDxwPkVycm9yIGNvZGUgZXhwbGFuYXRpb246IEhUVFBTdGF0
+dXMuTk9UX0ZPVU5EIC0gTm90aGluZyBtYXRjaGVzIHRoZSBnaXZlbiBVUkkuPC9wPgogICAgPC9i
+b2R5Pgo8L2h0bWw+Cg==
+</body>
+    </http-response>
+
+</http-transaction>
+            <http-transaction id="192">
+
+    <http-request>
+        <status>GET http://localhost:8000/WebConsole/Invoker HTTP/1.1</status>
+        <headers>
+            <header field="Host" content="localhost:8000" />
+            <header field="Accept-encoding" content="gzip, deflate" />
+            <header field="Accept" content="*/*" />
+            <header field="User-agent" content="w3af.org" />
+        </headers>
+        <body content-encoding="base64"></body>
+    </http-request>
+
+    <http-response>
+        <status>HTTP/1.1 404 File not found</status>
+        <headers>
+            <header field="date" content="Fri, 15 Jun 2018 14:36:48 GMT" />
+            <header field="connection" content="close" />
+            <header field="content-type" content="text/html;charset=utf-8" />
+            <header field="content-length" content="469" />
+            <header field="server" content="SimpleHTTP/0.6 Python/3.6.4" />
+        </headers>
+        <body content-encoding="base64">PCFET0NUWVBFIEhUTUwgUFVCTElDICItLy9XM0MvL0RURCBIVE1MIDQuMDEvL0VOIgogICAgICAg
+ICJodHRwOi8vd3d3LnczLm9yZy9UUi9odG1sNC9zdHJpY3QuZHRkIj4KPGh0bWw+CiAgICA8aGVh
+ZD4KICAgICAgICA8bWV0YSBodHRwLWVxdWl2PSJDb250ZW50LVR5cGUiIGNvbnRlbnQ9InRleHQv
+aHRtbDtjaGFyc2V0PXV0Zi04Ij4KICAgICAgICA8dGl0bGU+RXJyb3IgcmVzcG9uc2U8L3RpdGxl
+PgogICAgPC9oZWFkPgogICAgPGJvZHk+CiAgICAgICAgPGgxPkVycm9yIHJlc3BvbnNlPC9oMT4K
+ICAgICAgICA8cD5FcnJvciBjb2RlOiA0MDQ8L3A+CiAgICAgICAgPHA+TWVzc2FnZTogRmlsZSBu
+b3QgZm91bmQuPC9wPgogICAgICAgIDxwPkVycm9yIGNvZGUgZXhwbGFuYXRpb246IEhUVFBTdGF0
+dXMuTk9UX0ZPVU5EIC0gTm90aGluZyBtYXRjaGVzIHRoZSBnaXZlbiBVUkkuPC9wPgogICAgPC9i
+b2R5Pgo8L2h0bWw+Cg==
+</body>
+    </http-response>
+
+</http-transaction>
+            <http-transaction id="193">
+
+    <http-request>
+        <status>GET http://localhost:8000/invoker/JMXInvokerServlet HTTP/1.1</status>
+        <headers>
+            <header field="Host" content="localhost:8000" />
+            <header field="Accept-encoding" content="gzip, deflate" />
+            <header field="Accept" content="*/*" />
+            <header field="User-agent" content="w3af.org" />
+        </headers>
+        <body content-encoding="base64"></body>
+    </http-request>
+
+    <http-response>
+        <status>HTTP/1.1 404 File not found</status>
+        <headers>
+            <header field="date" content="Fri, 15 Jun 2018 14:36:48 GMT" />
+            <header field="connection" content="close" />
+            <header field="content-type" content="text/html;charset=utf-8" />
+            <header field="content-length" content="469" />
+            <header field="server" content="SimpleHTTP/0.6 Python/3.6.4" />
+        </headers>
+        <body content-encoding="base64">PCFET0NUWVBFIEhUTUwgUFVCTElDICItLy9XM0MvL0RURCBIVE1MIDQuMDEvL0VOIgogICAgICAg
+ICJodHRwOi8vd3d3LnczLm9yZy9UUi9odG1sNC9zdHJpY3QuZHRkIj4KPGh0bWw+CiAgICA8aGVh
+ZD4KICAgICAgICA8bWV0YSBodHRwLWVxdWl2PSJDb250ZW50LVR5cGUiIGNvbnRlbnQ9InRleHQv
+aHRtbDtjaGFyc2V0PXV0Zi04Ij4KICAgICAgICA8dGl0bGU+RXJyb3IgcmVzcG9uc2U8L3RpdGxl
+PgogICAgPC9oZWFkPgogICAgPGJvZHk+CiAgICAgICAgPGgxPkVycm9yIHJlc3BvbnNlPC9oMT4K
+ICAgICAgICA8cD5FcnJvciBjb2RlOiA0MDQ8L3A+CiAgICAgICAgPHA+TWVzc2FnZTogRmlsZSBu
+b3QgZm91bmQuPC9wPgogICAgICAgIDxwPkVycm9yIGNvZGUgZXhwbGFuYXRpb246IEhUVFBTdGF0
+dXMuTk9UX0ZPVU5EIC0gTm90aGluZyBtYXRjaGVzIHRoZSBnaXZlbiBVUkkuPC9wPgogICAgPC9i
+b2R5Pgo8L2h0bWw+Cg==
+</body>
+    </http-response>
+
+</http-transaction>
+            <http-transaction id="68">
+
+    <http-request>
+        <status>PUT http://localhost:8000/cMmBd HTTP/1.1</status>
+        <headers>
+            <header field="Content-length" content="6" />
+            <header field="Accept-encoding" content="gzip, deflate" />
+            <header field="Accept" content="*/*" />
+            <header field="User-agent" content="w3af.org" />
+            <header field="Host" content="localhost:8000" />
+            <header field="Content-type" content="text/plain" />
+        </headers>
+        <body content-encoding="base64">dnVjYlk2
+</body>
+    </http-request>
+
+    <http-response>
+        <status>HTTP/1.1 501 Unsupported method ('PUT')</status>
+        <headers>
+            <header field="date" content="Fri, 15 Jun 2018 14:36:46 GMT" />
+            <header field="connection" content="close" />
+            <header field="content-type" content="text/html;charset=utf-8" />
+            <header field="content-length" content="496" />
+            <header field="server" content="SimpleHTTP/0.6 Python/3.6.4" />
+        </headers>
+        <body content-encoding="base64">PCFET0NUWVBFIEhUTUwgUFVCTElDICItLy9XM0MvL0RURCBIVE1MIDQuMDEvL0VOIgogICAgICAg
+ICJodHRwOi8vd3d3LnczLm9yZy9UUi9odG1sNC9zdHJpY3QuZHRkIj4KPGh0bWw+CiAgICA8aGVh
+ZD4KICAgICAgICA8bWV0YSBodHRwLWVxdWl2PSJDb250ZW50LVR5cGUiIGNvbnRlbnQ9InRleHQv
+aHRtbDtjaGFyc2V0PXV0Zi04Ij4KICAgICAgICA8dGl0bGU+RXJyb3IgcmVzcG9uc2U8L3RpdGxl
+PgogICAgPC9oZWFkPgogICAgPGJvZHk+CiAgICAgICAgPGgxPkVycm9yIHJlc3BvbnNlPC9oMT4K
+ICAgICAgICA8cD5FcnJvciBjb2RlOiA1MDE8L3A+CiAgICAgICAgPHA+TWVzc2FnZTogVW5zdXBw
+b3J0ZWQgbWV0aG9kICgnUFVUJykuPC9wPgogICAgICAgIDxwPkVycm9yIGNvZGUgZXhwbGFuYXRp
+b246IEhUVFBTdGF0dXMuTk9UX0lNUExFTUVOVEVEIC0gU2VydmVyIGRvZXMgbm90IHN1cHBvcnQg
+dGhpcyBvcGVyYXRpb24uPC9wPgogICAgPC9ib2R5Pgo8L2h0bWw+Cg==
+</body>
+    </http-response>
+
+</http-transaction>
+            <http-transaction id="83">
+
+    <http-request>
+        <status>GET http://localhost:8000/favicon.ico HTTP/1.1</status>
+        <headers>
+            <header field="Host" content="localhost:8000" />
+            <header field="Accept-encoding" content="gzip, deflate" />
+            <header field="Accept" content="*/*" />
+            <header field="User-agent" content="w3af.org" />
+        </headers>
+        <body content-encoding="base64"></body>
+    </http-request>
+
+    <http-response>
+        <status>HTTP/1.1 404 File not found</status>
+        <headers>
+            <header field="date" content="Fri, 15 Jun 2018 14:36:46 GMT" />
+            <header field="connection" content="close" />
+            <header field="content-type" content="text/html;charset=utf-8" />
+            <header field="content-length" content="469" />
+            <header field="server" content="SimpleHTTP/0.6 Python/3.6.4" />
+        </headers>
+        <body content-encoding="base64">PCFET0NUWVBFIEhUTUwgUFVCTElDICItLy9XM0MvL0RURCBIVE1MIDQuMDEvL0VOIgogICAgICAg
+ICJodHRwOi8vd3d3LnczLm9yZy9UUi9odG1sNC9zdHJpY3QuZHRkIj4KPGh0bWw+CiAgICA8aGVh
+ZD4KICAgICAgICA8bWV0YSBodHRwLWVxdWl2PSJDb250ZW50LVR5cGUiIGNvbnRlbnQ9InRleHQv
+aHRtbDtjaGFyc2V0PXV0Zi04Ij4KICAgICAgICA8dGl0bGU+RXJyb3IgcmVzcG9uc2U8L3RpdGxl
+PgogICAgPC9oZWFkPgogICAgPGJvZHk+CiAgICAgICAgPGgxPkVycm9yIHJlc3BvbnNlPC9oMT4K
+ICAgICAgICA8cD5FcnJvciBjb2RlOiA0MDQ8L3A+CiAgICAgICAgPHA+TWVzc2FnZTogRmlsZSBu
+b3QgZm91bmQuPC9wPgogICAgICAgIDxwPkVycm9yIGNvZGUgZXhwbGFuYXRpb246IEhUVFBTdGF0
+dXMuTk9UX0ZPVU5EIC0gTm90aGluZyBtYXRjaGVzIHRoZSBnaXZlbiBVUkkuPC9wPgogICAgPC9i
+b2R5Pgo8L2h0bWw+Cg==
+</body>
+    </http-response>
+
+</http-transaction>
+            <http-transaction id="224">
+
+    <http-request>
+        <status>GET http://localhost:8000/?injection=&amp;unused= HTTP/1.1</status>
+        <headers>
+            <header field="Host" content="localhost:8000" />
+            <header field="Accept-encoding" content="gzip, deflate" />
+            <header field="Accept" content="*/*" />
+            <header field="User-agent" content="w3af.org" />
+        </headers>
+        <body content-encoding="base64"></body>
+    </http-request>
+
+    <http-response>
+        <status>HTTP/1.1 200 OK</status>
+        <headers>
+            <header field="date" content="Fri, 15 Jun 2018 14:36:49 GMT" />
+            <header field="last-modified" content="Thu, 14 Jun 2018 09:42:12 GMT" />
+            <header field="content-length" content="876" />
+            <header field="content-type" content="text/html" />
+            <header field="server" content="SimpleHTTP/0.6 Python/3.6.4" />
+        </headers>
+        <body content-encoding="base64">PHNjcmlwdD4KICB3aW5kb3cub25sb2FkID0gZnVuY3Rpb24oKSB7CiAgICB2YXIgdXJsID0gbmV3
+IFVSTCh3aW5kb3cubG9jYXRpb24uaHJlZik7CgogICAgdmFyIGMgPSB1cmwuc2VhcmNoUGFyYW1z
+LmdldCgiaW5qZWN0aW9uIik7CiAgICBpZiAoYykgewogICAgICBkb2N1bWVudC5nZXRFbGVtZW50
+QnlJZCgib3V0cHV0IikuaW5uZXJIVE1MID0gYzsKICAgIH0KCiAgICB2YXIgZCA9IHVybC5zZWFy
+Y2hQYXJhbXMuZ2V0KCJpbmplY3Rpb24yIik7CiAgICBpZiAoZCkgewogICAgICBkb2N1bWVudC5n
+ZXRFbGVtZW50QnlJZCgib3V0cHV0MiIpLmlubmVySFRNTCA9IGQ7CiAgICB9CgogICAgZG9jdW1l
+bnQuY29va2llID0gImZha2VfY29va2llXzE9Qk9PUDsiCiAgICBkb2N1bWVudC5jb29raWUgPSAi
+c2Vzc2lvbl9pZD0xMjM0NTY1NDIzIjsKICAgIGRvY3VtZW50LmNvb2tpZSA9ICJhbmFseXRpY3Nf
+Y29va2llPUJFRVAiOwogIH0KPC9zY3JpcHQ+Cgo8aDE+VnVsbmVyYWJpbGl0eSBUZXN0aW5nIHBh
+Z2U8L2gxPgoKPGZvcm0gaWQ9ImJvb3AiIGFjdGlvbj0iIj4KICA8aW5wdXQgdHlwZT0idGV4dCIg
+bmFtZT0iaW5qZWN0aW9uIiB2YWx1ZT0iIi8+CiAgPGlucHV0IHR5cGU9InRleHQiIG5hbWU9InVu
+dXNlZCIgdmFsdWU9IiI+CiAgPGlucHV0IHR5cGU9InN1Ym1pdCI+CjwvZm9ybT4KPGgyIGlkPSJv
+dXRwdXQiPjwvaDI+Cgo8Zm9ybSBpZD0iYmVlcCIgYWN0aW9uPSIiPgogIDxpbnB1dCB0eXBlPSJ0
+ZXh0IiBuYW1lPSJ1bnVzZWQiIHZhbHVlPSIiLz4KICA8aW5wdXQgdHlwZT0idGV4dCIgbmFtZT0i
+aW5qZWN0aW9uMiIgdmFsdWU9IiI+CiAgPGlucHV0IHR5cGU9InN1Ym1pdCI+CjwvZm9ybT4KPGgy
+IGlkPSJvdXRwdXQyIj48L2gyPgoK
+</body>
+    </http-response>
+
+</http-transaction>
+            <http-transaction id="59">
+
+    <http-request>
+        <status>GET http://localhost:8000/?pPfx9hs=exec%20xp_cmdshell%20dir HTTP/1.1</status>
+        <headers>
+            <header field="Host" content="localhost:8000" />
+            <header field="Accept-encoding" content="gzip, deflate" />
+            <header field="Accept" content="*/*" />
+            <header field="User-agent" content="w3af.org" />
+        </headers>
+        <body content-encoding="base64"></body>
+    </http-request>
+
+    <http-response>
+        <status>HTTP/1.1 200 OK</status>
+        <headers>
+            <header field="date" content="Fri, 15 Jun 2018 14:36:46 GMT" />
+            <header field="last-modified" content="Thu, 14 Jun 2018 09:42:12 GMT" />
+            <header field="content-length" content="876" />
+            <header field="content-type" content="text/html" />
+            <header field="server" content="SimpleHTTP/0.6 Python/3.6.4" />
+        </headers>
+        <body content-encoding="base64">PHNjcmlwdD4KICB3aW5kb3cub25sb2FkID0gZnVuY3Rpb24oKSB7CiAgICB2YXIgdXJsID0gbmV3
+IFVSTCh3aW5kb3cubG9jYXRpb24uaHJlZik7CgogICAgdmFyIGMgPSB1cmwuc2VhcmNoUGFyYW1z
+LmdldCgiaW5qZWN0aW9uIik7CiAgICBpZiAoYykgewogICAgICBkb2N1bWVudC5nZXRFbGVtZW50
+QnlJZCgib3V0cHV0IikuaW5uZXJIVE1MID0gYzsKICAgIH0KCiAgICB2YXIgZCA9IHVybC5zZWFy
+Y2hQYXJhbXMuZ2V0KCJpbmplY3Rpb24yIik7CiAgICBpZiAoZCkgewogICAgICBkb2N1bWVudC5n
+ZXRFbGVtZW50QnlJZCgib3V0cHV0MiIpLmlubmVySFRNTCA9IGQ7CiAgICB9CgogICAgZG9jdW1l
+bnQuY29va2llID0gImZha2VfY29va2llXzE9Qk9PUDsiCiAgICBkb2N1bWVudC5jb29raWUgPSAi
+c2Vzc2lvbl9pZD0xMjM0NTY1NDIzIjsKICAgIGRvY3VtZW50LmNvb2tpZSA9ICJhbmFseXRpY3Nf
+Y29va2llPUJFRVAiOwogIH0KPC9zY3JpcHQ+Cgo8aDE+VnVsbmVyYWJpbGl0eSBUZXN0aW5nIHBh
+Z2U8L2gxPgoKPGZvcm0gaWQ9ImJvb3AiIGFjdGlvbj0iIj4KICA8aW5wdXQgdHlwZT0idGV4dCIg
+bmFtZT0iaW5qZWN0aW9uIiB2YWx1ZT0iIi8+CiAgPGlucHV0IHR5cGU9InRleHQiIG5hbWU9InVu
+dXNlZCIgdmFsdWU9IiI+CiAgPGlucHV0IHR5cGU9InN1Ym1pdCI+CjwvZm9ybT4KPGgyIGlkPSJv
+dXRwdXQiPjwvaDI+Cgo8Zm9ybSBpZD0iYmVlcCIgYWN0aW9uPSIiPgogIDxpbnB1dCB0eXBlPSJ0
+ZXh0IiBuYW1lPSJ1bnVzZWQiIHZhbHVlPSIiLz4KICA8aW5wdXQgdHlwZT0idGV4dCIgbmFtZT0i
+aW5qZWN0aW9uMiIgdmFsdWU9IiI+CiAgPGlucHV0IHR5cGU9InN1Ym1pdCI+CjwvZm9ybT4KPGgy
+IGlkPSJvdXRwdXQyIj48L2gyPgoK
+</body>
+    </http-response>
+
+</http-transaction>
+            <http-transaction id="231">
+
+    <http-request>
+        <status>GET http://localhost:8000/?injection=9v7BoGOK&amp;unused=56 HTTP/1.1</status>
+        <headers>
+            <header field="Content-length" content="0" />
+            <header field="Accept-encoding" content="gzip, deflate" />
+            <header field="Accept" content="*/*" />
+            <header field="User-agent" content="w3af.org" />
+            <header field="Host" content="localhost:8000" />
+            <header field="Content-type" content="application/x-www-form-urlencoded" />
+        </headers>
+        <body content-encoding="base64"></body>
+    </http-request>
+
+    <http-response>
+        <status>HTTP/1.1 200 OK</status>
+        <headers>
+            <header field="date" content="Fri, 15 Jun 2018 14:36:49 GMT" />
+            <header field="last-modified" content="Thu, 14 Jun 2018 09:42:12 GMT" />
+            <header field="content-length" content="876" />
+            <header field="content-type" content="text/html" />
+            <header field="server" content="SimpleHTTP/0.6 Python/3.6.4" />
+        </headers>
+        <body content-encoding="base64">PHNjcmlwdD4KICB3aW5kb3cub25sb2FkID0gZnVuY3Rpb24oKSB7CiAgICB2YXIgdXJsID0gbmV3
+IFVSTCh3aW5kb3cubG9jYXRpb24uaHJlZik7CgogICAgdmFyIGMgPSB1cmwuc2VhcmNoUGFyYW1z
+LmdldCgiaW5qZWN0aW9uIik7CiAgICBpZiAoYykgewogICAgICBkb2N1bWVudC5nZXRFbGVtZW50
+QnlJZCgib3V0cHV0IikuaW5uZXJIVE1MID0gYzsKICAgIH0KCiAgICB2YXIgZCA9IHVybC5zZWFy
+Y2hQYXJhbXMuZ2V0KCJpbmplY3Rpb24yIik7CiAgICBpZiAoZCkgewogICAgICBkb2N1bWVudC5n
+ZXRFbGVtZW50QnlJZCgib3V0cHV0MiIpLmlubmVySFRNTCA9IGQ7CiAgICB9CgogICAgZG9jdW1l
+bnQuY29va2llID0gImZha2VfY29va2llXzE9Qk9PUDsiCiAgICBkb2N1bWVudC5jb29raWUgPSAi
+c2Vzc2lvbl9pZD0xMjM0NTY1NDIzIjsKICAgIGRvY3VtZW50LmNvb2tpZSA9ICJhbmFseXRpY3Nf
+Y29va2llPUJFRVAiOwogIH0KPC9zY3JpcHQ+Cgo8aDE+VnVsbmVyYWJpbGl0eSBUZXN0aW5nIHBh
+Z2U8L2gxPgoKPGZvcm0gaWQ9ImJvb3AiIGFjdGlvbj0iIj4KICA8aW5wdXQgdHlwZT0idGV4dCIg
+bmFtZT0iaW5qZWN0aW9uIiB2YWx1ZT0iIi8+CiAgPGlucHV0IHR5cGU9InRleHQiIG5hbWU9InVu
+dXNlZCIgdmFsdWU9IiI+CiAgPGlucHV0IHR5cGU9InN1Ym1pdCI+CjwvZm9ybT4KPGgyIGlkPSJv
+dXRwdXQiPjwvaDI+Cgo8Zm9ybSBpZD0iYmVlcCIgYWN0aW9uPSIiPgogIDxpbnB1dCB0eXBlPSJ0
+ZXh0IiBuYW1lPSJ1bnVzZWQiIHZhbHVlPSIiLz4KICA8aW5wdXQgdHlwZT0idGV4dCIgbmFtZT0i
+aW5qZWN0aW9uMiIgdmFsdWU9IiI+CiAgPGlucHV0IHR5cGU9InN1Ym1pdCI+CjwvZm9ybT4KPGgy
+IGlkPSJvdXRwdXQyIj48L2gyPgoK
+</body>
+    </http-response>
+
+</http-transaction>
+            <http-transaction id="232">
+
+    <http-request>
+        <status>GET http://localhost:8000/?injection=56&amp;unused=UEX3WPtY HTTP/1.1</status>
+        <headers>
+            <header field="Content-length" content="0" />
+            <header field="Accept-encoding" content="gzip, deflate" />
+            <header field="Accept" content="*/*" />
+            <header field="User-agent" content="w3af.org" />
+            <header field="Host" content="localhost:8000" />
+            <header field="Content-type" content="application/x-www-form-urlencoded" />
+        </headers>
+        <body content-encoding="base64"></body>
+    </http-request>
+
+    <http-response>
+        <status>HTTP/1.1 200 OK</status>
+        <headers>
+            <header field="date" content="Fri, 15 Jun 2018 14:36:49 GMT" />
+            <header field="last-modified" content="Thu, 14 Jun 2018 09:42:12 GMT" />
+            <header field="content-length" content="876" />
+            <header field="content-type" content="text/html" />
+            <header field="server" content="SimpleHTTP/0.6 Python/3.6.4" />
+        </headers>
+        <body content-encoding="base64">PHNjcmlwdD4KICB3aW5kb3cub25sb2FkID0gZnVuY3Rpb24oKSB7CiAgICB2YXIgdXJsID0gbmV3
+IFVSTCh3aW5kb3cubG9jYXRpb24uaHJlZik7CgogICAgdmFyIGMgPSB1cmwuc2VhcmNoUGFyYW1z
+LmdldCgiaW5qZWN0aW9uIik7CiAgICBpZiAoYykgewogICAgICBkb2N1bWVudC5nZXRFbGVtZW50
+QnlJZCgib3V0cHV0IikuaW5uZXJIVE1MID0gYzsKICAgIH0KCiAgICB2YXIgZCA9IHVybC5zZWFy
+Y2hQYXJhbXMuZ2V0KCJpbmplY3Rpb24yIik7CiAgICBpZiAoZCkgewogICAgICBkb2N1bWVudC5n
+ZXRFbGVtZW50QnlJZCgib3V0cHV0MiIpLmlubmVySFRNTCA9IGQ7CiAgICB9CgogICAgZG9jdW1l
+bnQuY29va2llID0gImZha2VfY29va2llXzE9Qk9PUDsiCiAgICBkb2N1bWVudC5jb29raWUgPSAi
+c2Vzc2lvbl9pZD0xMjM0NTY1NDIzIjsKICAgIGRvY3VtZW50LmNvb2tpZSA9ICJhbmFseXRpY3Nf
+Y29va2llPUJFRVAiOwogIH0KPC9zY3JpcHQ+Cgo8aDE+VnVsbmVyYWJpbGl0eSBUZXN0aW5nIHBh
+Z2U8L2gxPgoKPGZvcm0gaWQ9ImJvb3AiIGFjdGlvbj0iIj4KICA8aW5wdXQgdHlwZT0idGV4dCIg
+bmFtZT0iaW5qZWN0aW9uIiB2YWx1ZT0iIi8+CiAgPGlucHV0IHR5cGU9InRleHQiIG5hbWU9InVu
+dXNlZCIgdmFsdWU9IiI+CiAgPGlucHV0IHR5cGU9InN1Ym1pdCI+CjwvZm9ybT4KPGgyIGlkPSJv
+dXRwdXQiPjwvaDI+Cgo8Zm9ybSBpZD0iYmVlcCIgYWN0aW9uPSIiPgogIDxpbnB1dCB0eXBlPSJ0
+ZXh0IiBuYW1lPSJ1bnVzZWQiIHZhbHVlPSIiLz4KICA8aW5wdXQgdHlwZT0idGV4dCIgbmFtZT0i
+aW5qZWN0aW9uMiIgdmFsdWU9IiI+CiAgPGlucHV0IHR5cGU9InN1Ym1pdCI+CjwvZm9ybT4KPGgy
+IGlkPSJvdXRwdXQyIj48L2gyPgoK
+</body>
+    </http-response>
+
+</http-transaction>
+            <http-transaction id="60">
+
+    <http-request>
+        <status>GET http://localhost:8000/?pPfx9hs=%3Cscript%3Ealert%281%29%3C%2Fscript%3E HTTP/1.1</status>
+        <headers>
+            <header field="Host" content="localhost:8000" />
+            <header field="Accept-encoding" content="gzip, deflate" />
+            <header field="Accept" content="*/*" />
+            <header field="User-agent" content="w3af.org" />
+        </headers>
+        <body content-encoding="base64"></body>
+    </http-request>
+
+    <http-response>
+        <status>HTTP/1.1 200 OK</status>
+        <headers>
+            <header field="date" content="Fri, 15 Jun 2018 14:36:46 GMT" />
+            <header field="last-modified" content="Thu, 14 Jun 2018 09:42:12 GMT" />
+            <header field="content-length" content="876" />
+            <header field="content-type" content="text/html" />
+            <header field="server" content="SimpleHTTP/0.6 Python/3.6.4" />
+        </headers>
+        <body content-encoding="base64">PHNjcmlwdD4KICB3aW5kb3cub25sb2FkID0gZnVuY3Rpb24oKSB7CiAgICB2YXIgdXJsID0gbmV3
+IFVSTCh3aW5kb3cubG9jYXRpb24uaHJlZik7CgogICAgdmFyIGMgPSB1cmwuc2VhcmNoUGFyYW1z
+LmdldCgiaW5qZWN0aW9uIik7CiAgICBpZiAoYykgewogICAgICBkb2N1bWVudC5nZXRFbGVtZW50
+QnlJZCgib3V0cHV0IikuaW5uZXJIVE1MID0gYzsKICAgIH0KCiAgICB2YXIgZCA9IHVybC5zZWFy
+Y2hQYXJhbXMuZ2V0KCJpbmplY3Rpb24yIik7CiAgICBpZiAoZCkgewogICAgICBkb2N1bWVudC5n
+ZXRFbGVtZW50QnlJZCgib3V0cHV0MiIpLmlubmVySFRNTCA9IGQ7CiAgICB9CgogICAgZG9jdW1l
+bnQuY29va2llID0gImZha2VfY29va2llXzE9Qk9PUDsiCiAgICBkb2N1bWVudC5jb29raWUgPSAi
+c2Vzc2lvbl9pZD0xMjM0NTY1NDIzIjsKICAgIGRvY3VtZW50LmNvb2tpZSA9ICJhbmFseXRpY3Nf
+Y29va2llPUJFRVAiOwogIH0KPC9zY3JpcHQ+Cgo8aDE+VnVsbmVyYWJpbGl0eSBUZXN0aW5nIHBh
+Z2U8L2gxPgoKPGZvcm0gaWQ9ImJvb3AiIGFjdGlvbj0iIj4KICA8aW5wdXQgdHlwZT0idGV4dCIg
+bmFtZT0iaW5qZWN0aW9uIiB2YWx1ZT0iIi8+CiAgPGlucHV0IHR5cGU9InRleHQiIG5hbWU9InVu
+dXNlZCIgdmFsdWU9IiI+CiAgPGlucHV0IHR5cGU9InN1Ym1pdCI+CjwvZm9ybT4KPGgyIGlkPSJv
+dXRwdXQiPjwvaDI+Cgo8Zm9ybSBpZD0iYmVlcCIgYWN0aW9uPSIiPgogIDxpbnB1dCB0eXBlPSJ0
+ZXh0IiBuYW1lPSJ1bnVzZWQiIHZhbHVlPSIiLz4KICA8aW5wdXQgdHlwZT0idGV4dCIgbmFtZT0i
+aW5qZWN0aW9uMiIgdmFsdWU9IiI+CiAgPGlucHV0IHR5cGU9InN1Ym1pdCI+CjwvZm9ybT4KPGgy
+IGlkPSJvdXRwdXQyIj48L2gyPgoK
+</body>
+    </http-response>
+
+</http-transaction>
+            <http-transaction id="235">
+
+    <http-request>
+        <status>GET http://localhost:8000/?injection=%22&amp;unused=56 HTTP/1.1</status>
+        <headers>
+            <header field="Content-length" content="0" />
+            <header field="Accept-encoding" content="gzip, deflate" />
+            <header field="Accept" content="*/*" />
+            <header field="User-agent" content="w3af.org" />
+            <header field="Host" content="localhost:8000" />
+            <header field="Content-type" content="application/x-www-form-urlencoded" />
+        </headers>
+        <body content-encoding="base64"></body>
+    </http-request>
+
+    <http-response>
+        <status>HTTP/1.1 200 OK</status>
+        <headers>
+            <header field="date" content="Fri, 15 Jun 2018 14:36:49 GMT" />
+            <header field="last-modified" content="Thu, 14 Jun 2018 09:42:12 GMT" />
+            <header field="content-length" content="876" />
+            <header field="content-type" content="text/html" />
+            <header field="server" content="SimpleHTTP/0.6 Python/3.6.4" />
+        </headers>
+        <body content-encoding="base64">PHNjcmlwdD4KICB3aW5kb3cub25sb2FkID0gZnVuY3Rpb24oKSB7CiAgICB2YXIgdXJsID0gbmV3
+IFVSTCh3aW5kb3cubG9jYXRpb24uaHJlZik7CgogICAgdmFyIGMgPSB1cmwuc2VhcmNoUGFyYW1z
+LmdldCgiaW5qZWN0aW9uIik7CiAgICBpZiAoYykgewogICAgICBkb2N1bWVudC5nZXRFbGVtZW50
+QnlJZCgib3V0cHV0IikuaW5uZXJIVE1MID0gYzsKICAgIH0KCiAgICB2YXIgZCA9IHVybC5zZWFy
+Y2hQYXJhbXMuZ2V0KCJpbmplY3Rpb24yIik7CiAgICBpZiAoZCkgewogICAgICBkb2N1bWVudC5n
+ZXRFbGVtZW50QnlJZCgib3V0cHV0MiIpLmlubmVySFRNTCA9IGQ7CiAgICB9CgogICAgZG9jdW1l
+bnQuY29va2llID0gImZha2VfY29va2llXzE9Qk9PUDsiCiAgICBkb2N1bWVudC5jb29raWUgPSAi
+c2Vzc2lvbl9pZD0xMjM0NTY1NDIzIjsKICAgIGRvY3VtZW50LmNvb2tpZSA9ICJhbmFseXRpY3Nf
+Y29va2llPUJFRVAiOwogIH0KPC9zY3JpcHQ+Cgo8aDE+VnVsbmVyYWJpbGl0eSBUZXN0aW5nIHBh
+Z2U8L2gxPgoKPGZvcm0gaWQ9ImJvb3AiIGFjdGlvbj0iIj4KICA8aW5wdXQgdHlwZT0idGV4dCIg
+bmFtZT0iaW5qZWN0aW9uIiB2YWx1ZT0iIi8+CiAgPGlucHV0IHR5cGU9InRleHQiIG5hbWU9InVu
+dXNlZCIgdmFsdWU9IiI+CiAgPGlucHV0IHR5cGU9InN1Ym1pdCI+CjwvZm9ybT4KPGgyIGlkPSJv
+dXRwdXQiPjwvaDI+Cgo8Zm9ybSBpZD0iYmVlcCIgYWN0aW9uPSIiPgogIDxpbnB1dCB0eXBlPSJ0
+ZXh0IiBuYW1lPSJ1bnVzZWQiIHZhbHVlPSIiLz4KICA8aW5wdXQgdHlwZT0idGV4dCIgbmFtZT0i
+aW5qZWN0aW9uMiIgdmFsdWU9IiI+CiAgPGlucHV0IHR5cGU9InN1Ym1pdCI+CjwvZm9ybT4KPGgy
+IGlkPSJvdXRwdXQyIj48L2gyPgoK
+</body>
+    </http-response>
+
+</http-transaction>
+            <http-transaction id="236">
+
+    <http-request>
+        <status>GET http://localhost:8000/?injection=iDontExist&amp;unused=56 HTTP/1.1</status>
+        <headers>
+            <header field="Content-length" content="0" />
+            <header field="Accept-encoding" content="gzip, deflate" />
+            <header field="Accept" content="*/*" />
+            <header field="User-agent" content="w3af.org" />
+            <header field="Host" content="localhost:8000" />
+            <header field="Content-type" content="application/x-www-form-urlencoded" />
+        </headers>
+        <body content-encoding="base64"></body>
+    </http-request>
+
+    <http-response>
+        <status>HTTP/1.1 200 OK</status>
+        <headers>
+            <header field="date" content="Fri, 15 Jun 2018 14:36:49 GMT" />
+            <header field="last-modified" content="Thu, 14 Jun 2018 09:42:12 GMT" />
+            <header field="content-length" content="876" />
+            <header field="content-type" content="text/html" />
+            <header field="server" content="SimpleHTTP/0.6 Python/3.6.4" />
+        </headers>
+        <body content-encoding="base64">PHNjcmlwdD4KICB3aW5kb3cub25sb2FkID0gZnVuY3Rpb24oKSB7CiAgICB2YXIgdXJsID0gbmV3
+IFVSTCh3aW5kb3cubG9jYXRpb24uaHJlZik7CgogICAgdmFyIGMgPSB1cmwuc2VhcmNoUGFyYW1z
+LmdldCgiaW5qZWN0aW9uIik7CiAgICBpZiAoYykgewogICAgICBkb2N1bWVudC5nZXRFbGVtZW50
+QnlJZCgib3V0cHV0IikuaW5uZXJIVE1MID0gYzsKICAgIH0KCiAgICB2YXIgZCA9IHVybC5zZWFy
+Y2hQYXJhbXMuZ2V0KCJpbmplY3Rpb24yIik7CiAgICBpZiAoZCkgewogICAgICBkb2N1bWVudC5n
+ZXRFbGVtZW50QnlJZCgib3V0cHV0MiIpLmlubmVySFRNTCA9IGQ7CiAgICB9CgogICAgZG9jdW1l
+bnQuY29va2llID0gImZha2VfY29va2llXzE9Qk9PUDsiCiAgICBkb2N1bWVudC5jb29raWUgPSAi
+c2Vzc2lvbl9pZD0xMjM0NTY1NDIzIjsKICAgIGRvY3VtZW50LmNvb2tpZSA9ICJhbmFseXRpY3Nf
+Y29va2llPUJFRVAiOwogIH0KPC9zY3JpcHQ+Cgo8aDE+VnVsbmVyYWJpbGl0eSBUZXN0aW5nIHBh
+Z2U8L2gxPgoKPGZvcm0gaWQ9ImJvb3AiIGFjdGlvbj0iIj4KICA8aW5wdXQgdHlwZT0idGV4dCIg
+bmFtZT0iaW5qZWN0aW9uIiB2YWx1ZT0iIi8+CiAgPGlucHV0IHR5cGU9InRleHQiIG5hbWU9InVu
+dXNlZCIgdmFsdWU9IiI+CiAgPGlucHV0IHR5cGU9InN1Ym1pdCI+CjwvZm9ybT4KPGgyIGlkPSJv
+dXRwdXQiPjwvaDI+Cgo8Zm9ybSBpZD0iYmVlcCIgYWN0aW9uPSIiPgogIDxpbnB1dCB0eXBlPSJ0
+ZXh0IiBuYW1lPSJ1bnVzZWQiIHZhbHVlPSIiLz4KICA8aW5wdXQgdHlwZT0idGV4dCIgbmFtZT0i
+aW5qZWN0aW9uMiIgdmFsdWU9IiI+CiAgPGlucHV0IHR5cGU9InN1Ym1pdCI+CjwvZm9ybT4KPGgy
+IGlkPSJvdXRwdXQyIj48L2gyPgoK
+</body>
+    </http-response>
+
+</http-transaction>
+            <http-transaction id="62">
+
+    <http-request>
+        <status>GET http://localhost:8000/?pPfx9hs=type%20c%3A%5Cwinnt%5Crepair%5Csam._ HTTP/1.1</status>
+        <headers>
+            <header field="Host" content="localhost:8000" />
+            <header field="Accept-encoding" content="gzip, deflate" />
+            <header field="Accept" content="*/*" />
+            <header field="User-agent" content="w3af.org" />
+        </headers>
+        <body content-encoding="base64"></body>
+    </http-request>
+
+    <http-response>
+        <status>HTTP/1.1 200 OK</status>
+        <headers>
+            <header field="date" content="Fri, 15 Jun 2018 14:36:46 GMT" />
+            <header field="last-modified" content="Thu, 14 Jun 2018 09:42:12 GMT" />
+            <header field="content-length" content="876" />
+            <header field="content-type" content="text/html" />
+            <header field="server" content="SimpleHTTP/0.6 Python/3.6.4" />
+        </headers>
+        <body content-encoding="base64">PHNjcmlwdD4KICB3aW5kb3cub25sb2FkID0gZnVuY3Rpb24oKSB7CiAgICB2YXIgdXJsID0gbmV3
+IFVSTCh3aW5kb3cubG9jYXRpb24uaHJlZik7CgogICAgdmFyIGMgPSB1cmwuc2VhcmNoUGFyYW1z
+LmdldCgiaW5qZWN0aW9uIik7CiAgICBpZiAoYykgewogICAgICBkb2N1bWVudC5nZXRFbGVtZW50
+QnlJZCgib3V0cHV0IikuaW5uZXJIVE1MID0gYzsKICAgIH0KCiAgICB2YXIgZCA9IHVybC5zZWFy
+Y2hQYXJhbXMuZ2V0KCJpbmplY3Rpb24yIik7CiAgICBpZiAoZCkgewogICAgICBkb2N1bWVudC5n
+ZXRFbGVtZW50QnlJZCgib3V0cHV0MiIpLmlubmVySFRNTCA9IGQ7CiAgICB9CgogICAgZG9jdW1l
+bnQuY29va2llID0gImZha2VfY29va2llXzE9Qk9PUDsiCiAgICBkb2N1bWVudC5jb29raWUgPSAi
+c2Vzc2lvbl9pZD0xMjM0NTY1NDIzIjsKICAgIGRvY3VtZW50LmNvb2tpZSA9ICJhbmFseXRpY3Nf
+Y29va2llPUJFRVAiOwogIH0KPC9zY3JpcHQ+Cgo8aDE+VnVsbmVyYWJpbGl0eSBUZXN0aW5nIHBh
+Z2U8L2gxPgoKPGZvcm0gaWQ9ImJvb3AiIGFjdGlvbj0iIj4KICA8aW5wdXQgdHlwZT0idGV4dCIg
+bmFtZT0iaW5qZWN0aW9uIiB2YWx1ZT0iIi8+CiAgPGlucHV0IHR5cGU9InRleHQiIG5hbWU9InVu
+dXNlZCIgdmFsdWU9IiI+CiAgPGlucHV0IHR5cGU9InN1Ym1pdCI+CjwvZm9ybT4KPGgyIGlkPSJv
+dXRwdXQiPjwvaDI+Cgo8Zm9ybSBpZD0iYmVlcCIgYWN0aW9uPSIiPgogIDxpbnB1dCB0eXBlPSJ0
+ZXh0IiBuYW1lPSJ1bnVzZWQiIHZhbHVlPSIiLz4KICA8aW5wdXQgdHlwZT0idGV4dCIgbmFtZT0i
+aW5qZWN0aW9uMiIgdmFsdWU9IiI+CiAgPGlucHV0IHR5cGU9InN1Ym1pdCI+CjwvZm9ybT4KPGgy
+IGlkPSJvdXRwdXQyIj48L2gyPgoK
+</body>
+    </http-response>
+
+</http-transaction>
+    </http-transactions>
+</vulnerability>
+        <vulnerability id="[41]" method="GET" name="Server header" plugin="server_header" severity="Information" url="None" var="None">
+    <description>The server header for the remote web server is: &quot;SimpleHTTP/0.6 Python/3.6.4&quot;.</description>
+
+
+    <http-transactions>
+            <http-transaction id="41">
+
+    <http-request>
+        <status>GET http://localhost:8000/ HTTP/1.1</status>
+        <headers>
+            <header field="Host" content="localhost:8000" />
+            <header field="Accept-encoding" content="gzip, deflate" />
+            <header field="Accept" content="*/*" />
+            <header field="User-agent" content="w3af.org" />
+        </headers>
+        <body content-encoding="base64"></body>
+    </http-request>
+
+    <http-response>
+        <status>HTTP/1.1 200 OK</status>
+        <headers>
+            <header field="date" content="Fri, 15 Jun 2018 14:36:44 GMT" />
+            <header field="last-modified" content="Thu, 14 Jun 2018 09:42:12 GMT" />
+            <header field="content-length" content="876" />
+            <header field="content-type" content="text/html" />
+            <header field="server" content="SimpleHTTP/0.6 Python/3.6.4" />
+        </headers>
+        <body content-encoding="base64">PHNjcmlwdD4KICB3aW5kb3cub25sb2FkID0gZnVuY3Rpb24oKSB7CiAgICB2YXIgdXJsID0gbmV3
+IFVSTCh3aW5kb3cubG9jYXRpb24uaHJlZik7CgogICAgdmFyIGMgPSB1cmwuc2VhcmNoUGFyYW1z
+LmdldCgiaW5qZWN0aW9uIik7CiAgICBpZiAoYykgewogICAgICBkb2N1bWVudC5nZXRFbGVtZW50
+QnlJZCgib3V0cHV0IikuaW5uZXJIVE1MID0gYzsKICAgIH0KCiAgICB2YXIgZCA9IHVybC5zZWFy
+Y2hQYXJhbXMuZ2V0KCJpbmplY3Rpb24yIik7CiAgICBpZiAoZCkgewogICAgICBkb2N1bWVudC5n
+ZXRFbGVtZW50QnlJZCgib3V0cHV0MiIpLmlubmVySFRNTCA9IGQ7CiAgICB9CgogICAgZG9jdW1l
+bnQuY29va2llID0gImZha2VfY29va2llXzE9Qk9PUDsiCiAgICBkb2N1bWVudC5jb29raWUgPSAi
+c2Vzc2lvbl9pZD0xMjM0NTY1NDIzIjsKICAgIGRvY3VtZW50LmNvb2tpZSA9ICJhbmFseXRpY3Nf
+Y29va2llPUJFRVAiOwogIH0KPC9zY3JpcHQ+Cgo8aDE+VnVsbmVyYWJpbGl0eSBUZXN0aW5nIHBh
+Z2U8L2gxPgoKPGZvcm0gaWQ9ImJvb3AiIGFjdGlvbj0iIj4KICA8aW5wdXQgdHlwZT0idGV4dCIg
+bmFtZT0iaW5qZWN0aW9uIiB2YWx1ZT0iIi8+CiAgPGlucHV0IHR5cGU9InRleHQiIG5hbWU9InVu
+dXNlZCIgdmFsdWU9IiI+CiAgPGlucHV0IHR5cGU9InN1Ym1pdCI+CjwvZm9ybT4KPGgyIGlkPSJv
+dXRwdXQiPjwvaDI+Cgo8Zm9ybSBpZD0iYmVlcCIgYWN0aW9uPSIiPgogIDxpbnB1dCB0eXBlPSJ0
+ZXh0IiBuYW1lPSJ1bnVzZWQiIHZhbHVlPSIiLz4KICA8aW5wdXQgdHlwZT0idGV4dCIgbmFtZT0i
+aW5qZWN0aW9uMiIgdmFsdWU9IiI+CiAgPGlucHV0IHR5cGU9InN1Ym1pdCI+CjwvZm9ybT4KPGgy
+IGlkPSJvdXRwdXQyIj48L2gyPgoK
+</body>
+    </http-response>
+
+</http-transaction>
+    </http-transactions>
+</vulnerability>
+        <vulnerability id="[191]" method="GET" name="DNS wildcard" plugin="dns_wildcard" severity="Information" url="http://localhost:8000/" var="None">
+    <description>The target site has a DNS wildcard configuration, the contents of &quot;http://foobar.localhost:8000/&quot; are equal to the ones of &quot;http://localhost:8000/&quot;.</description>
+
+
+    <http-transactions>
+            <http-transaction id="191">
+
+    <http-request>
+        <status>GET http://localhost:8000/ HTTP/1.1</status>
+        <headers>
+            <header field="Host" content="foobar.localhost" />
+            <header field="Accept-encoding" content="gzip, deflate" />
+            <header field="Accept" content="*/*" />
+            <header field="User-agent" content="w3af.org" />
+        </headers>
+        <body content-encoding="base64"></body>
+    </http-request>
+
+    <http-response>
+        <status>HTTP/1.1 200 OK</status>
+        <headers>
+            <header field="date" content="Fri, 15 Jun 2018 14:36:48 GMT" />
+            <header field="last-modified" content="Thu, 14 Jun 2018 09:42:12 GMT" />
+            <header field="content-length" content="876" />
+            <header field="content-type" content="text/html" />
+            <header field="server" content="SimpleHTTP/0.6 Python/3.6.4" />
+        </headers>
+        <body content-encoding="base64">PHNjcmlwdD4KICB3aW5kb3cub25sb2FkID0gZnVuY3Rpb24oKSB7CiAgICB2YXIgdXJsID0gbmV3
+IFVSTCh3aW5kb3cubG9jYXRpb24uaHJlZik7CgogICAgdmFyIGMgPSB1cmwuc2VhcmNoUGFyYW1z
+LmdldCgiaW5qZWN0aW9uIik7CiAgICBpZiAoYykgewogICAgICBkb2N1bWVudC5nZXRFbGVtZW50
+QnlJZCgib3V0cHV0IikuaW5uZXJIVE1MID0gYzsKICAgIH0KCiAgICB2YXIgZCA9IHVybC5zZWFy
+Y2hQYXJhbXMuZ2V0KCJpbmplY3Rpb24yIik7CiAgICBpZiAoZCkgewogICAgICBkb2N1bWVudC5n
+ZXRFbGVtZW50QnlJZCgib3V0cHV0MiIpLmlubmVySFRNTCA9IGQ7CiAgICB9CgogICAgZG9jdW1l
+bnQuY29va2llID0gImZha2VfY29va2llXzE9Qk9PUDsiCiAgICBkb2N1bWVudC5jb29raWUgPSAi
+c2Vzc2lvbl9pZD0xMjM0NTY1NDIzIjsKICAgIGRvY3VtZW50LmNvb2tpZSA9ICJhbmFseXRpY3Nf
+Y29va2llPUJFRVAiOwogIH0KPC9zY3JpcHQ+Cgo8aDE+VnVsbmVyYWJpbGl0eSBUZXN0aW5nIHBh
+Z2U8L2gxPgoKPGZvcm0gaWQ9ImJvb3AiIGFjdGlvbj0iIj4KICA8aW5wdXQgdHlwZT0idGV4dCIg
+bmFtZT0iaW5qZWN0aW9uIiB2YWx1ZT0iIi8+CiAgPGlucHV0IHR5cGU9InRleHQiIG5hbWU9InVu
+dXNlZCIgdmFsdWU9IiI+CiAgPGlucHV0IHR5cGU9InN1Ym1pdCI+CjwvZm9ybT4KPGgyIGlkPSJv
+dXRwdXQiPjwvaDI+Cgo8Zm9ybSBpZD0iYmVlcCIgYWN0aW9uPSIiPgogIDxpbnB1dCB0eXBlPSJ0
+ZXh0IiBuYW1lPSJ1bnVzZWQiIHZhbHVlPSIiLz4KICA8aW5wdXQgdHlwZT0idGV4dCIgbmFtZT0i
+aW5qZWN0aW9uMiIgdmFsdWU9IiI+CiAgPGlucHV0IHR5cGU9InN1Ym1pdCI+CjwvZm9ybT4KPGgy
+IGlkPSJvdXRwdXQyIj48L2gyPgoK
+</body>
+    </http-response>
+
+</http-transaction>
+    </http-transactions>
+</vulnerability>
+        <vulnerability id="[192, 193, 136, 83, 53, 187, 188, 189, 190]" method="GET" name="Strange HTTP Reason message" plugin="strange_reason" severity="Information" url="http://localhost:8000/_vti_inf.html" var="None">
+    <description>The remote web server sent 9 HTTP responses with the uncommon status message &quot;File not found&quot;, manual inspection is recommended. The first ten URLs which sent the uncommon message are:
+ - http://localhost:8000/status
+ - http://localhost:8000/_vti_inf.html
+ - http://localhost:8000/web-console/ServerInfo.jsp
+ - http://localhost:8000/jmx-console/
+ - http://localhost:8000/invoker/JMXInvokerServlet
+ - http://localhost:8000/WebConsole/Invoker
+ - http://localhost:8000/server-status
+ - http://localhost:8000/favicon.ico
+ - http://localhost:8000/admin-console/
+</description>
+
+
+    <http-transactions>
+            <http-transaction id="192">
+
+    <http-request>
+        <status>GET http://localhost:8000/WebConsole/Invoker HTTP/1.1</status>
+        <headers>
+            <header field="Host" content="localhost:8000" />
+            <header field="Accept-encoding" content="gzip, deflate" />
+            <header field="Accept" content="*/*" />
+            <header field="User-agent" content="w3af.org" />
+        </headers>
+        <body content-encoding="base64"></body>
+    </http-request>
+
+    <http-response>
+        <status>HTTP/1.1 404 File not found</status>
+        <headers>
+            <header field="date" content="Fri, 15 Jun 2018 14:36:48 GMT" />
+            <header field="connection" content="close" />
+            <header field="content-type" content="text/html;charset=utf-8" />
+            <header field="content-length" content="469" />
+            <header field="server" content="SimpleHTTP/0.6 Python/3.6.4" />
+        </headers>
+        <body content-encoding="base64">PCFET0NUWVBFIEhUTUwgUFVCTElDICItLy9XM0MvL0RURCBIVE1MIDQuMDEvL0VOIgogICAgICAg
+ICJodHRwOi8vd3d3LnczLm9yZy9UUi9odG1sNC9zdHJpY3QuZHRkIj4KPGh0bWw+CiAgICA8aGVh
+ZD4KICAgICAgICA8bWV0YSBodHRwLWVxdWl2PSJDb250ZW50LVR5cGUiIGNvbnRlbnQ9InRleHQv
+aHRtbDtjaGFyc2V0PXV0Zi04Ij4KICAgICAgICA8dGl0bGU+RXJyb3IgcmVzcG9uc2U8L3RpdGxl
+PgogICAgPC9oZWFkPgogICAgPGJvZHk+CiAgICAgICAgPGgxPkVycm9yIHJlc3BvbnNlPC9oMT4K
+ICAgICAgICA8cD5FcnJvciBjb2RlOiA0MDQ8L3A+CiAgICAgICAgPHA+TWVzc2FnZTogRmlsZSBu
+b3QgZm91bmQuPC9wPgogICAgICAgIDxwPkVycm9yIGNvZGUgZXhwbGFuYXRpb246IEhUVFBTdGF0
+dXMuTk9UX0ZPVU5EIC0gTm90aGluZyBtYXRjaGVzIHRoZSBnaXZlbiBVUkkuPC9wPgogICAgPC9i
+b2R5Pgo8L2h0bWw+Cg==
+</body>
+    </http-response>
+
+</http-transaction>
+            <http-transaction id="193">
+
+    <http-request>
+        <status>GET http://localhost:8000/invoker/JMXInvokerServlet HTTP/1.1</status>
+        <headers>
+            <header field="Host" content="localhost:8000" />
+            <header field="Accept-encoding" content="gzip, deflate" />
+            <header field="Accept" content="*/*" />
+            <header field="User-agent" content="w3af.org" />
+        </headers>
+        <body content-encoding="base64"></body>
+    </http-request>
+
+    <http-response>
+        <status>HTTP/1.1 404 File not found</status>
+        <headers>
+            <header field="date" content="Fri, 15 Jun 2018 14:36:48 GMT" />
+            <header field="connection" content="close" />
+            <header field="content-type" content="text/html;charset=utf-8" />
+            <header field="content-length" content="469" />
+            <header field="server" content="SimpleHTTP/0.6 Python/3.6.4" />
+        </headers>
+        <body content-encoding="base64">PCFET0NUWVBFIEhUTUwgUFVCTElDICItLy9XM0MvL0RURCBIVE1MIDQuMDEvL0VOIgogICAgICAg
+ICJodHRwOi8vd3d3LnczLm9yZy9UUi9odG1sNC9zdHJpY3QuZHRkIj4KPGh0bWw+CiAgICA8aGVh
+ZD4KICAgICAgICA8bWV0YSBodHRwLWVxdWl2PSJDb250ZW50LVR5cGUiIGNvbnRlbnQ9InRleHQv
+aHRtbDtjaGFyc2V0PXV0Zi04Ij4KICAgICAgICA8dGl0bGU+RXJyb3IgcmVzcG9uc2U8L3RpdGxl
+PgogICAgPC9oZWFkPgogICAgPGJvZHk+CiAgICAgICAgPGgxPkVycm9yIHJlc3BvbnNlPC9oMT4K
+ICAgICAgICA8cD5FcnJvciBjb2RlOiA0MDQ8L3A+CiAgICAgICAgPHA+TWVzc2FnZTogRmlsZSBu
+b3QgZm91bmQuPC9wPgogICAgICAgIDxwPkVycm9yIGNvZGUgZXhwbGFuYXRpb246IEhUVFBTdGF0
+dXMuTk9UX0ZPVU5EIC0gTm90aGluZyBtYXRjaGVzIHRoZSBnaXZlbiBVUkkuPC9wPgogICAgPC9i
+b2R5Pgo8L2h0bWw+Cg==
+</body>
+    </http-response>
+
+</http-transaction>
+            <http-transaction id="136">
+
+    <http-request>
+        <status>GET http://localhost:8000/server-status HTTP/1.1</status>
+        <headers>
+            <header field="Host" content="localhost:8000" />
+            <header field="Accept-encoding" content="gzip, deflate" />
+            <header field="Accept" content="*/*" />
+            <header field="User-agent" content="w3af.org" />
+        </headers>
+        <body content-encoding="base64"></body>
+    </http-request>
+
+    <http-response>
+        <status>HTTP/1.1 404 File not found</status>
+        <headers>
+            <header field="date" content="Fri, 15 Jun 2018 14:36:47 GMT" />
+            <header field="connection" content="close" />
+            <header field="content-type" content="text/html;charset=utf-8" />
+            <header field="content-length" content="469" />
+            <header field="server" content="SimpleHTTP/0.6 Python/3.6.4" />
+        </headers>
+        <body content-encoding="base64">PCFET0NUWVBFIEhUTUwgUFVCTElDICItLy9XM0MvL0RURCBIVE1MIDQuMDEvL0VOIgogICAgICAg
+ICJodHRwOi8vd3d3LnczLm9yZy9UUi9odG1sNC9zdHJpY3QuZHRkIj4KPGh0bWw+CiAgICA8aGVh
+ZD4KICAgICAgICA8bWV0YSBodHRwLWVxdWl2PSJDb250ZW50LVR5cGUiIGNvbnRlbnQ9InRleHQv
+aHRtbDtjaGFyc2V0PXV0Zi04Ij4KICAgICAgICA8dGl0bGU+RXJyb3IgcmVzcG9uc2U8L3RpdGxl
+PgogICAgPC9oZWFkPgogICAgPGJvZHk+CiAgICAgICAgPGgxPkVycm9yIHJlc3BvbnNlPC9oMT4K
+ICAgICAgICA8cD5FcnJvciBjb2RlOiA0MDQ8L3A+CiAgICAgICAgPHA+TWVzc2FnZTogRmlsZSBu
+b3QgZm91bmQuPC9wPgogICAgICAgIDxwPkVycm9yIGNvZGUgZXhwbGFuYXRpb246IEhUVFBTdGF0
+dXMuTk9UX0ZPVU5EIC0gTm90aGluZyBtYXRjaGVzIHRoZSBnaXZlbiBVUkkuPC9wPgogICAgPC9i
+b2R5Pgo8L2h0bWw+Cg==
+</body>
+    </http-response>
+
+</http-transaction>
+            <http-transaction id="83">
+
+    <http-request>
+        <status>GET http://localhost:8000/favicon.ico HTTP/1.1</status>
+        <headers>
+            <header field="Host" content="localhost:8000" />
+            <header field="Accept-encoding" content="gzip, deflate" />
+            <header field="Accept" content="*/*" />
+            <header field="User-agent" content="w3af.org" />
+        </headers>
+        <body content-encoding="base64"></body>
+    </http-request>
+
+    <http-response>
+        <status>HTTP/1.1 404 File not found</status>
+        <headers>
+            <header field="date" content="Fri, 15 Jun 2018 14:36:46 GMT" />
+            <header field="connection" content="close" />
+            <header field="content-type" content="text/html;charset=utf-8" />
+            <header field="content-length" content="469" />
+            <header field="server" content="SimpleHTTP/0.6 Python/3.6.4" />
+        </headers>
+        <body content-encoding="base64">PCFET0NUWVBFIEhUTUwgUFVCTElDICItLy9XM0MvL0RURCBIVE1MIDQuMDEvL0VOIgogICAgICAg
+ICJodHRwOi8vd3d3LnczLm9yZy9UUi9odG1sNC9zdHJpY3QuZHRkIj4KPGh0bWw+CiAgICA8aGVh
+ZD4KICAgICAgICA8bWV0YSBodHRwLWVxdWl2PSJDb250ZW50LVR5cGUiIGNvbnRlbnQ9InRleHQv
+aHRtbDtjaGFyc2V0PXV0Zi04Ij4KICAgICAgICA8dGl0bGU+RXJyb3IgcmVzcG9uc2U8L3RpdGxl
+PgogICAgPC9oZWFkPgogICAgPGJvZHk+CiAgICAgICAgPGgxPkVycm9yIHJlc3BvbnNlPC9oMT4K
+ICAgICAgICA8cD5FcnJvciBjb2RlOiA0MDQ8L3A+CiAgICAgICAgPHA+TWVzc2FnZTogRmlsZSBu
+b3QgZm91bmQuPC9wPgogICAgICAgIDxwPkVycm9yIGNvZGUgZXhwbGFuYXRpb246IEhUVFBTdGF0
+dXMuTk9UX0ZPVU5EIC0gTm90aGluZyBtYXRjaGVzIHRoZSBnaXZlbiBVUkkuPC9wPgogICAgPC9i
+b2R5Pgo8L2h0bWw+Cg==
+</body>
+    </http-response>
+
+</http-transaction>
+            <http-transaction id="53">
+
+    <http-request>
+        <status>GET http://localhost:8000/_vti_inf.html HTTP/1.1</status>
+        <headers>
+            <header field="Host" content="localhost:8000" />
+            <header field="Accept-encoding" content="gzip, deflate" />
+            <header field="Accept" content="*/*" />
+            <header field="User-agent" content="w3af.org" />
+        </headers>
+        <body content-encoding="base64"></body>
+    </http-request>
+
+    <http-response>
+        <status>HTTP/1.1 404 File not found</status>
+        <headers>
+            <header field="date" content="Fri, 15 Jun 2018 14:36:46 GMT" />
+            <header field="connection" content="close" />
+            <header field="content-type" content="text/html;charset=utf-8" />
+            <header field="content-length" content="469" />
+            <header field="server" content="SimpleHTTP/0.6 Python/3.6.4" />
+        </headers>
+        <body content-encoding="base64">PCFET0NUWVBFIEhUTUwgUFVCTElDICItLy9XM0MvL0RURCBIVE1MIDQuMDEvL0VOIgogICAgICAg
+ICJodHRwOi8vd3d3LnczLm9yZy9UUi9odG1sNC9zdHJpY3QuZHRkIj4KPGh0bWw+CiAgICA8aGVh
+ZD4KICAgICAgICA8bWV0YSBodHRwLWVxdWl2PSJDb250ZW50LVR5cGUiIGNvbnRlbnQ9InRleHQv
+aHRtbDtjaGFyc2V0PXV0Zi04Ij4KICAgICAgICA8dGl0bGU+RXJyb3IgcmVzcG9uc2U8L3RpdGxl
+PgogICAgPC9oZWFkPgogICAgPGJvZHk+CiAgICAgICAgPGgxPkVycm9yIHJlc3BvbnNlPC9oMT4K
+ICAgICAgICA8cD5FcnJvciBjb2RlOiA0MDQ8L3A+CiAgICAgICAgPHA+TWVzc2FnZTogRmlsZSBu
+b3QgZm91bmQuPC9wPgogICAgICAgIDxwPkVycm9yIGNvZGUgZXhwbGFuYXRpb246IEhUVFBTdGF0
+dXMuTk9UX0ZPVU5EIC0gTm90aGluZyBtYXRjaGVzIHRoZSBnaXZlbiBVUkkuPC9wPgogICAgPC9i
+b2R5Pgo8L2h0bWw+Cg==
+</body>
+    </http-response>
+
+</http-transaction>
+            <http-transaction id="187">
+
+    <http-request>
+        <status>GET http://localhost:8000/admin-console/ HTTP/1.1</status>
+        <headers>
+            <header field="Host" content="localhost:8000" />
+            <header field="Accept-encoding" content="gzip, deflate" />
+            <header field="Accept" content="*/*" />
+            <header field="User-agent" content="w3af.org" />
+        </headers>
+        <body content-encoding="base64"></body>
+    </http-request>
+
+    <http-response>
+        <status>HTTP/1.1 404 File not found</status>
+        <headers>
+            <header field="date" content="Fri, 15 Jun 2018 14:36:48 GMT" />
+            <header field="connection" content="close" />
+            <header field="content-type" content="text/html;charset=utf-8" />
+            <header field="content-length" content="469" />
+            <header field="server" content="SimpleHTTP/0.6 Python/3.6.4" />
+        </headers>
+        <body content-encoding="base64">PCFET0NUWVBFIEhUTUwgUFVCTElDICItLy9XM0MvL0RURCBIVE1MIDQuMDEvL0VOIgogICAgICAg
+ICJodHRwOi8vd3d3LnczLm9yZy9UUi9odG1sNC9zdHJpY3QuZHRkIj4KPGh0bWw+CiAgICA8aGVh
+ZD4KICAgICAgICA8bWV0YSBodHRwLWVxdWl2PSJDb250ZW50LVR5cGUiIGNvbnRlbnQ9InRleHQv
+aHRtbDtjaGFyc2V0PXV0Zi04Ij4KICAgICAgICA8dGl0bGU+RXJyb3IgcmVzcG9uc2U8L3RpdGxl
+PgogICAgPC9oZWFkPgogICAgPGJvZHk+CiAgICAgICAgPGgxPkVycm9yIHJlc3BvbnNlPC9oMT4K
+ICAgICAgICA8cD5FcnJvciBjb2RlOiA0MDQ8L3A+CiAgICAgICAgPHA+TWVzc2FnZTogRmlsZSBu
+b3QgZm91bmQuPC9wPgogICAgICAgIDxwPkVycm9yIGNvZGUgZXhwbGFuYXRpb246IEhUVFBTdGF0
+dXMuTk9UX0ZPVU5EIC0gTm90aGluZyBtYXRjaGVzIHRoZSBnaXZlbiBVUkkuPC9wPgogICAgPC9i
+b2R5Pgo8L2h0bWw+Cg==
+</body>
+    </http-response>
+
+</http-transaction>
+            <http-transaction id="188">
+
+    <http-request>
+        <status>GET http://localhost:8000/jmx-console/ HTTP/1.1</status>
+        <headers>
+            <header field="Host" content="localhost:8000" />
+            <header field="Accept-encoding" content="gzip, deflate" />
+            <header field="Accept" content="*/*" />
+            <header field="User-agent" content="w3af.org" />
+        </headers>
+        <body content-encoding="base64"></body>
+    </http-request>
+
+    <http-response>
+        <status>HTTP/1.1 404 File not found</status>
+        <headers>
+            <header field="date" content="Fri, 15 Jun 2018 14:36:48 GMT" />
+            <header field="connection" content="close" />
+            <header field="content-type" content="text/html;charset=utf-8" />
+            <header field="content-length" content="469" />
+            <header field="server" content="SimpleHTTP/0.6 Python/3.6.4" />
+        </headers>
+        <body content-encoding="base64">PCFET0NUWVBFIEhUTUwgUFVCTElDICItLy9XM0MvL0RURCBIVE1MIDQuMDEvL0VOIgogICAgICAg
+ICJodHRwOi8vd3d3LnczLm9yZy9UUi9odG1sNC9zdHJpY3QuZHRkIj4KPGh0bWw+CiAgICA8aGVh
+ZD4KICAgICAgICA8bWV0YSBodHRwLWVxdWl2PSJDb250ZW50LVR5cGUiIGNvbnRlbnQ9InRleHQv
+aHRtbDtjaGFyc2V0PXV0Zi04Ij4KICAgICAgICA8dGl0bGU+RXJyb3IgcmVzcG9uc2U8L3RpdGxl
+PgogICAgPC9oZWFkPgogICAgPGJvZHk+CiAgICAgICAgPGgxPkVycm9yIHJlc3BvbnNlPC9oMT4K
+ICAgICAgICA8cD5FcnJvciBjb2RlOiA0MDQ8L3A+CiAgICAgICAgPHA+TWVzc2FnZTogRmlsZSBu
+b3QgZm91bmQuPC9wPgogICAgICAgIDxwPkVycm9yIGNvZGUgZXhwbGFuYXRpb246IEhUVFBTdGF0
+dXMuTk9UX0ZPVU5EIC0gTm90aGluZyBtYXRjaGVzIHRoZSBnaXZlbiBVUkkuPC9wPgogICAgPC9i
+b2R5Pgo8L2h0bWw+Cg==
+</body>
+    </http-response>
+
+</http-transaction>
+            <http-transaction id="189">
+
+    <http-request>
+        <status>GET http://localhost:8000/status HTTP/1.1</status>
+        <headers>
+            <header field="Host" content="localhost:8000" />
+            <header field="Accept-encoding" content="gzip, deflate" />
+            <header field="Accept" content="*/*" />
+            <header field="User-agent" content="w3af.org" />
+        </headers>
+        <body content-encoding="base64"></body>
+    </http-request>
+
+    <http-response>
+        <status>HTTP/1.1 404 File not found</status>
+        <headers>
+            <header field="date" content="Fri, 15 Jun 2018 14:36:48 GMT" />
+            <header field="connection" content="close" />
+            <header field="content-type" content="text/html;charset=utf-8" />
+            <header field="content-length" content="469" />
+            <header field="server" content="SimpleHTTP/0.6 Python/3.6.4" />
+        </headers>
+        <body content-encoding="base64">PCFET0NUWVBFIEhUTUwgUFVCTElDICItLy9XM0MvL0RURCBIVE1MIDQuMDEvL0VOIgogICAgICAg
+ICJodHRwOi8vd3d3LnczLm9yZy9UUi9odG1sNC9zdHJpY3QuZHRkIj4KPGh0bWw+CiAgICA8aGVh
+ZD4KICAgICAgICA8bWV0YSBodHRwLWVxdWl2PSJDb250ZW50LVR5cGUiIGNvbnRlbnQ9InRleHQv
+aHRtbDtjaGFyc2V0PXV0Zi04Ij4KICAgICAgICA8dGl0bGU+RXJyb3IgcmVzcG9uc2U8L3RpdGxl
+PgogICAgPC9oZWFkPgogICAgPGJvZHk+CiAgICAgICAgPGgxPkVycm9yIHJlc3BvbnNlPC9oMT4K
+ICAgICAgICA8cD5FcnJvciBjb2RlOiA0MDQ8L3A+CiAgICAgICAgPHA+TWVzc2FnZTogRmlsZSBu
+b3QgZm91bmQuPC9wPgogICAgICAgIDxwPkVycm9yIGNvZGUgZXhwbGFuYXRpb246IEhUVFBTdGF0
+dXMuTk9UX0ZPVU5EIC0gTm90aGluZyBtYXRjaGVzIHRoZSBnaXZlbiBVUkkuPC9wPgogICAgPC9i
+b2R5Pgo8L2h0bWw+Cg==
+</body>
+    </http-response>
+
+</http-transaction>
+            <http-transaction id="190">
+
+    <http-request>
+        <status>GET http://localhost:8000/web-console/ServerInfo.jsp HTTP/1.1</status>
+        <headers>
+            <header field="Host" content="localhost:8000" />
+            <header field="Accept-encoding" content="gzip, deflate" />
+            <header field="Accept" content="*/*" />
+            <header field="User-agent" content="w3af.org" />
+        </headers>
+        <body content-encoding="base64"></body>
+    </http-request>
+
+    <http-response>
+        <status>HTTP/1.1 404 File not found</status>
+        <headers>
+            <header field="date" content="Fri, 15 Jun 2018 14:36:48 GMT" />
+            <header field="connection" content="close" />
+            <header field="content-type" content="text/html;charset=utf-8" />
+            <header field="content-length" content="469" />
+            <header field="server" content="SimpleHTTP/0.6 Python/3.6.4" />
+        </headers>
+        <body content-encoding="base64">PCFET0NUWVBFIEhUTUwgUFVCTElDICItLy9XM0MvL0RURCBIVE1MIDQuMDEvL0VOIgogICAgICAg
+ICJodHRwOi8vd3d3LnczLm9yZy9UUi9odG1sNC9zdHJpY3QuZHRkIj4KPGh0bWw+CiAgICA8aGVh
+ZD4KICAgICAgICA8bWV0YSBodHRwLWVxdWl2PSJDb250ZW50LVR5cGUiIGNvbnRlbnQ9InRleHQv
+aHRtbDtjaGFyc2V0PXV0Zi04Ij4KICAgICAgICA8dGl0bGU+RXJyb3IgcmVzcG9uc2U8L3RpdGxl
+PgogICAgPC9oZWFkPgogICAgPGJvZHk+CiAgICAgICAgPGgxPkVycm9yIHJlc3BvbnNlPC9oMT4K
+ICAgICAgICA8cD5FcnJvciBjb2RlOiA0MDQ8L3A+CiAgICAgICAgPHA+TWVzc2FnZTogRmlsZSBu
+b3QgZm91bmQuPC9wPgogICAgICAgIDxwPkVycm9yIGNvZGUgZXhwbGFuYXRpb246IEhUVFBTdGF0
+dXMuTk9UX0ZPVU5EIC0gTm90aGluZyBtYXRjaGVzIHRoZSBnaXZlbiBVUkkuPC9wPgogICAgPC9i
+b2R5Pgo8L2h0bWw+Cg==
+</body>
+    </http-response>
+
+</http-transaction>
+    </http-transactions>
+</vulnerability>
+        <vulnerability id="[39, 97, 207]" method="GET" name="Allowed HTTP methods" plugin="allowed_methods" severity="Information" url="http://localhost:8000/" var="None">
+    <description>The URL &quot;http://localhost:8000/&quot; has the following enabled HTTP methods: GET, HEAD</description>
+
+    <long-description>There are a number of HTTP methods that can be used on a webserver
+(`OPTIONS`, `HEAD`, `GET`, `POST`, `PUT`, `DELETE` etc.). Each of
+these methods perform a different function and each have an associated
+level of risk when their use is permitted on the webserver.
+
+A client
+can use the `OPTIONS` method within a request to query a server to
+determine which methods are allowed.
+
+Cyber-criminals will almost
+always perform this simple test as it will give a very quick
+indication of any high-risk methods being permitted by the server.
+The tool discovered that several methods are supported by the server.</long-description>
+    <fix-guidance>It is recommended that a whitelisting approach be taken to explicitly
+permit the HTTP methods required by the application and block all
+others.
+
+Typically the only HTTP methods required for most
+applications are `GET` and `POST`. All other methods perform actions
+that are rarely required or perform actions that are inherently risky.
+These risky methods (such as `PUT`, `DELETE`, etc) should be protected
+by strict limitations, such as ensuring that the channel is secure
+(SSL/TLS enabled) and only authorised and trusted clients are
+permitted to use them.</fix-guidance>
+    <fix-effort>50</fix-effort>
+    <references>
+            <reference title="Apache.org" url="http://httpd.apache.org/docs/2.2/mod/core.html#limitexcept" />
+    </references>
+
+    <http-transactions>
+            <http-transaction id="39">
+
+    <http-request>
+        <status>OPTIONS http://localhost:8000/ HTTP/1.1</status>
+        <headers>
+            <header field="Host" content="localhost:8000" />
+            <header field="Accept-encoding" content="gzip, deflate" />
+            <header field="Accept" content="*/*" />
+            <header field="User-agent" content="w3af.org" />
+        </headers>
+        <body content-encoding="base64"></body>
+    </http-request>
+
+    <http-response>
+        <status>HTTP/1.1 501 Unsupported method ('OPTIONS')</status>
+        <headers>
+            <header field="date" content="Fri, 15 Jun 2018 14:36:46 GMT" />
+            <header field="connection" content="close" />
+            <header field="content-type" content="text/html;charset=utf-8" />
+            <header field="content-length" content="500" />
+            <header field="server" content="SimpleHTTP/0.6 Python/3.6.4" />
+        </headers>
+        <body content-encoding="base64">PCFET0NUWVBFIEhUTUwgUFVCTElDICItLy9XM0MvL0RURCBIVE1MIDQuMDEvL0VOIgogICAgICAg
+ICJodHRwOi8vd3d3LnczLm9yZy9UUi9odG1sNC9zdHJpY3QuZHRkIj4KPGh0bWw+CiAgICA8aGVh
+ZD4KICAgICAgICA8bWV0YSBodHRwLWVxdWl2PSJDb250ZW50LVR5cGUiIGNvbnRlbnQ9InRleHQv
+aHRtbDtjaGFyc2V0PXV0Zi04Ij4KICAgICAgICA8dGl0bGU+RXJyb3IgcmVzcG9uc2U8L3RpdGxl
+PgogICAgPC9oZWFkPgogICAgPGJvZHk+CiAgICAgICAgPGgxPkVycm9yIHJlc3BvbnNlPC9oMT4K
+ICAgICAgICA8cD5FcnJvciBjb2RlOiA1MDE8L3A+CiAgICAgICAgPHA+TWVzc2FnZTogVW5zdXBw
+b3J0ZWQgbWV0aG9kICgnT1BUSU9OUycpLjwvcD4KICAgICAgICA8cD5FcnJvciBjb2RlIGV4cGxh
+bmF0aW9uOiBIVFRQU3RhdHVzLk5PVF9JTVBMRU1FTlRFRCAtIFNlcnZlciBkb2VzIG5vdCBzdXBw
+b3J0IHRoaXMgb3BlcmF0aW9uLjwvcD4KICAgIDwvYm9keT4KPC9odG1sPgo=
+</body>
+    </http-response>
+
+</http-transaction>
+            <http-transaction id="97">
+
+    <http-request>
+        <status>HEAD http://localhost:8000/ HTTP/1.1</status>
+        <headers>
+            <header field="Host" content="localhost:8000" />
+            <header field="Accept-encoding" content="gzip, deflate" />
+            <header field="Accept" content="*/*" />
+            <header field="User-agent" content="w3af.org" />
+        </headers>
+        <body content-encoding="base64"></body>
+    </http-request>
+
+    <http-response>
+        <status>HTTP/1.1 200 OK</status>
+        <headers>
+            <header field="date" content="Fri, 15 Jun 2018 14:36:47 GMT" />
+            <header field="last-modified" content="Thu, 14 Jun 2018 09:42:12 GMT" />
+            <header field="content-length" content="876" />
+            <header field="content-type" content="text/html" />
+            <header field="server" content="SimpleHTTP/0.6 Python/3.6.4" />
+        </headers>
+        <body content-encoding="base64"></body>
+    </http-response>
+
+</http-transaction>
+            <http-transaction id="207">
+
+    <http-request>
+        <status>GET http://localhost:8000/ HTTP/1.1</status>
+        <headers>
+            <header field="Host" content="localhost:8000" />
+            <header field="Accept-encoding" content="gzip, deflate" />
+            <header field="Accept" content="*/*" />
+            <header field="User-agent" content="w3af.org" />
+        </headers>
+        <body content-encoding="base64"></body>
+    </http-request>
+
+    <http-response>
+        <status>HTTP/1.1 200 OK</status>
+        <headers>
+            <header field="date" content="Fri, 15 Jun 2018 14:36:48 GMT" />
+            <header field="last-modified" content="Thu, 14 Jun 2018 09:42:12 GMT" />
+            <header field="content-length" content="876" />
+            <header field="content-type" content="text/html" />
+            <header field="server" content="SimpleHTTP/0.6 Python/3.6.4" />
+        </headers>
+        <body content-encoding="base64">PHNjcmlwdD4KICB3aW5kb3cub25sb2FkID0gZnVuY3Rpb24oKSB7CiAgICB2YXIgdXJsID0gbmV3
+IFVSTCh3aW5kb3cubG9jYXRpb24uaHJlZik7CgogICAgdmFyIGMgPSB1cmwuc2VhcmNoUGFyYW1z
+LmdldCgiaW5qZWN0aW9uIik7CiAgICBpZiAoYykgewogICAgICBkb2N1bWVudC5nZXRFbGVtZW50
+QnlJZCgib3V0cHV0IikuaW5uZXJIVE1MID0gYzsKICAgIH0KCiAgICB2YXIgZCA9IHVybC5zZWFy
+Y2hQYXJhbXMuZ2V0KCJpbmplY3Rpb24yIik7CiAgICBpZiAoZCkgewogICAgICBkb2N1bWVudC5n
+ZXRFbGVtZW50QnlJZCgib3V0cHV0MiIpLmlubmVySFRNTCA9IGQ7CiAgICB9CgogICAgZG9jdW1l
+bnQuY29va2llID0gImZha2VfY29va2llXzE9Qk9PUDsiCiAgICBkb2N1bWVudC5jb29raWUgPSAi
+c2Vzc2lvbl9pZD0xMjM0NTY1NDIzIjsKICAgIGRvY3VtZW50LmNvb2tpZSA9ICJhbmFseXRpY3Nf
+Y29va2llPUJFRVAiOwogIH0KPC9zY3JpcHQ+Cgo8aDE+VnVsbmVyYWJpbGl0eSBUZXN0aW5nIHBh
+Z2U8L2gxPgoKPGZvcm0gaWQ9ImJvb3AiIGFjdGlvbj0iIj4KICA8aW5wdXQgdHlwZT0idGV4dCIg
+bmFtZT0iaW5qZWN0aW9uIiB2YWx1ZT0iIi8+CiAgPGlucHV0IHR5cGU9InRleHQiIG5hbWU9InVu
+dXNlZCIgdmFsdWU9IiI+CiAgPGlucHV0IHR5cGU9InN1Ym1pdCI+CjwvZm9ybT4KPGgyIGlkPSJv
+dXRwdXQiPjwvaDI+Cgo8Zm9ybSBpZD0iYmVlcCIgYWN0aW9uPSIiPgogIDxpbnB1dCB0eXBlPSJ0
+ZXh0IiBuYW1lPSJ1bnVzZWQiIHZhbHVlPSIiLz4KICA8aW5wdXQgdHlwZT0idGV4dCIgbmFtZT0i
+aW5qZWN0aW9uMiIgdmFsdWU9IiI+CiAgPGlucHV0IHR5cGU9InN1Ym1pdCI+CjwvZm9ybT4KPGgy
+IGlkPSJvdXRwdXQyIj48L2gyPgoK
+</body>
+    </http-response>
+
+</http-transaction>
+    </http-transactions>
+</vulnerability>
+        <vulnerability id="[68]" method="GET" name="Strange HTTP Reason message" plugin="strange_reason" severity="Information" url="http://localhost:8000/cMmBd" var="None">
+    <description>The remote web server sent 1 HTTP responses with the uncommon status message &quot;Unsupported method ('PUT')&quot;, manual inspection is recommended. The first ten URLs which sent the uncommon message are:
+ - http://localhost:8000/cMmBd
+</description>
+
+
+    <http-transactions>
+            <http-transaction id="68">
+
+    <http-request>
+        <status>PUT http://localhost:8000/cMmBd HTTP/1.1</status>
+        <headers>
+            <header field="Content-length" content="6" />
+            <header field="Accept-encoding" content="gzip, deflate" />
+            <header field="Accept" content="*/*" />
+            <header field="User-agent" content="w3af.org" />
+            <header field="Host" content="localhost:8000" />
+            <header field="Content-type" content="text/plain" />
+        </headers>
+        <body content-encoding="base64">dnVjYlk2
+</body>
+    </http-request>
+
+    <http-response>
+        <status>HTTP/1.1 501 Unsupported method ('PUT')</status>
+        <headers>
+            <header field="date" content="Fri, 15 Jun 2018 14:36:46 GMT" />
+            <header field="connection" content="close" />
+            <header field="content-type" content="text/html;charset=utf-8" />
+            <header field="content-length" content="496" />
+            <header field="server" content="SimpleHTTP/0.6 Python/3.6.4" />
+        </headers>
+        <body content-encoding="base64">PCFET0NUWVBFIEhUTUwgUFVCTElDICItLy9XM0MvL0RURCBIVE1MIDQuMDEvL0VOIgogICAgICAg
+ICJodHRwOi8vd3d3LnczLm9yZy9UUi9odG1sNC9zdHJpY3QuZHRkIj4KPGh0bWw+CiAgICA8aGVh
+ZD4KICAgICAgICA8bWV0YSBodHRwLWVxdWl2PSJDb250ZW50LVR5cGUiIGNvbnRlbnQ9InRleHQv
+aHRtbDtjaGFyc2V0PXV0Zi04Ij4KICAgICAgICA8dGl0bGU+RXJyb3IgcmVzcG9uc2U8L3RpdGxl
+PgogICAgPC9oZWFkPgogICAgPGJvZHk+CiAgICAgICAgPGgxPkVycm9yIHJlc3BvbnNlPC9oMT4K
+ICAgICAgICA8cD5FcnJvciBjb2RlOiA1MDE8L3A+CiAgICAgICAgPHA+TWVzc2FnZTogVW5zdXBw
+b3J0ZWQgbWV0aG9kICgnUFVUJykuPC9wPgogICAgICAgIDxwPkVycm9yIGNvZGUgZXhwbGFuYXRp
+b246IEhUVFBTdGF0dXMuTk9UX0lNUExFTUVOVEVEIC0gU2VydmVyIGRvZXMgbm90IHN1cHBvcnQg
+dGhpcyBvcGVyYXRpb24uPC9wPgogICAgPC9ib2R5Pgo8L2h0bWw+Cg==
+</body>
+    </http-response>
+
+</http-transaction>
+    </http-transactions>
+</vulnerability>
+        <vulnerability id="[19, 68]" method="GET" name="Click-Jacking vulnerability" plugin="click_jacking" severity="Medium" url="None" var="None">
+    <description>The whole target has no protection (X-Frame-Options header) against Click-Jacking attacks</description>
+
+    <long-description>Clickjacking (User Interface redress attack, UI redress attack, UI
+redressing) is a malicious technique of tricking a Web user into
+clicking on something different from what the user perceives they are
+clicking on, thus potentially revealing confidential information or
+taking control of their computer while clicking on seemingly innocuous
+web pages.
+
+The server didn't return an `X-Frame-Options` header which
+means that this website could be at risk of a clickjacking attack.
+The `X-Frame-Options` HTTP response header can be used to indicate
+whether or not a browser should be allowed to render a page inside a
+frame or iframe. Sites can use this to avoid clickjacking attacks, by
+ensuring that their content is not embedded into other sites.</long-description>
+    <fix-guidance>C
+o
+n
+f
+i
+g
+u
+r
+e
+ 
+y
+o
+u
+r
+ 
+w
+e
+b
+ 
+s
+e
+r
+v
+e
+r
+ 
+t
+o
+ 
+i
+n
+c
+l
+u
+d
+e
+ 
+a
+n
+ 
+X
+-
+F
+r
+a
+m
+e
+-
+O
+p
+t
+i
+o
+n
+s
+ 
+h
+e
+a
+d
+e
+r
+.</fix-guidance>
+    <fix-effort>50</fix-effort>
+    <references>
+            <reference title="RFC-7034" url="http://tools.ietf.org/html/rfc7034" />
+            <reference title="Mozilla developer network" url="https://developer.mozilla.org/en-US/docs/Web/HTTP/X-Frame-Options" />
+            <reference title="OWASP Clickjacking document" url="https://www.owasp.org/index.php/Clickjacking" />
+    </references>
+
+    <http-transactions>
+            <http-transaction id="19">
+
+    <http-request>
+        <status>GET http://localhost:8000/ HTTP/1.1</status>
+        <headers>
+            <header field="Host" content="localhost:8000" />
+            <header field="Accept-encoding" content="gzip, deflate" />
+            <header field="Accept" content="*/*" />
+            <header field="User-agent" content="w3af.org" />
+        </headers>
+        <body content-encoding="base64"></body>
+    </http-request>
+
+    <http-response>
+        <status>HTTP/1.1 200 OK</status>
+        <headers>
+            <header field="date" content="Fri, 15 Jun 2018 14:36:44 GMT" />
+            <header field="last-modified" content="Thu, 14 Jun 2018 09:42:12 GMT" />
+            <header field="content-length" content="876" />
+            <header field="content-type" content="text/html" />
+            <header field="server" content="SimpleHTTP/0.6 Python/3.6.4" />
+        </headers>
+        <body content-encoding="base64">PHNjcmlwdD4KICB3aW5kb3cub25sb2FkID0gZnVuY3Rpb24oKSB7CiAgICB2YXIgdXJsID0gbmV3
+IFVSTCh3aW5kb3cubG9jYXRpb24uaHJlZik7CgogICAgdmFyIGMgPSB1cmwuc2VhcmNoUGFyYW1z
+LmdldCgiaW5qZWN0aW9uIik7CiAgICBpZiAoYykgewogICAgICBkb2N1bWVudC5nZXRFbGVtZW50
+QnlJZCgib3V0cHV0IikuaW5uZXJIVE1MID0gYzsKICAgIH0KCiAgICB2YXIgZCA9IHVybC5zZWFy
+Y2hQYXJhbXMuZ2V0KCJpbmplY3Rpb24yIik7CiAgICBpZiAoZCkgewogICAgICBkb2N1bWVudC5n
+ZXRFbGVtZW50QnlJZCgib3V0cHV0MiIpLmlubmVySFRNTCA9IGQ7CiAgICB9CgogICAgZG9jdW1l
+bnQuY29va2llID0gImZha2VfY29va2llXzE9Qk9PUDsiCiAgICBkb2N1bWVudC5jb29raWUgPSAi
+c2Vzc2lvbl9pZD0xMjM0NTY1NDIzIjsKICAgIGRvY3VtZW50LmNvb2tpZSA9ICJhbmFseXRpY3Nf
+Y29va2llPUJFRVAiOwogIH0KPC9zY3JpcHQ+Cgo8aDE+VnVsbmVyYWJpbGl0eSBUZXN0aW5nIHBh
+Z2U8L2gxPgoKPGZvcm0gaWQ9ImJvb3AiIGFjdGlvbj0iIj4KICA8aW5wdXQgdHlwZT0idGV4dCIg
+bmFtZT0iaW5qZWN0aW9uIiB2YWx1ZT0iIi8+CiAgPGlucHV0IHR5cGU9InRleHQiIG5hbWU9InVu
+dXNlZCIgdmFsdWU9IiI+CiAgPGlucHV0IHR5cGU9InN1Ym1pdCI+CjwvZm9ybT4KPGgyIGlkPSJv
+dXRwdXQiPjwvaDI+Cgo8Zm9ybSBpZD0iYmVlcCIgYWN0aW9uPSIiPgogIDxpbnB1dCB0eXBlPSJ0
+ZXh0IiBuYW1lPSJ1bnVzZWQiIHZhbHVlPSIiLz4KICA8aW5wdXQgdHlwZT0idGV4dCIgbmFtZT0i
+aW5qZWN0aW9uMiIgdmFsdWU9IiI+CiAgPGlucHV0IHR5cGU9InN1Ym1pdCI+CjwvZm9ybT4KPGgy
+IGlkPSJvdXRwdXQyIj48L2gyPgoK
+</body>
+    </http-response>
+
+</http-transaction>
+            <http-transaction id="68">
+
+    <http-request>
+        <status>PUT http://localhost:8000/cMmBd HTTP/1.1</status>
+        <headers>
+            <header field="Content-length" content="6" />
+            <header field="Accept-encoding" content="gzip, deflate" />
+            <header field="Accept" content="*/*" />
+            <header field="User-agent" content="w3af.org" />
+            <header field="Host" content="localhost:8000" />
+            <header field="Content-type" content="text/plain" />
+        </headers>
+        <body content-encoding="base64">dnVjYlk2
+</body>
+    </http-request>
+
+    <http-response>
+        <status>HTTP/1.1 501 Unsupported method ('PUT')</status>
+        <headers>
+            <header field="date" content="Fri, 15 Jun 2018 14:36:46 GMT" />
+            <header field="connection" content="close" />
+            <header field="content-type" content="text/html;charset=utf-8" />
+            <header field="content-length" content="496" />
+            <header field="server" content="SimpleHTTP/0.6 Python/3.6.4" />
+        </headers>
+        <body content-encoding="base64">PCFET0NUWVBFIEhUTUwgUFVCTElDICItLy9XM0MvL0RURCBIVE1MIDQuMDEvL0VOIgogICAgICAg
+ICJodHRwOi8vd3d3LnczLm9yZy9UUi9odG1sNC9zdHJpY3QuZHRkIj4KPGh0bWw+CiAgICA8aGVh
+ZD4KICAgICAgICA8bWV0YSBodHRwLWVxdWl2PSJDb250ZW50LVR5cGUiIGNvbnRlbnQ9InRleHQv
+aHRtbDtjaGFyc2V0PXV0Zi04Ij4KICAgICAgICA8dGl0bGU+RXJyb3IgcmVzcG9uc2U8L3RpdGxl
+PgogICAgPC9oZWFkPgogICAgPGJvZHk+CiAgICAgICAgPGgxPkVycm9yIHJlc3BvbnNlPC9oMT4K
+ICAgICAgICA8cD5FcnJvciBjb2RlOiA1MDE8L3A+CiAgICAgICAgPHA+TWVzc2FnZTogVW5zdXBw
+b3J0ZWQgbWV0aG9kICgnUFVUJykuPC9wPgogICAgICAgIDxwPkVycm9yIGNvZGUgZXhwbGFuYXRp
+b246IEhUVFBTdGF0dXMuTk9UX0lNUExFTUVOVEVEIC0gU2VydmVyIGRvZXMgbm90IHN1cHBvcnQg
+dGhpcyBvcGVyYXRpb24uPC9wPgogICAgPC9ib2R5Pgo8L2h0bWw+Cg==
+</body>
+    </http-response>
+
+</http-transaction>
+    </http-transactions>
+</vulnerability>
+
+    <error caller="threading">The ClamAV plugin failed to connect to clamd using the provided unix socket: &quot;/var/run/clamav/clamd.ctl&quot;. Please verify your configuration and try again.</error>
+    <error caller="threading">audit.rfi plugin needs to be correctly configured to use. Please set valid values for local address (eg. 10.5.2.5) and port (eg. 44449), or use the official w3af site as the target server for remote inclusions. The configuration error is: &quot;Listen address and port need to be configured&quot;</error>
+    <error caller="threading">An unhandled exception occurred while running hmap: &quot;'HEADER_ORDER'&quot;</error>
+</w3af-run>

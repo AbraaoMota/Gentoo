@@ -1,0 +1,30 @@
+Information,Missing X-Content-Type-Options header,GET,http://localhost:8000/,,,|[260, 136, 19, 38, 43, 44, 46, 48, 50, 51, 52, 53, 55, 58, 187, 188, 189, 190, 192, 193, 68, 83, 224, 59, 231, 232, 60, 235, 236, 62]|,|The remote web application sent 11 HTTP responses which do not contain the X-Content-Type-Options header. The first ten URLs which did not send the header are:
+ - http://localhost:8000/status
+ - http://localhost:8000/_vti_inf.html
+ - http://localhost:8000/web-console/ServerInfo.jsp
+ - http://localhost:8000/jmx-console/
+ - http://localhost:8000/
+ - http://localhost:8000/cMmBd
+ - http://localhost:8000/invoker/JMXInvokerServlet
+ - http://localhost:8000/WebConsole/Invoker
+ - http://localhost:8000/server-status
+ - http://localhost:8000/favicon.ico
+|
+Information,Server header,GET,,,,[41],The server header for the remote web server is: "SimpleHTTP/0.6 Python/3.6.4".This information was found in the request with id 41.
+Information,DNS wildcard,GET,http://localhost:8000/,,,[191],|The target site has a DNS wildcard configuration, the contents of "http://foobar.localhost:8000/" are equal to the ones of "http://localhost:8000/".This information was found in the request with id 191.|
+Information,Strange HTTP Reason message,GET,http://localhost:8000/_vti_inf.html,,,|[192, 193, 136, 83, 53, 187, 188, 189, 190]|,|The remote web server sent 9 HTTP responses with the uncommon status message "File not found", manual inspection is recommended. The first ten URLs which sent the uncommon message are:
+ - http://localhost:8000/status
+ - http://localhost:8000/_vti_inf.html
+ - http://localhost:8000/web-console/ServerInfo.jsp
+ - http://localhost:8000/jmx-console/
+ - http://localhost:8000/invoker/JMXInvokerServlet
+ - http://localhost:8000/WebConsole/Invoker
+ - http://localhost:8000/server-status
+ - http://localhost:8000/favicon.ico
+ - http://localhost:8000/admin-console/
+|
+Information,Allowed HTTP methods,GET,http://localhost:8000/,,,|[39, 97, 207]|,|The URL "http://localhost:8000/" has the following enabled HTTP methods: GET, HEAD. This information was found in the requests with ids 39, 97 and 207.|
+Information,Strange HTTP Reason message,GET,http://localhost:8000/cMmBd,,,[68],|The remote web server sent 1 HTTP responses with the uncommon status message "Unsupported method ('PUT')", manual inspection is recommended. The first ten URLs which sent the uncommon message are:
+ - http://localhost:8000/cMmBd
+|
+Medium,Click-Jacking vulnerability,GET,,,,|[19, 68]|,The whole target has no protection (X-Frame-Options header) against Click-Jacking attacks. This vulnerability was found in the requests with ids 19 and 68.

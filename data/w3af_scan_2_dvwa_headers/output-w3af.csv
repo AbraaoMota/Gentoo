@@ -1,0 +1,41 @@
+Medium,Insecure password submission over HTTP,GET,http://10.6.66.42/dvwa/login.php,,,[20],The URL: "http://10.6.66.42/dvwa/login.php" contains a <form> tag which submits credentials over HTTP. This vulnerability was found in the request with id 20.
+Information,Missing X-Content-Type-Options header,GET,http://10.6.66.42/dvwa/login.php,,,|[20, 43, 45, 46, 47, 48, 52, 53, 55, 56, 57, 58, 61, 65, 66, 67, 68, 71, 91, 95, 96, 97, 99, 100, 101, 103, 104, 105, 107, 118]|,|The remote web application sent 17 HTTP responses which do not contain the X-Content-Type-Options header. The first ten URLs which did not send the header are:
+ - http://10.6.66.42/_vti_inf.html
+ - http://10.6.66.42/dvwa/login~.php
+ - http://10.6.66.42/WebConsole/Invoker
+ - http://10.6.66.42/dvwa\login.php
+ - http://10.6.66.42/
+ - http://10.6.66.42/dvwa/qnsrU
+ - http://10.6.66.42/status
+ - http://10.6.66.42/dvwa/_vti_inf.html
+ - http://10.6.66.42/web-console/ServerInfo.jsp
+ - http://10.6.66.42/jmx-console/
+|
+Information,Server header,GET,,,,[44],The server header for the remote web server is: "Apache/2.4.10 (Debian) PHP/5.6.29-0+deb8u1".This information was found in the request with id 44.
+Information,Operating system,GET,http://10.6.66.42/dvwa\login.php,,,|[45, 51]|,|Fingerprinted this host as a *nix system. Detection for this operating system is weak, "if not windows then linux".This information was found in the requests with ids 45 and 51.|
+Information,Transparent proxy detected,GET,http://10.6.66.42/dvwa/login.php,,,[1],|Your ISP seems to have a transparent proxy installed, this can influence scan results in unexpected ways.This information was found in the request with id 1.|
+Information,Favicon identification failed,GET,http://10.6.66.42/dvwa/favicon.ico,,,[43],|Favicon identification failed. If the remote site is using framework that is being exposed by its favicon, please send an email to w3af-develop@lists.sourceforge.net including this md5 hash "69c728902a3f1df75cf9eac73bd55556" and the name of the server or Web application it represents. New fingerprints make this plugin more powerful and  accurate.This information was found in the request with id 43.|
+Information,Powered-by header,GET,,,,[108],The x-powered-by header for the target HTTP server is "PHP/5.6.29-0+deb8u1".This information was found in the request with id 108.
+Information,Non existent methods default to GET,GET,http://10.6.66.42/dvwa/,,,|[148, 158]|,|The remote Web server has a custom configuration, in which any not implemented methods that are invoked are defaulted to GET instead of returning a "Not Implemented" response.This information was found in the requests with ids 148 and 158.|
+Low,Path disclosure vulnerability,GET,http://10.6.66.42/,,,[47],The URL: "http://10.6.66.42/" has a path disclosure vulnerability which discloses "/bin/apache2".This vulnerability was found in the request with id 47.
+Information,HTML comment contains HTML code,GET,http://10.6.66.42/,,,[47],A comment with the string "<div class="table_of_contents floating_e" was found in: "http://10.6.66.42/". This could be interesting.This information was found in the request with id 47.
+Information,Webserver fingerprint,GET,,,,[1],The most accurate fingerprint for this HTTP server is: "Apache/2.0.52 (Unix) PHP/5.0.3".This information was found in the request with id 1.
+Information,Strange HTTP response code,GET,http://10.6.66.42/dvwa/qnsrU,,,|[2179, 2152, 1129, 874, 107, 2446, 1105, 1106, 2269, 1150]|,|The remote web server sent 10 HTTP responses with the uncommon response status code 405 using "Method Not Allowed" as message. The first ten URLs which sent the uncommon status code are:
+ - http://10.6.66.42/dvwa/dvwa/css/pFXzv
+ - http://10.6.66.42/dvwa/dvwa/PoOTr
+ - http://10.6.66.42/dvwa/dvwa/includes/DBMS/Ahrjb
+ - http://10.6.66.42/dvwa/dvwa/includes/jWqaU
+ - http://10.6.66.42/dvwa/dvwa/images/
+ - http://10.6.66.42/dvwa/dvwa/images/qnKNu
+ - http://10.6.66.42/UPbed
+ - http://10.6.66.42/icons/bstMz
+ - http://10.6.66.42/dvwa/dvwa/js/jBnDV
+ - http://10.6.66.42/dvwa/qnsrU
+|
+Low,Directory indexing,GET,http://10.6.66.42/dvwa/dvwa/,,,[905],The URL: "http://10.6.66.42/dvwa/dvwa/" has a directory indexing vulnerability.This vulnerability was found in the request with id 905.
+Low,Directory indexing,GET,http://10.6.66.42/dvwa/dvwa/js/,,,[1215],The URL: "http://10.6.66.42/dvwa/dvwa/js/" has a directory indexing vulnerability.This vulnerability was found in the request with id 1215.
+Low,Directory indexing,GET,http://10.6.66.42/dvwa/dvwa/includes/,,,[1478],The URL: "http://10.6.66.42/dvwa/dvwa/includes/" has a directory indexing vulnerability.This vulnerability was found in the request with id 1478.
+Information,Blank http response body,GET,http://10.6.66.42/dvwa/dvwa/includes/dvwaPhpIds.inc.php,,,[2194],|The URL: "http://10.6.66.42/dvwa/dvwa/includes/dvwaPhpIds.inc.php" returned an empty body, this could indicate an application error.This information was found in the request with id 2194.|
+Low,Directory indexing,GET,http://10.6.66.42/dvwa/dvwa/includes/DBMS/,,,[2243],The URL: "http://10.6.66.42/dvwa/dvwa/includes/DBMS/" has a directory indexing vulnerability.This vulnerability was found in the request with id 2243.
+Information,Blank http response body,GET,http://10.6.66.42/dvwa/dvwa/includes/DBMS/PGSQL.php,,,[2331],|The URL: "http://10.6.66.42/dvwa/dvwa/includes/DBMS/PGSQL.php" returned an empty body, this could indicate an application error.This information was found in the request with id 2331.|
+Information,Blank http response body,GET,http://10.6.66.42/dvwa/dvwa/includes/DBMS/MySQL.php,,,[2375],|The URL: "http://10.6.66.42/dvwa/dvwa/includes/DBMS/MySQL.php" returned an empty body, this could indicate an application error.This information was found in the request with id 2375.|

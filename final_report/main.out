@@ -46,6 +46,13 @@
 \BOOKMARK [1][-]{section.6.2}{Experiments}{chapter.6}% 46
 \BOOKMARK [2][-]{subsection.6.2.1}{Test benches}{section.6.2}% 47
 \BOOKMARK [2][-]{subsection.6.2.2}{Test methodology}{section.6.2}% 48
-\BOOKMARK [0][-]{chapter.7}{Conclusion}{}% 49
-\BOOKMARK [0][-]{appendix.A}{Appendix}{}% 50
-\BOOKMARK [1][-]{section.A.1}{Exploit Code}{appendix.A}% 51
+\BOOKMARK [1][-]{section.6.3}{Benchmark analysis}{chapter.6}% 49
+\BOOKMARK [2][-]{subsection.6.3.1}{Test Harness}{section.6.3}% 50
+\BOOKMARK [2][-]{subsection.6.3.2}{DVWA}{section.6.3}% 51
+\BOOKMARK [2][-]{subsection.6.3.3}{WebGoat}{section.6.3}% 52
+\BOOKMARK [2][-]{subsection.6.3.4}{WackoPicko}{section.6.3}% 53
+\BOOKMARK [1][-]{section.6.4}{Live application scanning}{chapter.6}% 54
+\BOOKMARK [1][-]{section.6.5}{Accessibility}{chapter.6}% 55
+\BOOKMARK [0][-]{chapter.7}{Conclusion}{}% 56
+\BOOKMARK [0][-]{appendix.A}{Appendix}{}% 57
+\BOOKMARK [1][-]{section.A.1}{Exploit Code}{appendix.A}% 58

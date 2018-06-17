@@ -22,6 +22,7 @@ var ARMessageHandler = function(message, sender, sendResponse) {
       toggleActionRecordingButton();
       ARMessageHandlerBusy = false;
     } else if (message.name === "devToolsParams" && ARsession === "recording") {
+      console.log("RECEIVED A REQUEST TO ANALYSE");
       storeARrequests(storage, message);
       ARMessageHandlerBusy = false;
     }

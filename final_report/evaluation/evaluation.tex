@@ -2,6 +2,8 @@
 \chapter{Evaluation}
 
 
+In this section we will take a retrospective look at the tool and its achievements. We observe some benchmarks ran against competitors as well as measure how well Gentoo has performed given the expected pre-requisites as set out earlier in this thesis. We will also attempt to given a qualitative evaluation of how well it has performed, given initial user feedback (beyond the quantitative analysis). \\
+
 \section{Metrics of success}
 
 To appropriately judge the success of the extension, we must have some quantifiable metrics, described below
@@ -73,3 +75,217 @@ To quantify how well the tool performs its job, the success rates of all 3 group
 Additionally, comparing each group success rate to the success rates of each of the automated scanners is useful to be able to validate the claim that a user driven, semi-automated approach is advantageous. This should be done within the context of what vulnerabilities the extension is able to detect - if an automated scanner can find more types of vulnerabilities than the ones the extension has been designed to find, then these will not be counted in the results. For a fair comparison in that aspect, it is assumed that with more development time, the extension may be developed further to be able to identify another type of vulnerability. \\
 
 Another means of testing the success of the application would be to put it to test against real world applications. By activating the described passive mode as needed, and browsing web application domains, it is possible that a user of the extension finds vulnerabilities in the target application. Should this happen, it would be a great validating factor for the success of the tool.
+
+
+\section{Benchmark analysis}
+
+We now compare and analyse Gentoo's performance against other tools when scanning vulnerable web applications. We will be using OWASP's Zed Attack Proxy Project (\textit{ZAP}), and the Web Application Attack and Audit Framework (\textit{w3af}) as points of comparison - both of these are open source web scanners. In order to ensure a fair basis for comparing these tools, we used a virtual machine running the \textit{Kali} Linux distribution\footnote{ Kali version 3.26.2. The virtual machine was allocated 3.9GB memory, using an Intel i7-4980HQ at 2.8GHz (2 cores)} and installed each tool in this VM. \\
+
+ As part of setting up these benchmarks (which were mostly geared towards finding XSS vulnerabilities as per Gentoo's current functionality), it was also necessary to use a proxy to disable the browser's XSS Auditor. Since the benchmarks are comprised of web applications with intentionally vulnerable functionalities, we want to observe this functionality without the extra protections added by the browser. For this purpose, we use BurpSuite's proxying feature to capture requests and disable the \texttt{X-XSS-Protection} header (should it be present, Figure \ref{fig:burp_xss_disabled}). We enable its use in Chrome by linking it with \textit{ProxySwitchOmega} \footnote{ ProxySwitchOmega is a Google Chrome extension to enable request proxying: https://goo.gl/iFSJvH.}. \\
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=\textwidth]{images/evaluation/burp_xss_disabled.png}
+	\caption{Any request passed to Gentoo or the other tools is stripped of the \texttt{X-XSS-Protection} header, allowing for accurate XSS detection.}
+	\label{fig:burp_xss_disabled}
+\end{figure}
+
+As explained before, we will be extracting 3 key metrics: \textit{Time to Vulnerability}, \textit{Interaction Volume} and \textit{Number of Attacks needed}. \textit{Time to vulnerability} is measured as the time from the moment the scan is initiated until the first 'vulnerability' is detected by the application (irrespective of whether this is the vulnerability we are specifically looking for or not - we will explain the reasoning for this later). \textit{Interaction Volume} is measured as the total number of bytes used in the scan by the tool. \textit{Number of attacks needed} measures how many requests a tool had to make before finding its first vulnerability in the scan (as a proportion to how many requests it made in the scan overall). \\ 
+
+In order to extract data for the purposes of these experiments, we use console logging in Gentoo to acquire accurate timestamps for key events in a scan. For the other tools, we use the provided reporting and exporting functionalities by each tool and analyse the outputs of these to acquire the necessary data. \\
+
+\subsection{Test Harness}
+
+Firstly, we benchmarked the tools against the produced Test Harness. We ran Gentoo using the Action Replay functionality to detect the XSS vulnerabilities present in this page, and subsequently used the Passive Mode to scan the headers in the Test Harness.  \\
+
+\begin{table}[h]
+	
+{\rowcolors{3}{Apricot}{Wheat1}
+	\label{table:test_harness_benchmarks}
+	   \captionsetup{justification=centering}
+	
+	\caption{Running the tools against the Test Harness. The * by the \textit{Time to Vulnerability} column indicates the desired vulnerability (XSS) was not detected}
+\begin{tabular}{ |p{4cm}||p{2cm}|p{1.4cm}|p{1.6cm}|p{2cm}|p{2cm}| }
+	\hline
+	\multicolumn{6}{|c|}{\textbf{Test Harness Benchmarks}} \\ [0.5ex]
+	\hline \hline 
+	Tool Being Tested& Time To Vulnerability & Total Scan Time & Interaction Volume & Attacks to Vuln / Total Attacks & \% of Scan to 1st Vuln \\
+	\hline
+	Gentoo (XSS detection)    & 9.6s      & 15.8s    & 32KB & 10/27 &37\% \\
+	Gentoo (Header Analysis) & 50ms    &  3.0s    & 4KB&  1/4 &25\%\\
+	ZAP                                   & 5.6s (*) & 7.8      &  1.31MB &1621/2140 &76\%\\ 
+	w3af                                 & 7.9s  (*) & 136.2s & 950KB & 71/1126 &6.3\%\\
+	\hline
+\end{tabular}
+} \\
+\end{table}
+
+The table above describes 
+
+When producing this data, it became evident that comparing Gentoo to these tools on a basis of whether they had found a specific vulnerability on an application seemed unfair. As it stands, our extension is very focused on finding a given vulnerability, and if set up correctly, seems to provide good feedback on said vulnerability. However, ZAP and w3af are stand-alone implementations designed to run without user interaction, and as such, will scan the entire web-application in a non-discriminatory way when it comes to selecting vulnerabilities - anything of use is flagged up for the final report. Thus, although we set up these tests in a manner such that Gentoo \textit{should} find a vulnerability it has been designed to catch, we will not hold it against the results of the other 2 should they find other useful information along the way. \\
+
+In the benchmark above (Table \ref{table:test_harness_benchmarks}), neither ZAP nor w3af reported an XSS vulnerability for the Test Harness. This is perhaps a little odd, as the page containing this vulnerability conforms to the minimum requirements for a Reflected XSS. However, since it is a \textit{very} simple page, it could be supposed that the page is not complex enough for the filters being used to correctly classify an XSS according to the other tools. \\
+
+Nonetheless, all 3 of the tools produced due warnings when \textit{passively} analysing the application, with the exception of w3af, which does not seem to have a separate passive mode. However, when observing the scan outputs, the speed at which these alerts in w3af are produced seems to indicate that internally, these alerts are still acquired passively from webrequests. \\
+
+\begin{table}[h]
+	
+	{\rowcolors{3}{Apricot}{Wheat1}
+
+		\captionsetup{justification=centering}
+		
+		\caption{The alerts produced by the different tools when analysing the Test Harness}
+				\label{table:test_harness_alerts}
+		\begin{tabular}{ |p{8cm}|>{\centering\arraybackslash}m{2cm} |>{\centering\arraybackslash}m{2cm} |>{\centering\arraybackslash}m{2cm}| }
+			\hline
+			\multicolumn{4}{|c|}{\textbf{Test Harness passive alerts}} \\ [0.5ex]
+			\hline \hline 
+			Alert Type & Gentoo & ZAP & w3af \\
+			\hline
+			X-Frame-Options (Clickjacking) & X & X & X \\
+			X-XSS-Protection & X & X & \\
+			X-Content-Type-Options& X & X & \\
+			Content-Security-Policy & X & & \\
+			Referrer-Policy & X & & \\
+			Strict-Transport-Security & X  & & \\
+			Server Header Exposed & & & X\\
+			DNS Wildcard config & & & X \\
+			Too many HTTP methods allowed & & & X\\
+			
+			\hline
+		\end{tabular}
+	} \\
+\end{table}
+
+In Table \ref{table:test_harness_alerts}, we see that all of tools can agree that clickjacking is a big enough concern that the \texttt{X-Frame-Options} header should be set. We will ignore the alerts for the missing \texttt{X-XSS-Options} header because this is by design as previously explained, although it is interesting to note that w3af did not report this missing header in its scans. Some of the uniquely reported headers by Gentoo are also more recent additions - both the \texttt{Content-Security-Policy} and the \texttt{Referrer-Policy} are newer headers. As for the last 4 on the Table, these settings are more suggestions than alerts - these are flagged up by Gentoo and w3af, but do not necessarily indicate weaknesses. They are nonetheless useful in the \textit{information gathering} phase of any pentester, and shouldn't be readily ignored.  
+
+
+
+
+\subsection{DVWA}
+
+
+\begin{table}[h]
+	
+	{\rowcolors{3}{Apricot}{Wheat1}
+		\label{table:dvwa_benchmarks}
+		\captionsetup{justification=centering}
+		
+		\caption{}
+		\begin{tabular}{ |p{4cm}||p{2cm}|p{1.4cm}|p{1.6cm}|p{2cm}|p{2cm}| }
+			\hline
+			\multicolumn{6}{|c|}{\textbf{DVWA Benchmarks}} \\ [0.5ex]
+			\hline \hline 
+			Tool Being Tested& Time To Vulnerability & Total Scan Time & Interaction Volume & Attacks to Vuln / Total Attacks & \% of Scan to 1st Vuln \\
+			\hline
+			Gentoo (XSS detection)    & 6.6s      & 9.4s    &   66.3KB          & 4/15 & 27 \% \\
+			Gentoo (Header Analysis) & 27ms    &  3.0s    & 17.9KB   &  2/5 & 40\%\\
+			ZAP                                  & 2.6s & 66.6s     &  65.79MB & 3852/22995& 16.7\%\\ 
+			w3af                                 & -- & -- & -- & -- &-- \\
+			\hline
+		\end{tabular}
+	} \\
+\end{table}
+
+\subsection{WebGoat}
+
+bla
+
+\begin{table}[h]
+	
+	{\rowcolors{3}{Apricot}{Wheat1}
+		\label{table:webgoat_benchmarks}
+		\captionsetup{justification=centering}
+		
+		\caption{}
+		\begin{tabular}{ |p{4cm}||p{2cm}|p{1.4cm}|p{1.6cm}|p{2cm}|p{2cm}| }
+			\hline
+			\multicolumn{6}{|c|}{\textbf{WebGoat Benchmarks}} \\ [0.5ex]
+			\hline \hline 
+			Tool Being Tested& Time To Vulnerability & Total Scan Time & Interaction Volume & Attacks to Vuln / Total Attacks & \% of Scan to 1st Vuln \\
+			\hline
+			Gentoo (XSS detection)    & --     & --    &   --          & -- & -- \\
+			Gentoo (Header Analysis) &  11.6s   & 17.8s   & 52.0KB   & 1/24 & 4.1\%\\
+			ZAP                                   & 12.9s &  48.5s   & 68.0MB  & 1213/4437 & 27.3\%\\ 
+			w3af                                 & -- & -- & -- & -- & -- \\
+			\hline
+		\end{tabular}
+	} \\
+\end{table}
+
+\subsection{WackoPicko}
+
+
+bla
+
+\begin{table}[h]
+	
+	{\rowcolors{3}{Apricot}{Wheat1}
+		\label{table:wackopicko_benchmarks}
+		\captionsetup{justification=centering}
+		
+		\caption{}
+		\begin{tabular}{ |p{4cm}||p{2cm}|p{1.4cm}|p{1.6cm}|p{2cm}|p{2cm}| }
+			\hline
+			\multicolumn{6}{|c|}{\textbf{WackoPicko Benchmarks}} \\ [0.5ex]
+			\hline \hline 
+			Tool Being Tested& Time To Vulnerability & Total Scan Time & Interaction Volume & Attacks to Vuln / Total Attacks & \% of Scan to 1st Vuln \\
+			\hline
+			Gentoo (XSS detection)    &   11.6s   &  17.8s   &  52.0KB           & 1/24 & 4.1\% \\
+			Gentoo (Header Analysis) &  51ms &  3.1s  &  1.6KB  & 3/7 & 42.9 \%\\
+			ZAP                                   & 53s &  184.3s   & 254.4MB & 10854/46301 & 23.4\%\\ 
+			w3af                                 & 458ms & 498s & 7.0MB & 2/8279 & 0.02\% \\
+			\hline
+		\end{tabular}
+	} \\
+\end{table}
+
+
+\section{Live application scanning}
+
+
+\section{Accessibility}
+
+> Brief introduction to ZAP and w3af, features
+> Not being able to scan webgoat
+> User feedback
+> Being on chrome
+
+> It's clear that gentoo wins because it's already in the browser (which is the best zap feature, not available in w3af making it terrible) 
+> Mention the fact i had to disable x-xss-protection maybe renders it a bit useless on sites
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

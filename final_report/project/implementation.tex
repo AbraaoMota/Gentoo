@@ -11,7 +11,7 @@ The diagram below puts into more detail the exact structure of the extension in 
 	\centering
 	\includegraphics[width=0.9\textwidth]{images/project_structure.png}
 	\caption{The directory structure used for the project}
-	\label{fig:test}
+	\label{fig:project_structure}
 \end{figure}
 
 I have arranged the files in question into 2 separate subfolders - the \texttt{testpages} directory keeps the source code for the test harness page with vulnerabilities, while the \texttt{src} directory keeps all the other extension related code. \\
@@ -48,7 +48,7 @@ This is the main interaction point for a user utilizing the extension. The layou
 	\centering
 	\includegraphics[width=0.8\textwidth]{images/popup_full.png}
 	\caption{The main contents of the popup page when first clicked by a userw}
-	\label{fig:test}
+	\label{fig:popup_full}
 \end{figure}
 
 This page offers an accessible means for tweaking and toggling all the options available in the extension, as well as viewing and analysing the outputs from the different modes of running the extension.  
@@ -70,7 +70,7 @@ The devtools page has access to a specific set of API's designed to extend the e
 	\centering
 	\includegraphics[width=0.55\textwidth]{images/devtools-extension.png}
 	\caption{An extension making use of the DevTools API's further extends the capabilities of a standard Chrome Extension. Diagram from \cite{chromeExtensionDevTools}}
-	\label{fig:test}
+	\label{fig:devtools_extension}
 \end{figure}
 
 More specifically, I am interested in the \texttt{devtools.network} API - this provides access to every request once it has finished. This contains a wealth of information which is otherwise difficult to obtain without using the devtools API. One of the APIs I am also using in the extension is the \texttt{chrome.webRequest}. This gives me access to several different events at different points of the lifetime of the request. It allows me to access some headers as well as change a limited set of these. It however does not provide sufficient information for the purposes of the extension - \texttt{devtools.network} gives access to the response content of any given request, which is vital in analysing outputs from a request to create attack correlations. Accessing the \texttt{devtools} APIs requires the Developer tools to be open for the page in question, which is only a small inconvenience when using the extension.
@@ -83,7 +83,7 @@ To better understand the structure of the extension and how each feature ahead i
 	\centering
 	\includegraphics[width=0.95\textwidth]{images/message_passing.png}
 	\caption{This diagram illustrates the passing of messages within the different components in the extension}
-	\label{fig:test}
+	\label{fig:message_passing}
 \end{figure}
 
 In order to analyse the requests being made in different context scripts, the \texttt{devtools} script gathers every request made in the page which has the Developer Tools inspection windows open. Since this page cannot directly pass messages to the content scripts \cite{chromeExtensionDevTools}, it uses the background page as a mediator. It establishes a connection to the background page and passes to it every request it picks up. The background page then forwards these messages to the different content scripts that analyse the requests - \texttt{action\_replay} and \texttt{passive\_mode}. \\
@@ -138,7 +138,7 @@ The sibling node with the text \textit{Investigate form} is made into a clickabl
 		\label{fig:whiteBox}
 	\end{subfigure}
 	\caption{The \textit{Investigate Form} input being added to different pages allows a user to attempt attacks against the page in question.}
-	\label{fig:test}
+	\label{fig:investigate_form}
 \end{figure} 
 
 \subsection{Recommendation Sensitivity}
@@ -151,7 +151,7 @@ As a result, I added a setting to tweak the sensitivity of the Recommendations -
 	\centering
 	\includegraphics[width=0.7\textwidth]{images/tweaking_recommender_sensitivity.png}
 	\caption{Changing the recommendation sensitivity within the settings tab}
-	\label{fig:test}
+	\label{fig:tweaking_recommender_sensitivity}
 \end{figure}
 
 This adds a bit more complexity to the method in question - the conventional Javascript and JQuery \texttt{submit()} methods work on form elements only. In order to submit the attack attempt for this sensitivity, I manually submit a request to the base URL of the current window, setting the query parameter with the name corresponding to the name of the input being selected. The value for this query parameter is the attack string with some modifications for correct URL encoding. These are:
@@ -173,15 +173,15 @@ Once the Action Replay mode is enabled, the extension adds a small input button 
 	\begin{subfigure}{.5\textwidth}
 		\centering
 		\includegraphics[width=.8\linewidth]{images/ar_initial.png}
-		\label{fig:test_page_investigate_form}
+		\label{fig:ar_initial}
 	\end{subfigure}%
 	\begin{subfigure}{.5\textwidth}
 		\centering
 		\includegraphics[width=.8\linewidth]{images/ar_recording.png}
-		\label{fig:whiteBox}
+		\label{fig:ar_recording}
 	\end{subfigure}
 	\caption{The Action Replay button before and during a session recording. A recording session starts and stops at the click of this button. In the interest of usability, the button can be moved by the user anywhere on the page so as to not obstruct other content indefinitely.}
-	\label{fig:test}
+	\label{fig:ar_stages}
 \end{figure} 
 
 In the interest of demonstrating a minimum behaviour within the time frame of the project, I analyse only the responses with the \texttt{Content-type} header set to \texttt{text/html}. This is because vulnerabilities in HTML responses are more readily detectable and easier to analyse than others (e.g. those in CSS files). \\
@@ -199,7 +199,7 @@ Passive Mode is designed to run in the background while browsing, gathering data
 	\centering
 	\includegraphics[width=0.9\textwidth]{images/passive_mode_settings.png}
 	\caption{The settings tab can be used to configure which submodes are activated within the Passive Mode.}
-	\label{fig:test}
+	\label{fig:passive_mode_settings}
 \end{figure}
 
 Once this mode is enabled, any eligible web requests are firstly stored in the \texttt{passiveModeRequests} structure in \texttt{chrome.storage.local}. The analysis is then ran separately per request. The scope of the analysis depends on the activated settings; by default each request is checked for weak security header settings and for potentially dangerous user-controlled inputs that are reflected in responses. The user can also activate further basic CSRF and Cookie safety checks, as well as enabling the \textit{cross checks} feature. 

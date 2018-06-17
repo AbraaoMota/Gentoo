@@ -49,6 +49,10 @@ chrome.runtime.onConnect.addListener(
 
         // Send a message to the action replay script
         chrome.tabs.query({ active: true, currentWindow: true }, function(tabs) {
+          console.log("WE CURRENTLY HAVE THESE TABS");
+          console.log(tabs);
+          console.log("WE'RE PASSING IT TO THIS TAB");
+          console.log(tabs[0]);
           chrome.tabs.sendMessage(
             tabs[0].id,
             {

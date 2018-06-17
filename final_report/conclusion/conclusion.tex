@@ -1,9 +1,66 @@
 \chapter{Conclusion}
 
+We conclude this thesis with some ideas on how to further improve the body of work thus far, and make an overall collection of thoughts on Gentoo. \\
 
-> Things that could also be done
+\section{Future work}
 
-	> Sqli stuff
-	> XML
-	
-> Compared against a larger range of tools - some commercial ones?
+It is easy to see how Gentoo could be taken some steps further. One of the first potential additions to this would be to incorporate the scanning for SQL injetions. This particular type of vulnerability would express itself in a very similar way to what has already been shown in the Reflected XSS. The concept of these two vulnerabilities is similar - a malicious input is injected into a form, and the output is analysed in search of clues of injection. In the case of encoding an SQL Injection analyser, this might involve searching the response body for database-like query outputs, or for error pages that slowly leak information such as the version of the database, or react to blind injections (perhaps the page takes longer to load because a successful delay command has been executed as part of the malicious payload). Given the framework we have built up with Gentoo, detecting and preventing SQL injections would be the next logical step to follow in expanding the suite of vulnerabilities Gentoo can detect. \\
+
+Another improvement would be to make more effective use of XMLHttpRequests, particularly in the Action Replay mode. In the current code version, Gentoo will load a new attack window per generated attack - doing so allows the extension to evaluate any Javascript ran as part of a potential attack in the new window, since the evaluated body is not part of the initial request response. Doing so can become extremely cumbersome however, especially if we were to expand the suite of attacks. At the moment, the automatic launch of several new tabs can severely slow down the machine, or in more memory-starved situations, crash Google Chrome altogether. Using XMLHttpRequests would bypass this situation; these requests are performed in the background, and require minimal to no input from the user when compared with new tabs being opened. \\
+
+One of the major improvements in attack power would be to enable attack fuzzing. In the current version of Gentoo, each existing attack payload is hardcoded, and none of the attacks will deviate from this. However, with the vast expanse of the internet, it is very likely that a potential website \texttt{A} suffers from a vulnerability when injected with the specific payload \texttt{P}, whereas website \texttt{B} might suffer from an injection of payload \texttt{P'}. It is not the case however that \texttt{A} is vulnerable to payload \texttt{P'}, or \texttt{B} to \texttt{P}
+ for that matter. But what if the only difference between \texttt{P} and \texttt{P'} is a single \texttt{"} character? It is hard to justify the hardcoding of all these possibilities, which is where the power of input fuzzing would come in. Using this, only one base input type would have to be hardcoded, whilst all the other inputs would be automatically generated as per the defined regex rules. Using a fuzzer engine to generate attack payloads would exponentially increase the attack surface area of Gentoo, although care would have to be taken to discerningly choose which regex rules would be selected so as to generate good quality input fuzzes. \\
+ 
+ Gentoo could also be improved from a user centric design overhaul. Specifically, an interactive tutorial that guides each new user in a step by step experience that teaches how to use the different attack modes would be of great use. Such a tutorial would be of particularly great aid to new users coming to grips with how the Action Replay mechanism works, as this mode is complex, and the steps to follow and the order in which to execute them is not immediately clear. Doing so would also give users another chance to become more educated on how to diagnose vulnerabilities. This would improve usability and create a far more polished end product. \\
+ 
+ This project would also have very likely benefitted from benchmarking Gentoo against a more extensive list of competitors. Both ZAP and w3af are open source web application scanners, so we did not ascertain how Gentoo would have performed when set side by side against commercial tools. This leaves a gap for further investigation in the project. \\
+
+
+
+\section{Final Remarks}
+
+
+This project has ambitiously saddled on the margin of automation when it comes to black box web application scanners. Gentoo finds itself as a hybrid tool that automates the bulk of work, but only when it is told to by a user. We think that this hybrid approach is one worth exploring further, especially because certain vulnerability diagnosis and exploitation is a complex task, which is likely to require human validation for a while still. \\
+
+We saw how this automation can be useful in a low effort scenario using the Recommendations, how it was used in active user-led scans by using the Action Replay mechanism, and how it can be entirely automated into the background by Passive scans. Each of these modes has their own perks and separate advantages. We were particularly content to see the validation of the hypothesis that vulnerability diagnosis and exploit is a delicate process by uncovering the live vulnerability. This was triggered by the insertion of Recommendations into a page; doing so legitimized much of the work being done on this project. \\
+
+We think this project explored through its analysis that there is no right or wrong approach in whether a scanner is fully automated or perhaps semi automated, as there are good and valid arguments both for and against each of these variations. We did however numerically analyse the two types, and came to the conclusion that Gentoo's implementation was successful in delivering a focused, lightweight scan, which successfully met some of the key metrics we were hoping to observe from such a tool. Perhaps more importantly here is ascertaining that the abstraction of using a browser extension was particularly advantageous from a user's perspective because the extension leverages its power and granted permissions to co-exist very closely between the user and the application under test. \\
+
+ This takes us back to the initial project proposal 
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

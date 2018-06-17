@@ -429,52 +429,16 @@ As demonstrated in Section \ref{live_vulnerability}, Gentoo was used as a drivin
 
 Indeed, this turned out to be the case. In many websites, triggering Gentoo's Recommendations prompted webpages to produce interesting error pages (some of which revealed relevant information, such as the \texttt{Server} and the \texttt{Powered-By} headers common to many web servers nowadays, as well as versioning information) - in a scenario where a pentester would target these websites, this would be very relevant in the \textit{information gathering} phase. \\
 
-The HTML injection vulnerability detected arose as a result of unexpected behaviour triggered by the recommendations. It was not expected that Gentoo would be used in successfully finding a live vulnerability - this was considered to be an added bonus. The successful identification of this vulnerability thus proved that the implementation of the low effort Recommendations feature was a great success. 
-
+The HTML injection vulnerability detected arose as a result of unexpected behaviour triggered by the recommendations. It was not expected that Gentoo would be used in successfully finding a live vulnerability - this was considered to be an added bonus. The successful identification of this vulnerability thus proved that the implementation of the low effort Recommendations feature was a great success. \\
 
 
 \section{Accessibility}
-> COMPATIBILITY 
-	> Brief introduction to ZAP and w3af, features
-	> textarea stuff	
-	> Not being able to scan webgoat
 
+Finally, we evaluate different accessibility aspects of the extension. We begin by looking at some compatibility aspects. As we have seen, Gentoo was unable to scan WebGoat due to a scripting error, for reasons we were unable to diagnose. Being incompatible with one of the vulnerable web applications hinders our ability to produce an effective comparison between Gentoo and its competitors. It also highlights what we will call 'creator's bias' - since we have built and tested Gentoo using the Test Harness, the tool becomes overfitted to detecting vulnerabilities in this web application. Thus, when we eventually test the extension against other applications, due to lack of testing or programming generalisation, as seen with WebGoat, the extension is unable to scan for vulnerabilities. This also explains the reason as to why Gentoo was unable to detect the Persisted XSS vulnerability within DVWA. Although the \texttt{textarea} HTML tag is a valid form input, it was not included in the Test Harness. As a result, Gentoo's Action Replay algorithm does not check for additional inputs submitted through \texttt{textarea} - meaning it skips out on detecting an important vulnerability. \\
 
-> User feedback
-> Being on chrome
+One of ZAP's most useful features is being able to open a browser window at the URL which is being attacked. While it is open, ZAP logs the user's input, including any credentials used in form submissions, to help with crawling the web application. This feature is not present in w3af, making it very reliant on its own authentication mechanisms. These were difficult and unreliable to setup, meaning w3af was effectively unable to scan both DVWA and WebGoat. In comparison, Gentoo has no need for this feature because it is inherent to how the browser extension functions - the program has direct access to the web application, and effectively acts as a middle-man between it and the user. The user does not need to worry about crawling nor authentication beyond their own account, because Gentoo acts as a companion, analysing whatever website the user decides to browse. Thus Gentoo incorporates one of the most useful features in web app scanners by default, massively improving its usability. \\
 
-> It's clear that gentoo wins because it's already in the browser (which is the best zap feature, not available in w3af making it terrible) 
-> Mention the fact i had to disable x-xss-protection maybe renders it a bit useless on sites
-> Mention creator bias to get scanners to pass well known vulnerable apps
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+As part of development, we have created a user feedback form for interested people who were willing to partake in a small experiment to gather data on how users used Gentoo. Although this experiment has not yet gathered enough data for statistical relevance, some of the user feedback regarding usability is useful to consider. While observing users attempt to uncover the XSS vulnerability using Gentoo on the Test Harness, it became clear that of all the mechanisms in the extension, using the Action Replay mode was particularly unclear. Although there are some limited instructions written in plaintext in the popup page regarding usage, users were still confused about how to use the Action Replay, and made no progress in uncovering vulnerabilities on their own when using this mode. Thus, accessibility for users in Gentoo could have been improved by adding a guided tutorial or a plaintext page with instructions on how to use the extension itself. \\ 
 
 
 

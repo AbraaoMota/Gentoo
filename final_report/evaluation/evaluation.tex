@@ -100,7 +100,7 @@ Firstly, we benchmarked the tools against the produced Test Harness. We ran Gent
 
 \begin{table}[h]
 	
-{\rowcolors{3}{Apricot}{Wheat1}
+{\rowcolors{3}{green!24}{white}
 
 	   \captionsetup{justification=centering}
 	
@@ -133,7 +133,7 @@ Nonetheless, all 3 of the tools produced warnings when analysing the application
 
 \begin{table}[h]
 	
-	{\rowcolors{3}{Apricot}{Wheat1}
+	{\rowcolors{3}{green!24}{white}
 
 		\captionsetup{justification=centering}
 		
@@ -167,10 +167,10 @@ In Table \ref{table:test_harness_alerts}, we see that all of tools can agree tha
 We now proceed to look at how these tools perform at a more homogenous level by benchmarking them against a third-party produced application. \\
 \begin{table}[h]
 	
-	{\rowcolors{3}{Apricot}{Wheat1}
+	{\rowcolors{3}{green!24}{white}
 
 		\captionsetup{justification=centering}		
-		\caption{}
+		\caption{Running the tools against DVWA.}
 		\label{table:dvwa_benchmarks}
 		\begin{tabular}{ |p{4cm}||p{1.4cm}|p{1.4cm}|p{1.6cm}|p{2cm}|p{2cm}| }
 			\hline
@@ -196,7 +196,7 @@ Table \ref{table:dvwa_alerts} highlights this further. During this time, ZAP has
 
 \begin{table}[h]
 	
-	{\rowcolors{3}{Apricot}{Wheat1}
+	{\rowcolors{3}{green!24}{white}
 		
 		\captionsetup{justification=centering}
 		
@@ -232,9 +232,9 @@ Moving on, we now observe how each of the tools performs when scanning WebGoat, 
 
 \begin{table}[h]
 	
-	{\rowcolors{3}{Apricot}{Wheat1}
+	{\rowcolors{3}{green!24}{White}
 		\captionsetup{justification=centering}		
-		\caption{}
+		\caption{Running the tools against WebGoat}
 		\label{table:webgoat_benchmarks}
 		\begin{tabular}{ |p{4cm}||p{1.4cm}|p{1.4cm}|p{1.6cm}|p{2cm}|p{2cm}| }
 			\hline
@@ -256,7 +256,7 @@ Gentoo's header analysis is again very terse, as it picks up relatively few requ
 
 \begin{table}[h]
 	
-	{\rowcolors{3}{Apricot}{Wheat1}
+	{\rowcolors{3}{green!24}{white}
 		
 		\captionsetup{justification=centering}
 		
@@ -290,9 +290,9 @@ WackoPicko is our final benchmark in which Gentoo will be compared against the o
 
 \begin{table}[h]
 	
-	{\rowcolors{3}{Apricot}{Wheat1}
+	{\rowcolors{3}{green!24}{white}
 		\captionsetup{justification=centering}		
-		\caption{}
+		\caption{Running the tools against WackoPicko.}
 		\label{table:wackopicko_benchmarks}
 		\begin{tabular}{ |p{4cm}||p{1.4cm}|p{1.4cm}|p{1.6cm}|p{2cm}|p{2cm}| }
 			\hline
@@ -309,16 +309,16 @@ WackoPicko is our final benchmark in which Gentoo will be compared against the o
 	} \\
 \end{table}
 
-From Table \ref{table:wackopicko_benchmarks}, we once again see that Gentoo's XSS detection works very effectively; despite taking into account human interaction, the user is able to efficiently detect an XSS vulnerability within seconds. Across all of the benchmarks, Gentoo has remained very succint, with a few well directed requests that are then able to detect a vulnerability. This time, ZAP delivers a much larger scan, making over 46 thousand requests in 3 minutes. 
+From Table \ref{table:wackopicko_benchmarks}, we once again see that Gentoo's XSS detection works very effectively; despite taking into account human interaction, the user is able to efficiently detect an XSS vulnerability within seconds. Across all of the benchmarks, Gentoo has remained very succint, with a few well directed requests that are then able to detect a vulnerability. This time, ZAP delivers a much larger scan, making over 46 thousand requests in 3 minutes. w3af also has more to work with this time, so after a lengthy 8 minutes, it has made 7MB of interactions over 8279 requests - but it surprisingly finds its first vulnerability within the second request it made, making this benchmark run the (relatively) fastest to obtain a vulnerability as a function of the size of the scan. \\
 
 
 \begin{table}[h]
 	
-	{\rowcolors{3}{Apricot}{Wheat1}
+	{\rowcolors{3}{green!24}{white}
 		
 		\captionsetup{justification=centering}
 		
-		\caption{The alerts \& warnings produced by the different tools when analysing DVWA. Those with ** are real, dangerous vulnerabilities found in WackoPicko}
+		\caption{The alerts \& warnings produced by the different tools when analysing WackoPicko. Those with * are serious vulnerabilities, not present in Wackopicko, whereas those with ** are real, dangerous vulnerabilities found in WackoPicko}
 		\label{table:wackopicko_alerts}
 		\begin{tabular}{ |p{7cm}|>{\centering\arraybackslash}m{2cm} |>{\centering\arraybackslash}m{2cm} |>{\centering\arraybackslash}m{2cm}| }
 			\hline
@@ -331,7 +331,7 @@ From Table \ref{table:wackopicko_benchmarks}, we once again see that Gentoo's XS
 			Path Traversal ** &  & X & X\\
 			SQL Injection **& & X & X\\
 			Parameter Tampering ** &  & X & \\
-			CSRF ** & & & X \\
+			CSRF * & & & X \\
 			Guessable Credentials (Weak Auth) ** & & & X \\
 			X-Frame-Options (Clickjacking) & X & X & X \\
 			X-XSS-Protection & X & X & \\
@@ -345,9 +345,61 @@ From Table \ref{table:wackopicko_benchmarks}, we once again see that Gentoo's XS
 	} \\
 \end{table}
 
+As we see from Table \ref{table:wackopicko_alerts}, Gentoo has once again performed its duty and found the Reflected XSS vulnerability, as well as the usual list of weak security headers and session cookies. This is consistent with its previous behaviours, demonstrating it can perform an accurate scan whilst making judicious use of the requests it makes. However, we cannot ignore the payoffs for spending a longer time in scanning as shown by ZAP and w3af - both of these detected the Reflected XSS as well as other serious vulnerabilities. Notably, the CSRF vulnerability is not actually reported by the creators of WackoPicko as a present vulnerability, so we assume this is a false-positive result from the w3af scan. Nonetheless, the remainder of these results  provide very valuable insights to a penetration tester. \\
+
+\subsection{Cross evaluation}
+
+At this stage, we would benefit from a deeper analysis across the aforementioned figures to ascertain a comparison between the tools and their expected performances. We start by looking at the \textit{Time to Vulnerability} that each tool has shown when scanning the different vulnerable web applications. Figure \ref{fig:time_to_vuln} shows how each tool has performed against one another in their respective scans. \\ 
+
+It becomes apparent that Gentoo's figures are the most stable when compared across the different web application scans. The XSS focused attacks seem to range anywhere between between 5 to 15 seconds. It is important to remember however that these scans are still dependent on human interaction - depending on the experience of the user who is using the Action Replay mechanism to collect data, this scan \textit{could} take a lot longer, as the user (or their machine) may be overwhelmed with the amount of windows opened to carry out each attack. The speed in these numbers probably suffers from a bias of knowing how to use Gentoo from a creator's perspective. Nonetheless, it is promising to see that the lower boundary for the time taken in this scan is competitive when pitted against the other scanners. \\
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=\textwidth]{images/evaluation/time_to_vuln.png}
+	\caption{This figure shows the trends across each tool's \textit{Time to Vulnerability} metric}
+	\label{fig:time_to_vuln}
+\end{figure}
+
+We argue that the numbers presented in Figure \ref{fig:time_to_vuln} are nonetheless qualified to be compared as-is. An argument could be made that these numbers are biased towards Gentoo because the extension is only looking for one type of vulnerability on each scan, whereas ZAP and w3af have to scour the entire application for vulnerabilities. However, it is that very broad scope which ZAP and w3af have access to which counter-balances the argument - both of these tools can search for \textbf{any} possible vulnerability in whichever order they please. This means they can report easier to find vulnerabilities more promptly than Gentoo. That is what we observed with w3af - this tool produces alerts and warnings for some more esoteric vulnerabilities than ZAP and Gentoo, which contributes to its accelerated pace in reporting vulnerabilities (especially notable in the WackoPicko scan). ZAP does not seem to perform as homogeneously as the other tools, but it certainly makes up for this in its consistency and range of vulnerability detections, as shown in the alert figures above. \\
+
+It is pleasing to see that Gentoo has a consistent performance in raw speed of finding a vulnerability from the start of the scan, and that the wait for a specific vulnerability identification is in line with expectations of its user interaction (slower than automatic) and the complexity of the web application. This trend is seen both in the XSS and in the Passive Header scans. \\
+
+We now analyse the \textit{Interaction Volume} for each of the tools, and produce a comparison between these. \\
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=\textwidth]{images/evaluation/interaction_to_volume.png}
+	\caption{This figure shows the trends across each tool's \textit{Interaction Volume} metric}
+	\label{fig:interaction_volume}
+\end{figure}
+
+It is abundantly clear from Figure \ref{fig:interaction_volume} that ZAP has an overwhelmingly larger amount of data transferred in its scans than any of the other tools. In comparison to the others, Gentoo has a consistently small interaction volume in every scan. Unlike the \textit{Time to Vulnerability} metric, the \textit{Interaction Volume} measure is far more dependent on the scanner's scope of attack - the more vulnerabilities a scanner targets, the more requests will have to be sent out (potentially fuzzed) to trigger a wider range of vulnerabilities. As the web application complexity grows, the \textit{Interaction Volume} figures of full-scan tools inflate alongside it, whereas scanning for 1 vulnerability involves attempting the same attack on whatever the surface area presented to attack might be. Therefore, it is reasonable to suggest a normalisation factor for a more apt tool comparison. For the outputs of ZAP and w3af, we divide the \textit{Interaction Volume} by the confirmed number of dangerous vulnerabilities found by each scan to give us the \textit{Normalised Interaction Volume}. This normalised metric should give us a comparison metric that is correlated to the success of the tool - the better it performs in finding vulnerabilities, the lower the \textit{Normalised Interaction Volume}.\\
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=\textwidth]{images/evaluation/normalised_interaction_volume.png}
+	\caption{The \textit{Normalised Interaction Volume} mostly affected the figures for ZAP, }
+	\label{fig:normalised_interaction_volume}
+\end{figure}
+
+As shown by Figure \ref{fig:normalised_interaction_volume}, the largest change between the \textit{Interaction Volume} and the \textit{Normalised Interaction Volume} metrics is the scale by which ZAP shows a much larger \textit{Interaction Volume} than its competitors (the scale has approximately been divided by 5 from Figure \ref{fig:interaction_volume} to Figure \ref{fig:normalised_interaction_volume}). Clearly, despite the normalisation, ZAP still has an overwhelmingly large amount of \textit{Interaction Volume} when compared to Gentoo and w3af. Gentoo dominates in this category, requiring very little page interactions to successfully fingerprint XSS vulnerabilities. \\
+
+ We see that the \textit{Normalised Interaction Volume} for Gentoo's XSS scan scales with more complex web applications, but in a controlled way, such that it remains the best performer in this category. A low \textit{Normalised Interaction Volume} is desirable as the tool is more likely to remain unnoticed for a longer period of time than its competitors. Web application servers that log requests could easily identify tools such as ZAP and block further requests for fear of Denial of Service or other attack. In a similar situation, Gentoo would remain stealthier for a longer period of time, which is a desirable feature for a penetration tester. \\ 
+
+Lastly 
+
+> Create graphs of Time to Vulnerability, \% of scan completed to get to first vulnerability 
+
+> Table observing the ratio of total attacks to number of alerts / vulnerabilities found
+	> derive smth from that
+> 
+
+> w3af finds more unique, esoteric alerts. perhaps not as useful
+
 
 \section{Live application scanning}
 
+\section{Algorithm}
 
 \section{Accessibility}
 > COMPATIBILITY 

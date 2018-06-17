@@ -52,8 +52,10 @@
 \contentsline {subsection}{\numberline {6.3.2}DVWA}{44}{subsection.6.3.2}
 \contentsline {subsection}{\numberline {6.3.3}WebGoat}{46}{subsection.6.3.3}
 \contentsline {subsection}{\numberline {6.3.4}WackoPicko}{46}{subsection.6.3.4}
-\contentsline {section}{\numberline {6.4}Live application scanning}{47}{section.6.4}
-\contentsline {section}{\numberline {6.5}Accessibility}{47}{section.6.5}
-\contentsline {chapter}{\numberline {7}Conclusion}{48}{chapter.7}
-\contentsline {chapter}{\numberline {A}Appendix}{49}{appendix.A}
-\contentsline {section}{\numberline {A.1}Exploit Code}{49}{section.A.1}
+\contentsline {subsection}{\numberline {6.3.5}Cross evaluation}{48}{subsection.6.3.5}
+\contentsline {section}{\numberline {6.4}Live application scanning}{50}{section.6.4}
+\contentsline {section}{\numberline {6.5}Algorithm}{50}{section.6.5}
+\contentsline {section}{\numberline {6.6}Accessibility}{50}{section.6.6}
+\contentsline {chapter}{\numberline {7}Conclusion}{51}{chapter.7}
+\contentsline {chapter}{\numberline {A}Appendix}{52}{appendix.A}
+\contentsline {section}{\numberline {A.1}Exploit Code}{52}{section.A.1}

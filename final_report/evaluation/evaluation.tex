@@ -178,7 +178,8 @@ We now proceed to look at how these tools perform at a more homogenous level by 
 			\hline \hline 
 			Tool Being Tested& Time To Vulnerability & Total Scan Time & Interaction Volume & Attacks to Vuln / Total Attacks & \% of Scan to 1st Vuln \\
 			\hline
-			Gentoo (XSS detection)    & 6.6s      & 9.4s    &   66.3KB          & 4/15 & 27 \% \\
+			Gentoo (Reflected XSS)    & 6.6s      & 9.4s    &   66.3KB          & 4/15 & 27 \% \\
+			Gentoo (Persisted XSS)    &  -- & 5.3s & 80.6KB & 13/13 & 100 \% \\
 			Gentoo (Header Analysis) & 27ms    &  3.0s    & 17.9KB   &  2/5 & 40\%\\
 			ZAP                                  & 2.6s & 66.6s     &  65.79MB & 3852/22995& 16.7\%\\ 
 			w3af                                 & -- & -- & -- & -- &-- \\
@@ -187,9 +188,9 @@ We now proceed to look at how these tools perform at a more homogenous level by 
 	} \\
 \end{table}
 
-Once again, the results for the Gentoo XSS detection seem promising - the scan duration in DVWA is still very reasonable, even accounting for human interaction delays. The attack order is also effective, as the first confirmed vulnerability is found after just a quarter of the attacks are performed. Unfortunately, we weren't able to configure w3af to successfully scan DVWA. w3af does possess authentication enabled scans and crawls as a feature, but we were unable to configure it in such a way that it could log into DVWA as a user as part of its crawl. The resulting crawl was very debilitated as a result - only very few resources that were not hidden behind the login form were accessible, and so we could not count this towards w3af's overall performance. In this benchmark, ZAP has performed very well. It executed close to 23 thousand requests in just over a minute, and detected its first serious vulnerability in only 2.6 seconds. This is an example where automated scanners can boast of their alacrity - all the while performing over 1500x more requests than Gentoo, it still found a vulnerability faster than a human could. \\
+Once again, the results for the Gentoo XSS detection seem promising - the scan duration in DVWA is still very reasonable, even accounting for human interaction delays. The attack order is also effective, as the first confirmed vulnerability is found after just a quarter of the attacks are performed. However, Gentoo's search for a persisted XSS failed in the page containing that vulnerability. None of the attacks forged against this page worked - for a very simple reason. The Persistent XSS vulnerability in DVWA involves submitting a \texttt{textarea} - a form input that isn't designated by the \texttt{input} HTML tag. This is an oversight in Gentoo's page injection logic, as \texttt{textarea}'s are perfectly valid inputs to submit. However, this concern had not been addressed before this benchmark, negatively affecting Gentoo's evaluation. Unfortunately, we weren't able to configure w3af to successfully scan DVWA. w3af does possess authentication enabled scans and crawls as a feature, but we were unable to configure it in such a way that it could log into DVWA as a user as part of its crawl. The resulting crawl was very debilitated as a result - only very few resources that were not hidden behind the login form were accessible, and so we could not count this towards w3af's overall performance. In this benchmark, ZAP has performed very well. It executed close to 23 thousand requests in just over a minute, and detected its first serious vulnerability in only 2.6 seconds. This is an example where automated scanners can boast of their alacrity - all the while performing over 1500x more requests than Gentoo, it still found a vulnerability faster than a human could. \\
 
-Table \ref{table:dvwa_alerts} highlights this further. During this time, ZAP has not only detected a Reflected XSS, but has also found other severe vulnerabilities, Path Traversals and SQL injections. Gentoo's passive mode, as with the Test Harness, has detected and warned the user about the same set of headers as ZAP has. Both also found that the valuable \texttt{PHPSESSID} cookie should have probably been set with the \texttt{httpOnly} flag to maximise session security. In this respect, both scanners have done well - ZAP has used the extra time of its scan to find important and relevant vulnerabilities. Its scan time is still over 5 times the duration of the combined Gentoo scans, so it should be almost expected that in an application such as DVWA, which is known to be littered with bugs, 
+Table \ref{table:dvwa_alerts} highlights this further. During this time, ZAP has not only detected a Reflected XSS, but also Persisted XSS and other severe vulnerabilities - Path Traversals and SQL injections. At this point it's worth mentioning that Gentoo's passive mode, as with the Test Harness, has detected and warned the user about the same set of headers as ZAP has, with some more warnings added over ZAP. Both also found that the valuable \texttt{PHPSESSID} cookie should have probably been set with the \texttt{httpOnly} flag to maximise session security. In this respect, both scanners have done well - ZAP has used the extra time of its scan to find important and relevant vulnerabilities. Its scan time is still over 5 times the duration of the combined Gentoo scans, so this success should almost be expected in an application such as DVWA, which is brimming with vulnerabilities.
 
 
 
@@ -208,6 +209,7 @@ Table \ref{table:dvwa_alerts} highlights this further. During this time, ZAP has
 			Alert Type & Gentoo & ZAP & w3af \\
 			\hline
 			XSS (Reflected) ** & X & X & --\\
+			XSS (Persistent) ** &  & X & --\\
 			Path Traversal ** &  & X & --\\
 			SQL Injection **& & X & --\\
 			X-Frame-Options (Clickjacking) & X & X & -- \\
@@ -226,7 +228,7 @@ Table \ref{table:dvwa_alerts} highlights this further. During this time, ZAP has
 
 \subsection{WebGoat}
 
-bla
+Moving on, we now observe how each of the tools performs when scanning WebGoat, OWASP's deliberately insecure application designed to teach security lessons. Unfortunately, we still couldn't configure w3af to sign into WebGoat. As a result, it could still not perform any relevant scanning besides passive header analysis for alerts and warnings, and as such, it is not included in the following results. Surprisingly, Gentoo is unable to perform the Action Replay on this application. Although it can visually start a scan, under these circumstances, the \texttt{DevTools} script cannot identify the WebGoat page to be the active tab, resulting in an exception which does not allow the Action Replay algorithm to complete. As a result, only Gentoo's Passive mode worked as normal, acquiring weak header and cookie data as before. ZAP managed to complete another full application scan; using it's \textit{Launch Browser} feature, we were able to log into a user profile during testing, and emulate and crawl the application while it is still open. Once we are happy with the crawling done, ZAP then performs several attacks based off of this information. \\
 
 \begin{table}[h]
 	
@@ -241,7 +243,7 @@ bla
 			Tool Being Tested& Time To Vulnerability & Total Scan Time & Interaction Volume & Attacks to Vuln / Total Attacks & \% of Scan to 1st Vuln \\
 			\hline
 			Gentoo (XSS detection)    & --     & --    &   --          & -- & -- \\
-			Gentoo (Header Analysis) &  11.6s   & 17.8s   & 52.0KB   & 1/24 & 4.1\%\\
+			Gentoo (Header Analysis) &  3.2s   & 6.2s   & 1.3MB   & 1/3 & 33.3\%\\
 			ZAP                                   & 12.9s &  48.5s   & 68.0MB  & 1213/4437 & 27.3\%\\ 
 			w3af                                 & -- & -- & -- & -- & -- \\
 			\hline
@@ -249,10 +251,42 @@ bla
 	} \\
 \end{table}
 
+
+Gentoo's header analysis is again very terse, as it picks up relatively few requests in order to analyse the necessary headers - the first vulnerability is found in the first of these. The interaction volume this time however is significantly larger, as WebGoat generates a lot data per request than the other applications thus far. In the meantime, ZAP remains a consistent opponent by delivering a hefty scan in a reasonable time - under a minute. This is enough time to reel in 4 serious vulnerabilities, which the other tools have missed out on by lack of compatibility. Gentoo's header analysis still picks up on valuable session ID cookies and alerts to their lack of security, as does ZAP. 
+
+\begin{table}[h]
+	
+	{\rowcolors{3}{Apricot}{Wheat1}
+		
+		\captionsetup{justification=centering}
+		
+		\caption{The alerts \& warnings produced by the different tools when analysing WebGoat. Those with ** are dangerous vulnerabilities found in WebGoat}
+		\label{table:webgoat_alerts}
+		\begin{tabular}{ |p{7cm}|>{\centering\arraybackslash}m{2cm} |>{\centering\arraybackslash}m{2cm} |>{\centering\arraybackslash}m{2cm}| }
+			\hline
+			\multicolumn{4}{|c|}{\textbf{WebGoat alerts}} \\ [0.5ex]
+			\hline \hline 
+			Alert Type & Gentoo & ZAP & w3af \\
+			\hline
+			XSS (Reflected) ** & -- & X & --\\	
+			SQL Injection **& -- & X & --\\
+			XSS (Reflected in JSON Response) ** & -- & X & -- \\
+			Parameter Tampering **& -- & X & --\\
+			X-XSS-Protection & X & X & --\\
+			Content-Security-Policy & X & &-- \\
+			Referrer-Policy & X & & --\\
+			Strict-Transport-Security & X  & & --\\
+			JSESSID Cookie Insecure Flags & X & X & -- \\
+			PHPSESSID Cookie Insecure Flags & X & X & -- \\
+			\hline
+		\end{tabular}
+	} \\
+\end{table}
+
+
 \subsection{WackoPicko}
 
-
-bla
+WackoPicko is our final benchmark in which Gentoo will be compared against the other tools. This time, Gentoo has no problem scanning the application for an XSS vulnerability using AR 
 
 \begin{table}[h]
 	
@@ -276,14 +310,50 @@ bla
 \end{table}
 
 
+\begin{table}[h]
+	
+	{\rowcolors{3}{Apricot}{Wheat1}
+		
+		\captionsetup{justification=centering}
+		
+		\caption{The alerts \& warnings produced by the different tools when analysing DVWA. Those with ** are real, dangerous vulnerabilities found in WackoPicko}
+		\label{table:wackopicko_alerts}
+		\begin{tabular}{ |p{7cm}|>{\centering\arraybackslash}m{2cm} |>{\centering\arraybackslash}m{2cm} |>{\centering\arraybackslash}m{2cm}| }
+			\hline
+			\multicolumn{4}{|c|}{\textbf{WackoPicko alerts}} \\ [0.5ex]
+			\hline \hline 
+			Alert Type & Gentoo & ZAP & w3af \\
+			\hline
+			XSS (Reflected) ** & X & X & X\\
+			XSS (Persistent) ** &  & X & \\
+			Path Traversal ** &  & X & X\\
+			SQL Injection **& & X & X\\
+			Parameter Tampering ** &  & X & \\
+			CSRF ** & & & X \\
+			Guessable Credentials (Weak Auth) ** & & & X \\
+			X-Frame-Options (Clickjacking) & X & X & X \\
+			X-XSS-Protection & X & X & \\
+			X-Content-Type-Options& X & X & \\
+			Content-Security-Policy & X & &\\
+			Referrer-Policy & X & & \\
+			Strict-Transport-Security & X  & & \\
+			PHPSESSID Cookie Insecure Flags & X & X &  \\
+			\hline
+		\end{tabular}
+	} \\
+\end{table}
+
+
 \section{Live application scanning}
 
 
 \section{Accessibility}
+> COMPATIBILITY 
+	> Brief introduction to ZAP and w3af, features
+	> textarea stuff	
+	> Not being able to scan webgoat
 
-> Brief introduction to ZAP and w3af, features
-> textarea stuff	
-> Not being able to scan webgoat
+
 > User feedback
 > Being on chrome
 

@@ -375,10 +375,10 @@ We now analyse the \textit{Interaction Volume} for each of the tools, and produc
 
 It is abundantly clear from Figure \ref{fig:interaction_volume} that ZAP has an overwhelmingly larger amount of data transferred in its scans than any of the other tools. In comparison to the others, Gentoo has a consistently small interaction volume in every scan. Unlike the \textit{Time to Vulnerability} metric, the \textit{Interaction Volume} measure is far more dependent on the scanner's scope of attack - the more vulnerabilities a scanner targets, the more requests will have to be sent out (potentially fuzzed) to trigger a wider range of vulnerabilities. As the web application complexity grows, the \textit{Interaction Volume} figures of full-scan tools inflate alongside it, whereas scanning for 1 vulnerability involves attempting the same attack on whatever the surface area presented to attack might be. Therefore, it is reasonable to suggest a normalisation factor for a more apt tool comparison. For the outputs of ZAP and w3af, we divide the \textit{Interaction Volume} by the confirmed number of dangerous vulnerabilities found by each scan to give us the \textit{Normalised Interaction Volume}. This normalised metric should give us a comparison metric that is correlated to the success of the tool - the better it performs in finding vulnerabilities, the lower the \textit{Normalised Interaction Volume}.\\
 
-\begin{figure}[h]
+\begin{figure}[h!]
 	\centering
 	\includegraphics[width=\textwidth]{images/evaluation/normalised_interaction_volume.png}
-	\caption{The \textit{Normalised Interaction Volume} mostly affected the figures for ZAP, }
+	\caption{The \textit{Normalised Interaction Volume} mostly affected the figures for ZAP, giving it a fairer means of comparison against Gentoo and w3af}
 	\label{fig:normalised_interaction_volume}
 \end{figure}
 
@@ -386,20 +386,52 @@ As shown by Figure \ref{fig:normalised_interaction_volume}, the largest change b
 
  We see that the \textit{Normalised Interaction Volume} for Gentoo's XSS scan scales with more complex web applications, but in a controlled way, such that it remains the best performer in this category. A low \textit{Normalised Interaction Volume} is desirable as the tool is more likely to remain unnoticed for a longer period of time than its competitors. Web application servers that log requests could easily identify tools such as ZAP and block further requests for fear of Denial of Service or other attack. In a similar situation, Gentoo would remain stealthier for a longer period of time, which is a desirable feature for a penetration tester. \\ 
 
-Lastly 
+Lastly, we look at the \textit{Number of replays / attacks needed} (to get to the first vulnerability) for each of the produced scans. As Figure \ref{fig:number_replays_first_vuln} shows, once again, the figures for this metric are heavily skewed when looking at the outputs from ZAP. While Gentoo performs particularly well in this category (with the largest number of replays for any of the scans barely hitting double digits), we can also see that w3af performs reasonably well. \\
 
-> Create graphs of Time to Vulnerability, \% of scan completed to get to first vulnerability 
+\begin{figure}[h!]
+	\centering
+	\includegraphics[width=\textwidth]{images/evaluation/number_replays_first_vuln.png}
+	\caption{The number of attacks or replays required in a scan to reach the first diagnosed vulnerability}
+	\label{fig:number_replays_first_vuln}
+\end{figure}
 
-> Table observing the ratio of total attacks to number of alerts / vulnerabilities found
-	> derive smth from that
-> 
 
-> w3af finds more unique, esoteric alerts. perhaps not as useful
-
+ Clearly, with more requests this metric is easily dilated or distorted - as we have seen from the previous data points, ZAP sends out a far larger number of requests than Gentoo or w3af. Thus we prepare this statistic in a separate way, the percentage of the scan at which the first vulnerability was found (or \textit{Scan completion to first vulnerability}). Instead of measuring how many raw requests are made until a vulnerability is found, it normalizes the data to a percentage of the scan. We see the results in Figure \ref{fig:scan_completion_first_vuln}. \\
+ 
+ \begin{figure}[h!]
+ 	\centering
+ 	\includegraphics[width=\textwidth]{images/evaluation/scan_completion_first_vuln.png}
+ 	\caption{The percentage to which the scan was complete when the first vulnerability was found}
+ 	\label{fig:scan_completion_first_vuln}
+ \end{figure}
+ 
+ This metric gives a more interesting basis for analysis. Here, we see that the Gentoo Passive Header scan shows a very stable \textit{scan completion} metric when compared to the other scans. The Gentoo XSS scanner displays positive results here, with all of the \textit{scan completion} results being below 40\%. This leads us to believe that throughout its scans, it detects vulnerabilities with focused attack vectors, making judicious use of its requests. With an even better success rate for this metric, w3af has an extremely low \textit{scan completion} rate, with the worst of the 2 values being under 10\%. This indicates that of the 3 tools, w3af is the best at quickly identifying vulnerabilities, irrespective of their severity. This greedy approach is desirable for pentesters, as this hastily provides them with more information during their \textit{information gathering} phase of testing a web application. \\
+ 
+ Although the \textit{scan completion to first vulnerability} metric provides a more normalized comparison point than the \textit{number of replays / attacks needed to first vulnerability}, it is important to note that it is mathematically skewed to profess superior statistics to scans in which a larger number of requests is sent. In scans with fewer overall requests (namely the Gentoo XSS and Gentoo Headers), each request which is unsuccessful in uncovering a vulnerability counts more towards the \textit{scan completion to first vulnerability} measurement than a similar request for scans which employ more requests overall. In one of the data points (Gentoo Header scan in WebGoat), a total of 3 passive requests were made, of which the first instantly generated an alert which was logged in Gentoo. Despite this seemingly 'perfect' performance for this intended measurement, the \textit{scan completion} metric (correctly) records this at 33\%, which misleads a reader of Figure \ref{fig:scan_completion_first_vuln} into thinking that Gentoo is performing relatively badly. \\
+ 
+ Overall, given the very low numbers reported for the \textit{number of replays / attacks to first vulnerability} as well as the stable numbers for the \textit{scan completion to first vulnerability}, it is fair to deduce that Gentoo has also performed well in this category. This attests that the attacks generated by the extension are executed in a relevant order; attacks that are more likely to uncover vulnerabilities are expected to be ran before other esoteric attacks. \\
+ 
+ In review of the analysis of these metrics between the different tools, we observe the following: 
+ 
+ \begin{itemize}
+ 	\item ZAP is the most successful of the tools in reporting significant vulnerabilities. This comes at the cost of larger and longer-running scans, which subsequently results in a more conspicuous web application scanner. A large number of requests can more readily identify potential attackers and intruders into an application, which is not desirable for penetration testers (in black-box testing situations).
+ 	
+ 	\item w3af produces alerts and warnings for more esoteric vulnerabilities than either ZAP or Gentoo. This tool is also quick to point these out, making it a good option between those analysed for a web analyst in terms of value for time spent.
+ 	
+ 	\item Gentoo performed well in all 3 metrics analysed - given that it is only semi-automated, it is still reasonably fast at detecting \textbf{targeted} vulnerabilities. It does so with a small online footprint; we recorded it to have the lowest \textit{normalised interaction volume} of all the tools in the tests. Its attacks are also concise, they quickly detected the intended vulnerabilities as far as the scope of the tests above has shown. The successful performance in these 3 metrics validates the implementation as described in Chapter \ref{implementation}.
+ 	
+ 	\item Comparing Gentoo as a human interaction based scanner to fully automated black box scanners is difficult. Different metrics must be analysed in tandem, and we cannot be quick to make absolute judgements on the success or failure of these in comparison to another. 
+ \end{itemize}
 
 \section{Live application scanning}
 
-\section{Algorithm}
+As demonstrated in Section \ref{live_vulnerability}, Gentoo was used as a driving tool behind the uncovering of a real vulnerability on a live website with a significant amount of traffic. The process behind this discovery was very informal - Gentoo's Recommendations feature was often left on after development sessions as we browsed through the internet. We sporadically and (mostly) randomly clicked the recommendations button to see whether Gentoo would be able to uncover any interesting behaviour in websites (at the very least). \\
+
+Indeed, this turned out to be the case. In many websites, triggering Gentoo's Recommendations prompted webpages to produce interesting error pages (some of which revealed relevant information, such as the \texttt{Server} and the \texttt{Powered-By} headers common to many web servers nowadays, as well as versioning information) - in a scenario where a pentester would target these websites, this would be very relevant in the \textit{information gathering} phase. \\
+
+The HTML injection vulnerability detected arose as a result of unexpected behaviour triggered by the recommendations. It was not expected that Gentoo would be used in successfully finding a live vulnerability - this was considered to be an added bonus. The successful identification of this vulnerability thus proved that the implementation of the low effort Recommendations feature was a great success. 
+
+
 
 \section{Accessibility}
 > COMPATIBILITY 

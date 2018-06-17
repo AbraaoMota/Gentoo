@@ -50,10 +50,10 @@
 \contentsline {section}{\numberline {6.3}Benchmark analysis}{42}{section.6.3}
 \contentsline {subsection}{\numberline {6.3.1}Test Harness}{43}{subsection.6.3.1}
 \contentsline {subsection}{\numberline {6.3.2}DVWA}{44}{subsection.6.3.2}
-\contentsline {subsection}{\numberline {6.3.3}WebGoat}{44}{subsection.6.3.3}
-\contentsline {subsection}{\numberline {6.3.4}WackoPicko}{45}{subsection.6.3.4}
-\contentsline {section}{\numberline {6.4}Live application scanning}{45}{section.6.4}
-\contentsline {section}{\numberline {6.5}Accessibility}{45}{section.6.5}
-\contentsline {chapter}{\numberline {7}Conclusion}{46}{chapter.7}
-\contentsline {chapter}{\numberline {A}Appendix}{47}{appendix.A}
-\contentsline {section}{\numberline {A.1}Exploit Code}{47}{section.A.1}
+\contentsline {subsection}{\numberline {6.3.3}WebGoat}{45}{subsection.6.3.3}
+\contentsline {subsection}{\numberline {6.3.4}WackoPicko}{46}{subsection.6.3.4}
+\contentsline {section}{\numberline {6.4}Live application scanning}{46}{section.6.4}
+\contentsline {section}{\numberline {6.5}Accessibility}{46}{section.6.5}
+\contentsline {chapter}{\numberline {7}Conclusion}{47}{chapter.7}
+\contentsline {chapter}{\numberline {A}Appendix}{48}{appendix.A}
+\contentsline {section}{\numberline {A.1}Exploit Code}{48}{section.A.1}

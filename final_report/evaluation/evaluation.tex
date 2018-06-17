@@ -2,7 +2,7 @@
 \chapter{Evaluation}
 
 
-In this section we will take a retrospective look at the tool and its achievements. We observe some benchmarks ran against competitors as well as measure how well Gentoo has performed given the expected pre-requisites as set out earlier in this thesis. We will also attempt to given a qualitative evaluation of how well it has performed, given initial user feedback (beyond the quantitative analysis). \\
+In this section we will take a retrospective look at the tool and its achievements. We observe some benchmarks ran against competitors as well as measure how well Gentoo has performed given the expected pre-requisites as set out earlier in this thesis. We will also attempt to given a qualitative evaluation of how well it has performed, given initial user feedback (beyond the quantitative analysis).
 
 \section{Metrics of success}
 
@@ -96,16 +96,17 @@ In order to extract data for the purposes of these experiments, we use console l
 
 \subsection{Test Harness}
 
-Firstly, we benchmarked the tools against the produced Test Harness. We ran Gentoo using the Action Replay functionality to detect the XSS vulnerabilities present in this page, and subsequently used the Passive Mode to scan the headers in the Test Harness.  \\
+Firstly, we benchmarked the tools against the produced Test Harness. We ran Gentoo using the Action Replay functionality to detect the XSS vulnerabilities present in this page, and subsequently used the Passive Mode to scan the headers in the Test Harness. For ZAP, we used the \textit{Launch Browser} feature to crawl the page, and subsequently attacked it with all selected input vectors. We used the \textit{full\_audit} profile provided by w3af to perform the corresponding scan. \\
 
 \begin{table}[h]
 	
 {\rowcolors{3}{Apricot}{Wheat1}
-	\label{table:test_harness_benchmarks}
+
 	   \captionsetup{justification=centering}
 	
 	\caption{Running the tools against the Test Harness. The * by the \textit{Time to Vulnerability} column indicates the desired vulnerability (XSS) was not detected}
-\begin{tabular}{ |p{4cm}||p{2cm}|p{1.4cm}|p{1.6cm}|p{2cm}|p{2cm}| }
+		\label{table:test_harness_benchmarks}
+\begin{tabular}{ |p{4cm}||p{1.4cm}|p{1.4cm}|p{1.6cm}|p{2cm}|p{2cm}| }
 	\hline
 	\multicolumn{6}{|c|}{\textbf{Test Harness Benchmarks}} \\ [0.5ex]
 	\hline \hline 
@@ -113,20 +114,22 @@ Firstly, we benchmarked the tools against the produced Test Harness. We ran Gent
 	\hline
 	Gentoo (XSS detection)    & 9.6s      & 15.8s    & 32KB & 10/27 &37\% \\
 	Gentoo (Header Analysis) & 50ms    &  3.0s    & 4KB&  1/4 &25\%\\
-	ZAP                                   & 5.6s (*) & 7.8      &  1.31MB &1621/2140 &76\%\\ 
+	ZAP                                   & 5.6s (*) & 7.8s      &  1.31MB &1621/2140 &76\%\\ 
 	w3af                                 & 7.9s  (*) & 136.2s & 950KB & 71/1126 &6.3\%\\
 	\hline
 \end{tabular}
 } \\
 \end{table}
 
-The table above describes 
+Table \ref{table:test_harness_benchmarks} shows how each tool performed when measured up against the aforementioned metrics. For the XSS detection in Gentoo, we intentionally measure the time taken by a human to interact with the extension to analyse the outputs produced. The scan begins once the Action Replay recording begins, which means a form input must be manually submitted, the Action Replay button clicked on the new page, and each of the resulting attacks inspected for vulnerabilities. The scan is considered to be finished once the last successful attack has been registered as an observable output in the extension (at the same time the extension badge icon turns to an exclamation mark (\textbf{!})), or, in the absence of a vulnerability, once the user has finished inspecting the attacks. \\
+
+In this case, 2 separate attacks were successful in triggering an XSS vulnerability during the extension's scan. It took the user a relatively short time to come to this conclusion, as the scan only took around 16 seconds. This seems especially successful when compared to the other automated results - ZAP's scan was about half the time, whilst w3af's was unusually long, and neither of these seemed to have correctly found the XSS flaw on the page. The order in which attacks were performed seemed to be good, with the first vulnerability being reported when the Gentoo scan was only about 37\% of the way through. In comparison to the other tools, it is clear both by the number of requests and the interaction volume that Gentoo did this with a significantly lower number of requests. This could be due to overfitting and creator's bias however, as the Test Harness was heavily used alongside the development of Gentoo. We will bear this in mind as we look at other vulnerable pages shortly.  \\
 
 When producing this data, it became evident that comparing Gentoo to these tools on a basis of whether they had found a specific vulnerability on an application seemed unfair. As it stands, our extension is very focused on finding a given vulnerability, and if set up correctly, seems to provide good feedback on said vulnerability. However, ZAP and w3af are stand-alone implementations designed to run without user interaction, and as such, will scan the entire web-application in a non-discriminatory way when it comes to selecting vulnerabilities - anything of use is flagged up for the final report. Thus, although we set up these tests in a manner such that Gentoo \textit{should} find a vulnerability it has been designed to catch, we will not hold it against the results of the other 2 should they find other useful information along the way. \\
 
-In the benchmark above (Table \ref{table:test_harness_benchmarks}), neither ZAP nor w3af reported an XSS vulnerability for the Test Harness. This is perhaps a little odd, as the page containing this vulnerability conforms to the minimum requirements for a Reflected XSS. However, since it is a \textit{very} simple page, it could be supposed that the page is not complex enough for the filters being used to correctly classify an XSS according to the other tools. \\
+In the benchmark above (Table \ref{table:test_harness_benchmarks}), neither ZAP nor w3af reported an XSS vulnerability for the Test Harness. This is perhaps a little odd, as the page containing this vulnerability conforms to the minimum requirements for a Reflected XSS. However, since it is a \textit{very} simple page, it could be supposed that the page is not complex enough for the filters being used by the other scanners to correctly classify it as vulnerable to XSS. \\
 
-Nonetheless, all 3 of the tools produced due warnings when \textit{passively} analysing the application, with the exception of w3af, which does not seem to have a separate passive mode. However, when observing the scan outputs, the speed at which these alerts in w3af are produced seems to indicate that internally, these alerts are still acquired passively from webrequests. \\
+Nonetheless, all 3 of the tools produced warnings when analysing the application headers. With the exception of w3af, the tools seem to clearly indicate whether the results are being passively obtained or not. However, when observing the scan, the speed at which the alerts in w3af are produced seems to indicate that internally, these are still acquired passively from web requests. \\
 
 \begin{table}[h]
 	
@@ -135,8 +138,8 @@ Nonetheless, all 3 of the tools produced due warnings when \textit{passively} an
 		\captionsetup{justification=centering}
 		
 		\caption{The alerts produced by the different tools when analysing the Test Harness}
-				\label{table:test_harness_alerts}
-		\begin{tabular}{ |p{8cm}|>{\centering\arraybackslash}m{2cm} |>{\centering\arraybackslash}m{2cm} |>{\centering\arraybackslash}m{2cm}| }
+		\label{table:test_harness_alerts}
+		\begin{tabular}{ |p{7cm}|>{\centering\arraybackslash}m{2cm} |>{\centering\arraybackslash}m{2cm} |>{\centering\arraybackslash}m{2cm}| }
 			\hline
 			\multicolumn{4}{|c|}{\textbf{Test Harness passive alerts}} \\ [0.5ex]
 			\hline \hline 
@@ -157,22 +160,19 @@ Nonetheless, all 3 of the tools produced due warnings when \textit{passively} an
 	} \\
 \end{table}
 
-In Table \ref{table:test_harness_alerts}, we see that all of tools can agree that clickjacking is a big enough concern that the \texttt{X-Frame-Options} header should be set. We will ignore the alerts for the missing \texttt{X-XSS-Options} header because this is by design as previously explained, although it is interesting to note that w3af did not report this missing header in its scans. Some of the uniquely reported headers by Gentoo are also more recent additions - both the \texttt{Content-Security-Policy} and the \texttt{Referrer-Policy} are newer headers. As for the last 4 on the Table, these settings are more suggestions than alerts - these are flagged up by Gentoo and w3af, but do not necessarily indicate weaknesses. They are nonetheless useful in the \textit{information gathering} phase of any pentester, and shouldn't be readily ignored.  
-
-
-
+In Table \ref{table:test_harness_alerts}, we see that all of tools can agree that clickjacking is a big enough concern that the \texttt{X-Frame-Options} header should be set. We will ignore the alerts for the missing \texttt{X-XSS-Options} header because this is by design as previously explained, although it is interesting to note that w3af did not report this missing header in its scans. Some of the uniquely reported headers by Gentoo are also more recent additions - both the \texttt{Content-Security-Policy} and the \texttt{Referrer-Policy} are newer headers. As for the last 4 on the Table, these settings are more suggestions than alerts - these are flagged up by Gentoo and w3af, but do not necessarily indicate weaknesses. They are nonetheless useful in the \textit{information gathering} phase of any pentester, and shouldn't be readily ignored. \\ 
 
 \subsection{DVWA}
 
-
+We now proceed to look at how these tools perform at a more homogenous level by benchmarking them against a third-party produced application. \\
 \begin{table}[h]
 	
 	{\rowcolors{3}{Apricot}{Wheat1}
-		\label{table:dvwa_benchmarks}
-		\captionsetup{justification=centering}
-		
+
+		\captionsetup{justification=centering}		
 		\caption{}
-		\begin{tabular}{ |p{4cm}||p{2cm}|p{1.4cm}|p{1.6cm}|p{2cm}|p{2cm}| }
+		\label{table:dvwa_benchmarks}
+		\begin{tabular}{ |p{4cm}||p{1.4cm}|p{1.4cm}|p{1.6cm}|p{2cm}|p{2cm}| }
 			\hline
 			\multicolumn{6}{|c|}{\textbf{DVWA Benchmarks}} \\ [0.5ex]
 			\hline \hline 
@@ -187,6 +187,43 @@ In Table \ref{table:test_harness_alerts}, we see that all of tools can agree tha
 	} \\
 \end{table}
 
+Once again, the results for the Gentoo XSS detection seem promising - the scan duration in DVWA is still very reasonable, even accounting for human interaction delays. The attack order is also effective, as the first confirmed vulnerability is found after just a quarter of the attacks are performed. Unfortunately, we weren't able to configure w3af to successfully scan DVWA. w3af does possess authentication enabled scans and crawls as a feature, but we were unable to configure it in such a way that it could log into DVWA as a user as part of its crawl. The resulting crawl was very debilitated as a result - only very few resources that were not hidden behind the login form were accessible, and so we could not count this towards w3af's overall performance. In this benchmark, ZAP has performed very well. It executed close to 23 thousand requests in just over a minute, and detected its first serious vulnerability in only 2.6 seconds. This is an example where automated scanners can boast of their alacrity - all the while performing over 1500x more requests than Gentoo, it still found a vulnerability faster than a human could. \\
+
+Table \ref{table:dvwa_alerts} highlights this further. During this time, ZAP has not only detected a Reflected XSS, but has also found other severe vulnerabilities, Path Traversals and SQL injections. Gentoo's passive mode, as with the Test Harness, has detected and warned the user about the same set of headers as ZAP has. Both also found that the valuable \texttt{PHPSESSID} cookie should have probably been set with the \texttt{httpOnly} flag to maximise session security. In this respect, both scanners have done well - ZAP has used the extra time of its scan to find important and relevant vulnerabilities. Its scan time is still over 5 times the duration of the combined Gentoo scans, so it should be almost expected that in an application such as DVWA, which is known to be littered with bugs, 
+
+
+
+\begin{table}[h]
+	
+	{\rowcolors{3}{Apricot}{Wheat1}
+		
+		\captionsetup{justification=centering}
+		
+		\caption{The alerts \& warnings produced by the different tools when analysing DVWA. Those with ** are real, dangerous vulnerabilities found in DVWA}
+		\label{table:dvwa_alerts}
+		\begin{tabular}{ |p{7cm}|>{\centering\arraybackslash}m{2cm} |>{\centering\arraybackslash}m{2cm} |>{\centering\arraybackslash}m{2cm}| }
+			\hline
+			\multicolumn{4}{|c|}{\textbf{DVWA alerts}} \\ [0.5ex]
+			\hline \hline 
+			Alert Type & Gentoo & ZAP & w3af \\
+			\hline
+			XSS (Reflected) ** & X & X & --\\
+			Path Traversal ** &  & X & --\\
+			SQL Injection **& & X & --\\
+			X-Frame-Options (Clickjacking) & X & X & -- \\
+			X-XSS-Protection & X & X & --\\
+			X-Content-Type-Options& X & X &-- \\
+			Content-Security-Policy & X & &-- \\
+			Referrer-Policy & X & & --\\
+			Strict-Transport-Security & X  & & --\\
+			PHPSESSID Cookie Insecure Flags & X & X & -- \\
+			\hline
+		\end{tabular}
+	} \\
+\end{table}
+
+
+
 \subsection{WebGoat}
 
 bla
@@ -194,11 +231,10 @@ bla
 \begin{table}[h]
 	
 	{\rowcolors{3}{Apricot}{Wheat1}
-		\label{table:webgoat_benchmarks}
-		\captionsetup{justification=centering}
-		
+		\captionsetup{justification=centering}		
 		\caption{}
-		\begin{tabular}{ |p{4cm}||p{2cm}|p{1.4cm}|p{1.6cm}|p{2cm}|p{2cm}| }
+		\label{table:webgoat_benchmarks}
+		\begin{tabular}{ |p{4cm}||p{1.4cm}|p{1.4cm}|p{1.6cm}|p{2cm}|p{2cm}| }
 			\hline
 			\multicolumn{6}{|c|}{\textbf{WebGoat Benchmarks}} \\ [0.5ex]
 			\hline \hline 
@@ -221,11 +257,10 @@ bla
 \begin{table}[h]
 	
 	{\rowcolors{3}{Apricot}{Wheat1}
-		\label{table:wackopicko_benchmarks}
-		\captionsetup{justification=centering}
-		
+		\captionsetup{justification=centering}		
 		\caption{}
-		\begin{tabular}{ |p{4cm}||p{2cm}|p{1.4cm}|p{1.6cm}|p{2cm}|p{2cm}| }
+		\label{table:wackopicko_benchmarks}
+		\begin{tabular}{ |p{4cm}||p{1.4cm}|p{1.4cm}|p{1.6cm}|p{2cm}|p{2cm}| }
 			\hline
 			\multicolumn{6}{|c|}{\textbf{WackoPicko Benchmarks}} \\ [0.5ex]
 			\hline \hline 
@@ -247,13 +282,14 @@ bla
 \section{Accessibility}
 
 > Brief introduction to ZAP and w3af, features
+> textarea stuff	
 > Not being able to scan webgoat
 > User feedback
 > Being on chrome
 
 > It's clear that gentoo wins because it's already in the browser (which is the best zap feature, not available in w3af making it terrible) 
 > Mention the fact i had to disable x-xss-protection maybe renders it a bit useless on sites
-
+> Mention creator bias to get scanners to pass well known vulnerable apps
 
 
 

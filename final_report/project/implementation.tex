@@ -4,7 +4,7 @@
 %5\section{Extension Structure}
 
 As explained in \ref{browserExtensions}, the extension is split into different files for both security reasons and other separation of concerns.
-The diagram below puts into more detail the exact structure of the extension in context with some of the real files being used.
+Figure \ref{fig:project_structure} puts into more detail the exact structure of the extension in context with some of the real files being used.
 
 
 \begin{figure}[h]
@@ -22,7 +22,7 @@ Within \texttt{src} we find different folders for separate concerns - \texttt{li
 
 The manifest is where the extension declares its intentions by enumerating all the scripts and files to be accessed, as well as the permissions required to run the extension as an add-on to the browser. This file is necessary due to security reasons; each extension is expected to run as a standalone program within the browser. Any dependencies are to be declared and included within the package before the program is run, with the exception of contents that are whitelisted in the declared \textit{Content Security Policy} (CSP) directive within the file. We are using the recommended default CSP directive of \texttt{script-src 'self'; object-src 'self'}. This policy actively prevents notoriously dangerous Javascript functions from being evaluated, disables in-line Javascript functionality (which enforces a separation of content from behaviour), and, as the name suggests, will only load scripts and files locally available to the package \cite{chromeExtensionCSP}. \\ 
 
-A potential methodology to use in a setting like this would be to employ a bundler to create a single minified (or compressed) \texttt{.js} file that includes all the required libraries and code to be imported. An example of this is  \textit{Webpack} \footnote{\url{https://webpack.js.org/}} - we did not employ a bundler like this as I learned about its uses later into the project. Furthermore, I am including a relatively small number of third-party sourced code, making this a small practical concern. \\
+A potential methodology to use in a setting like this would be to employ a bundler to create a single minified (or compressed) \texttt{.js} file that includes all the required libraries and code to be imported. An example of this is  \textit{Webpack} \footnote{\url{https://webpack.js.org/}} - we did not employ a bundler like this as we learned about its uses later into the project. Furthermore, we are including a relatively small number of third-party sourced code, making this a small practical concern. \\
 
 Other noteworthy details from the manifest file include:
 
@@ -36,7 +36,7 @@ Other noteworthy details from the manifest file include:
 
 \section{Test harness}
 
-In order to be able to appropriately test for features in development for this extension it is necessary to have access to a fragile website. It would not be ethical to use a website in production to test my extension against; doing so could result in all manner of adversities for the owner of that web address. That is under the assumption that we could firstly find a fragile website to test against; despite the prevalence of security weaknesses spread through the web, it is inherently a difficult task to identify and exploit these. Therefore, we have developed a deliberately weak website to test against. As will be demonstrated in each of the following sections, this harness website (stored under \texttt{testpages/index.html}) can be used to showcase an example of each vulnerability and consequent attack. \\
+In order to be able to appropriately test for features in development for this extension it is necessary to have access to a fragile website. It would not be ethical to use a website in production to test Gentoo against; doing so could result in all manner of adversities for the owner of that web address. That is under the assumption that we could firstly find a fragile website to test against; despite the prevalence of security weaknesses spread through the web, it is inherently a difficult task to identify and exploit these. Therefore, we have developed a deliberately weak website to test against. As will be demonstrated in each of the following sections, this harness website (stored under \texttt{testpages/index.html}) can be used to showcase an example of each vulnerability and consequent attack. \\
 
 In order to emulate the website as a server, we are using the out-of-the-box implementation of Python's \texttt{SimpleHTTPServer}. To run this, we simply have to run \texttt{python3 -m http.server 8000} to start a server on the localhost at port 8000. This allows us to submit forms and thus emulate query parameter submissions.
 
@@ -47,7 +47,7 @@ This is the main interaction point for a user utilizing the extension. The layou
 \begin{figure}[h!]
 	\centering
 	\includegraphics[width=0.8\textwidth]{images/popup_full.png}
-	\caption{The main contents of the popup page when first clicked by a userw}
+	\caption{The main contents of the popup page when first clicked by a user}
 	\label{fig:popup_full}
 \end{figure}
 
@@ -60,7 +60,7 @@ The background page we are using in the extension is a persistent page, meaning 
 
 \section{Request Logger}
 
-This page is designed to capture information from attacks that have successfully hijacked Javascript execution and diverted a user to this page. In order to be accessible from any other window, it must be declared as a \texttt{web\_accessible\_resource}. It captures the page it was referred from and reports it as a page where a vulnerability exists.
+This page is designed to capture information from attacks that have successfully hijacked Javascript execution and diverted a user to this page. This functionality is paramount in being able to detect XSS vulnerabilities in Gentoo. In order to be accessible from any other window, it must be declared as a \texttt{web\_accessible\_resource}. It captures the page it was referred from and reports it as a page where a vulnerability exists.
 
 \section{Devtools} \label{devtools}
 
@@ -69,7 +69,7 @@ The devtools page has access to a specific set of API's designed to extend the e
 \begin{figure}[h]
 	\centering
 	\includegraphics[width=0.55\textwidth]{images/devtools-extension.png}
-	\caption{An extension making use of the DevTools API's further extends the capabilities of a standard Chrome Extension. Diagram from \cite{chromeExtensionDevTools}}
+	\caption{An extension making use of the DevTools API's further extends the capabilities of a standard Chrome Extension. Diagram from \cite{chromeExtensionDevTools}.}
 	\label{fig:devtools_extension}
 \end{figure}
 
@@ -145,7 +145,7 @@ The sibling node with the text \textit{Investigate form} is made into a clickabl
 
 With the above implementation it would not be possible to ascertain whether an input that wasn't first in a form was susceptible to vulnerabilities or not. Adding the \textit{Investigate Form} button to every input in a page will \textit{usually} create too much clutter and make the page harder to use. It also creates elements for hidden inputs, which is likely to shift the contents of the page in unexpected ways. \\
 
-As a result, I added a setting to tweak the sensitivity of the Recommendations - the default setting of \textbf{1} will apply the algorithm above, adding a button for the first \texttt{input} tag per \texttt{form} on a page. Setting it to \textbf{2} will now add the button as above for \textbf{every} \texttt{input} tag per \texttt{form} on a page. The highest sensitivity (\textbf{3}) will append this button for every input in a page, regardless of being within a \texttt{form} tag or not. \\
+As a result, we added a setting to tweak the sensitivity of the Recommendations - the default setting of \textbf{1} will apply the algorithm above, adding a button for the first \texttt{input} tag per \texttt{form} on a page. Setting it to \textbf{2} will now add the button as above for \textbf{every} \texttt{input} tag per \texttt{form} on a page. The highest sensitivity (\textbf{3}) will append this button for every input in a page, regardless of being within a \texttt{form} tag or not. \\
 
 \begin{figure}[h]
 	\centering
@@ -154,7 +154,7 @@ As a result, I added a setting to tweak the sensitivity of the Recommendations -
 	\label{fig:tweaking_recommender_sensitivity}
 \end{figure}
 
-This adds a bit more complexity to the method in question - the conventional Javascript and JQuery \texttt{submit()} methods work on form elements only. In order to submit the attack attempt for this sensitivity, I manually submit a request to the base URL of the current window, setting the query parameter with the name corresponding to the name of the input being selected. The value for this query parameter is the attack string with some modifications for correct URL encoding. These are:
+This adds a bit more complexity to the method in question - the conventional Javascript and JQuery \texttt{submit()} methods work on form elements only. In order to submit the attack attempt for this sensitivity, we manually submit a request to the base URL of the current window, setting the query parameter with the name corresponding to the name of the input being selected. The value for this query parameter is the attack string with some modifications for correct URL encoding. These are:
 
 \begin{enumerate}
 	\item Replace the escaped character \texttt{\%20} with \texttt{+}. URL encoding rules state that for query parameters, a whitespace should be set to the \texttt{+} symbol instead
@@ -236,7 +236,7 @@ The process performed here is the same as the analysis part described in the Act
 
 The principle behind a Cross Site Request Forgery (CSRF) attack is that a website relies on a user's identity to validate actions on their behalf. This identity may be kept as information in the user's browser, perhaps as a session ID stored in a cookie to distinguish this user from other users. The attack results from the user being tricked into performing state-changing actions on the application by an attacker who has exploited the trust mechanism used between the application and the user. These state-changing actions could happen if the attacker has also worked out which URLs the application would fabricate when performing these actions on behalf of the victim. \\
 
-In the context of checking this passively, I employ a very basic algorithm to establish a minimum set of requirements for a page that could be vulnerable to CSRF:
+In the context of checking this passively, we employ a very basic algorithm to establish a minimum set of requirements for a page that could be vulnerable to CSRF:
 
 \begin{enumerate}
 	\item \textbf{Target pages using client-side authentication} - The most basic means of doing this is to look for a cookie which establishes some means of authentication between the website and the user. The script executing in this part contains a list of well known cookie names known to store this type of information in different web frameworks. This could easily be bypassed by tweaking the name of this cookie slightly (with a number perhaps). Therefore, the check done is whether the cookie in question includes (in any part of its name), the strings contained in the "session cookie name blacklist".

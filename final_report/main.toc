@@ -10,7 +10,7 @@
 \contentsline {subsection}{\numberline {2.2.2}Automated Vulnerability Scanners}{8}{subsection.2.2.2}
 \contentsline {section}{\numberline {2.3}Browser extensions}{10}{section.2.3}
 \contentsline {chapter}{\numberline {3}Design}{12}{chapter.3}
-\contentsline {section}{\numberline {3.1}Project Contribution}{12}{section.3.1}
+\contentsline {section}{\numberline {3.1}Project Highlights}{12}{section.3.1}
 \contentsline {section}{\numberline {3.2}Limitations}{14}{section.3.2}
 \contentsline {subsection}{\numberline {3.2.1}Time taken}{14}{subsection.3.2.1}
 \contentsline {subsection}{\numberline {3.2.2}Breadth of work}{14}{subsection.3.2.2}
@@ -41,7 +41,7 @@
 \contentsline {subsection}{\numberline {5.3.1}CSRF alerts}{31}{subsection.5.3.1}
 \contentsline {subsection}{\numberline {5.3.2}Insecure Cookie Alerts}{34}{subsection.5.3.2}
 \contentsline {subsection}{\numberline {5.3.3}Request Cross Checks}{34}{subsection.5.3.3}
-\contentsline {section}{\numberline {5.4}Live Vulnerability Test Case}{34}{section.5.4}
+\contentsline {section}{\numberline {5.4}Live Vulnerability Test Case}{35}{section.5.4}
 \contentsline {chapter}{\numberline {6}Evaluation}{40}{chapter.6}
 \contentsline {section}{\numberline {6.1}Metrics of success}{40}{section.6.1}
 \contentsline {section}{\numberline {6.2}Experiments}{41}{section.6.2}
@@ -51,7 +51,7 @@
 \contentsline {subsection}{\numberline {6.3.1}Test Harness}{43}{subsection.6.3.1}
 \contentsline {subsection}{\numberline {6.3.2}DVWA}{44}{subsection.6.3.2}
 \contentsline {subsection}{\numberline {6.3.3}WebGoat}{46}{subsection.6.3.3}
-\contentsline {subsection}{\numberline {6.3.4}WackoPicko}{46}{subsection.6.3.4}
+\contentsline {subsection}{\numberline {6.3.4}WackoPicko}{47}{subsection.6.3.4}
 \contentsline {subsection}{\numberline {6.3.5}Cross evaluation}{48}{subsection.6.3.5}
 \contentsline {section}{\numberline {6.4}Live application scanning}{52}{section.6.4}
 \contentsline {section}{\numberline {6.5}Accessibility}{52}{section.6.5}

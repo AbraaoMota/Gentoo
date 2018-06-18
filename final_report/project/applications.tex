@@ -210,7 +210,7 @@ The rest of our Test Harness page already fulfills the minimum requirements for 
 
 \subsection{Insecure Cookie Alerts}
 
-Passive mode can also check whether any potentially important or valuable cookies are being set with the appropriate security settings. Setting up an example to demonstrate this is the same as described in Section \ref{applications_CSRF_alerts} - we will reuse the same 3 cookies for this case. The only seemingly \textit{valuable} cookie in this case is the same, the one that stores the "session\_id" for the user. Only this cookie should raise any alerts about not being set securely. This is what we see shown in Figure \ref{fig:cookie_warning}. As expected, setting one or both of these flags in the cookie will change or delete the warning altogether.  \\
+Passive mode can also check whether any potentially important or valuable cookies are being set with the appropriate security settings. Setting up an example to demonstrate this is the same as described in Section \ref{applications_CSRF_alerts} - we will reuse the same 3 cookies for this case. The only seemingly \textit{valuable} cookie in this case is the same, the one that stores the session ID for the user. Only this cookie should raise any alerts about not being set securely. This is what we see shown in Figure \ref{fig:cookie_warning}. As expected, setting one or both of these flags in the cookie will change or delete the warning altogether.  \\
 
 \begin{figure}[h!]
 	\centering
@@ -244,12 +244,12 @@ This strategy should be sufficient to demonstrate an example that showcases the 
 	\label{fig:cross_check_warnings}
 \end{figure}
 
-
+\newpage
 \section{Live Vulnerability Test Case} \label{live_vulnerability}
 
-This section will describe a series of steps taken while using the extension that lead to the discovery of a real vulnerability on a live website. As part of the section we will demonstrate how this vulnerability can further be exploited. The website belongs to a fitness organization based in India; the specific login page we will consider is regularly used by over 1000 gyms / fitness studios. According to \url{alexa.com},\footnote{Not to be confused with Amazon's voice assistant, although both services are owned by Amazon.} this login form accounts for approximately 27\% of the traffic on the main domain. The website is kept anonymous as a courtesy to its rightful owners; in the meantime, the vulnerability has also been responsibly closed to the owners of the website. \\ 
+This section will describe a series of steps taken while using the extension that lead to the discovery of a real vulnerability on a live website. As part of the section we will demonstrate how this vulnerability can further be exploited. The website belongs to a fitness organization based in India; the specific login page we will consider is regularly used by over 1000 gyms / fitness studios. According to \url{alexa.com},\footnote{Not to be confused with Amazon's voice assistant, although both services are owned by Amazon.} this login form accounts for approximately 27\% of the traffic on the main domain. The website is kept anonymous as a courtesy to its rightful owners; in the meantime, the vulnerability has also been responsibly disclosed to the owners of the website, with a detailed explanation of its presence and characteristics being described. \\ 
 
-This particular vulnerability was discovered as a result of using the recommendations feature of the extension. Figure \ref{fig:vuln_page} shows the login form before and after enabling the recommendations in the extension, at a sensitivity of \textbf{2}.
+This particular vulnerability was discovered as a result of using the recommendations feature of the extension. Figure \ref{fig:vuln_page} shows the login form before and after enabling the recommendations in the extension, at a sensitivity of \textbf{2}. \\
 
 \begin{figure}[h]
 	\centering
